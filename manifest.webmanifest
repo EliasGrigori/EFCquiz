@@ -3,7 +3,6 @@
  "short_name": "EFCQuiz",
  "description": "Treinamento, presença e avaliação de eficácia. Sistema EFClaudian.",
  "lang": "pt-BR",
- "id": "/efcquiz/index.html",
  "start_url": "./index.html",
  "scope": "./",
  "display": "standalone",
