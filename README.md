@@ -1,5 +1,5 @@
 # EFCquiz
-Treinamento, presença e avaliação de eficácia (PWA). Faz parte do sistema EFClaudian. Versão 2.3.1.
+Treinamento, presença e avaliação de eficácia (PWA). Faz parte do sistema EFClaudian. Versão 2.3.0.
 
 Site: https://eliasgrigori.github.io/EFCquiz/  (atenção: **EFCquiz** com E, F e C maiúsculos e "quiz" minúsculo; o GitHub Pages diferencia maiúscula de minúscula)
 

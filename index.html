@@ -1247,11 +1247,11 @@ dl.dl dd{margin:0;overflow-wrap:anywhere}
 .mdf{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--sunk)}
 textarea.prm{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.55;color:var(--muted);background:var(--bg);resize:vertical}
 .qsel{display:grid;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
-.q{display:grid;grid-template-columns:20px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer}
-.q:last-child{border-bottom:0}
-.q:hover{background:var(--sunk)}
-.q input{width:17px;height:17px;accent-color:var(--accent);margin:0}
-.q.at{background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+.qsel .q{display:grid;grid-template-columns:20px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer}
+.qsel .q:last-child{border-bottom:0}
+.qsel .q:hover{background:var(--sunk)}
+.qsel .q input{width:17px;height:17px;accent-color:var(--accent);margin:0}
+.qsel .q.at{background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
 .qt{font-size:14px;line-height:1.35}
 .et{font-size:11.5px;font-weight:500;color:var(--muted);background:var(--sunk);border-radius:5px;padding:2px 8px;white-space:nowrap;min-width:0}
 .et:empty{background:transparent;padding:0}
@@ -1331,8 +1331,8 @@ textarea.prm{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:
   .mdl2{top:0;left:0;transform:none;width:100vw;max-height:100dvh;height:100dvh;border-radius:0;border:0}
   .mdl2.sm{width:100vw}
   .mdf .btn.pri{flex:1 1 100%;justify-content:center;min-height:44px}
-  .q{grid-template-columns:20px minmax(0,1fr);gap:4px 12px}
-  .q .et{grid-column:2;justify-self:start}
+  .qsel .q{grid-template-columns:20px minmax(0,1fr);gap:4px 12px}
+  .qsel .q .et{grid-column:2;justify-self:start}
   .fbi{grid-template-columns:minmax(0,1fr);gap:6px}
   .c3w{grid-template-columns:minmax(0,1fr)}
   .csec{padding:14px}
@@ -1367,7 +1367,7 @@ input[type=text],input[type=number],input[type=date],input[type=search],select,t
 .cfgp .phd{border-radius:var(--r-card)}
 .tl,.ct,.pn,.csec,.cards4>div,.cx,.fpan,.panel,.note,.okmsg,.msg{border-radius:var(--r-card)}
 .dwbl,.vls>li,.cbx{border-radius:12px}
-.fbi,.rd,.avdemo,.testebar,.q:first-child,.qsel{border-radius:var(--r-ctl)}
+.fbi,.rd,.avdemo,.testebar,.qsel .q:first-child,.qsel{border-radius:var(--r-ctl)}
 .mnu .pop.novo-pop{border-radius:16px}
 .mnu .pop.novo-pop button{border-radius:10px}
 .mdl2{border-radius:var(--r-win)}
@@ -1471,6 +1471,27 @@ input[type=text],input[type=number],input[type=date],input[type=search],select,t
 .cvbt{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px}
 .cvqr .qr img,.cvqr .qr canvas{width:min(280px,64vw);height:min(280px,64vw)}
 .relsel{max-width:260px}
+
+/* v2.3.2 · pergunta e títulos do participante: largura inteira, cor e negrito, tamanho conforme o texto */
+.phone .q,.tel .q{display:block;padding:0;border:0;cursor:default;width:100%;color:var(--accent);font-weight:800;letter-spacing:-.01em;text-wrap:balance;overflow-wrap:anywhere}
+.phone .q.t1{font-size:30px;line-height:1.15}.phone .q.t2{font-size:26px;line-height:1.2}.phone .q.t3{font-size:22px;line-height:1.25}.phone .q.t4{font-size:19px;line-height:1.3}
+
+/* v2.3.2 · escolha do boneco */
+.avbox{display:grid;gap:14px;justify-items:center;text-align:center}
+.avtit{margin:0;font-size:26px;font-weight:800;color:var(--accent);text-align:center;width:100%;line-height:1.15}.avtit.sm{font-size:18px}
+.avsub{margin:0;color:var(--muted);font-size:14.5px;text-align:center}
+.avstage{width:min(240px,64%);aspect-ratio:1;border-radius:var(--r-card,14px);background:linear-gradient(160deg,var(--sunk),color-mix(in srgb,var(--accent) 12%,var(--surface)));border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.avstage .av.lg{width:82%;height:82%;border:0;background:transparent}
+.avsugb{display:grid;gap:8px;justify-items:center;width:100%}
+.avsug{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.avsug{flex-wrap:nowrap}.avsug .avop .av.sm{width:min(40px,9vw);height:min(40px,9vw)}
+.avop{border-radius:12px;padding:3px}
+.avsel{width:100%;text-align:left}.avsel select{width:100%;min-height:48px;font-size:16px;font-weight:600}
+.avopts{width:100%;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:8px}
+.avopts .avop{border-radius:12px}
+.avacoes{display:flex;gap:10px;width:100%}.avacoes .btn.pri{flex:1}
+.ptopo>div{min-width:0;flex:1}.ptopo .pn,.ptopo .muted{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.25}
+.phone .pb>*{flex-shrink:0}
 </style>
 </head>
 <body>
@@ -1894,7 +1915,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.3.1";
+const APP_VERSAO = "2.3.2";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Packing","Campo","Laboratório","Almoxarifado","Oficina","Segurança","RH","ADM","Outros"];
@@ -2106,6 +2127,7 @@ function isCorrect(it, r){
   if (it.tipo === "ordenar") return Array.isArray(r.ordem) && r.ordem.length === it.alternativas.length && r.ordem.every((v,i) => v === i);
   return r.escolha === it.correta;
 }
+const tmpS = (s, it) => it.tempo * 1000 * (1 + ((s && s.tempoPct) || 0) / 100);
 function pontos(it, r){ if (!isCorrect(it, r) || r.tarde) return 0; const f = Math.min(1, r.tempoMs / (it.tempo*1000)); return Math.round(1000 * (1 - f/2)); }
 const sessAtual = () => S.sessoes.find(s => s.id === UI().sessId) || null;
 const sessById = id => S.sessoes.find(s => s.id === id) || null;
@@ -2196,8 +2218,8 @@ function tickSessao(s){
     const b = botPlano(p, it); if (b.falta || el < b.plan) return;
     s.resp[k] = {escolha: b.escolha, ordem: b.ordem, tempoMs: Math.round(b.plan), t: now()}; mudou = true; });
   const todos = s.part.length > 0 && s.part.every(p => s.resp[p.id + "|" + it.id] || (p.bot && botPlano(p, it).falta));
-  if ((el >= it.tempo*1000 && !s.semBloqueio) || todos){ s.fase = {...s.fase, etapa: "resultado"}; mudou = true; }
-  else { const rest = Math.ceil((it.tempo*1000 - el)/1000), k = s.id + it.id + rest; if (rest <= 5 && rest >= 1 && lastBeep !== k && (UI().view === "tel" || UI().view === "par")){ lastBeep = k; tocarSom("bip"); } }
+  if ((el >= tmpS(s, it) && !s.semBloqueio) || todos){ s.fase = {...s.fase, etapa: "resultado"}; mudou = true; }
+  else { const rest = Math.ceil((tmpS(s, it) - el)/1000), k = s.id + it.id + rest; if (rest <= 5 && rest >= 1 && lastBeep !== k && (UI().view === "tel" || UI().view === "par")){ lastBeep = k; tocarSom("bip"); } }
   return mudou;
 }
 function expirarFotos(){ let m = false; S.sessoes.forEach(s => { if (s.foto && s.foto.data && now() >= s.foto.expiraEm){ s.foto.data = null; s.foto.apagadaEm = s.foto.expiraEm; m = true; } }); return m; }
@@ -2288,6 +2310,7 @@ function afterRender(){
   initSigPad();
   document.querySelectorAll("[data-qr]").forEach(el => { if (el.dataset.done) return; el.dataset.done = 1;
     try { new QRCode(el, {text: el.dataset.qr, width: +el.dataset.qrw || 160, height: +el.dataset.qrw || 160, colorDark: cssVar("--qr-escuro"), colorLight: cssVar("--qr-claro"), correctLevel: QRCode.CorrectLevel.M}); } catch(e) { el.textContent = "QR indisponível"; } });
+  document.querySelectorAll(".phone .q").forEach(el => { const n = (el.textContent || "").trim().length; el.classList.remove("t1","t2","t3","t4"); el.classList.add(n <= 28 ? "t1" : n <= 70 ? "t2" : n <= 140 ? "t3" : "t4"); });
   tickTimers();
 }
 function tickTimers(){
@@ -2323,6 +2346,9 @@ function miniLinha(s, p, cores){ const qs = s.itens.map((it, i) => ({it, i})).fi
     if (cores && lib.has(x.i) && (s.modo === "ritmo" ? !!r : true)) c = isCorrect(x.it, r) ? "ok" : (r || s.modo === "aovivo") ? "bad" : "";
     else if (s.modo === "aovivo" && x.i === s.fase.idx) c = "atual"; else if (s.modo === "aovivo" ? x.i < s.fase.idx : !!r) c = "feito";
     return `<i class="${c}"></i>`; }).join("")}</div>`; }
+const PTR = {baixo: false, t: 0};
+["pointerdown", "touchstart"].forEach(ev => document.addEventListener(ev, () => { PTR.baixo = true; PTR.t = Date.now(); }, {passive: true, capture: true}));
+["pointerup", "pointercancel", "touchend", "touchcancel", "click"].forEach(ev => document.addEventListener(ev, () => { PTR.baixo = false; PTR.t = Date.now(); }, {passive: true, capture: true}));
 function initSigPad(){
   const cv = document.getElementById("sigCanvas"); if (!cv || cv.dataset.ready) return; cv.dataset.ready = "1";
   const r0 = cv.getBoundingClientRect(); cv.width = Math.max(300, Math.round(r0.width * 2)); cv.height = Math.round(170 * 2);
@@ -2618,7 +2644,7 @@ function vNova(){
   ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram. Formato individual.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
   <section class="panel"><div class="bd stack">
     <div class="grid2">
-      <label class="field"><span>Instrutor</span><input type="text" id="n-instr" data-nbind="instrutor" value="${esc(o.instrutor)}"></label>
+      <label class="field"><span>Instrutor · aparece no Relatório e no PDF</span><input type="text" id="n-instr" data-nbind="instrutor" value="${esc(o.instrutor)}"></label>
       <label class="field"><span>Local</span><input type="text" id="n-local" data-nbind="local" value="${esc(o.local)}" placeholder="Ex.: Refeitório"></label>
     </div>
     <div class="grid2">
@@ -2671,10 +2697,10 @@ function vControle(){
     <div><span class="lbl">Respostas desta pergunta</span><b class="num">${it && f.etapa==="pergunta" ? respondidas + " de " + s.part.length : "—"}</b></div>
   </div>
   <div class="solid">${linhaTempo(s)}</div>
-  ${f.etapa === "pergunta" ? regua(f.inicio + it.tempo*1000, it.tempo*1000, s.semBloqueio) : ""}
+  ${f.etapa === "pergunta" ? regua(f.inicio + tmpS(s, it), tmpS(s, it), s.semBloqueio) : ""}
   <div class="row">${controles(s, true)}</div>
-  <section class="panel">${hdr("Quem entrou")}<div class="tblwrap"><table><thead><tr><th>Nome</th><th>Equipe</th><th class="r">Acertos</th><th class="r">Gincana</th></tr></thead><tbody>
-  ${c.rows.map(r => `<tr><td>${eqTag(s, r.p)} ${esc(r.p.nome)}${r.p.membros && r.p.membros.length ? `<div class="muted" style="font-size:12.5px">${r.p.membros.map(esc).join(", ")}</div>` : ""}${r.p.bot && S.config.demo ? ` <span class="pill mut">simulado</span>` : ""}</td><td>${esc(nomeEquipe(s, r.p) || "—")}</td><td class="r num">${r.ac}</td><td class="r num">${r.pg}</td></tr>`).join("") || `<tr><td colspan="4" class="muted">Ninguém entrou ainda. Mostre a chave no telão${S.config.demo ? " ou use \"Simular participantes\"" : ""}.</td></tr>`}
+  <section class="panel">${hdr("Quem entrou · ranking", `<span class="muted" style="font-size:13px">ordem por acertos; rapidez desempata</span>`)}<div class="tblwrap"><table><thead><tr><th class="r">Pos.</th><th>Nome</th>${s.equipe !== "nao" ? "<th>Equipe</th>" : ""}<th class="r">Acertos</th>${c.ginc.length ? `<th class="r">Gincana</th>` : ""}</tr></thead><tbody>
+  ${c.rows.map(r => `<tr><td class="r num">${r.pos}º</td><td>${eqTag(s, r.p)} ${esc(r.p.nome)}${r.p.membros && r.p.membros.length ? `<div class="muted" style="font-size:12.5px">${r.p.membros.map(esc).join(", ")}</div>` : ""}${r.p.bot && S.config.demo ? ` <span class="pill mut">simulado</span>` : ""}</td>${s.equipe !== "nao" ? `<td>${esc(nomeEquipe(s, r.p) || "—")}</td>` : ""}<td class="r num">${r.ac}</td>${c.ginc.length ? `<td class="r num">${r.pg}</td>` : ""}</tr>`).join("") || `<tr><td colspan="5" class="muted">Ninguém entrou ainda. Mostre a chave no telão${S.config.demo ? " ou use \"Simular participantes\"" : ""}.</td></tr>`}
   </tbody></table></div></section></div>`;
 }
 function vEncerrar(){
@@ -2753,7 +2779,7 @@ function telPergunta(s, it){
   const fil = s.part.map(p => `<i class="${s.resp[p.id + "|" + it.id] ? "on" : ""}"></i>`).join("");
   return `<div class="row">${rotUso(it)}<span class="mid" style="font-size:calc(20px*var(--esc))">${it.ensaio ? "" : "Pergunta " + numQ(s, s.fase.idx)}</span>
     <div class="quem" aria-label="${resp.length} de ${s.part.length} responderam"><div class="fil">${fil}</div><span class="ct num">${resp.length} de ${s.part.length} ${s.equipe === "um" ? "equipes responderam" : "responderam"}</span></div></div>
-  ${regua(s.fase.inicio + it.tempo*1000, it.tempo*1000, s.semBloqueio)}
+  ${regua(s.fase.inicio + tmpS(s, it), tmpS(s, it), s.semBloqueio)}
   <div class="row" style="align-items:flex-start;flex-wrap:nowrap"><p class="big q2" style="flex:1">${esc(it.enunciado)}</p>${it.voz ? `<button class="ic-btn" data-act="vozOuvir" data-arg="${it.id}" aria-label="Tocar a pergunta gravada" title="Tocar a pergunta gravada">${ICON.som}</button>` : ""}</div>${fotoPerg(it)}
   ${ord ? `<div class="stack" style="gap:6px">${ord.map(k => `<div class="opt" style="--c:var(--line-forte)"><span>${esc(it.alternativas[k])}</span></div>`).join("")}</div><p class="muted">Coloque na ordem certa no celular.</p>`
        : `<div class="opts${temFotos(it) ? " fotos" : ""}">${it.alternativas.map((a, k) => optHtml(it, k, "div", "")).join("")}</div>`}`;
@@ -2769,13 +2795,13 @@ function telResultado(s, it){
     ? `<div class="stack" style="gap:6px"><span class="lbl">Ordem certa</span><div class="rank">${it.alternativas.map((a, k) => `<div><span class="p">${k+1}</span><span></span><span>${esc(a)}</span><span></span></div>`).join("")}</div></div>`
     : barrasAlt(it, pi.cont, pi.n);
   const top = s.mostrarRanking && !it.ensaio ? `<div class="stack" style="gap:8px"><span class="lbl">${it.uso==="gincana" ? "Placar da gincana" : "Mais acertos até agora"}</span><div class="rank">${(it.uso==="gincana" ? c.gin : c.rows).slice(0,5).map((r, i) => `<div><span class="p">${i+1}º</span><span class="row" style="gap:4px;flex-wrap:nowrap">${avMini(s, r.p, "sm")}${eqTag(s, r.p)}</span><span>${esc(r.p.nome)}${s.equipe==="cada" && eqDe(s,r.p) ? ` <span class="muted" style="font-size:14px">${esc(eqDe(s,r.p).nome)}</span>` : ""}</span><span class="score">${it.uso==="gincana" ? r.pg + " pts" : r.ac + " acerto(s)"}</span></div>`).join("")}</div></div>` : "";
-  return `<div class="row">${rotUso(it)}<span class="muted num">${pi.acertos} de ${pi.n} acertaram</span><span class="pctg num">${pi.pct}%</span></div>
+  return `<div class="row">${rotUso(it)}${it.ensaio || !pi.resp ? `<span class="muted">${it.ensaio ? "Pergunta de teste · não vale nota" : "Ninguém respondeu"}</span>` : `<span class="muted num">${pi.acertos} de ${pi.n} acertaram</span><span class="pctg num">· ${pi.pct}%</span>`}</div>
   <p class="mid">${esc(it.enunciado)}</p>${bars}
   ${it.porque ? `<div class="solid" style="font-size:calc(18px*var(--esc));border-left:3px solid var(--ok)"><span class="lbl">Por quê</span><br>${esc(it.porque)}</div>` : ""}${top}`;
 }
 function telFim(s){
   const c = calc(s);
-  if (!s.mostrarRanking) return `<p class="big">Perguntas concluídas.</p><p class="mid muted">Participação registrada. Obrigado.</p><p class="muted">Encerre no celular do responsável para tirar a foto e gerar o registro.</p>`;
+  if (!s.mostrarRanking) return `<p class="big">Perguntas concluídas.</p><p class="mid muted">Participação registrada. Obrigado.</p><p class="muted">Encerre na tela do professor (responsável) para tirar a foto e gerar o registro.</p>`;
   const lista = (s.equipe !== "nao" ? c.equipes.map(e => ({nome: e.nome, v: e.nota + "%", nota: e.nota, m: marcaEq(e.cor, e.simb, true)})) : c.rows.map(r => ({nome: r.p.nome, v: r.ac + " acerto(s) · " + r.nota + "%", nota: r.nota, m: avMini(s, r.p, "pod")}))).slice(0, 3);
   const alt = n => 0;
   const pod = [lista[1], lista[0], lista[2]].map((x, i) => x ? `<div class="h${[2,1,3][i]}" ><span class="pos">${[2,1,3][i]}º</span>${x.m}<b>${esc(x.nome)}</b><span class="score">${x.v}</span></div>` : `<div style="background:transparent;border:0"></div>`).join("");
@@ -2783,7 +2809,7 @@ function telFim(s){
   return `<p class="big">Resultado</p><span class="lbl">${s.equipe !== "nao" ? "Equipes · média da nota" : "Avaliação · acertos, rapidez desempata"}</span>
   <div class="podwrap"><div class="podium prop">${pod}</div></div>
   ${g && g.pg > 0 ? `<div class="gincl"><span class="lbl">Gincana</span>${eqTag(s, g.p)}<b style="flex:1">${esc(g.p.nome)}</b><span class="score num">${g.pg} pts</span></div>` : ""}
-  <p class="muted">Encerre no celular do responsável para tirar a foto e gerar o registro.</p>`;
+  <p class="muted">Encerre na tela do professor (responsável) para tirar a foto e gerar o registro.</p>`;
 }
 
 /* ---------- Participante ---------- */
@@ -2878,7 +2904,7 @@ function telaPergunta(s, p, it, inicio, r){
       ${pre !== null ? `<button class="btn pri enviar" data-act="responder" data-arg="${it.id}|${pre}">Enviar resposta ${letra(pre)}</button>` : s.confirmar ? `<p class="muted" style="margin:0;font-size:14px">Toque na alternativa e depois em Enviar.</p>` : ""}`;
   }
   return `${topoPergunta(s, p, it, idx)}
-    ${regua(inicio + it.tempo*1000, it.tempo*1000, s.semBloqueio)}
+    ${regua(inicio + tmpS(s, it), tmpS(s, it), s.semBloqueio)}
     <p class="q">${esc(it.enunciado)}</p>${r ? "" : it.voz ? `<button class="btn ouvir" data-act="vozOuvir" data-arg="${it.id}" aria-label="Ouvir a pergunta">${ICON.som}Ouvir a pergunta</button>` : botOuvir(fala, true)}${fotoPerg(it, "max-height:22vh;object-fit:contain;align-self:flex-start")}${corpo}`;
 }
 function meusAcertos(s, p){ const lib = liberados(s); let ac = 0, n = 0; s.itens.forEach((it, i) => { if (!scored(it) || !lib.has(i)) return; if (s.modo === "ritmo" && !s.resp[p.id + "|" + it.id] && i >= (S.eu ? S.eu.idx : 0)) return; n++; if (isCorrect(it, s.resp[p.id + "|" + it.id])) ac++; }); return {ac, n}; }
@@ -2906,7 +2932,7 @@ function meuResultado(s, p){
     ${c.ginc.length ? `<div class="solid"><b>Gincana:</b> <span class="num">${r.pg}</span> pontos</div>` : ""}
     ${s.mostrarRanking && !(r.nota === 0 && r.pos === 1) ? `<p class="q">${s.equipe !== "nao" && eq >= 0 ? "Sua equipe ficou em " + (eq+1) + "º lugar." : "Você ficou em " + r.pos + "º lugar."}</p>` : ""}
     ${blocoAssinatura(s, p)}
-    <p class="muted">Participação registrada. Obrigado.</p>`;
+    ${assKeys(s, p).some(x => !(s.assin || {})[x.key]) ? "" : `<p class="muted">Participação registrada. Obrigado.</p>`}`;
 }
 function assKeys(s, p){ return s.equipe === "um" ? p.membros.map((m, k) => ({key: p.id + "#" + k, nome: m})) : [{key: p.id, nome: p.nome}]; }
 function blocoAssinatura(s, p){
@@ -3411,7 +3437,7 @@ const A = {
   som(){ UI().som = UI().som !== true; if (UI().som) tocarSom("revelar"); },
   telaCheia(){ const r = document.documentElement; if (document.fullscreenElement){ if (document.exitFullscreen) document.exitFullscreen().catch(() => {}); } else if (r.requestFullscreen){ r.requestFullscreen().catch(() => {}); } return "norender"; },
   encerrarTempo(id, ok){ if (!ok) return pedir("Encerrar o tempo agora?", "Quem ainda não respondeu fica sem resposta nesta pergunta.", "encerrarTempo", id, "Encerrar tempo", true); A.avancar(id); },
-  pedeEncerrar(id, ok){ if (!ok) return pedir("Encerrar o treinamento?", "Você vai para a tela da foto da turma. Depois de encerrar, ninguém responde mais.", "pedeEncerrar", id, "Sim, encerrar", true); A.irEncerrar(id); },
+  pedeEncerrar(id, ok){ if (!ok) return pedir("Encerrar o treinamento?", "Você vai para a tela de encerramento (foto da turma e assinaturas). Depois de encerrar, ninguém responde mais.", "pedeEncerrar", id, "Sim, encerrar", true); A.irEncerrar(id); },
   delT(id, ok){ const T = S.treinamentos.find(t => t.id === id); if (!T) return; if (!ok) return pedir("Excluir modelo?", `"${T.titulo}" será apagado deste aparelho. Sessões já aplicadas continuam. Exporte o .json antes se quiser guardar.`, "delT", id, "Excluir", true); S.treinamentos = S.treinamentos.filter(t => t.id !== id); UI().msgResp = "Modelo excluído."; },
   delSessao(id, ok){ const s = sessById(id); if (!s) return; if (!ok) return pedir("Excluir sessão?", `A sessão de "${s.titulo}" (${s.part.length} participante(s)), com foto e assinaturas, será apagada deste aparelho. Exporte o PDF ou .json antes.`, "delSessao", id, "Excluir", true);
     S.sessoes = S.sessoes.filter(x => x.id !== id); if (S.eu && S.eu.sessId === id) S.eu = null; if (UI().relId === id) UI().relId = null; if (UI().sessId === id) UI().sessId = null; UI().tela = "lista"; UI().msgResp = "Sessão excluída."; },
@@ -3542,10 +3568,10 @@ function registrar(itemId, r){
   const k = p.id + "|" + itemId; if (s.resp[k]) return;
   const it = s.itens.find(x => x.id === itemId);
   if (s.modo === "aovivo"){ if (s.fase.etapa !== "pergunta" || s.itens[s.fase.idx].id !== itemId) return;
-    const el = now() - s.fase.inicio, tarde = el > it.tempo*1000;
-    s.resp[k] = {...r, tempoMs: s.semBloqueio ? el : Math.min(it.tempo*1000, el), t: now(), ...(tarde && s.semBloqueio ? {tarde: true} : {})}; }
-  else { const el = now() - (S.eu.qStart || now()), tarde = el > it.tempo*1000;
-    s.resp[k] = {...r, tempoMs: s.semBloqueio ? el : Math.min(it.tempo*1000, el), t: now(), ...(tarde && s.semBloqueio ? {tarde: true} : {})}; S.eu.fb = true; }
+    const el = now() - s.fase.inicio, tarde = el > tmpS(s, it);
+    s.resp[k] = {...r, tempoMs: s.semBloqueio ? el : Math.min(tmpS(s, it), el), t: now(), ...(tarde && s.semBloqueio ? {tarde: true} : {})}; }
+  else { const el = now() - (S.eu.qStart || now()), tarde = el > tmpS(s, it);
+    s.resp[k] = {...r, tempoMs: s.semBloqueio ? el : Math.min(tmpS(s, it), el), t: now(), ...(tarde && s.semBloqueio ? {tarde: true} : {})}; S.eu.fb = true; }
 }
 
 document.addEventListener("click", e => {
@@ -3627,10 +3653,11 @@ function tick(){
     S.sessoes.forEach(s => { if (tickSessao(s)) m = true; });
     const e = S.eu, s = minhaSessao();
     if (e && s && s.modo === "ritmo" && s.status === "andamento" && e.qStart && !e.fb && e.idx < s.itens.length){
-      const it = s.itens[e.idx]; if (isQ(it) && !s.semBloqueio && now() - e.qStart >= it.tempo*1000){ e.fb = true; m = true; } }
+      const it = s.itens[e.idx]; if (isQ(it) && !s.semBloqueio && now() - e.qStart >= tmpS(s, it)){ e.fb = true; m = true; } }
     if (m) save();
     const ae = document.activeElement, cvs = document.getElementById("sigCanvas"), editando = (ae && app.contains(ae) && /INPUT|TEXTAREA|SELECT/.test(ae.tagName)) || (cvs && cvs.dataset.sujo) || !!UI().conf && false;
-    if (S.rev !== lastRev && !editando) render(); else tickTimers();
+    const tocando = PTR.baixo || (now() - PTR.t) < 600;
+    if (S.rev !== lastRev && !editando && !tocando) render(); else tickTimers();
   } finally { tickBusy = false; }
 }
 
@@ -3784,12 +3811,13 @@ function vAvatar(pe, primeira){
   const aba = ed.aba, opts = [...Array(AV_N[aba]).keys()].map(v => { const t = {...o, [aba]: v}, c = avCode(t);
     return `<button class="avop" data-act="avPeca" data-arg="${aba}|${v}" aria-pressed="${o[aba] === v}" aria-label="${esc(AV_ROT[aba])}: ${esc((AV_NOMES[aba] || [])[v] || "opção " + (v+1))}">${avSvg(c, "sm")}</button>`; }).join("");
   return `<div class="avbox">
-    ${primeira ? `<p class="q" style="margin:0">Escolha o seu boneco</p><p class="muted" style="margin:0;font-size:14px">Ele aparece no telão e no seu perfil. Pode mudar quando quiser. Tudo liberado, sem custo.</p>` : `<span class="lbl">Seu boneco</span>`}
-    <div class="avtopo">${avSvg(ed.code, "lg")}<div class="stack" style="gap:6px"><span class="lbl">Sugestões</span><div class="avsug">${sug.map(c => `<button class="avop" data-act="avUsar" data-arg="${c}" aria-label="Usar esta sugestão">${avSvg(c, "sm")}</button>`).join("")}</div>
-      <button class="btn sm" data-act="avLote">${ICON.mais}Outras sugestões</button></div></div>
-    <div class="avabas" role="tablist" aria-label="Partes do boneco">${AV_K.map(k => `<button role="tab" data-act="avAba" data-arg="${k}" aria-pressed="${aba === k}">${AV_ROT[k]}</button>`).join("")}</div>
+    ${primeira ? `<h2 class="avtit">Escolha o seu boneco</h2><p class="avsub">Ele aparece no telão e no seu perfil. Pode mudar quando quiser.</p>` : `<h2 class="avtit sm">Seu boneco</h2>`}
+    <div class="avstage">${avSvg(ed.code, "lg")}</div>
+    <div class="avsugb"><span class="lbl">Sugestões</span><div class="avsug">${sug.map(c => `<button class="avop" data-act="avUsar" data-arg="${c}" aria-label="Usar esta sugestão">${avSvg(c, "sm")}</button>`).join("")}</div>
+      <button class="btn sm" data-act="avLote">${ICON.mais}Outras sugestões</button></div>
+    <label class="field avsel"><span>Parte do boneco</span><select data-avaba="1" aria-label="Parte do boneco">${AV_K.map(k => `<option value="${k}"${aba === k ? " selected" : ""}>${AV_ROT[k]}</option>`).join("")}</select></label>
     <div class="avopts">${opts}</div>
-    <div class="row"><button class="btn pri lg" style="flex:1" data-act="avSalvar">${primeira ? "Usar este boneco" : "Salvar boneco"}</button>${primeira ? `<button class="btn" data-act="avPular">Depois</button>` : `<button class="btn" data-act="avCancelar">Cancelar</button>`}</div></div>`;
+    <div class="avacoes"><button class="btn pri lg" data-act="avSalvar">${primeira ? "Usar este boneco" : "Salvar boneco"}</button>${primeira ? `<button class="btn" data-act="avPular">Depois</button>` : `<button class="btn" data-act="avCancelar">Cancelar</button>`}</div></div>`;
 }
 
 /* ---------- histórico da pessoa (perfil, selos, reforço) ---------- */
@@ -4165,7 +4193,7 @@ async function nvPublicar(s){
   const reforcoNomes = s.reforco ? s.reforco.pessoas.map(id => S.pessoas.find(pe => pe.id === id)).filter(Boolean).map(pe => sha256(s.id + "|" + norm(nomeCompleto(pe)))) : null;   /* só o resumo (hash): quem tem a chave não vê os nomes */
   const base = {v: 1, dono: nvUid(), donoNome: NV.conta.nome, chave: s.chave, titulo: s.titulo, tId: s.tId, modo: s.modo, equipe: s.equipe, maxEquipe: s.maxEquipe, meta: s.meta,
     mostrarRanking: !!s.mostrarRanking, embaralhar: !!s.embaralhar, confirmar: !!s.confirmar, semBloqueio: !!s.semBloqueio, prazo: s.prazo || "", instrutor: s.instrutor || "", local: s.local || "",
-    ordem: s.itens.map(it => it.id), reforcoNomes, tVer: s.tVer || 0, teste: !!s.teste, setores: (s.setores && s.setores.length ? s.setores : S.config.setores).slice(), criadaEm: s.criadaEm, escrito: now(), srv: nvTS(), ...nvDinamico(s)};
+    ordem: s.itens.map(it => it.id), reforcoNomes, tVer: s.tVer || 0, tempoPct: s.tempoPct || 0, teste: !!s.teste, setores: (s.setores && s.setores.length ? s.setores : S.config.setores).slice(), criadaEm: s.criadaEm, escrito: now(), srv: nvTS(), ...nvDinamico(s)};
   try {
     await nvSessRef(s.id).set(base);
     for (const it of s.itens) await nvSessRef(s.id).collection("itens").doc(it.id).set(nvItemPub(it));
@@ -4295,7 +4323,7 @@ async function nvBuscarChave(k){
   const velho = S.sessoes.find(x => x.id === c.sid);
   const s = velho || {id: c.sid, tId: d.tId, titulo: d.titulo, meta: d.meta, assin: {}, chave: d.chave, criadaEm: d.criadaEm || now(), criadoPor: d.donoNome || "",
     instrutor: d.instrutor, local: d.local, modo: d.modo, prazo: d.prazo, equipe: d.equipe, maxEquipe: d.maxEquipe, mostrarRanking: !!d.mostrarRanking, embaralhar: !!d.embaralhar, confirmar: !!d.confirmar,
-    demo: false, tVer: +d.tVer || 0, teste: d.teste ? true : undefined, semBloqueio: !!d.semBloqueio, reforco: d.reforcoNomes ? {pessoas: [], nomes: d.reforcoNomes} : null, setores: Array.isArray(d.setores) ? d.setores : null, itens, part: [], equipes: [], resp: {}, foto: null, encerradaPor: ""};
+    demo: false, tVer: +d.tVer || 0, tempoPct: +d.tempoPct || 0, teste: d.teste ? true : undefined, semBloqueio: !!d.semBloqueio, reforco: d.reforcoNomes ? {pessoas: [], nomes: d.reforcoNomes} : null, setores: Array.isArray(d.setores) ? d.setores : null, itens, part: [], equipes: [], resp: {}, foto: null, encerradaPor: ""};
   s.remota = {uid: nvTUid(), dono: d.dono, donoNome: d.donoNome || ""};
   nvAplicarDoc(s, d, sn);
   if (!velho) S.sessoes.push(s);
@@ -4547,7 +4575,9 @@ function vPorta(){
 const _vPart = vPart;
 vPart = function(){
   const h = _vPart();
-  return (ativado() || UI().teste) ? `<div class="voltar-par"><button class="btn sm" data-act="view" data-arg="resp">${ICON.voltar}Voltar ao responsável</button></div>` + h : h;
+  if (!(ativado() || UI().teste)) return h;
+  const bt = `<button class="btn sm" data-act="view" data-arg="resp">${ICON.voltar}Voltar ao responsável</button>`;
+  return h.includes('<div class="pf">') ? h.replace('<div class="pf">', '<div class="pf">' + bt) : `<div class="voltar-par">${bt}</div>` + h;
 };
 
 /* ---------- navegação ---------- */
@@ -4709,7 +4739,7 @@ function verEm(T, t){ let n = 0; (T.versoes || []).forEach(v => { if (v.em <= t)
 
 /* sessão nova guarda a versão aplicada e se é TESTE (demonstração com pessoas de verdade) */
 const _sessaoNova23 = sessaoNova;
-sessaoNova = function(T, o){ const s = _sessaoNova23(T, o); s.tVer = T.versao || 0; if (o && Array.isArray(o.setores) && o.setores.length) s.setores = o.setores.slice(); if (S.config.demoModo === "real") s.teste = true; return s; };
+sessaoNova = function(T, o){ const s = _sessaoNova23(T, o); s.tVer = T.versao || 0; if (o && Array.isArray(o.setores) && o.setores.length) s.setores = o.setores.slice(); if (S.config.demoModo === "real" || (o && o.teste)) s.teste = true; if (o && +o.tempoPct) s.tempoPct = +o.tempoPct; return s; };
 
 /* ---------------- sessões TESTE ficam fora do registro de eficácia ---------------- */
 function semTeste(fn){ return function(...a){ const todas = S.sessoes; S.sessoes = todas.filter(s => !s.teste); try { return fn.apply(this, a); } finally { S.sessoes = todas; } }; }
@@ -4988,7 +5018,7 @@ function vIA(){
   if (!I.itens){
     corpo = `<div class="grid3 iag"><label class="field"><span>Assunto</span><input type="text" id="ia-ass" data-iabind="assunto" value="${esc(I.assunto || "")}" placeholder="Ex.: Higiene no packing house"></label>
         ${dd("dd-pub", "Público", I.publico || "adulto", [["adulto", "Adulto", "Linguagem simples e direta"], ["infantil", "Infantil", "Frases curtas, palavras de criança"]], "iaPub", "")}
-        ${dd("dd-tam", "Tamanho", +I.tam, [[5, "Curto · 5 perguntas"], [10, "Médio · 10 perguntas"], [20, "Longo · 20 perguntas"]], "iaTam", "")}</div>
+        ${dd("dd-tam", "Tamanho", +I.tam, [[5, "5 perguntas"], [10, "10 perguntas"], [15, "15 perguntas"], [20, "20 perguntas"], [30, "30 perguntas"]], "iaTam", "")}</div>
       <label class="field"><span>O pedido pronto · cole numa IA junto com o seu material</span><textarea id="ia-txt" class="prm" readonly rows="7">${esc(textoPromptIA(I))}</textarea></label>
       <div class="row">${I.msg ? `<span class="okmsg sm">${esc(I.msg)}</span>` : ""}<button class="btn pri" data-act="iaCopiar">${ICON.copiar}Copiar o pedido</button><button class="btn" data-act="iaBaixar">${ICON.baixar}Baixar .txt</button></div>
       <label class="field"><span>A resposta da IA · copie tudo o que ela respondeu e cole aqui</span><textarea id="ia-resp" data-iaresp="1" rows="4" placeholder="Cole aqui o que a IA respondeu">${esc(I.txt || "")}</textarea></label>
@@ -5036,7 +5066,7 @@ vNova = function(){
   ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram. Formato individual.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
   <section class="panel"><div class="bd stack">
     <div class="grid2">
-      <label class="field"><span>Instrutor</span><input type="text" id="n-instr" data-nbind="instrutor" value="${esc(o.instrutor)}"></label>
+      <label class="field"><span>Instrutor · aparece no Relatório e no PDF</span><input type="text" id="n-instr" data-nbind="instrutor" value="${esc(o.instrutor)}"></label>
       <label class="field"><span>Local</span><input type="text" id="n-local" data-nbind="local" value="${esc(o.local)}" placeholder="Ex.: Refeitório"></label>
     </div>
     <div class="ddg">
@@ -5050,7 +5080,8 @@ vNova = function(){
     ${o.modo === "ritmo" ? `<label class="field" style="max-width:260px"><span>Prazo para responder</span><input type="date" id="n-prazo" data-nbind="prazo" value="${esc(o.prazo)}"></label>` : ""}
     ${o.equipe !== "nao" && !o.reforco ? `<label class="field" style="max-width:260px"><span>Máximo de pessoas por equipe</span><input type="number" min="2" max="12" id="n-max" data-nbind="maxEquipe" value="${o.maxEquipe}"></label>` : ""}
     ${blocoSetores(o)}
-    <div class="chks"><label class="chk"><input type="checkbox" id="n-rank" data-nchk="mostrarRanking" ${o.mostrarRanking ? "checked" : ""}>Mostrar ranking no telão e no celular</label>
+    <div class="grid2">${dd("dd-tpct", "Tempo extra para quem tiver dificuldade", o.tempoPct || 0, TPCT, "novaTpct", "")}<p class="aj" style="align-self:end;margin:0">Soma uma porcentagem ao tempo de cada pergunta. Dá para mudar durante a sessão.</p></div>
+    <div class="chks"><label class="chk"><input type="checkbox" id="n-teste" data-nchk="teste" ${o.teste || S.config.demoModo === "real" ? "checked" : ""}>Sessão de teste (não entra no relatório, no reforço nem no PDF)</label><label class="chk"><input type="checkbox" id="n-rank" data-nchk="mostrarRanking" ${o.mostrarRanking ? "checked" : ""}>Mostrar ranking no telão e no celular</label>
     <label class="chk"><input type="checkbox" id="n-emb" data-nchk="embaralhar" ${o.embaralhar ? "checked" : ""}>Embaralhar a ordem das alternativas no celular</label>
     <label class="chk"><input type="checkbox" id="n-conf" data-nchk="confirmar" ${o.confirmar ? "checked" : ""}>Pedir confirmação antes de enviar a resposta</label></div>
     <p class="aj">Nota da avaliação: só acertos e erros. Rapidez desempata quem acertou o mesmo número. Perguntas de gincana valem pontos por rapidez num placar separado.${S.config.demo && o.nuvem !== "1" ? " Demonstração: use “Próxima pessoa” na aba Participante para simular outro celular." : ""}</p>
@@ -5116,12 +5147,14 @@ function blocoFb(s){
   const pe = logado(); if (!s || !pe || s.equipe === "um") return "";
   const u = UI(), f = u.fbr && u.fbr.sid === s.id ? u.fbr : null, ja = (S.mensagens || []).filter(m => m.pessoaId === pe.id && m.sId === s.id);
   return `<div class="fbq"><span class="lbl">Como foi este treinamento? · opcional</span>
-    <div class="fbb">${FB_TIPOS.map(([k, l, ic]) => `<button class="btn sm${f && f.tipo === k ? " on" : ""}" data-act="fbTipo" data-arg="${s.id}|${k}" aria-pressed="${!!(f && f.tipo === k)}">${ICON[ic]}${l}</button>`).join("")}</div>
+    ${ja.length && !f ? "" : `<div class="fbb">${FB_TIPOS.map(([k, l, ic]) => `<button class="btn sm${f && f.tipo === k ? " on" : ""}" data-act="fbTipo" data-arg="${s.id}|${k}" aria-pressed="${!!(f && f.tipo === k)}">${ICON[ic]}${l}</button>`).join("")}</div>`}
     ${f ? `<textarea id="fbr-txt" data-fbr="1" rows="2" maxlength="600" placeholder="${f.tipo === "elogio" ? "Se quiser, conte o que gostou" : "Escreva aqui"}">${esc(f.texto || "")}</textarea>${u.fbrErro ? `<div class="msg">${esc(u.fbrErro)}</div>` : ""}<div class="row"><button class="btn pri" data-act="fbEnviar">Enviar com o meu nome</button><button class="btn ghost" data-act="fbCancelar">Cancelar</button></div>` : ""}
-    ${ja.length ? `<p class="aj">${ICON.ok} ${plu(ja.length, "mensagem enviada", "mensagens enviadas")} sobre este treinamento. Obrigado.</p>` : ""}</div>`;
+    ${ja.length ? `<p class="aj">${ICON.ok} ${plu(ja.length, "mensagem enviada", "mensagens enviadas")} sobre este treinamento. Obrigado.</p>${f ? "" : `<button class="btn sm" data-act="fbTipo" data-arg="${s.id}|comentario">Enviar outro comentário</button>`}` : ""}</div>`;
 }
 const _meuResultado23 = meuResultado;
-meuResultado = function(s, p){ const h = _meuResultado23(s, p); return h ? h.replace(`<p class="muted">Participação registrada. Obrigado.</p>`, `${blocoFb(s)}<p class="muted">Participação registrada. Obrigado.</p>`) : h; };
+meuResultado = function(s, p){ const h = _meuResultado23(s, p); if (!h) return h; const erros = s.itens.filter(it => scored(it) && it.uso === "avaliacao" && !isCorrect(it, s.resp[p.id + "|" + it.id])).length;
+  const rev = erros && logado() ? `<button class="btn" data-act="revDoResultado" data-arg="${s.id}">Rever o que errei (${erros})</button>` : "";
+  return h.includes(`<p class="muted">Participação registrada. Obrigado.</p>`) ? h.replace(`<p class="muted">Participação registrada. Obrigado.</p>`, `${rev}${blocoFb(s)}<p class="muted">Participação registrada. Obrigado.</p>`) : h + rev + blocoFb(s); };
 const _vRevisao23 = vRevisao;
 vRevisao = function(pe, sid){ const h = _vRevisao23(pe, sid), s = sessById(sid); return h.replace(`<button class="btn pri lg" data-act="revFechar">Terminei a revisão</button>`, `${blocoFb(s)}<button class="btn pri lg" data-act="revFechar">Terminei a revisão</button>`); };
 
@@ -5342,6 +5375,37 @@ Object.assign(A, {
     try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(() => fim("Link copiado."), reserva); else reserva(); } catch(e) { reserva(); } return "norender"; },
   conviteShare(){ const s = sessById(UI().convite); if (!s) return "norender"; try { navigator.share({title: s.titulo, text: textoConvite(s)}).catch(() => {}); } catch(e) {} return "norender"; }
 });
+
+/* =====================================================================
+   v2.3.2 · o que o participante vê: a tela não pula e a assinatura não some
+   ===================================================================== */
+let SIGDRAFT = null;
+const _render232 = render;
+render = function(){
+  const cv = document.getElementById("sigCanvas");
+  if (cv && cv.dataset.sujo === "1") { try { SIGDRAFT = cv.toDataURL(); } catch(e) {} }
+  const s0 = (typeof minhaSessao === "function" && S && S.ui.view === "par") ? minhaSessao() : null;
+  const chave = s0 ? [s0.id, s0.fase && s0.fase.etapa, s0.fase && s0.fase.idx, S.eu].join("|") : "";
+  const pb = document.querySelector(".phone .pb"), st = pb ? pb.scrollTop : 0, wy = window.scrollY;
+  _render232();
+  const pb2 = document.querySelector(".phone .pb");
+  if (pb2 && chave && pb && pb.dataset.k === chave) { pb2.scrollTop = st; window.scrollTo(0, wy); }
+  if (pb2) pb2.dataset.k = chave;
+  const cv2 = document.getElementById("sigCanvas");
+  if (!cv2) { SIGDRAFT = null; }
+  else if (SIGDRAFT && !cv2.dataset.sujo) { const im = new Image(); im.onload = () => { try { cv2.getContext("2d").drawImage(im, 0, 0, cv2.width, cv2.height); cv2.dataset.sujo = "1"; } catch(e) {} }; im.src = SIGDRAFT; }
+};
+const _sigLimpar232 = A.sigLimpar; A.sigLimpar = function(){ SIGDRAFT = null; return _sigLimpar232.apply(this, arguments); };
+A.revDoResultado = function(id){ const u = UI(); u.perfil = true; u.revisao = id; u.msgFale = ""; u.erroFale = ""; };
+document.addEventListener("change", e => { const t = e.target; if (t && t.dataset && t.dataset.avaba){ A.avAba(t.value); save(); render(); } });
+
+/* v2.3.2 · tempo extra em porcentagem (Aplicar e durante a sessão) */
+const TPCT = [[0, "Nenhum"], [25, "+25% de tempo"], [50, "+50% de tempo"], [75, "+75% de tempo"], [100, "+100% de tempo (dobro)"]];
+A.novaTpct = function(v){ const u = UI(); u.nova.tempoPct = +v; u.menu = null; };
+A.ctlTpct = function(v){ const s = sessAtual(); if (s){ s.tempoPct = +v; } UI().menu = null; };
+const _vControle232 = vControle;
+vControle = function(){ const s = sessAtual(), h = _vControle232(); if (!s || s.status === "encerrada" || !h.includes('<div class="kv">')) return h;
+  return h.replace('<div class="kv">', `<div class="grid2">${dd("dd-ctpct", "Tempo extra para quem tiver dificuldade", s.tempoPct || 0, TPCT, "ctlTpct", "")}<p class="aj" style="align-self:end;margin:0">Vale para a pergunta atual e as próximas. Quem já respondeu não muda.</p></div><div class="kv">`); };
 </script>
 </body>
 </html>
