@@ -1462,6 +1462,15 @@ input[type=text],input[type=number],input[type=date],input[type=search],select,t
 @media (max-width:900px){.fpan .field.dd{flex:1 1 0;min-width:0;width:auto;max-width:none}}
 /* o logo em JPEG tem o papel dele: as bordas somem no fundo, sem caixa aparente */
 .abertura .abt-alt img,.logo-porta{-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(transparent,#000 9%,#000 91%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(transparent,#000 9%,#000 91%,transparent);mask-composite:intersect}
+/* v2.3.1 · convidar participantes */
+.mdl2.conv{width:min(480px,calc(100vw - 24px))}
+.cvqr{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:14px}
+.cvqr .qr{padding:10px;background:var(--qr-claro,#fff);border-radius:10px;line-height:0}
+.cvch{display:flex;flex-direction:column;align-items:center;gap:2px;margin-bottom:14px}
+.cvch .chave{font-size:40px;letter-spacing:.14em;font-family:var(--mono,ui-monospace,monospace)}
+.cvbt{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px}
+.cvqr .qr img,.cvqr .qr canvas{width:min(280px,64vw);height:min(280px,64vw)}
+.relsel{max-width:260px}
 </style>
 </head>
 <body>
@@ -1885,7 +1894,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.3.0";
+const APP_VERSAO = "2.3.1";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Packing","Campo","Laboratório","Almoxarifado","Oficina","Segurança","RH","ADM","Outros"];
@@ -2168,7 +2177,7 @@ function ritmoBot(s, p){
 }
 
 /* ============ fases ao vivo ============ */
-function iniciar(s){ s.status = "andamento"; if (s.modo === "aovivo") irPara(s, 0); }
+function iniciar(s){ s.status = "andamento"; s.iniciadaEm = s.iniciadaEm || now(); if (s.modo === "aovivo") irPara(s, 0); }
 function irPara(s, idx){
   if (idx >= s.itens.length){ s.fase = {idx, etapa: "fim", inicio: now()}; return; }
   const it = s.itens[idx];
@@ -2278,7 +2287,7 @@ function pedir(titulo, msg, act, arg, ok, perigo){ UI().conf = {titulo, msg, act
 function afterRender(){
   initSigPad();
   document.querySelectorAll("[data-qr]").forEach(el => { if (el.dataset.done) return; el.dataset.done = 1;
-    try { new QRCode(el, {text: el.dataset.qr, width: 160, height: 160, colorDark: cssVar("--qr-escuro"), colorLight: cssVar("--qr-claro"), correctLevel: QRCode.CorrectLevel.M}); } catch(e) { el.textContent = "QR indisponível"; } });
+    try { new QRCode(el, {text: el.dataset.qr, width: +el.dataset.qrw || 160, height: +el.dataset.qrw || 160, colorDark: cssVar("--qr-escuro"), colorLight: cssVar("--qr-claro"), correctLevel: QRCode.CorrectLevel.M}); } catch(e) { el.textContent = "QR indisponível"; } });
   tickTimers();
 }
 function tickTimers(){
@@ -2332,8 +2341,8 @@ function plural(n, um, varios){ return n + " " + (n === 1 ? um : varios); }
 const fCurta = t => { const d = new Date(t); return pad(d.getDate()) + "/" + pad(d.getMonth() + 1); };
 const ICON_TRI = SV('<path d="M12 4l9 16H3Z" fill="currentColor"/>', 1.5);
 /* situação em relação à meta: ▲ + texto + cor (a cor nunca vai sozinha) */
-function sitMeta(med, mt){
-  if (med === null) return `<span class="st mut">Ainda não aplicado</span>`;
+function sitMeta(med, mt, aplicada){
+  if (med === null) return aplicada ? `<span class="st mut">Aplicado · sem avaliação</span>` : `<span class="st mut">Ainda não aplicado</span>`;
   return med >= mt ? `<span class="st ok">${ICON.ok}Na meta</span>` : `<span class="st bad">${ICON_TRI}Abaixo da meta</span>`;
 }
 function barraMeta(med, mt){ return `<span class="rmeta" style="--c:${med >= mt ? "var(--ok)" : "var(--bad)"}" role="img" aria-label="Nota média ${med}% e meta ${mt}%"><i style="width:${med}%"></i><b style="left:${mt}%"></b></span><span><b class="num" style="color:var(--fg)">${med}%</b> · meta <span class="num">${mt}%</span></span>`; }
@@ -2358,7 +2367,7 @@ function linhaEncerrada(s){
   const c = calc(s), med = c.aval.length ? numerosSessao(s, c).media : null, mt = c.meta;
   return `<div class="r"><div class="nm"><b>${esc(s.titulo)}</b><span class="det"><span class="num">${fData(s.encerradaEm)} ${fHora(s.encerradaEm)}</span> · ${plural(s.part.length, "participante", "participantes")} · ${esc(s.local || "sem local")}</span></div>
     ${med === null ? `<span></span>` : `<div class="nt">${barraMeta(med, mt)}</div>`}
-    ${sitMeta(med, mt)}
+    ${sitMeta(med, mt, true)}
     <div class="ac"><button class="btn pri" data-act="verRel" data-arg="${s.id}">Relatório</button>${menuBtn("e" + s.id, [["exportarS", s.id, "Exportar sessão .json", ICON.baixar], ...(pode() ? [["delSessao", s.id, "Excluir sessão", ICON.lixo, true]] : [])])}</div></div>`;
 }
 const TXT_SECAO = {trein: "Treinamentos", ref: "Reforço", msg: "Mensagens", enc: "Encerradas", rel: "Relatório", tel: "Telão", par: "Participante", cfg: "Configurações", conf: "Conferir registro"};
@@ -2895,7 +2904,7 @@ function meuResultado(s, p){
     <div class="kv" style="grid-template-columns:1fr 1fr"><div><span class="lbl">Acertos</span><b class="score" style="font-size:24px">${r.ac}</b></div><div><span class="lbl">Erros</span><b class="score" style="font-size:24px">${r.er}</b></div>
     <div><span class="lbl">Sem resposta</span><b class="score" style="font-size:24px">${r.sr}</b></div><div><span class="lbl">Nota</span><b class="score" style="font-size:24px">${r.nota}%</b></div></div>
     ${c.ginc.length ? `<div class="solid"><b>Gincana:</b> <span class="num">${r.pg}</span> pontos</div>` : ""}
-    ${s.mostrarRanking ? `<p class="q">${s.equipe !== "nao" && eq >= 0 ? "Sua equipe ficou em " + (eq+1) + "º lugar." : "Você ficou em " + r.pos + "º lugar."}</p>` : ""}
+    ${s.mostrarRanking && !(r.nota === 0 && r.pos === 1) ? `<p class="q">${s.equipe !== "nao" && eq >= 0 ? "Sua equipe ficou em " + (eq+1) + "º lugar." : "Você ficou em " + r.pos + "º lugar."}</p>` : ""}
     ${blocoAssinatura(s, p)}
     <p class="muted">Participação registrada. Obrigado.</p>`;
 }
@@ -2926,7 +2935,7 @@ function vRitmo(s, p){
 /* ---------- Relatório ---------- */
 function vRel(){
   const u = UI(), aba = u.relAba || "sessao";
-  const abas = `<div class="abas" role="tablist" aria-label="Relatório">${[["sessao","Resumo"],["mapa","Mapa da turma"],["assert","Assertividade"],["setores","Setores"]].map(([k, l]) => `<button role="tab" data-act="relAba" data-arg="${k}" aria-pressed="${aba === k}">${l}</button>`).join("")}</div>`;
+  const abas = `<div class="relsel">${dd("relaba", "Ver", aba, [["sessao","Resumo"],["mapa","Mapa da turma"],["assert","Assertividade"],["setores","Setores"]], "relAba")}</div>`;
   if (aba === "assert") return `<div class="stack"><div class="pghd"><h1>Assertividade</h1><span class="sub">Como a turma vai ao longo do tempo</span></div>${abas}${vAssert()}</div>`;
   if (aba === "setores") return `<div class="stack"><div class="pghd"><h1>Desafio entre setores</h1><span class="sub">Placar por setor, com no mínimo 3 pessoas</span></div>${abas}${vSetores()}</div>`;
   const lista = [...S.sessoes].sort((a, b) => (b.encerradaEm || b.criadaEm) - (a.encerradaEm || a.criadaEm));
@@ -2951,7 +2960,7 @@ function vRel(){
   const nAbaixo = c.rows.filter(r => r.nota < M && c.aval.length).length;
   const reforcoT = reforcoPendente().find(g => g.T.id === s.tId);
   const podeRea = s.status === "encerrada" && pode() && S.treinamentos.some(T => T.id === s.tId);
-  const cab = `<div class="pghd"><h1>${esc(s.titulo)}</h1><span class="sub">Sessão de <span class="num">${fData(s.criadaEm)} ${fHora(s.criadaEm)}</span> · ${esc(s.local || "sem local")} · ${s.status === "encerrada" ? "Encerrada" : rotFase(s)}</span></div>
+  const cab = `<div class="pghd"><h1>${esc(s.titulo)}</h1><span class="sub">Sessão de <span class="num">${fData(s.criadaEm)}</span> · início <span class="num">${fHora(s.iniciadaEm || s.criadaEm)}</span>${s.status === "encerrada" && s.encerradaEm ? ` · encerrada <span class="num">${fHora(s.encerradaEm)}</span>` : ""} · ${esc(s.local || "sem local")} · ${s.status === "encerrada" ? "Encerrada" : rotFase(s)}</span></div>
   <div class="tools"><label class="row" style="gap:8px"><span class="muted">Sessão</span>${sel}</label></div>${abas}`;
   const triPeq = ICON_TRI.replace("<svg", '<svg style="width:12px;height:12px;vertical-align:-1px"');
   const cards = `<div class="cards4">
@@ -2960,7 +2969,7 @@ function vRel(){
     <div><b class="num">${N.acerto}%</b><span>Acerto geral</span></div>
     <div><b class="num">${N.tempo}</b><span>Tempo médio por pergunta</span></div></div>`;
   const agir = `<div class="cx"><h2>O que fazer agora</h2>
-    ${nAbaixo ? `<p><span class="ruim">${ICON_TRI}<span class="num">${nAbaixo}</span> ${nAbaixo === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ${erraram.map(r => `${esc(r.p.nome)} <span class="num">${r.nota}%</span>`).join(", ")}${nAbaixo > erraram.length ? "…" : ""}</p>` : `<p>Todos atingiram a meta de <span class="num">${M}%</span>.</p>`}
+    ${nAbaixo ? `<p><span class="ruim">${ICON_TRI}<span class="num">${nAbaixo}</span> ${nAbaixo === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ${erraram.map(r => `${esc(r.p.nome)} <span class="num">${r.nota}%</span>`).join(", ")}${nAbaixo > erraram.length ? "…" : ""}</p>` : (!c.aval.length ? (s.itens.some(it => isQ(it) && it.uso === "avaliacao") ? (N.presentes ? `<p><span class="ruim">${ICON_TRI}<span class="num">${N.presentes}</span> ${N.presentes === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ninguém respondeu às perguntas de avaliação.</p>` : `<p class="muted">Ninguém respondeu às perguntas de avaliação.</p>`) : `<p class="muted">Esta sessão não tem perguntas de avaliação, por isso não há meta a conferir.</p>`) : N.presentes && N.eficazes >= N.presentes ? `<p>Todos atingiram a meta de <span class="num">${M}%</span>.</p>` : `<p><span class="num">${N.eficazes} de ${N.presentes}</span> atingiram a meta de <span class="num">${M}%</span>.</p>`)}
     ${dificeis.length ? `<p>Pergunta mais difícil: “${esc(cut(dificeis[0].it.enunciado, 90))}” (<span class="num">${dificeis[0].pct}%</span>)</p>` : ""}
     ${faltou.length ? `<p class="muted">${s.modo === "ritmo" ? plural(faltou.length, "pessoa não concluiu", "pessoas não concluíram") : plural(faltou.length, "pessoa deixou perguntas sem resposta", "pessoas deixaram perguntas sem resposta")}. Veja no Mapa da turma.</p>` : ""}
     ${podeRea ? (reforcoT ? `<button class="btn pri" data-act="reforcoAbrir" data-arg="${s.tId}">${ICON.play}Reaplicar para quem ficou abaixo</button>` : `<button class="btn pri" data-act="novaSessao" data-arg="${s.tId}">${ICON.play}Aplicar de novo</button>`) : ""}</div>`;
@@ -3382,7 +3391,7 @@ const A = {
     S.sessoes.forEach(s => s.part.forEach(p => { if (sai.has(p.pessoaId)) p.pessoaId = fica.id; }));
     S.pessoas = S.pessoas.filter(pe => !sai.has(pe.id)); UI().psel = []; UI().msgResp = "Cadastros juntados em " + nomeCompleto(fica) + "."; },
   abaResp(k){ UI().abaResp = k; },
-  relAba(k){ UI().relAba = k; UI().dlMsg = ""; },
+  relAba(k){ UI().relAba = k; UI().menu = null; UI().dlMsg = ""; },
   afToggle(){ UI().afAberto = !UI().afAberto; },
   afTodas(){ UI().afTodas = !UI().afTodas; },
   assertCsv(){ exportarAssert("csv"); return "norender"; },
@@ -3474,7 +3483,7 @@ const A = {
     const s = S.sessoes.find(x => x.chave === k);
     if (k.length !== 6) return erroJoin("A chave tem 6 números. Confira no telão."), "norender";
     if (!s) return erroJoin("Chave não encontrada. Confira os números no telão."), "norender";
-    if (s.status === "encerrada") return erroJoin("Este treinamento já foi encerrado."), "norender";
+    if (s.status === "encerrada") return erroJoin("Este treinamento já terminou. Obrigado!"), "norender";
     if (!s.entradaAberta) return erroJoin("A entrada está fechada. Fale com o responsável."), "norender";
     j.chave = k; j.etapa = 2; UI().erroJoin = ""; if (S.ui.logado && s.equipe !== "um" && S.pessoas.some(pe => pe.id === S.ui.logado)) j.pessoaId = S.ui.logado; },
   joinVoltar(){ UI().join.etapa = 1; UI().erroJoin = ""; },
@@ -3861,7 +3870,7 @@ function vMensagens(){
     <div class="caixa">${ms.slice(0, u.msgTodas ? 999 : 6).map(m => { const pe = S.pessoas.find(x => x.id === m.pessoaId), T = S.treinamentos.find(t => t.id === m.tId);
       return `<div class="${m.lida ? "" : "nova"}"><button class="lx" data-act="msgDel" data-arg="${m.id}" aria-label="Excluir mensagem" title="Excluir">${ICON.lixo}</button>
         <span class="row" style="gap:6px">${pe ? avSvg(avDaPessoa(pe), "xs") : ""}<b>${esc(pe ? nomeCompleto(pe) : "Pessoa")}</b><span class="muted">${esc(pe ? pe.setor : "")}</span><span class="pill ${m.tipo === "reclamacao" ? "bad" : m.tipo === "sugestao" ? "acc" : "mut"}">${TIPO_MSG[m.tipo]}</span><span class="muted num" style="font-size:12.5px">${fData(m.em)} ${fHora(m.em)}</span></span>
-        ${T ? `<span class="muted" style="font-size:13px">Sobre: ${esc(T.titulo)}</span>` : ""}<span>${esc(m.texto)}</span>
+        ${T ? `<span class="muted" style="font-size:13px">Sobre: ${esc(T.titulo)}${typeof m.tVer === "number" ? " · " + (typeof vv === "function" ? vv(m.tVer) : "v" + String(m.tVer).padStart(2,"0")) : ""}</span>` : ""}<span>${esc(m.texto)}</span>
         ${m.resposta ? `<span class="resp"><b>Sua resposta:</b> ${esc(m.resposta)}</span>` : ab === m.id ? `<label class="field"><span>Resposta (aparece no perfil da pessoa)</span><textarea id="resp-${m.id}" data-resptxt="${m.id}" rows="2" maxlength="600">${esc(u.respTxt || "")}</textarea></label><div class="row"><button class="btn sm pri" data-act="msgResponder" data-arg="${m.id}">Enviar resposta</button><button class="btn sm" data-act="msgAbrir" data-arg="">Cancelar</button></div>` : `<div class="row"><button class="btn sm" data-act="msgAbrir" data-arg="${m.id}">Responder</button>${m.lida ? "" : `<button class="btn sm" data-act="msgLida" data-arg="${m.id}">${ICON.ok}Marcar como lida</button>`}</div>`}</div>`; }).join("")}</div>
     ${ms.length > 6 ? `<div class="bd"><button class="btn sm" data-act="msgTodas">${u.msgTodas ? "Mostrar só 6" : "Mostrar todas (" + ms.length + ")"}</button></div>` : ""}</section>`;
 }
@@ -4003,7 +4012,7 @@ Object.assign(A, {
   faleTipo(k){ UI().fale.tipo = k; UI().msgFale = ""; },
   faleEnviar(){ const pe = logado(), f = UI().fale; UI().msgFale = ""; UI().erroFale = "";
     if (!pe) return; if (f.texto.trim().length < 3) return void (UI().erroFale = "Escreva a mensagem antes de enviar.");
-    S.mensagens = S.mensagens || []; S.mensagens.push({id: uid(), pessoaId: pe.id, tipo: f.tipo, tId: f.tId || "", texto: f.texto.trim(), em: now(), lida: false, resposta: "", ...(f.sId ? {sId: f.sId} : {}), ...(typeof f.tVer === "number" ? {tVer: f.tVer} : {})});
+    S.mensagens = S.mensagens || []; S.mensagens.push({id: uid(), pessoaId: pe.id, tipo: f.tipo, tId: f.tId || "", texto: f.texto.trim(), em: now(), lida: false, resposta: "", ...(f.sId ? {sId: f.sId} : {}), ...(typeof f.tVer === "number" ? {tVer: f.tVer} : (S.treinamentos.find(t => t.id === f.tId) ? {tVer: S.treinamentos.find(t => t.id === f.tId).versao || 0} : {}))});
     UI().fale = {tipo: f.tipo, texto: "", tId: ""}; UI().msgFale = "Mensagem enviada ao responsável."; vibrar(30); },
   msgAbrir(id){ UI().msgAberta = id || null; UI().respTxt = ""; },
   msgLida(id){ const m = (S.mensagens || []).find(x => x.id === id); if (m) m.lida = true; },
@@ -4052,6 +4061,9 @@ const NV = {estado: "off", erro: "", p: null, fauth: null, fdb: null, user: null
 const nvOn = () => NV.estado === "pronto";
 const nvUid = () => NV.user ? NV.user.uid : "";
 const nvTUid = () => NV.tuser ? NV.tuser.uid : "";   /* a turma usa um login anônimo separado (app "efcquiz-turma"), que não mexe no login do EFClaudian */
+/* v2.3.1: "Sair só do EFCquiz" — o login do EFClaudian continua ativo; só este app deixa de usá-lo */
+const LS_SAIU = "efq-saiu-local";
+const nvSaiuLocal = () => { try { return localStorage.getItem(LS_SAIU) === "1"; } catch(e) { return false; } };
 const nvResp = () => !!(NV.conta && NV.user && !NV.user.isAnonymous);
 const nvTS = () => firebase.firestore.FieldValue.serverTimestamp();
 const nvMs = (v, alt) => v && typeof v.toMillis === "function" ? v.toMillis() : (typeof v === "number" ? v : alt);
@@ -4087,7 +4099,8 @@ function nvIniciar(){
 /* mesmo navegador do EFClaudian = mesma conta (o Firebase guarda o login por site) */
 async function nvAuthMudou(u){
   const antes = nvUid(); NV.user = u || null;
-  if (!u || u.isAnonymous){ NV.conta = null; if (S.ui.nuvemConta){ S.ui.nuvemConta = null; save(); } }
+  if (u && !u.isAnonymous && nvSaiuLocal()){ NV.conta = null; if (S.ui.nuvemConta){ S.ui.nuvemConta = null; save(); } }
+  else if (!u || u.isAnonymous){ NV.conta = null; if (S.ui.nuvemConta){ S.ui.nuvemConta = null; save(); } }
   else {
     try { const d = await NV.fdb.collection("sv2_users").doc(u.uid).get();
       const x = d.exists ? d.data() : null;
@@ -4116,6 +4129,7 @@ async function nvEntrar(login, senha){
   let ult = null;
   for (const e of cands){ try { await NV.fauth.signInWithEmailAndPassword(e, senha); ult = null; break; } catch(er) { ult = er; } }
   if (ult) throw ult;
+  try { localStorage.removeItem(LS_SAIU); } catch(e) {}
   await nvAuthMudou(NV.fauth.currentUser);
   if (!NV.conta) throw Object.assign(new Error("sem perfil"), {code: "efq/sem-perfil"});
 }
@@ -4273,9 +4287,9 @@ async function nvBuscarChave(k){
   await nvGarantirUsuario();
   const ch = await NV.tdb.collection("efq_chaves").doc(k).get();
   if (!ch.exists) return {erro: "Chave não encontrada. Confira os números no telão."};
-  const c = ch.data(); if (!c.ativa) return {erro: "Este treinamento já foi encerrado."};
+  const c = ch.data(); if (!c.ativa) return {erro: "Este treinamento já terminou. Obrigado!"};
   const sn = await nvSessRefT(c.sid).get(); if (!sn.exists) return {erro: "Chave não encontrada. Confira os números no telão."};
-  const d = sn.data(); if (d.status === "encerrada") return {erro: "Este treinamento já foi encerrado."};
+  const d = sn.data(); if (d.status === "encerrada") return {erro: "Este treinamento já terminou. Obrigado!"};
   const iq = await nvSessRefT(c.sid).collection("itens").get(), mapa = {}; iq.forEach(x => { mapa[x.id] = x.data(); });
   const itens = (d.ordem || []).map(id => mapa[id]).filter(Boolean);
   const velho = S.sessoes.find(x => x.id === c.sid);
@@ -4408,8 +4422,15 @@ calc = function(s){ const c = _calc(s); if (s.remota){ c.rows.forEach(r => { if 
 A.nvLogin = function(){ const u = UI(), l = (u.nvLogin || ""), sn = (u.nvSenha || ""); if (!l.trim() || !sn){ u.nvMsg = "Preencha o login e a senha."; return; }
   u.nvMsg = "Entrando..."; u.nvSenha = "";
   nvEntrar(l, sn).then(() => { u.nvMsg = "Conectado como " + NV.conta.nome + "."; u.nvLogin = ""; save(); render(); }).catch(e => { u.nvMsg = nvErroTexto(e); save(); render(); }); };
-A.nvSair = function(_, ok){ if (!ok) return pedir("Sair da conta?", "Neste navegador você também sai do EFClaudian. As sessões já abertas continuam neste aparelho.", "nvSair", "", "Sair", false);
+A.nvSair = function(_, ok){ if (!ok) return pedir("Sair só do EFCquiz?", "Você sai daqui, mas continua conectado no EFClaudian. As sessões já abertas continuam neste aparelho.", "nvSair", "", "Sair do EFCquiz", false);
+  try { localStorage.setItem(LS_SAIU, "1"); } catch(e) {}
+  NV.conta = null; S.ui.nuvemConta = null; nvReligar(); save(); render(); };
+A.nvSairTudo = function(_, ok){ if (!ok) return pedir("Sair de tudo?", "Neste navegador você sai também do EFClaudian. As sessões já abertas continuam neste aparelho.", "nvSairTudo", "", "Sair de tudo", true);
+  try { localStorage.removeItem(LS_SAIU); } catch(e) {}
   nvIniciar().then(() => NV.fauth.signOut()).then(() => { NV.conta = null; S.ui.nuvemConta = null; save(); render(); }).catch(() => {}); };
+/* volta a usar a conta do EFClaudian que já está conectada neste navegador, sem pedir a senha */
+A.nvVoltar = function(){ try { localStorage.removeItem(LS_SAIU); } catch(e) {}
+  nvIniciar().then(() => nvAuthMudou(NV.fauth.currentUser)).catch(() => render()); return "norender"; };
 A.nvAbrirInteg = function(){ UI().cfg = true; UI().cfgAba = "integ"; };
 A.nvConectar = function(){ nvIniciar().then(() => render()).catch(() => render()); return "norender"; };
 document.addEventListener("input", e => { const t = e.target; if (!S) return;
@@ -4425,8 +4446,8 @@ function nvEstadoTexto(){
 }
 function nvPainelInteg(){
   const u = UI(), st = nvEstadoTexto();
-  const conta = nvResp() ? `<div class="nvconta"><span class="pill ok">Conectado</span><b>${esc(NV.conta.nome)}</b><span class="muted">${PERFIS[S.perfil]} · conta do EFClaudian</span><button class="btn sm" data-act="nvSair">Sair da conta</button></div>`
-    : `<div class="nvlogin"><label class="field"><span>Login ou e-mail do EFClaudian</span><input type="text" id="nv-login" autocomplete="username" value="${esc(u.nvLogin || "")}"></label>
+  const conta = nvResp() ? `<div class="nvconta"><span class="pill ok">Conectado</span><b>${esc(NV.conta.nome)}</b><span class="muted">${PERFIS[S.perfil]} · conta do EFClaudian</span><button class="btn sm" data-act="nvSair">Sair só do EFCquiz</button><button class="btn sm ghost" data-act="nvSairTudo">Sair de tudo</button></div>`
+    : `${nvSaiuLocal() && NV.user && !NV.user.isAnonymous ? `<div class="nvconta"><span class="pill mut">Fora do EFCquiz</span><span class="muted">O EFClaudian continua conectado neste navegador.</span><button class="btn sm pri" data-act="nvVoltar">Voltar com a conta do EFClaudian</button></div>` : ""}<div class="nvlogin"><label class="field"><span>Login ou e-mail do EFClaudian</span><input type="text" id="nv-login" autocomplete="username" value="${esc(u.nvLogin || "")}"></label>
       <label class="field"><span>Senha</span><input type="password" id="nv-senha" autocomplete="current-password" value=""></label>
       <button class="btn pri" data-act="nvLogin">Entrar</button></div>`;
   return `<div class="integr">
@@ -4592,7 +4613,7 @@ function shellRender(){
     <div class="grp">Ao vivo</div>${nv("tel", "Abrir telão")}${nv("par", "Participante")}
     <div class="grp">Sistema</div>${nv("conf", "Conferir registro")}${nv("cfg", "Configurações")}</div>` : "";
   /* faixa de demonstração: uma linha pequena */
-  const demo = u.teste ? `<b>Teste rápido</b> · dados simulados <button class="lk" data-act="sairTeste">Sair do teste</button>`
+  const demo = u.teste ? `<b>Teste rápido</b> · dados simulados <button class="lk" data-act="demoAbrir">Trocar</button> <button class="lk" data-act="sairTeste">Sair do teste</button>`
     : S.config.demo ? `<b>Modo demonstração</b> · dados simulados <button class="lk" data-act="cfg">Desligar</button>` : "";
   db.hidden = !demo; db.innerHTML = demo;
 }
@@ -4904,7 +4925,7 @@ function vPainel(){
   if (ab === "versoes") corpo = `<ol class="vls">${vers.map(v => { const st = statsVersao(T, v.n), med = st.ac.med, mt = T.meta || 70;
       return `<li class="${v.n === T.versao ? "at" : ""}"><div class="vh"><b>${vv(v.n)}</b>${v.n === T.versao ? `<span class="vs at">atual</span>` : ""}<span class="aj">${fData(v.em)} · ${esc(v.por || "")}</span></div><p>${esc(v.mud)}</p>
         <div class="vst">${med === null ? `<span class="aj">Ainda não aplicada</span>` : `<span class="rmeta" style="--c:${med >= mt ? "var(--ok)" : "var(--bad)"}"><i style="width:${med}%"></i><b style="left:${mt}%"></b></span><b class="num">${med}%</b>`}<span class="aj">${plu(st.ss.length, "aplicação", "aplicações")} · ${plu(st.ac.n, "pessoa", "pessoas")} · ${plu(st.nCom, "comentário", "comentários")}</span></div></li>`; }).join("")}</ol>
-      <p class="aj">Uma versão nova nasce quando muda pergunta, alternativa, resposta certa ou meta. Mudar só as observações não cria versão.</p>`;
+      <p class="aj">Uma versão nova nasce quando muda pergunta, alternativa, resposta certa, uso (avaliação ou gincana) ou meta. Mudar só as observações não cria versão.</p>`;
   if (ab === "coment"){ const f = P.cf || "", fv = P.cv ?? "";
     const lst = com.filter(m => (!f || m.tipo === f) && (fv === "" || m._v === +fv)), nf = (f ? 1 : 0) + (fv !== "" ? 1 : 0);
     const resumo = nf ? [f ? TIPO_MSG[f] : "", fv !== "" ? vv(+fv) : ""].filter(Boolean).join(" · ") : "Nenhum filtro ativo";
@@ -4995,7 +5016,7 @@ function vDemoModal(){
     <footer class="mdf"><span class="esp"></span><button class="btn" data-act="demoFechar">Cancelar</button><button class="btn pri" data-act="demoAplicar">Usar este modo</button></footer></div>`;
 }
 function avisoDemo(){
-  const m = S.config.demoModo; if (m === "off" || UI().teste) return "";
+  const m = UI().teste && S.config.demoModo === "off" ? "simulado" : S.config.demoModo; if (m === "off") return "";
   return `<button class="avdemo" data-act="demoAbrir"><i></i><span><b>Modo demonstração: ${MODOS[m][0].toLowerCase()}.</b> ${m === "real" ? "Esta sessão é TESTE e não conta no registro." : "Os participantes podem ser simulados."}</span><u>Trocar</u></button>`;
 }
 function blocoSetores(o){
@@ -5176,7 +5197,7 @@ shellRender = function(){
     <div class="grp">Ao vivo</div>${nv("tel", "Abrir telão")}${nv("par", "Participante")}
     <div class="grp">Sistema</div>${nv("conf", "Conferir registro")}${nv("cfg", "Configurações")}</div>` : "";
   const m = S.config.demoModo;
-  const demo = APRES ? "" : u.teste ? `<b>Teste rápido</b> · dados simulados <button class="lk" data-act="sairTeste">Sair do teste</button>`
+  const demo = APRES ? "" : u.teste ? `<b>Teste rápido</b> · ${m === "real" ? "pessoas de verdade, sessões de TESTE" : "dados simulados"} <button class="lk" data-act="demoAbrir">Trocar</button> <button class="lk" data-act="sairTeste">Sair do teste</button>`
     : m !== "off" ? `<b>Modo demonstração</b> · ${m === "real" ? "pessoas de verdade, sessões de TESTE" : "dados simulados"} <button class="lk" data-act="demoAbrir">Trocar</button>` : "";
   db.hidden = !demo; db.innerHTML = demo;
 };
@@ -5274,7 +5295,7 @@ document.addEventListener("change", async e => { const t = e.target; if (!S) ret
   else if (t.dataset.aprot){ u.apresRoteiro = t.checked; save(); }
 });
 document.addEventListener("keydown", e => { if (e.key !== "Escape" || !S) return; const u = UI();
-  if (u.ia){ u.ia = null; } else if (u.demoModal){ u.demoModal = false; } else if (u.painel){ u.painel = null; } else if (u.menu){ u.menu = null; } else return;
+  if (u.convite){ u.convite = null; } else if (u.ia){ u.ia = null; } else if (u.demoModal){ u.demoModal = false; } else if (u.painel){ u.painel = null; } else if (u.menu){ u.menu = null; } else return;
   e.preventDefault(); save(); render(); });
 
 function vAbertura(){ const d = document.createElement("div"); d.className = "abertura"; d.setAttribute("aria-hidden", "true");
@@ -5285,6 +5306,42 @@ function vAbertura(){ const d = document.createElement("div"); d.className = "ab
   document.body.appendChild(d); return d; }
 const ABERT = (() => { try { const inst = window.matchMedia && matchMedia("(display-mode: standalone)").matches, pede = /[?&]abertura=1/.test(location.search); return inst || pede ? {d: vAbertura(), t0: Date.now()} : null; } catch(e) { return null; } })();
 Promise.resolve(iniciarApp()).finally(() => { if (!ABERT) return; setTimeout(() => { ABERT.d.classList.add("sai"); setTimeout(() => ABERT.d.remove(), 450); }, Math.max(0, 1100 - (Date.now() - ABERT.t0))); });
+
+/* =====================================================================
+   v2.3.1 · CONVIDAR PARTICIPANTES (M03)
+   Botão bem visível na tela de controle; janela com QR grande, chave,
+   WhatsApp, copiar link e compartilhar. O link vale só para esta sessão.
+   ===================================================================== */
+function textoConvite(s){ return "Entre no treinamento " + s.titulo + ": " + linkSessao(s) + " · chave " + s.chave; }
+function vConvite(){
+  const u = UI(); if (!u.convite) return "";
+  const s = sessById(u.convite); if (!s) return "";
+  const aviso = u.conviteMsg ? `<p class="aj" role="status">${esc(u.conviteMsg)}</p>` : "";
+  return `<div class="veu2" data-act="conviteFechar"></div><div class="mdl2 conv" role="dialog" aria-modal="true" aria-labelledby="cv-t"><header class="mdh"><div><h2 id="cv-t">Convidar participantes</h2><p class="aj">${esc(s.titulo)}</p></div><button class="btn sm ic" data-act="conviteFechar" aria-label="Fechar">${ICON.fechar}</button></header>
+    <div class="mdb"><div class="cvqr"><div class="qr" data-qr="${esc(linkSessao(s))}" data-qrw="280" aria-label="QR code do link de entrada"></div><span class="muted">Aponte a câmera do celular para o quadrado.</span></div>
+      <div class="cvch"><span class="lbl">Chave</span><b class="chave">${s.chave}</b></div>
+      <div class="cvbt"><button class="btn pri" data-act="conviteWhats">Enviar pelo WhatsApp</button><button class="btn" data-act="conviteCopiar">Copiar link</button>${typeof navigator.share === "function" ? `<button class="btn" data-act="conviteShare">Compartilhar</button>` : ""}</div>
+      ${aviso}
+      <p class="aj">Este link vale só para este treinamento. Quem receber não precisa de conta nem instala nada: abre, escreve o nome e responde.</p></div></div>`;
+}
+const _vControle231 = vControle;
+vControle = function(){
+  const s = sessAtual(); let h = _vControle231(); if (!s) return h;
+  if (s.status !== "encerrada"){
+    h = h.replace(`<button class="btn sm" data-act="view" data-arg="tel">Abrir telão</button>`, `<button class="btn sm pri" data-act="conviteAbrir" data-arg="${s.id}">Convidar participantes</button><button class="btn sm" data-act="view" data-arg="tel">Abrir telão</button>`);
+  }
+  return h + vConvite();
+};
+Object.assign(A, {
+  conviteAbrir(id){ const u = UI(); u.convite = id; u.conviteMsg = ""; },
+  conviteFechar(){ const u = UI(); u.convite = null; u.conviteMsg = ""; },
+  conviteWhats(){ const s = sessById(UI().convite); if (!s) return "norender"; const url = "https://wa.me/?text=" + encodeURIComponent(textoConvite(s)); try { window.open(url, "_blank", "noopener"); } catch(e) {} return "norender"; },
+  conviteCopiar(){ const s = sessById(UI().convite); if (!s) return "norender"; const t = linkSessao(s);
+    const fim = m => { UI().conviteMsg = m; save(); render(); };
+    const reserva = () => { try { const ta = document.createElement("textarea"); ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); const r = document.execCommand("copy"); ta.remove(); fim(r ? "Link copiado." : "Não deu para copiar. Use o QR ou o WhatsApp."); } catch(e) { fim("Não deu para copiar. Use o QR ou o WhatsApp."); } };
+    try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(() => fim("Link copiado."), reserva); else reserva(); } catch(e) { reserva(); } return "norender"; },
+  conviteShare(){ const s = sessById(UI().convite); if (!s) return "norender"; try { navigator.share({title: s.titulo, text: textoConvite(s)}).catch(() => {}); } catch(e) {} return "norender"; }
+});
 </script>
 </body>
 </html>
