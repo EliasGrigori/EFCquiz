@@ -1492,6 +1492,358 @@ input[type=text],input[type=number],input[type=date],input[type=search],select,t
 .avacoes{display:flex;gap:10px;width:100%}.avacoes .btn.pri{flex:1}
 .ptopo>div{min-width:0;flex:1}.ptopo .pn,.ptopo .muted{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.25}
 .phone .pb>*{flex-shrink:0}
+/* =====================================================================
+   v2.4.0 · PADRÃO EFCquiz · Opção 4 aprovada (cabeçalho em faixa)
+   medidas: espaço 8/12/16/24 · cantos 6 etiqueta, 10 botão/campo, 14 cartão, 20 janela
+   ===================================================================== */
+:root{--g1:8px;--g2:12px;--g3:16px;--g4:24px;--rt:6px;--rb:10px;--rc:14px;--rj:20px;
+  --faixa1:color-mix(in srgb,var(--accent) 78%,#000);--faixa2:var(--accent);--faixa3:color-mix(in srgb,var(--accent) 72%,#fff)}
+.demobar{display:none!important}
+.col{overflow-x:clip}
+.col>main{padding-top:0}
+
+/* ---------- menu lateral remasterizado ---------- */
+.side{background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 92%,var(--accent)));padding:18px 12px 14px;gap:2px;box-shadow:1px 0 0 var(--line),6px 0 24px -18px rgba(30,10,80,.25);border-right:0}
+.side .marca{padding:2px 8px 18px;gap:11px}
+.side .marca img{width:40px;height:40px;border-radius:12px;box-shadow:0 4px 14px -4px rgba(60,20,140,.35),0 0 0 1px var(--line)}
+.side .marca b{font-size:18px;font-weight:800;letter-spacing:-.01em}
+.side .marca span{font-size:11.5px}
+.side .grp{margin:18px 10px 6px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);opacity:.85}
+.side .nv{min-height:42px;padding:6px 8px;gap:11px;font-weight:600;font-size:14px;border-radius:var(--rb);transition:background .15s,color .15s,transform .15s}
+.side .nv svg{width:30px;height:30px;padding:6px;border-radius:9px;background:var(--sunk);color:var(--muted);transition:background .15s,color .15s;flex:none}
+.side .nv:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.side .nv:hover svg{color:var(--accent)}
+.side .nv[aria-current="page"]{background:var(--fg);color:var(--bg);box-shadow:0 8px 20px -10px rgba(10,5,40,.6)}
+.side .nv[aria-current="page"] svg{background:var(--accent);color:var(--accent-fg)}
+.side .nv .n{border-radius:999px;padding:0 7px;line-height:20px;min-width:22px;box-shadow:0 2px 6px -2px var(--accent)}
+.side .nv[aria-current="page"] .n{background:var(--accent-fg);color:var(--accent)}
+.side .pe{margin-top:auto;border:1px solid var(--line);border-radius:var(--rc);padding:10px 12px;background:var(--surface);display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;align-items:center;box-shadow:0 6px 18px -14px rgba(20,10,60,.4)}
+.side .pe .cav{grid-row:span 3;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font:800 13px var(--f-body);color:#fff;background:linear-gradient(135deg,var(--faixa1),var(--faixa3))}
+.side .pe b{font-size:12.5px;line-height:1.25}
+.side .pe span{font-size:11.5px;line-height:1.3}
+.side .pe .lk{font-size:11.5px}
+
+/* ---------- cabeçalho em faixa ---------- */
+.pg2{position:relative;color:#fff;padding:18px 0 20px;display:grid;gap:8px;margin-bottom:var(--g4)}
+.pg2::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:-100vmax;right:-100vmax;background:linear-gradient(120deg,var(--faixa1),var(--faixa2) 55%,var(--faixa3))}
+.pg2.ck{padding-bottom:64px;margin-bottom:0}
+.pg2-top{display:flex;align-items:center;gap:10px;min-height:22px;font-size:12.5px;color:rgba(255,255,255,.82)}
+.pg2-vt{display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 10px 0 6px;border-radius:var(--rb);border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;font:600 12.5px var(--f-body);cursor:pointer}
+.pg2-vt svg{width:16px;height:16px}
+.pg2-vt:hover{background:rgba(255,255,255,.22)}
+.pg2-cr{font-weight:600}
+.pg2-demo{margin-left:auto;display:inline-flex;align-items:center;gap:6px;color:#ffe2a8;font-weight:600}
+.pg2-demo i{width:7px;height:7px;border-radius:50%;background:#ffe2a8}
+.pg2-demo .lk{border:0;background:transparent;color:#ffe2a8;text-decoration:underline;cursor:pointer;padding:0 0 0 4px;font:inherit}
+.pg2-tt{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pg2-t{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;flex:1}
+.pg2 h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-.015em;line-height:1.2;color:#fff}
+.pg2 h1 .vs{background:rgba(255,255,255,.2);color:#fff}
+.pg2-tag{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:var(--rt);font-size:12px;font-weight:700;background:rgba(255,255,255,.18);color:#fff;white-space:nowrap}
+.pg2-tag.v{background:rgba(255,255,255,.24)}
+.pg2-tag.warn{background:#ffe2a8;color:#5b3d00}
+.pg2-tag.ok{background:rgba(255,255,255,.92);color:var(--ok)}
+.pg2-tag.bad{background:rgba(255,255,255,.92);color:var(--bad)}
+.pg2-ac{display:flex;align-items:center;gap:8px;margin-left:auto}
+.pg2-ac .btn{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;box-shadow:none}
+.pg2-ac .btn:hover{background:rgba(255,255,255,.22)}
+.pg2-ac .btn.pri{background:#fff;color:var(--accent);border-color:#fff;font-weight:700}
+.pg2-ac .btn.pri:hover{background:rgba(255,255,255,.9)}
+.pg2-ac .btn svg{color:currentColor}
+.pg2-ib{width:38px;height:38px;display:inline-grid;place-items:center;border-radius:var(--rb);border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;padding:0}
+.pg2-ib:hover,.pg2-ib[aria-expanded="true"],.pg2-ib.on{background:rgba(255,255,255,.26)}
+.pg2-ib svg{width:19px;height:19px}
+.pg2-ib.sm{width:28px;height:28px;border-radius:50%}.pg2-ib.sm svg{width:17px;height:17px}
+.pg2 .mnu .pop{color:var(--fg)}
+.pg2-sub{margin:0;font-size:13.5px;color:rgba(255,255,255,.85)}
+.pg2-pop{background:var(--surface);color:var(--fg);border-radius:var(--rc);box-shadow:0 18px 40px -12px rgba(20,10,60,.45);padding:14px 16px;max-width:520px;font-size:13.5px;position:relative}
+.pg2-pop .dl{margin:0}
+.pg2-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-top:4px}
+.pg2-tools .field.dd{margin:0;min-width:0}
+.pg2-tools .field.dd>span{color:rgba(255,255,255,.85);font-size:11.5px;font-weight:600}
+.pg2-tools .ddb{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);color:#fff;min-width:150px}
+.pg2-tools .ddb svg{color:#fff}
+.pg2-tools .ddp{color:var(--fg)}
+.pg2-tools .ses .ddb{min-width:280px}
+
+/* ---------- caixas de número (padrão 6, caprichadas) ---------- */
+.pg2-k{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--g2);margin:-46px 0 var(--g4)}
+.kx,.cards4>div,.kpis2>div{position:relative;background:var(--surface);border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:var(--rc);padding:14px 12px 13px;text-align:center;box-shadow:0 10px 26px -16px rgba(30,15,80,.45);overflow:hidden}
+.kx::before,.cards4>div::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--faixa2),var(--faixa3))}
+.kx.ok::before{background:var(--ok)}.kx.bad::before{background:var(--bad)}
+.kx b,.cards4>div b{display:block;font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--fg)}
+.kx.ok b{color:var(--ok)}.kx.bad b{color:var(--bad)}
+.kx span,.cards4>div>span{display:block;margin-top:5px;font-size:12.5px;color:var(--muted);font-weight:500}
+.kx .barra{display:block;height:6px;border-radius:3px;background:var(--sunk);margin:8px auto 0;width:80%;position:relative;overflow:hidden}
+.kx .barra i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:currentColor}
+.kx .barra u{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--fg)}
+
+/* ---------- tabelas (padrão 9: centralizadas) ---------- */
+main .tblwrap table th,main .tblwrap table td,main table.pres th,main table.pres td{text-align:center}
+main .tblwrap table th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--muted)}
+main .tblwrap table td{height:44px}
+
+/* ---------- celular ---------- */
+@media (max-width:900px){
+  .pg2{padding:14px 0 16px;gap:6px}
+  .pg2.ck{padding-bottom:56px}
+  .pg2 h1{font-size:20px}
+  .pg2-tt{flex-wrap:nowrap;align-items:flex-start}
+  .pg2-ac{gap:6px}
+  .pg2-ac .btn{height:36px;padding:0 10px;font-size:13px}
+  .pg2-ac .btn .tx{display:none}
+  .pg2-ib{width:36px;height:36px}
+  .pg2-tools{display:grid;grid-template-columns:1.4fr 1fr}
+  .pg2-tools .ddb,.pg2-tools .ses .ddb{min-width:0;width:100%}
+  .pg2-k{grid-template-columns:1fr 1fr;margin-top:-42px}
+  .kx b,.cards4>div b{font-size:24px}
+}
+.side .side-v{font-size:11px;color:var(--muted);text-align:center;margin-top:6px}
+.side .pe>.lk{grid-column:2}
+@media (max-width:900px){
+  .pg2-tt{flex-wrap:wrap}
+  .pg2-t{flex:1 1 100%}
+  .pg2-ac{margin-left:0}
+  .pg2-top{flex-wrap:wrap}
+  .pg2-demo{font-size:11.5px}
+  .pg2-k.n3{grid-template-columns:repeat(3,1fr);gap:8px}
+  .pg2-k.n3 .kx b{font-size:20px}.pg2-k.n3 .kx span{font-size:11px}
+  .pg2-k.n3 .kx{padding:10px 6px}
+}
+/* controle */
+.pg2-k.ctl{margin-top:-46px}
+.kx.chv b{font-family:var(--f-mono);letter-spacing:.08em}
+.kx b{overflow-wrap:anywhere}
+.pg2-k.ctl .kx b{font-size:22px}
+.passo{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--rc);padding:14px 16px;box-shadow:0 10px 26px -18px rgba(30,15,80,.45)}
+.passo .pt{grid-column:1/-1;display:grid;gap:2px}
+.passo .pt>span{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--accent)}
+.passo .pt p{margin:0;font-size:15px}
+.passo .pa{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.passo .pa .btn.pri{height:48px;padding:0 22px;font-size:16px}
+.passo .pdd{grid-column:2;grid-row:2}
+.passo .pdd .field.dd>span{font-size:11.5px}
+@media (max-width:900px){.passo{grid-template-columns:1fr}.passo .pdd{grid-column:1;grid-row:auto}.passo .pa .btn.pri{flex:1 1 100%}}
+main .avdemo{display:none}
+:root{--sw:226px}
+.side .pe .cav svg{width:20px;height:20px}
+.kx b.tx{font-size:18px}
+.pg2 h1{min-width:0;overflow-wrap:anywhere}
+.pg2-tools>*{min-width:0}
+@media (max-width:900px){
+  .pg2-ac{width:100%;justify-content:flex-end}
+  .pg2-tools .ses{grid-column:1/-1}
+  .pg2-tools{grid-template-columns:1fr 1fr}
+  .pg2-tools .field.dd,.pg2-tools .relsel{width:100%}
+}
+/* janela Imprimir evidência */
+.mdl2.evid{width:min(640px,calc(100vw - 24px))}
+.evs{display:grid;gap:10px;padding:4px 0 14px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.evs:last-of-type{border-bottom:0}
+.evs h3{margin:0;font-size:14.5px}
+.evins{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.evms{display:grid;gap:8px;max-height:280px;overflow:auto}
+.evm{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border:1px solid var(--line);border-radius:var(--rb);padding:10px 12px}
+.evm p{margin:4px 0 0;font-size:13.5px}
+.evm.fora{opacity:.55;background:var(--sunk)}
+@media (max-width:600px){.evins{grid-template-columns:1fr}}
+/* mensagens */
+.mgl{padding:0;overflow:hidden}
+.mg{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:start}
+.mg:last-of-type{border-bottom:0}
+.mg.nova{background:color-mix(in srgb,var(--accent) 4%,var(--surface));box-shadow:inset 3px 0 0 var(--accent)}
+.mg-av .av{width:34px;height:34px}
+.mg-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.mg-h b{font-size:14px}.mg-h .muted{font-size:13px}
+.mg-t{margin:4px 0 2px;font-size:14.5px}
+.mg-m{font-size:12.5px;color:var(--muted)}
+.mg-r{margin-top:8px;font-size:13.5px;background:var(--sunk);border-radius:var(--rb);padding:8px 10px}
+.mg-f{margin-top:8px;display:grid;gap:8px}
+.mg-a{display:flex;gap:6px}
+.mg-b{width:34px;height:34px;display:grid;place-items:center;border-radius:var(--rb);border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;padding:0}
+.mg-b svg{width:17px;height:17px}
+.mg-b:hover{color:var(--accent);border-color:var(--accent)}
+.mg-b.del:hover{color:var(--bad);border-color:var(--bad)}
+@media (max-width:600px){.mg{grid-template-columns:minmax(0,1fr) auto;padding:12px}.mg-av{display:none}.pg2-k.mini{grid-template-columns:repeat(4,1fr);gap:6px}.pg2-k.mini .kx{padding:9px 4px}.pg2-k.mini .kx b{font-size:19px}.pg2-k.mini .kx span{font-size:10.5px}}
+/* assertividade */
+.gleg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;align-items:center;margin-bottom:6px}
+.gleg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.gleg i.ok{background:var(--ok)}.gleg i.bad{background:var(--bad)}.gleg i.mt{height:0;border-top:2px dashed var(--fg);border-radius:0;width:16px;vertical-align:3px}
+.gleg .muted{margin-left:auto}
+.graf2{width:100%;height:auto;display:block;font-family:var(--f-body)}
+.graf2 .ax{stroke:var(--line);stroke-width:1}
+.graf2 .yl,.graf2 .xt{fill:var(--muted);font-size:11.5px}
+.graf2 .yt{fill:var(--muted);font-size:11px;font-weight:700}
+.graf2 .xd{fill:var(--fg);font-size:12px;font-weight:700}
+.graf2 .br{cursor:pointer}
+.graf2 .hit{fill:transparent}
+.graf2 .br:hover .hit{fill:var(--sunk)}
+.graf2 .br.ok .b{fill:var(--ok)}.graf2 .br.bad .b{fill:var(--bad)}
+.graf2 .v{font-size:13px;font-weight:800;fill:var(--fg)}
+.graf2 .mt,.graf2 .mt1{stroke:var(--fg);stroke-width:2;stroke-dasharray:6 4}
+.graf2 .mtl{font-size:12px;font-weight:700;fill:var(--fg)}
+main .numeros{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--g2)}
+main .numeros>div{display:flex;flex-direction:column-reverse;align-items:center;text-align:center;background:var(--surface);border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:var(--rc);padding:14px 10px 12px;box-shadow:0 10px 26px -16px rgba(30,15,80,.45);position:relative;overflow:hidden}
+main .numeros>div::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--faixa2),var(--faixa3))}
+main .numeros>div b{font-size:28px;font-weight:800}
+main .numeros>div .lbl{margin-top:4px;font-size:12.5px;color:var(--muted)}
+.grafx{overflow-x:auto}
+@media (max-width:700px){.graf2{min-width:600px}}
+.pg2-k.sem{margin:0 0 var(--g3)}
+.ih-uso .field.dd{margin:0}.ih-uso .field.dd>span:empty{display:none}.ih-uso .ddb{height:34px;min-width:130px}
+.ibx{width:34px;height:34px;display:inline-grid;place-items:center;border-radius:var(--rb);border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;padding:0}
+.ibx svg{width:17px;height:17px}.ibx:disabled{opacity:.4;cursor:default}
+.ibx:hover:not(:disabled){color:var(--accent);border-color:var(--accent)}
+.ibx.del:hover{color:var(--bad);border-color:var(--bad)}
+.fimok{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--ok-soft);border:1px solid var(--ok);border-radius:var(--rc);padding:14px 16px}
+.fimok>div{flex:1;min-width:220px;display:grid;gap:2px}.fimok span{font-size:13.5px}
+.field.dd>span:empty{display:none}
+.sw{display:inline-flex;align-items:center;gap:10px;border:0;background:transparent;cursor:pointer;font:600 13.5px var(--f-body);color:var(--muted);padding:4px 0}
+.sw i{width:42px;height:24px;border-radius:999px;background:var(--line-forte);position:relative;transition:background .15s;flex:none}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:left .15s}
+.sw.on{color:var(--fg)}.sw.on i{background:var(--accent)}.sw.on i::after{left:21px}
+.ddw{display:block;max-width:420px}.ddw .field.dd{margin:0}
+.ptopo .pn{background:none;border:0;padding:0;position:static;box-shadow:none;font-weight:800;font-size:19px}
+.avsel .field.dd{margin:0}.avsel .ddb{width:100%;height:46px}.avsel .ddp{max-height:260px;overflow:auto}
+@media (max-width:900px){.pg2-k.ctl{grid-template-columns:1fr 1fr}.pg2-k.ctl .kx b{font-size:20px}}
+.ddw.sm{display:inline-block}.ddw.sm .ddb{height:34px;min-width:120px}
+/* v2.4.0 · ajustes da aprovação */
+.pg2-tt{display:flex;align-items:center;gap:8px 10px;flex-wrap:wrap}
+.pg2-tt>h1{flex:0 1 auto}
+.pg2-t{flex:1 1 auto;display:flex;align-items:center;gap:8px}
+.pg2-tag{height:28px;padding:0 11px;font-size:12.5px;background:rgba(255,255,255,.95);color:var(--accent);box-shadow:0 4px 12px -6px rgba(0,0,0,.35)}
+.pg2-tag.v{background:#fff;color:var(--accent);font-weight:800;letter-spacing:.02em}
+.pg2-tag.st{background:rgba(255,255,255,.16);color:#fff;border:1.5px solid rgba(255,255,255,.75);box-shadow:none;gap:6px}
+.pg2-tag.st::before{content:"";width:7px;height:7px;border-radius:50%;background:#7ef0b6;box-shadow:0 0 0 3px rgba(126,240,182,.25)}
+.pg2-ib.sm{width:28px;height:28px;background:#fff;color:var(--accent);border-color:#fff;box-shadow:0 4px 12px -6px rgba(0,0,0,.35)}
+.pg2-ib.sm.on,.pg2-ib.sm:hover{background:#f1ebfd}
+.pg2-ib{background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.55);box-shadow:0 6px 16px -10px rgba(0,0,0,.45)}
+table.hm td .av,table.hm td .av.xs,table.hm td .av.sm{width:30px;height:30px}
+.mg-av .av,.mg-av .av.sm{width:46px;height:46px;border-radius:12px}
+.kx.tx b{font-size:18px!important;line-height:1.15}
+@media (max-width:900px){
+  .pg2-tt{display:grid;grid-template-columns:auto 1fr;align-items:center;row-gap:10px}
+  .pg2-tt>h1{grid-column:1/-1}
+  .pg2-t{grid-column:1;flex:none}
+  .pg2-ac{grid-column:2;width:auto;justify-content:flex-end;align-items:center;margin-left:0}
+  .pg2-tag,.pg2-ib.sm{height:32px}.pg2-ib.sm{width:32px}
+  .pg2-ac .pg2-ib{width:32px;height:32px}.pg2-ac .pg2-ib svg{width:17px;height:17px}
+  .pg2-ac .btn{height:32px}
+  .kx.tx b{font-size:16px!important}
+}
+@media (max-width:600px){.mg{grid-template-columns:auto minmax(0,1fr) auto}.mg-av{display:block}.mg-av .av,.mg-av .av.sm{width:40px;height:40px}}
+
+/* ===== v2.4.0 final: menu Noite elegante + ícones coloridos ===== */
+.side{background:#16132a;box-shadow:none;border-right:0;color:#c9c4e3}
+.side .marca b{color:#fff}.side .marca span{color:#8f89b3}
+.side .grp{color:#8a84b0;opacity:1}
+.side .nv{color:#c4bfe0;font-weight:600}
+.side .nv svg{width:30px;height:30px;padding:7px;border-radius:50%;color:#fff;background:#6b7280;box-shadow:0 4px 10px -4px rgba(0,0,0,.6)}
+.side .nv[data-arg="trein"] svg{background:#7c3aed}.side .nv[data-arg="msg"] svg{background:#2f80ed}.side .nv[data-arg="rel"] svg{background:#2f8566}
+.side .nv[data-arg="tel"] svg{background:#e07a2e}.side .nv[data-arg="par"] svg{background:#d0457a}.side .nv[data-arg="conf"] svg{background:#4b5563}.side .nv[data-arg="cfg"] svg{background:#6b7280}
+.side .nv:hover{background:rgba(255,255,255,.07);color:#fff}
+.side .nv:hover svg{color:#fff}
+.side .nv[aria-current="page"]{background:rgba(255,255,255,.12);color:#fff;font-weight:700;box-shadow:inset 3px 0 0 var(--faixa3)}
+.side .nv[aria-current="page"] svg{box-shadow:0 0 0 2px #16132a,0 0 0 4px rgba(255,255,255,.55)}
+.side .nv .n{box-shadow:none}
+.side .nv[aria-current="page"] .n{background:#fff;color:var(--accent)}
+.side .pe{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);box-shadow:none}
+.side .pe b{color:#fff}.side .pe span{color:#9a94bd}.side .pe .lk{color:#c5adff}
+.side .side-v{color:#6f6996}
+
+/* ===== faixa 1: Ondas e luz ===== */
+.pg2::after{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:-40px;right:-40px;pointer-events:none;background:
+   radial-gradient(520px 200px at 18% -20%,rgba(255,255,255,.30),transparent 70%),
+   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160' preserveAspectRatio='none'%3E%3Cpath d='M0 90 C200 30 420 150 640 90 S1020 30 1200 80 V160 H0Z' fill='%23ffffff' fill-opacity='.16'/%3E%3Cpath d='M0 120 C260 70 480 160 720 115 S1060 80 1200 110 V160 H0Z' fill='%23ffffff' fill-opacity='.12'/%3E%3Cpath d='M0 40 C300 0 600 80 900 30 S1150 10 1200 25' fill='none' stroke='%23ffffff' stroke-opacity='.25' stroke-width='1.5'/%3E%3C/svg%3E") bottom/100% 75% no-repeat}
+  .pg2::before{box-shadow:inset 0 -1px 0 rgba(255,255,255,.25)}
+
+/* ===== destaque dos controles na faixa ===== */
+.pg2-tag.st{background:#fff;color:#14532d;border:0;font-weight:800;box-shadow:0 6px 16px -6px rgba(0,0,0,.5),0 0 0 3px rgba(255,255,255,.28)}
+.pg2-tag.st::before{background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.25)}
+.pg2-ac .pg2-ib,.pg2-ib{background:#fff;color:var(--accent);border:0;box-shadow:0 8px 18px -8px rgba(0,0,0,.55),0 0 0 3px rgba(255,255,255,.25)}
+.pg2-ac .pg2-ib:hover,.pg2-ib:hover,.pg2-ib[aria-expanded="true"],.pg2-ib.on{background:#f1ebfd;transform:translateY(-1px)}
+.pg2-ib svg{stroke-width:2.2}
+.pg2-tools .field.dd>span{color:#fff;font-size:12px;font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.pg2-tools .ddb{background:#fff;color:#1e1b3a;border:0;font-weight:700;box-shadow:0 8px 18px -8px rgba(0,0,0,.55),0 0 0 3px rgba(255,255,255,.25)}
+.pg2-tools .ddb svg{color:var(--accent)}
+
+/* ===== v2.5.0: telão em janela separada ===== */
+.tjg{position:relative;display:inline-flex;align-items:stretch}
+.tjg>.btn:first-child{border-top-right-radius:0;border-bottom-right-radius:0}
+.tjg>.btn.ic{border-top-left-radius:0;border-bottom-left-radius:0;margin-left:1px;padding:0 9px;min-width:0}
+.pg2 .tjg>.btn{background:#fff;color:var(--accent);border:0;font-weight:700;box-shadow:0 8px 18px -8px rgba(0,0,0,.55)}
+.pg2 .tjg>.btn:hover{background:#f1ebfd}
+.tjg .pop{right:0;left:auto;top:calc(100% + 6px);min-width:280px;color:var(--fg)}
+.tjg .pop button{display:flex;gap:10px;align-items:flex-start;text-align:left;padding:10px 12px}
+.tjg .pop button span{display:grid;gap:2px}.tjg .pop button b{font-size:14px}.tjg .pop button small{font-size:12px;color:var(--muted);font-weight:500}
+.tjg .pop button svg{width:20px;height:20px;flex:none;margin-top:1px;color:var(--accent)}
+.pg2-tag.tjon{height:38px;padding:0 14px;font-size:13px}
+.tjav{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;display:flex;gap:12px;align-items:center;max-width:min(640px,calc(100vw - 32px));background:#2b1d00;color:#ffe2a8;border-radius:14px;padding:12px 14px;box-shadow:0 18px 40px -16px rgba(0,0,0,.6);font-weight:600;font-size:14px}
+.tjav .btn{flex:none}
+.tj-ov{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:24px;background:rgba(14,8,40,.62);backdrop-filter:blur(3px)}
+.tj-cx{background:var(--surface);color:var(--fg);border-radius:20px;padding:32px 36px;max-width:520px;width:100%;display:grid;gap:14px;justify-items:center;text-align:center;box-shadow:0 30px 80px -30px rgba(0,0,0,.7)}
+.tj-cx h2{margin:0;font-size:28px;font-weight:800}
+.tj-cx p{margin:0;font-size:17px;color:var(--muted);line-height:1.45}
+.tj-ic{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--faixa1),var(--faixa3))}
+.tj-ic svg{width:30px;height:30px}
+.tj-cx .btn.lg{font-size:18px;padding:0 26px;min-height:54px;gap:10px}
+.tj-cx .tj-nao{background:transparent;border:0;color:var(--muted);text-decoration:underline}
+</style>
+<style id="v241">
+/* ===== v2.4.1 ===== */
+/* iPhone: o Safari só entrega o toque a botões e links; com cursor de mão, toque em foto, fundo escuro e "tocar fora" passa a funcionar */
+[data-act]{cursor:pointer}
+@supports (-webkit-touch-callout:none){body{cursor:pointer;-webkit-tap-highlight-color:transparent}}
+/* iPhones antigos (sem color-mix): cores de reserva */
+@supports not (color:color-mix(in srgb,red,blue)){
+.obs2{border-color:var(--warn);background:var(--warn-soft)}
+.vls>li.at{border-color:var(--accent)}
+.qsel .q.at,.mg.nova{background:var(--accent-soft)}
+.avdemo,.testebar{border-color:var(--warn)}
+.dw .dws>div:has(.c-ok){border-color:var(--ok)!important}.dw .dws>div:has(.c-bad){border-color:var(--bad)!important}.dw .dws>div:has(.c-acc){border-color:var(--accent)!important}
+.avstage{background:var(--sunk)}
+.kx,.cards4>div,.kpis2>div,main .numeros>div{border-color:var(--line)}
+}
+/* entrar: estado de espera visível */
+.btn.ocupado{opacity:.85;cursor:progress}
+.gira{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;display:inline-block;animation:gira .8s linear infinite;flex:none}
+@keyframes gira{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.gira{animation:none;border-right-color:currentColor;opacity:.6}}
+.phone input.falta{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.phone .msg[role="alert"]{margin:0}
+/* participante: rodapé numa linha, nome inteiro sem estourar */
+.phone .pf{flex-wrap:nowrap}.phone .pf .btn{white-space:nowrap}.phone .pf .mono{white-space:nowrap;font-size:13px}
+/* participante: lista de setor abre dentro da caixa, sem cortar */
+.phone .dd .pop{position:static;box-shadow:none;margin-top:6px;max-height:none;width:100%}
+.phone .ph .pnome{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+/* Controle no PC: linha do tempo e próximo passo à esquerda, quem entrou à direita */
+@media (min-width:1100px){
+.stack.ctl2{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}
+.stack.ctl2>*{grid-column:1/-1}
+.stack.ctl2>.ctl-esq{grid-column:1;display:grid;gap:12px;min-width:0}
+.stack.ctl2>.ctl-esq+section.panel{grid-column:2}
+}
+</style>
+<style id="v242">
+/* ===== v2.4.2 · toque intencional: logo que a pergunta aparece, as alternativas ficam 0,4 s "acordando" ===== */
+.phone .opts1,.phone .ord{transition:opacity .18s ease}
+.phone .opts1.trava,.phone .ord.trava{opacity:.5}
+@media (prefers-reduced-motion:reduce){.phone .opts1,.phone .ord{transition:none}}
+</style>
+<style id="v260">
+/* ===== v2.6.0 · pré e pós-teste ===== */
+.gnh{display:grid;gap:8px;padding:14px 16px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:14px;background:var(--surface);margin-top:14px}
+.gnh-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.gnh-r>div{display:grid;gap:2px;justify-items:center;min-width:76px}
+.gnh-r b{font-size:30px;line-height:1;font-weight:800}
+.gnh-r span{font-size:13px;color:var(--muted)}
+.gnh-r i{font-style:normal;font-size:24px;color:var(--muted)}
+.gnh-r .gg{padding:8px 14px;border-radius:12px;background:var(--accent-soft);color:var(--c,var(--accent))}
+.gnh-r .gg span{color:inherit;opacity:.85}
+.gnh-r.big b{font-size:38px}
+.gnh.sm{margin-top:10px}.gnh.sm .gnh-r b{font-size:24px}
+.gpn .gt td,.gpn .gt th{text-align:center}.gpn .gt .nm{text-align:left}
+.tel .gnh{margin-top:18px}.tel .gnh-r b{font-size:calc(40px*var(--esc))}
 </style>
 </head>
 <body>
@@ -1915,7 +2267,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.3.2";
+const APP_VERSAO = "2.6.0";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Packing","Campo","Laboratório","Almoxarifado","Oficina","Segurança","RH","ADM","Outros"];
@@ -2121,7 +2473,7 @@ function sessaoNova(T, o){
     fase: {idx: -1, etapa: "espera", inicio: 0}, part: [], equipes: [], resp: {}, foto: null, encerradaEm: 0, encerradaPor: ""};
 }
 const isQ = it => it.tipo !== "explicacao";
-const scored = it => isQ(it) && !it.ensaio;
+const scored = it => isQ(it) && !it.ensaio && !it.pre;
 function isCorrect(it, r){
   if (!r) return false;
   if (it.tipo === "ordenar") return Array.isArray(r.ordem) && r.ordem.length === it.alternativas.length && r.ordem.every((v,i) => v === i);
@@ -2330,7 +2682,7 @@ function regua(fim, dur, livre){ const seg = Math.round(dur/1000); let marcas = 
   return `<div class="timer${livre ? " livre" : ""}" data-end="${fim}" data-dur="${dur}" role="timer"><div class="regua"><i></i>${marcas}</div><span class="s"></span>${livre ? `<span class="esg-t">Tempo esgotado · ainda dá para responder</span>` : ""}</div>`; }
 /* linha do tempo: explicação = quadrado vazado, pergunta = cheio, atual = destacado */
 /* V06: linha do tempo com rótulo. E = explicação, teste = pergunta de teste, 1..n = perguntas */
-function rotItem(s, i){ const it = s.itens[i]; if (!isQ(it)) return {c: "E", t: "explicação"}; if (it.ensaio) return {c: "teste", t: "pergunta de teste"}; let n = 0; for (let k = 0; k <= i; k++) if (scored(s.itens[k])) n++; return {c: String(n), t: "pergunta " + n}; }
+function rotItem(s, i){ const it = s.itens[i]; if (!isQ(it)) return {c: "E", t: "explicação"}; if (it.ensaio) return {c: "teste", t: "pergunta de teste"}; if (it.pre){ const n = numPre(s, i); return {c: "P" + n.split(" ")[0], t: "pré-teste " + n}; } let n = 0; for (let k = 0; k <= i; k++) if (scored(s.itens[k])) n++; return {c: String(n), t: "pergunta " + n}; }
 function linhaTempo(s){ const f = s.fase; const ativo = s.modo === "aovivo" && s.status === "andamento"; const atual = ativo ? f.idx : -1; const fim = f.etapa === "fim" || s.status === "encerrada";
   const nq = s.itens.filter(scored).length;
   const mk = s.itens.map((it, i) => { const r = rotItem(s, i); return `<span class="sg${isQ(it) ? "" : " exp"}${!fim && i < atual ? " feito" : fim ? " feito" : ""}${i === atual && !fim ? " atual" : ""}" title="${esc(r.t)}"><span>${r.c}</span></span>`; }).join("");
@@ -2562,8 +2914,9 @@ function rotFase(s){
   const f = s.fase, it = s.itens[f.idx];
   if (f.etapa === "fim") return "perguntas concluídas";
   if (f.etapa === "explicacao") return "explicação";
-  return (it && it.ensaio ? "ensaio" : "pergunta " + numQ(s, f.idx)) + (f.etapa === "resultado" ? " (resultado)" : "");
+  return (it && it.ensaio ? "ensaio" : it && it.pre ? "pré-teste " + numPre(s, f.idx) : "pergunta " + numQ(s, f.idx)) + (f.etapa === "resultado" ? " (resultado)" : "");
 }
+function numPre(s, idx){ let n = 0; for (let i = 0; i <= idx; i++) if (isQ(s.itens[i]) && s.itens[i].pre) n++; return n + " de " + s.itens.filter(x => isQ(x) && x.pre).length; }
 function numQ(s, idx){ let n = 0; for (let i = 0; i <= idx; i++) if (scored(s.itens[i])) n++; return n + " de " + s.itens.filter(scored).length; }
 
 function vEditor(){
@@ -2574,7 +2927,7 @@ function vEditor(){
   ${UI().erro ? `<div class="msg">${esc(UI().erro)}</div>` : ""}${UI().msgEd ? `<div class="okmsg">${esc(UI().msgEd)}</div>` : ""}
   <section class="panel"><div class="bd grid2">
     <label class="field"><span>Título</span><input type="text" id="t-titulo" data-bind="titulo" value="${esc(d.titulo)}" placeholder="Ex.: Higiene no packing house"></label>
-    <label class="field"><span>Meta de aprovação (nota mínima para "Eficaz")</span><select id="t-meta" data-bindnum="meta">${METAS.map(m => `<option value="${m}"${+(d.meta || 70)===m?" selected":""}>${m}%</option>`).join("")}</select></label>
+    <label class="field"><span>Meta de aprovação (nota mínima para "Eficaz")</span>${dd("dd-tmeta", "", +(d.meta || 70), METAS.map(m => [m, m + "%"]), "setMetaEd", "")}</label>
     <label class="field"><span>Descrição (opcional)</span><input type="text" id="t-desc" data-bind="descricao" value="${esc(d.descricao)}"></label>
   </div></section>
   <div class="note">Toda sessão começa sozinha com uma pergunta de teste que não vale nota. Use "Explicação" para marcar os momentos em que você apresenta no telão.</div>
@@ -2604,10 +2957,10 @@ const TIPO_NOME = {explicacao:"Explicação", multipla:"Múltipla escolha", vf:"
 function vItemEd(it, i, n){
   const p = "itens." + i + ".";
   const head = `<div class="ih"><span class="n">${pad(i+1)}</span><b style="margin-right:auto">${TIPO_NOME[it.tipo]}</b>
-    ${isQ(it) ? `<div class="seg" role="group" aria-label="Uso">${["avaliacao","gincana"].map(u => `<button data-act="setUso" data-arg="${i}|${u}" aria-pressed="${it.uso===u}">${u==="avaliacao"?"Avaliação":"Gincana"}</button>`).join("")}</div>` : ""}
-    <button class="btn sm" data-act="mover" data-arg="${i}|-1" ${i===0?"disabled":""} aria-label="Subir">${ICON.up}</button>
-    <button class="btn sm" data-act="mover" data-arg="${i}|1" ${i===n-1?"disabled":""} aria-label="Descer">${ICON.dn}</button>
-    <button class="btn sm bad" data-act="delItem" data-arg="${i}" aria-label="Excluir">${ICON.x}</button></div>`;
+    ${isQ(it) ? `<div class="ih-uso">${dd("dd-uso-" + i, "", it.uso, [["avaliacao", "Avaliação", "Conta na nota de eficácia"], ["gincana", "Gincana", "Vale pontos por rapidez, fora da nota"]], "setUso", i + "|")}</div>` : ""}
+    <button class="ibx" data-act="mover" data-arg="${i}|-1" ${i===0?"disabled":""} aria-label="Subir" title="Subir">${ICON.up}</button>
+    <button class="ibx" data-act="mover" data-arg="${i}|1" ${i===n-1?"disabled":""} aria-label="Descer" title="Descer">${ICON.dn}</button>
+    <button class="ibx del" data-act="delItem" data-arg="${i}" aria-label="Excluir etapa" title="Excluir etapa">${ICON.lixo}</button></div>`;
   if (!isQ(it)) return `<div class="item">${head}<div class="ib grid2">
     <label class="field"><span>Tema da explicação (aparece no telão)</span><input type="text" id="e-${it.id}" data-bind="${p}enunciado" value="${esc(it.enunciado)}"></label>
     <label class="field"><span>Observação (opcional)</span><input type="text" id="o-${it.id}" data-bind="${p}texto" value="${esc(it.texto||"")}"></label></div></div>`;
@@ -2698,7 +3051,7 @@ function vControle(){
   </div>
   <div class="solid">${linhaTempo(s)}</div>
   ${f.etapa === "pergunta" ? regua(f.inicio + tmpS(s, it), tmpS(s, it), s.semBloqueio) : ""}
-  <div class="row">${controles(s, true)}</div>
+  <div class="passo"><div class="pa">${controles(s, true)}</div></div>
   <section class="panel">${hdr("Quem entrou · ranking", `<span class="muted" style="font-size:13px">ordem por acertos; rapidez desempata</span>`)}<div class="tblwrap"><table><thead><tr><th class="r">Pos.</th><th>Nome</th>${s.equipe !== "nao" ? "<th>Equipe</th>" : ""}<th class="r">Acertos</th>${c.ginc.length ? `<th class="r">Gincana</th>` : ""}</tr></thead><tbody>
   ${c.rows.map(r => `<tr><td class="r num">${r.pos}º</td><td>${eqTag(s, r.p)} ${esc(r.p.nome)}${r.p.membros && r.p.membros.length ? `<div class="muted" style="font-size:12.5px">${r.p.membros.map(esc).join(", ")}</div>` : ""}${r.p.bot && S.config.demo ? ` <span class="pill mut">simulado</span>` : ""}</td>${s.equipe !== "nao" ? `<td>${esc(nomeEquipe(s, r.p) || "—")}</td>` : ""}<td class="r num">${r.ac}</td>${c.ginc.length ? `<td class="r num">${r.pg}</td>` : ""}</tr>`).join("") || `<tr><td colspan="5" class="muted">Ninguém entrou ainda. Mostre a chave no telão${S.config.demo ? " ou use \"Simular participantes\"" : ""}.</td></tr>`}
   </tbody></table></div></section></div>`;
@@ -2735,7 +3088,7 @@ function vTelao(){
       <button class="ic-btn" data-act="projetor" aria-pressed="${pj}" aria-label="Modo projetor" title="${pj ? "Sair do modo projetor" : "Modo projetor: contraste alto e letra maior"}">${ICON.proj}</button>
       <button class="ic-btn" data-act="telaCheia" aria-label="Tela cheia" title="Tela cheia">${ICON.tela}</button></span>${linhaTempo(s)}</div>`;
   let body = "";
-  if (s.status === "encerrada") body = `<p class="big">Treinamento encerrado.</p><p class="muted">Registro gerado no celular do responsável.</p>`;
+  if (s.status === "encerrada") body = `<p class="big">Treinamento encerrado.</p><p class="muted">Registro gerado no celular do responsável.</p>${blocoGanhoTelao(s)}`;
   else if (s.status === "espera" || s.modo === "ritmo") body = telEspera(s);
   else if (f.etapa === "explicacao") body = `<span class="lbl">Momento de explicação</span><p class="big q2">${esc(it.enunciado || "Explicação")}</p>${it.texto ? `<p class="mid muted">${esc(it.texto)}</p>` : ""}<p class="muted">Quando terminar de explicar, toque em "Concluir explicação". As perguntas abrem no celular da turma.</p>`;
   else if (f.etapa === "pergunta") body = telPergunta(s, it);
@@ -2765,7 +3118,7 @@ function grupos(s){
   if (s.equipe === "um") return s.part.map(p => ({nome: p.nome, cor: p.cor, simb: p.simb, nomes: p.membros}));
   return s.equipes.map(e => { const ps = s.part.filter(p => p.equipe === e.id); return {nome: e.nome, cor: e.cor, simb: e.simb, nomes: ps.map(p => p.nome), avs: ps.map(p => avDoPart(s, p))}; }).filter(g => g.nomes.length);
 }
-function rotUso(it){ return it.ensaio ? `<span class="pill warn">Pergunta de teste · não vale nota</span>` : it.uso === "gincana" ? `<span class="pill acc">Gincana · vale rapidez</span>` : `<span class="pill ok">Avaliação</span>`; }
+function rotUso(it){ return it.pre ? `<span class="pill warn">Pré-teste · não vale nota</span>` : it.ensaio ? `<span class="pill warn">Pergunta de teste · não vale nota</span>` : it.uso === "gincana" ? `<span class="pill acc">Gincana · vale rapidez</span>` : `<span class="pill ok">Avaliação</span>`; }
 function temFotos(it){ return it.tipo === "multipla" && (it.altFotos || []).some(Boolean); }
 function optHtml(it, k, tag, extra, cls){
   const f = (it.altFotos || [])[k], a = it.alternativas[k];
@@ -2777,7 +3130,7 @@ function telPergunta(s, it){
   const resp = s.part.filter(p => s.resp[p.id + "|" + it.id]);
   const ord = it.tipo === "ordenar" ? shuffled(it.alternativas.length, "ord" + it.id) : null;
   const fil = s.part.map(p => `<i class="${s.resp[p.id + "|" + it.id] ? "on" : ""}"></i>`).join("");
-  return `<div class="row">${rotUso(it)}<span class="mid" style="font-size:calc(20px*var(--esc))">${it.ensaio ? "" : "Pergunta " + numQ(s, s.fase.idx)}</span>
+  return `<div class="row">${rotUso(it)}<span class="mid" style="font-size:calc(20px*var(--esc))">${it.ensaio ? "" : it.pre ? "Pré-teste " + numPre(s, s.fase.idx) : "Pergunta " + numQ(s, s.fase.idx)}</span>
     <div class="quem" aria-label="${resp.length} de ${s.part.length} responderam"><div class="fil">${fil}</div><span class="ct num">${resp.length} de ${s.part.length} ${s.equipe === "um" ? "equipes responderam" : "responderam"}</span></div></div>
   ${regua(s.fase.inicio + tmpS(s, it), tmpS(s, it), s.semBloqueio)}
   <div class="row" style="align-items:flex-start;flex-wrap:nowrap"><p class="big q2" style="flex:1">${esc(it.enunciado)}</p>${it.voz ? `<button class="ic-btn" data-act="vozOuvir" data-arg="${it.id}" aria-label="Tocar a pergunta gravada" title="Tocar a pergunta gravada">${ICON.som}</button>` : ""}</div>${fotoPerg(it)}
@@ -2825,7 +3178,7 @@ function vPart(){
     if (s.status === "espera" || (s.modo === "ritmo" && S.eu.idx === 0 && !S.eu.qStart)) return phone(`<b>Presença registrada</b>`, vAvatar(lg, true), `<span class="muted mono">Chave ${s.chave}</span>`);
     if (!lg.av) lg.av = UI().avEd && UI().avEd.pid === lg.id ? UI().avEd.code : avSorteio(lg.id); S.eu.escolherAv = false; UI().avEd = null; save(); }
   const eqn = nomeEquipe(s, p);
-  const head = `${s.equipe === "um" ? eqTag(s, p) : avMini(s, p, "xs")}<b>${esc(s.equipe === "um" ? p.nome : p.nome.split(" ")[0])}</b>${eqn && s.equipe==="cada" ? `<span class="row" style="gap:6px">${eqTag(s, p)}${esc(eqn)}</span>` : ""}${fPerfil}`;
+  const head = `${s.equipe === "um" ? eqTag(s, p) : avMini(s, p, "xs")}<b class="pnome">${esc(s.equipe === "um" ? p.nome : ((pe => pe ? nomeCompleto(pe) : p.nome)(S.pessoas.find(x => x.id === p.pessoaId))))}</b>${eqn && s.equipe==="cada" ? `<span class="row" style="gap:6px">${eqTag(s, p)}${esc(eqn)}</span>` : ""}${fPerfil}`;
   const foot = `<span class="muted mono">Chave ${s.chave}</span>${s.remota ? "" : `<button class="btn sm" data-act="proxPessoa">Próxima pessoa</button>`}`;
   return phone(head, s.modo === "ritmo" ? vRitmo(s, p) : vAoVivo(s, p), foot);
 }
@@ -2884,7 +3237,7 @@ function vAoVivo(s, p){
 }
 function topoPergunta(s, p, it, idx){
   const nq = s.itens.filter(scored).length;
-  return `<div class="qtop"><div class="qn">${it.ensaio ? "Pergunta de teste" : `Pergunta ${numQ(s, idx)}`}${it.ensaio ? "" : miniLinha(s, p, false)}</div>${it.ensaio ? `<span class="pill warn" style="justify-self:start">Não vale nota</span>` : it.uso === "gincana" ? `<span class="pill acc" style="justify-self:start">Gincana · vale rapidez</span>` : ""}</div>`;
+  return `<div class="qtop"><div class="qn">${it.ensaio ? "Pergunta de teste" : it.pre ? `Pré-teste ${numPre(s, idx)}` : `Pergunta ${numQ(s, idx)}`}${it.ensaio || it.pre ? "" : miniLinha(s, p, false)}</div>${it.ensaio || it.pre ? `<span class="pill warn" style="justify-self:start">Não vale nota</span>` : it.uso === "gincana" ? `<span class="pill acc" style="justify-self:start">Gincana · vale rapidez</span>` : ""}</div>`;
 }
 function telaPergunta(s, p, it, inicio, r){
   const idx = s.itens.indexOf(it);
@@ -2959,13 +3312,15 @@ function vRitmo(s, p){
 }
 
 /* ---------- Relatório ---------- */
+let REL_TESTE = false;
+function relNotaTeste(){ return REL_TESTE ? `<div class="testebar">${ICON.teste}<span><b>Sessão de TESTE.</b> Feita no modo demonstração com pessoas de verdade. Não entra no relatório de eficácia, no reforço nem no PDF oficial.</span></div>` : (S.config.demoModo === "real" && UI().relAba === "assert" ? `<div class="note">As sessões de TESTE não entram na Assertividade. Para vê-las, abra a aba <b>Testes</b> em Treinamentos. <button class="btn sm" data-act="nav" data-arg="teste">Ver Testes</button></div>` : ""); }
 function vRel(){
   const u = UI(), aba = u.relAba || "sessao";
   const abas = `<div class="relsel">${dd("relaba", "Ver", aba, [["sessao","Resumo"],["mapa","Mapa da turma"],["assert","Assertividade"],["setores","Setores"]], "relAba")}</div>`;
-  if (aba === "assert") return `<div class="stack"><div class="pghd"><h1>Assertividade</h1><span class="sub">Como a turma vai ao longo do tempo</span></div>${abas}${vAssert()}</div>`;
-  if (aba === "setores") return `<div class="stack"><div class="pghd"><h1>Desafio entre setores</h1><span class="sub">Placar por setor, com no mínimo 3 pessoas</span></div>${abas}${vSetores()}</div>`;
+  if (aba === "assert") return `<div class="stack">${pgHead({crumb: "Relatório", titulo: "Assertividade", sub: "Acerto médio de cada sessão ao longo do tempo, comparado com a meta", tools: abas})}${relNotaTeste()}${vAssert()}</div>`;
+  if (aba === "setores") return `<div class="stack">${pgHead({crumb: "Relatório", titulo: "Desafio entre setores", sub: "Placar por setor, com no mínimo 3 pessoas", tools: abas})}${vSetores()}</div>`;
   const lista = [...S.sessoes].sort((a, b) => (b.encerradaEm || b.criadaEm) - (a.encerradaEm || a.criadaEm));
-  if (!lista.length) return `<div class="stack"><div class="pghd"><h1>Relatório</h1><span class="sub">Nenhuma sessão ainda</span></div>${abas}<p class="muted">Aplique um treinamento para ver o relatório aqui.</p></div>`;
+  if (!lista.length) return `<div class="stack">${pgHead({crumb: "Relatório", titulo: "Relatório", sub: "Nenhuma sessão ainda", tools: abas})}${relNotaTeste()}<section class="panel"><div class="bd"><p class="muted" style="margin:0">Aplique um treinamento para ver o relatório aqui.</p></div></section></div>`;
   let s = sessById(u.relId); if (!s){ s = lista.find(x => x.status === "encerrada") || lista[0]; u.relId = s.id; }
   const c = calc(s), ag = now();
   const sel = `<select id="rel-sel" data-relsel="1" style="width:auto;max-width:100%" aria-label="Sessão">${S.treinamentos.map(T => { const ss = lista.filter(x => x.tId === T.id); return ss.length ? `<optgroup label="${esc(T.titulo)}">${ss.map(x => `<option value="${x.id}"${x.id===s.id?" selected":""}>${fData(x.encerradaEm||x.criadaEm)} ${fHora(x.encerradaEm||x.criadaEm)} · ${x.status==="encerrada"?"encerrada":"aberta"} · ${x.part.length} pessoa(s)</option>`).join("")}</optgroup>` : ""; }).join("")}${lista.filter(x => !S.treinamentos.some(T => T.id === x.tId)).map(x => `<option value="${x.id}"${x.id===s.id?" selected":""}>${esc(x.titulo)} · ${fData(x.encerradaEm||x.criadaEm)}</option>`).join("")}</select>`;
@@ -2986,8 +3341,7 @@ function vRel(){
   const nAbaixo = c.rows.filter(r => r.nota < M && c.aval.length).length;
   const reforcoT = reforcoPendente().find(g => g.T.id === s.tId);
   const podeRea = s.status === "encerrada" && pode() && S.treinamentos.some(T => T.id === s.tId);
-  const cab = `<div class="pghd"><h1>${esc(s.titulo)}</h1><span class="sub">Sessão de <span class="num">${fData(s.criadaEm)}</span> · início <span class="num">${fHora(s.iniciadaEm || s.criadaEm)}</span>${s.status === "encerrada" && s.encerradaEm ? ` · encerrada <span class="num">${fHora(s.encerradaEm)}</span>` : ""} · ${esc(s.local || "sem local")} · ${s.status === "encerrada" ? "Encerrada" : rotFase(s)}</span></div>
-  <div class="tools"><label class="row" style="gap:8px"><span class="muted">Sessão</span>${sel}</label></div>${abas}`;
+  let cab = "";
   const triPeq = ICON_TRI.replace("<svg", '<svg style="width:12px;height:12px;vertical-align:-1px"');
   const cards = `<div class="cards4">
     <div><b class="num">${N.media}%</b><span>Nota média · meta <span class="num">${M}%</span> ${dif >= 0 ? `<span style="color:var(--ok)">${ICON.ok.replace("<svg", '<svg style="width:13px;height:13px;vertical-align:-2px"')}</span>` : `<span style="color:var(--bad)">${triPeq} abaixo</span>`}</span><div class="rmeta" style="--c:${dif >= 0 ? "var(--ok)" : "var(--bad)"}" role="img" aria-label="Nota média ${N.media}% e meta ${M}%"><i style="width:${N.media}%"></i><b style="left:${M}%"></b></div></div>
@@ -3006,6 +3360,14 @@ function vRel(){
     <dt>Meta</dt><dd class="num">${M}%${s.metaAjuste ? ` <span class="muted">ajustada de ${s.metaAjuste.de}% por ${esc(s.metaAjuste.por)}</span>` : ""}</dd>
     <dt>Situação</dt><dd>${s.status === "encerrada" ? `Encerrada em <span class="num">${fData(s.encerradaEm)} ${fHora(s.encerradaEm)}</span>` : rotFase(s)}</dd>
     <dt>Código</dt><dd class="mono">${s.integ ? esc(s.integ) : "sai ao encerrar"}</dd></dl></div>`;
+  const opSes = lista.map(x => { const T = S.treinamentos.find(t => t.id === x.tId); return [x.id, `${fData(x.encerradaEm || x.criadaEm)} ${fHora(x.encerradaEm || x.criadaEm)} · ${x.status === "encerrada" ? "encerrada" : "aberta"} · ${plural(x.part.length, "pessoa", "pessoas")}`, T ? T.titulo : x.titulo]; });
+  const linhaData = `${fData(s.criadaEm)} · início ${fHora(s.iniciadaEm || s.criadaEm)}${s.status === "encerrada" && s.encerradaEm ? " · encerrada " + fHora(s.encerradaEm) : ""} · ${esc(s.local || "sem local")} · ${esc(s.instrutor || "sem instrutor")}`;
+  const infoRel = `<p style="margin:0 0 8px;font-weight:600">${linhaData}</p>` + dados.replace('<div class="cx"><h2>Dados da sessão</h2>', "").replace(/<\/div>$/, "");
+  const kpisRel = aba === "sessao" ? [[`${N.media}%`, `Nota média · meta ${M}%`, dif >= 0 ? "ok" : "bad", `<span class="barra" style="color:${dif >= 0 ? "var(--ok)" : "var(--bad)"}"><i style="width:${Math.min(100, N.media)}%"></i><u style="left:${M}%"></u></span>`], [`${N.eficazes} de ${N.presentes}`, "Atingiram a meta"], [`${N.acerto}%`, "Acerto geral"], [N.tempo, "Tempo médio por pergunta"]] : null;
+  const expItens = [["exportarS", s.id, "Sessão (.json)", "baixar"], ["csv", "", "Planilha (CSV)", "baixar"], ...(S.config.demo ? [["simDias", "", "Demonstração: avançar " + FOTO_DIAS + " dias", "cam"]] : [])];
+  cab = pgHead({crumb: "Relatório", titulo: esc(s.titulo), tags: [[vv(s.tVer || 0), "v"], ...(REL_TESTE ? [["TESTE", "warn"]] : [])], info: infoRel, status: [s.status === "encerrada" ? "Encerrada" : rotFase(s), ""],
+    icones: [["relExp", "", "exp", "Exportar", expItens], ["evidAbrir", s.id, "impr", "Imprimir evidência"]],
+    tools: `<div class="ses">${dd("relses", "Sessão", s.id, opSes, "relSel")}</div>${abas}`, kpis: kpisRel, nota: relNotaTeste()});
   return `<div class="stack">
   ${cab}
   ${aba === "mapa" ? `
@@ -3017,7 +3379,7 @@ function vRel(){
         : `<div class="bars"><div class="b"><div class="bt fill" style="min-height:36px"><i class="cert" style="width:${x.pct}%;animation:none"></i><span style="font-size:15px">Ordem certa</span></div><span class="num score">${x.acertos}</span></div></div>`}
       <span class="muted num" style="font-size:13px">${x.acertos} de ${x.n} acertaram · ${x.resp} responderam</span></div>`).join("") || `<span class="muted">Nenhuma pergunta respondida ainda.</span>`}</div></section>
   ` : `
-  ${cards}<div class="dois">${agir}${dados}</div>
+  ${agir}
   <section class="panel">${hdr("Presença e resultado", `<span class="muted so-d" style="font-size:13px">Toque no título da coluna para ordenar</span>`)}
     <div class="tblwrap so-d"><table class="pres">
     <thead><tr>${th("pos","Pos.")}${th("nome","Nome")}${temEq ? th("equipe","Equipe") : ""}${temSetor ? th("setor","Setor") : ""}${th("ac","Certas")}${th("nota","Nota")}${th("nota","Situação")}${temG ? th("pg","Gincana") : ""}<th>Assinou</th></tr></thead>
@@ -3034,10 +3396,7 @@ function vRel(){
   </div></section>
   <div class="row end">
     ${u.dlMsg ? `<span class="${u.dlErr?"msg":"okmsg"}" style="margin-right:auto">${esc(u.dlMsg)}</span>` : ""}
-    ${S.config.demo ? `<button class="btn" data-act="simDias">Demonstração: avançar ${FOTO_DIAS} dias</button>` : ""}
-    <button class="btn" data-act="exportarS" data-arg="${s.id}">${ICON.baixar}Sessão (.json)</button>
-    <button class="btn" data-act="csv">${ICON.baixar}Planilha (CSV)</button>
-    <button class="btn pri" data-act="pdf">${ICON.baixar}Exportar PDF</button></div>
+  </div>
   ${S.offset ? `<p class="muted" style="font-size:13px;text-align:right;margin:0">Relógio da demonstração adiantado ${Math.round(S.offset/DAY)} dia(s). Hoje na demonstração: ${fData(ag)}. <button class="btn sm" data-act="zerarDias">Voltar ao relógio real</button></p>` : ""}
   `}
   </div>`;
@@ -3135,7 +3494,7 @@ function vAssert(){
     <div><span class="lbl">Acerto geral</span><b class="num">${Math.round(tot.ac / tot.n * 100)}%</b></div>
     <div><span class="lbl">Treinamentos na meta</span><b class="num">${naMeta}<span style="font-size:.5em;color:var(--muted)"> de ${porT.length}</span></b></div>
   </div>
-  <section class="panel">${hdr("Evolução · acerto por sessão", `<span class="muted" style="font-size:13px">Cada ponto é uma sessão. Toque no ponto para ver.</span>`)}<div class="bd">${grafEvolucao(D.sess, f)}</div></section>
+  <section class="panel">${hdr("Acerto de cada sessão", `<span class="muted" style="font-size:13px">Cada barra é um dia em que o treinamento foi aplicado. Toque na barra para abrir o relatório dela.</span>`)}<div class="bd">${grafEvolucao(D.sess, f)}</div></section>
   ${porSet.length ? tab("Por setor", ["Setor", "Pessoas", "Respostas", "Acerto", "Meta"], porSet.map(g => `<tr><td>${esc(g.k)}</td><td class="num">${g.pess.size}</td><td class="num">${g.n}</td><td class="num"><b>${g.pct}%</b></td><td>${estado(g.pct, g.metaM)} <span class="muted num">${g.metaM}%</span></td></tr>`).join(""), "Setores só contam nas sessões individuais e de equipe com cada um no seu celular. No modo \"um celular por equipe\" aparece o nome da equipe, na tabela própria.") : ""}
   ${tab("Por treinamento", ["Treinamento", "Sessões", "Acerto", "Meta"], porT.map(g => `<tr><td>${esc(g.ult.tit)}</td><td class="num">${g.ss.size}</td><td class="num"><b>${g.pct}%</b></td><td>${estado(g.pct, g.metaM)} <span class="muted num">${g.metaM}%</span></td></tr>`).join(""))}
   ${tab("Por instrutor", ["Instrutor", "Sessões", "Acerto"], porIn.map(g => `<tr><td>${esc(g.k)}</td><td class="num">${g.ss.size}</td><td class="num"><b>${g.pct}%</b></td></tr>`).join(""))}
@@ -3603,7 +3962,7 @@ function refoca(id, fn){ const el = document.getElementById(id), pos = el ? el.s
 document.addEventListener("change", async e => {
   const t = e.target, u = UI();
   if (t.dataset.bindnum){ setPath(u.draft, t.dataset.bindnum, +t.value); save(); }
-  else if (t.dataset.nchk){ u.nova[t.dataset.nchk] = t.checked; save(); }
+  else if (t.dataset.nchk){ u.nova[t.dataset.nchk] = t.checked; save(); if (t.dataset.nchk === "prePos") render(); }
   else if (t.dataset.jsetor){ const j = u.join; j.setorSel = t.value; j.setor = t.value === "__novo" ? (j.setorNovo || "").trim() : t.value; save(); render(); }
   else if (t.dataset.jradio){ u.join.equipeId = t.dataset.jradio; save(); render(); }
   else if (t.dataset.bindroot === "temaCfg"){ u.tema = t.value; save(); render(); }
@@ -3720,7 +4079,7 @@ async function iniciarApp(){
   S.sessoes.forEach(s => { if (s.status === "encerrada" && !s.integ) selarSessao(s); });
   if (S.config && typeof S.config.empresa === "string" && !(window.EFC_CONFIG_FIXO)) EFC_CONFIG.empresa = S.config.empresa;
   if (S.ui.textura) EFC_aplicarTextura({url: texturaAmostra(), opacidade: .55, repetir: "repeat", escala: "220px"});
-  if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => render());
+  if (window.matchMedia){ const mq = matchMedia("(prefers-color-scheme: dark)"); if (mq.addEventListener) mq.addEventListener("change", () => render()); else if (mq.addListener) mq.addListener(() => render()); }
   document.addEventListener("fullscreenchange", () => { document.documentElement.dataset.cheia = document.fullscreenElement && UI().view === "tel" ? "on" : ""; if (!document.fullscreenElement && UI().projetor){ UI().projetor = false; save(); render(); } });
   window.addEventListener("pagehide", () => { if (gravaTimer){ clearTimeout(gravaTimer); persistir(); } });
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden" && gravaTimer){ clearTimeout(gravaTimer); persistir(); } });
@@ -3815,7 +4174,7 @@ function vAvatar(pe, primeira){
     <div class="avstage">${avSvg(ed.code, "lg")}</div>
     <div class="avsugb"><span class="lbl">Sugestões</span><div class="avsug">${sug.map(c => `<button class="avop" data-act="avUsar" data-arg="${c}" aria-label="Usar esta sugestão">${avSvg(c, "sm")}</button>`).join("")}</div>
       <button class="btn sm" data-act="avLote">${ICON.mais}Outras sugestões</button></div>
-    <label class="field avsel"><span>Parte do boneco</span><select data-avaba="1" aria-label="Parte do boneco">${AV_K.map(k => `<option value="${k}"${aba === k ? " selected" : ""}>${AV_ROT[k]}</option>`).join("")}</select></label>
+    <div class="avsel">${dd("dd-avaba", "Parte do boneco", aba, AV_K.map(k => [k, AV_ROT[k]]), "avAba", "")}</div>
     <div class="avopts">${opts}</div>
     <div class="avacoes"><button class="btn pri lg" data-act="avSalvar">${primeira ? "Usar este boneco" : "Salvar boneco"}</button>${primeira ? `<button class="btn" data-act="avPular">Depois</button>` : `<button class="btn" data-act="avCancelar">Cancelar</button>`}</div></div>`;
 }
@@ -4177,7 +4536,7 @@ const nvSessRef = id => NV.fdb.collection("efq_sessoes").doc(id);
 const nvSessRefT = id => NV.tdb.collection("efq_sessoes").doc(id);
 function nvGab(s){
   const lib = liberados(s), g = {}, tudo = s.modo === "ritmo" || s.status === "encerrada";
-  s.itens.forEach((it, i) => { if (!isQ(it)) return; if (tudo || lib.has(i)) g[it.id] = {c: it.tipo === "ordenar" ? -1 : it.correta, p: it.porque || ""}; });
+  s.itens.forEach((it, i) => { if (!isQ(it) || it.pre) return; if (tudo || lib.has(i)) g[it.id] = {c: it.tipo === "ordenar" ? -1 : it.correta, p: it.porque || ""}; });
   return g;
 }
 function nvOcup(s){ const o = {}; s.part.forEach(p => { if (p.equipe) o[p.equipe] = (o[p.equipe] || 0) + 1; }); return o; }
@@ -4224,7 +4583,7 @@ function nvSincronizar(){
       const c = calc(s), eqs = c.equipes;
       c.rows.forEach(r => { if (!r.p.nuvem) return;
         const eqPos = s.equipe !== "nao" ? eqs.findIndex(e => e.nome === nomeEquipe(s, r.p)) + 1 : 0;
-        const res = {nota: r.nota, ac: r.ac, er: r.er, sr: r.sr, pg: r.pg, pos: r.pos, n: c.rows.length, eqPos, fim: s.status === "encerrada"};
+        const res = {nota: r.nota, ac: r.ac, er: r.er, sr: r.sr, pg: r.pg, pos: r.pos, n: c.rows.length, eqPos, fim: s.status === "encerrada", ...resGanho(s, r.p)};
         const k = s.id + r.p.id, sg = JSON.stringify(res);
         if (NV.resSig[k] !== sg && (s.status === "encerrada" || s.fase.etapa === "fim" || r.concluiu)){ NV.resSig[k] = sg;
           nvSessRef(s.id).collection("part").doc(r.p.id).update({res}).catch(() => { NV.resSig[k] = ""; }); }
@@ -4255,7 +4614,9 @@ function nvOuvirSessaoResp(s){
           let eq = null;
           if (s.equipe === "cada" && d.eq){ const e0 = s.equipes.find(e => e.id === d.eq.id) || s.equipes.find(e => norm(e.nome) === norm(d.eq.nome));
             if (e0) eq = e0.id; else { const i = s.equipes.length; const e = {id: d.eq.id, nome: String(d.eq.nome).trim(), cor: CORES_EQ[i % CORES_EQ.length], simb: i % SIMB_EQ.length}; s.equipes.push(e); eq = e.id; } }
-          p = {id, nome: nomeCompleto(pe), membros: [], equipe: eq, entrou: nvMs(d.em, now()), pessoaId: pe.id, setor: pe.setor, nuvem: true}; }
+          p = {id, nome: nomeCompleto(pe), membros: [], equipe: eq, entrou: nvMs(d.em, now()), pessoaId: pe.id, setor: pe.setor, nuvem: true};
+          /* v2.4.0: a mesma pessoa entrou de novo (outro toque, outra aba): a entrada antiga sem respostas e sem assinatura sai, para não duplicar */
+          s.part = s.part.filter(x => !(x.id !== id && (x.pessoaId === pe.id || norm(x.nome) === norm(p.nome)) && !Object.keys(s.resp || {}).some(k => k.startsWith(x.id + "|")) && !Object.keys(s.assin || {}).some(k => k === x.id || k.startsWith(x.id + "#")))); }
         s.part.push(p); m = true;
       } else if (d.av && p.pessoaId){ const pe = S.pessoas.find(x => x.id === p.pessoaId); if (pe && pe.av !== d.av){ pe.av = d.av; m = true; } }
       if (d.assin){ s.assin = s.assin || {}; Object.entries(d.assin).forEach(([k, v]) => { if ((k === id || k.startsWith(id + "#")) && typeof v === "string" && s.assin[k] !== v){ s.assin[k] = v; m = true; } }); }
@@ -4576,7 +4937,7 @@ const _vPart = vPart;
 vPart = function(){
   const h = _vPart();
   if (!(ativado() || UI().teste)) return h;
-  const bt = `<button class="btn sm" data-act="view" data-arg="resp">${ICON.voltar}Voltar ao responsável</button>`;
+  const bt = `<button class="btn sm" data-act="view" data-arg="resp" aria-label="Voltar ao responsável" title="Voltar ao responsável">${ICON.voltar}Responsável</button>`;
   return h.includes('<div class="pf">') ? h.replace('<div class="pf">', '<div class="pf">' + bt) : `<div class="voltar-par">${bt}</div>` + h;
 };
 
@@ -4752,11 +5113,10 @@ const sessTeste = () => S.sessoes.filter(s => s.teste).sort((a, b) => (b.encerra
 function acertoDe(ss){ let soma = 0, n = 0; ss.forEach(s => { const c = calc(s); if (!c.aval.length) return; c.rows.forEach(r => { soma += r.nota; n++; }); }); return {med: n ? Math.round(soma / n) : null, n}; }
 const _vRel23 = vRel;
 vRel = function(){
-  const s = sessById(UI().relId);
-  if (s && s.teste){ const todas = S.sessoes; S.sessoes = todas.filter(x => x.teste);
-    try { return `<div class="testebar">${ICON.teste}<span><b>Sessão de TESTE.</b> Feita no modo demonstração com pessoas de verdade. Não entra no relatório de eficácia, no reforço nem no PDF oficial.</span></div>` + _vRel23(); } finally { S.sessoes = todas; } }
-  const todas = S.sessoes; S.sessoes = todas.filter(x => !x.teste);
-  try { return _vRel23(); } finally { S.sessoes = todas; }
+  const s = sessById(UI().relId), todas = S.sessoes;
+  REL_TESTE = !!(s && s.teste);
+  S.sessoes = REL_TESTE ? todas.filter(x => x.teste) : todas.filter(x => !x.teste);
+  try { return _vRel23(); } finally { S.sessoes = todas; REL_TESTE = false; }
 };
 const _pdf23 = A.pdf;
 A.pdf = function(){ const s = sessById(UI().relId); if (s && s.teste){ UI().dlMsg = "Sessão de TESTE: não gera o PDF oficial."; return; } return _pdf23(); };
@@ -4887,7 +5247,7 @@ function vLista(){
     const vazio = S.treinamentos.length ? `<p class="muted vz">Nenhuma avaliação com esse filtro.</p>` : `<div class="vazio-t"><b>Comece pela primeira avaliação</b><p class="muted" style="margin:0">Toque em <b>Novo treinamento</b> e escolha: um modelo pronto, começar do zero ou criar com uma IA a partir de um material seu.</p></div>`;
     corpo = `${pode() ? "" : `<div class="note">O perfil Colaborador não cria nem aplica treinamentos. Só os perfis Primário e Líder estrela podem.</div>`}${vModelos()}${abertas.length ? `<div class="sec-t">Sessões abertas</div><div class="tl">${abertas.map(linhaAberta).join("")}</div><div class="sec-t">Avaliações</div>` : ""}
       ${xs.length ? (u.vis === "cartoes" ? `<div class="cts">${xs.map(cartaoT).join("")}</div>` : `<div class="tl av">${xs.map(linhaT2).join("")}</div>`) : vazio}
-      ${S.treinamentos.length ? `<p class="rodasub">O acerto médio junta todas as aplicações de cada avaliação, de todas as versões; cada pessoa conta igual. Toque nos três pontos para ver versão por versão.</p>` : ""}`;
+      `;
   }
   if (aba === "ref") corpo = vReforco2(q);
   if (aba === "enc"){ const fech = sessOficiais().filter(s => !q || norm(s.titulo + " " + (s.local || "") + " " + (s.instrutor || "")).includes(q)).sort((a, b) => b.encerradaEm - a.encerradaEm);
@@ -4896,7 +5256,7 @@ function vLista(){
     corpo = `<div class="note">${ICON.teste} Sessões feitas no modo demonstração com pessoas de verdade. Só o perfil Principal vê esta aba. Elas não entram no relatório de eficácia, no reforço nem no PDF oficial.</div>
       ${ts.length ? `<div class="tl">${ts.map(s => s.status === "encerrada" ? linhaEncerrada(s).replace(`<b>${esc(s.titulo)}</b>`, `<b>${esc(s.titulo)} <span class="pill warn">TESTE</span></b>`) : linhaAberta(s)).join("")}</div>` : `<p class="muted vz">Nenhuma sessão de teste ainda.</p>`}`; }
   const sub = {trein: "Avaliações de eficácia salvas neste aparelho", ref: "Quem ficou abaixo da meta e precisa rever o assunto", enc: "Sessões já aplicadas, com o registro de presença", teste: "Sessões de teste, fora do registro oficial"}[aba];
-  return `<div class="stack lista2">${avisos}<div class="bandas">${cabLista("Treinamentos", sub, kpis)}${abasLista(aba)}${ferrLista(aba)}</div>${corpo}</div>${vPainel()}${vIA()}`;
+  return `<div class="stack lista2">${avisos}${cabLista("Treinamentos", sub, kpis)}<div class="bandas">${abasLista(aba)}${ferrLista(aba)}</div>${corpo}</div>${vPainel()}${vIA()}`;
 }
 
 const _linhaAberta23 = linhaAberta;
@@ -5082,7 +5442,7 @@ vNova = function(){
     ${blocoSetores(o)}
     <div class="grid2">${dd("dd-tpct", "Tempo extra para quem tiver dificuldade", o.tempoPct || 0, TPCT, "novaTpct", "")}<p class="aj" style="align-self:end;margin:0">Soma uma porcentagem ao tempo de cada pergunta. Dá para mudar durante a sessão.</p></div>
     <div class="chks"><label class="chk"><input type="checkbox" id="n-teste" data-nchk="teste" ${o.teste || S.config.demoModo === "real" ? "checked" : ""}>Sessão de teste (não entra no relatório, no reforço nem no PDF)</label><label class="chk"><input type="checkbox" id="n-rank" data-nchk="mostrarRanking" ${o.mostrarRanking ? "checked" : ""}>Mostrar ranking no telão e no celular</label>
-    <label class="chk"><input type="checkbox" id="n-emb" data-nchk="embaralhar" ${o.embaralhar ? "checked" : ""}>Embaralhar a ordem das alternativas no celular</label>
+    ${blocoPrePos(o)}<label class="chk"><input type="checkbox" id="n-emb" data-nchk="embaralhar" ${o.embaralhar ? "checked" : ""}>Embaralhar a ordem das alternativas no celular</label>
     <label class="chk"><input type="checkbox" id="n-conf" data-nchk="confirmar" ${o.confirmar ? "checked" : ""}>Pedir confirmação antes de enviar a resposta</label></div>
     <p class="aj">Nota da avaliação: só acertos e erros. Rapidez desempata quem acertou o mesmo número. Perguntas de gincana valem pontos por rapidez num placar separado.${S.config.demo && o.nuvem !== "1" ? " Demonstração: use “Próxima pessoa” na aba Participante para simular outro celular." : ""}</p>
     <div class="row end"><button class="btn pri lg" data-act="abrirSessao">Abrir sessão e gerar chave</button></div>
@@ -5361,7 +5721,7 @@ const _vControle231 = vControle;
 vControle = function(){
   const s = sessAtual(); let h = _vControle231(); if (!s) return h;
   if (s.status !== "encerrada"){
-    h = h.replace(`<button class="btn sm" data-act="view" data-arg="tel">Abrir telão</button>`, `<button class="btn sm pri" data-act="conviteAbrir" data-arg="${s.id}">Convidar participantes</button><button class="btn sm" data-act="view" data-arg="tel">Abrir telão</button>`);
+    h = h.replace(`<button class="btn sm" data-act="view" data-arg="tel">Abrir telão</button>`, `<button class="btn sm pri" data-act="conviteAbrir" data-arg="${s.id}">${ICON.convite}<span class="tx">Convidar participantes</span></button><button class="btn sm" data-act="view" data-arg="tel">${ICON.telao}<span class="tx">Abrir telão</span></button>`);
   }
   return h + vConvite();
 };
@@ -5405,7 +5765,738 @@ A.novaTpct = function(v){ const u = UI(); u.nova.tempoPct = +v; u.menu = null; }
 A.ctlTpct = function(v){ const s = sessAtual(); if (s){ s.tempoPct = +v; } UI().menu = null; };
 const _vControle232 = vControle;
 vControle = function(){ const s = sessAtual(), h = _vControle232(); if (!s || s.status === "encerrada" || !h.includes('<div class="kv">')) return h;
-  return h.replace('<div class="kv">', `<div class="grid2">${dd("dd-ctpct", "Tempo extra para quem tiver dificuldade", s.tempoPct || 0, TPCT, "ctlTpct", "")}<p class="aj" style="align-self:end;margin:0">Vale para a pergunta atual e as próximas. Quem já respondeu não muda.</p></div><div class="kv">`); };
+  return h.replace('<div class="passo">', `<div class="passo"><div class="pdd">${dd("dd-ctpct", "Tempo extra", s.tempoPct || 0, TPCT, "ctlTpct", "")}</div>`); };
+
+/* =====================================================================
+   v2.4.0 · PADRÃO EFCquiz (aprovado em 30/10/2026, Opção 4)
+   Cabeçalho em faixa, caixas de número, botões só ícone, menu lateral novo.
+   Uma peça só para todas as telas: pgHead(). As telas antigas são convertidas
+   em padronizar(), sem mexer no resto de cada tela.
+   ===================================================================== */
+const SVi = p => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+Object.assign(ICON, {
+  impr: SVi('<path d="M7 8V3h10v5"/><path d="M7 17H4v-7h16v7h-3"/><rect x="7" y="14" width="10" height="7" rx="1"/>'),
+  exp: SVi('<path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/>'),
+  info: SVi('<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.5v.5"/>'),
+  telao: SVi('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'),
+  convite: SVi('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/>'),
+  sair: SVi('<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/>')
+});
+function demoChip(){
+  if (typeof APRES !== "undefined" && APRES) return "";
+  const u = UI(), m = S.config.demoModo;
+  if (u.teste) return `<span class="pg2-demo"><i></i>Teste rápido<button class="lk" data-act="demoAbrir">Trocar</button><button class="lk" data-act="sairTeste">Sair</button></span>`;
+  if (m === "off") return "";
+  return `<span class="pg2-demo"><i></i>Demonstração · ${m === "real" ? "pessoas de verdade" : "dados simulados"}<button class="lk" data-act="demoAbrir">Trocar</button></span>`;
+}
+/* o = {crumb, titulo, sub, tags:[[txt, cls]], info (html do "!"), status:[txt, cls], icones:[[act, arg, icone, rotulo, menuItens?]], acoes (html), volta (act), tools (html), kpis:[[valor, rotulo, cls, extra]], nota (html)} */
+function pgHead(o){
+  const u = UI(), infoAb = !!u.pgInfo;
+  const ic = (o.icones || []).map(([act, arg, ico, rot, itens]) => itens
+    ? `<div class="mnu"><button class="pg2-ib" data-act="menu" data-arg="${act}" aria-expanded="${u.menu === act}" aria-label="${esc(rot)}" title="${esc(rot)}">${ICON[ico] || ico}</button>${u.menu === act ? `<div class="pop" role="menu">${itens.map(([a, g, l, i2]) => `<button role="menuitem" data-act="${a}" data-arg="${esc(g || "")}">${i2 ? ICON[i2] || "" : ""}${esc(l)}</button>`).join("")}</div>` : ""}</div>`
+    : `<button class="pg2-ib" data-act="${act}" data-arg="${esc(arg || "")}" aria-label="${esc(rot)}" title="${esc(rot)}">${ICON[ico] || ico}</button>`).join("");
+  const tags = (o.tags || []).map(([t, c]) => `<span class="pg2-tag ${c || ""}">${t}</span>`).join("");
+  const info = o.info ? `<button class="pg2-ib sm${infoAb ? " on" : ""}" data-act="pgInfo" aria-expanded="${infoAb}" aria-label="Detalhes" title="Detalhes">${ICON.info}</button>` : "";
+  const kp = o.kpis && o.kpis.length ? `<div class="pg2-k n${o.kpis.length}${o.kmini ? " mini" : ""}">${o.kpis.map(([v, r, c, x]) => `<div class="kx ${c || ""}"><b class="num">${v}</b><span>${r}</span>${x || ""}</div>`).join("")}</div>` : "";
+  return `<header class="pg2${kp ? " ck" : ""}">
+    <div class="pg2-top">${o.volta ? `<button class="pg2-vt" data-act="${o.volta}" aria-label="Voltar">${ICON.voltar}<span>Voltar</span></button>` : ""}${o.crumb ? `<span class="pg2-cr">${o.crumb}</span>` : ""}${demoChip()}</div>
+    <div class="pg2-tt"><h1>${o.titulo}</h1><div class="pg2-t">${tags}${info}</div><div class="pg2-ac">${o.status ? `<span class="pg2-tag st ${o.status[1] || ""}">${o.status[0]}</span>` : ""}${o.acoes || ""}${ic}</div></div>
+    ${o.sub ? `<p class="pg2-sub">${o.sub}</p>` : ""}
+    ${infoAb && o.info ? `<div class="pg2-pop" role="dialog" aria-label="Detalhes">${o.info}</div>` : ""}
+    ${o.tools ? `<div class="pg2-tools">${o.tools}</div>` : ""}
+  </header>${kp}${o.nota || ""}`;
+}
+A.pgInfo = function(){ UI().pgInfo = !UI().pgInfo; };
+const _nav52 = A.nav; A.nav = function(k){ UI().pgInfo = false; return _nav52.apply(this, arguments); };
+
+/* crumb por tela */
+function crumbAtual(){
+  const u = UI(), t = u.tela;
+  if (t === "editor") return "Treinamentos";
+  if (t === "nova") return "Treinamentos";
+  if (t === "controle" || t === "encerrar") return "Ao vivo";
+  if (t === "conferir" || u.cfg) return "Sistema";
+  return "";
+}
+/* converte os cabeçalhos antigos (Voltar + título; pghd) para o padrão */
+function padronizar(h){
+  let feito = false;
+  h = h.replace(/<div class="row"><button class="btn sm" data-act="(voltar\w*)">Voltar<\/button><h1[^>]*>([\s\S]*?)<\/h1>([\s\S]*?)<\/div>/, (m, act, tit, rest) => {
+    feito = true;
+    const vs = /<span class="vs">([^<]*)<\/span>/.exec(tit); const titulo = tit.replace(/\s*<span class="vs">[^<]*<\/span>/, "");
+    const acoes = rest.replace(/class="btn sm pri"/g, 'class="btn pri"').replace(/class="btn sm"/g, 'class="btn"');
+    return pgHead({volta: act, crumb: crumbAtual(), titulo, tags: vs ? [[vs[1], "v"]] : [], acoes});
+  });
+  if (!feito) h = h.replace(/<div class="pghd"><h1>([^<]*)<\/h1>(?:<span class="sub">([^<]*)<\/span>)?<\/div>/, (m, tit, sub) => { feito = true; return pgHead({crumb: crumbAtual(), titulo: tit, sub: sub || ""}); });
+  return h;
+}
+/* lista e configurações: cabeçalho em faixa com as caixas de número */
+cabLista = function(titulo, sub, kpis){
+  return pgHead({crumb: titulo === "Configurações" ? "Sistema" : "", titulo, sub, kpis: (kpis || []).map(([v, r]) => [v, r])});
+};
+const _vResp52 = vResp;
+vResp = function(){ return padronizar(_vResp52()); };
+
+/* menu lateral: logo e cartão da conta */
+const _shell52 = shellRender;
+shellRender = function(){
+  _shell52();
+  const side = elId("side"); if (!side || !side.innerHTML) return;
+  const mk = side.querySelector(".marca");
+  const pe = side.querySelector(".pe"); if (!pe) return;
+  const logado = nvResp(), nome = logado ? String(NV.conta.nome) : "Sem login";
+  const ini = logado ? nome.split(/\s+/).filter(Boolean).map(x => x[0]).filter((x, i, a) => i === 0 || i === a.length - 1).join("").toUpperCase() : "";
+  pe.innerHTML = `<span class="cav">${ini ? esc(ini) : (ICON.pessoa || "")}</span><b>${esc(nome)}</b><span>${esc(PERFIS[S.perfil])}${logado ? " · conta do EFClaudian" : ""}</span>${logado ? `<span>${esc(EFC_CONFIG.produto)} v${APP_VERSAO}</span>` : `<button class="lk" data-act="nvAbrirInteg">Entrar com a conta do EFClaudian</button>`}`;
+  if (!logado) pe.insertAdjacentHTML("afterend", `<span class="side-v">${esc(EFC_CONFIG.produto)} v${APP_VERSAO}</span>`);
+};
+
+/* Controle: números em caixas e "Próximo passo" bem claro */
+function proximoPasso(s){
+  const f = s.fase;
+  if (s.status === "espera") return s.part.length ? `Tudo pronto: ${plural(s.part.length, "pessoa entrou", "pessoas entraram")}. Abra o telão na outra tela e toque em <b>${s.modo === "aovivo" ? "Iniciar treinamento" : "Liberar respostas"}</b>.` : `Ninguém entrou ainda. Toque em <b>Convidar participantes</b> (QR, chave ou WhatsApp). Quando alguém entrar, o botão de iniciar acende.`;
+  if (s.modo === "ritmo") return "Cada pessoa responde no seu ritmo. Quando todos terminarem, toque em <b>Encerrar treinamento</b>.";
+  if (f.etapa === "explicacao") return "Explique no telão e toque em <b>Concluir explicação</b>.";
+  if (f.etapa === "pergunta") return "A turma está respondendo. Espere o tempo acabar ou toque em <b>Encerrar tempo</b>.";
+  if (f.etapa === "resultado") return "Comente o resultado no telão e toque em <b>Próxima</b>.";
+  if (f.etapa === "fim") return "Perguntas concluídas. Toque em <b>Encerrar treinamento</b> para tirar a foto, recolher as assinaturas e gerar o registro.";
+  return "";
+}
+const _vControle52 = vControle;
+vControle = function(){
+  const s = sessAtual(); let h = _vControle52(); if (!s) return h;
+  h = h.replace(/<div class="kv">((?:\s*<div><span class="lbl">[\s\S]*?<\/b><\/div>)+)\s*<\/div>/, (m, inner) => {
+    const cx = [...inner.matchAll(/<div><span class="lbl">([\s\S]*?)<\/span><b[^>]*>([\s\S]*?)<\/b><\/div>/g)].map(x => { const v = x[2].trim(), tx = !/^[\d\s—–-]+$/.test(v) && !/Chave|Participantes/.test(x[1]);
+      const vv2 = tx ? (m => m ? `${m[1][0].toUpperCase() + m[1].slice(1)}<br>${m[2]}` : v[0].toUpperCase() + v.slice(1).replace(/^(\S+)\s+/, "$1<br>"))(/^(pergunta|explicação|resultado)\s+(.+)$/i.exec(v)) : v;
+      return `<div class="kx${/Chave/.test(x[1]) ? " chv" : ""}${tx ? " tx" : ""}"><b class="num">${vv2}</b><span>${x[1]}</span></div>`; }).join("");
+    return `<div class="pg2-k ctl n4">${cx}</div>`; });
+  h = h.replace('<div class="passo">', `<div class="passo"><div class="pt"><span>Próximo passo</span><p>${proximoPasso(s)}</p></div>`);
+  return h;
+};
+A.relSel = function(id){ const u = UI(); u.relId = id; u.dlMsg = ""; u.menu = null; u.pgInfo = false; };
+
+/* =====================================================================
+   PDF DE EVIDÊNCIA (aprovado em 30/10/2026)
+   folhas: lista com nota e assinatura · reforço · comentários (ocultáveis) ·
+   assinaturas dos instrutores · foto sozinha, em pé, no tamanho máximo
+   ===================================================================== */
+const PALAVROES = ["porra", "caralho", "merda", "puta", "puto", "fdp", "foda", "fuder", "foder", "cacete", "buceta", "bosta", "viado", "otario", "otário", "babaca", "arrombad", "desgraça", "vagabund", "cu ", "pqp", "vsf", "tnc"];
+const temPalavrao = t => { const x = " " + norm(String(t || "")) + " "; return PALAVROES.some(p => x.includes(norm(p))); };
+const msgsSessao = s => (S.mensagens || []).filter(m => m.sId === s.id).sort((a, b) => a.em - b.em);
+const msgNoPdf = m => m.pdfOculta === undefined ? !temPalavrao(m.texto) : !m.pdfOculta;
+function instrutoresDe(s){ const ev = s.evid && Array.isArray(s.evid.assin) ? s.evid.assin : null; if (ev) return ev;
+  const xs = String(s.instrutor || "").split(/\s*(?:,|;|\/|\se\s)\s*/).map(x => x.trim()).filter(Boolean); return xs.length ? xs : [""]; }
+function vEvid(){
+  const u = UI(); if (!u.evid) return ""; const s = sessById(u.evid); if (!s) return "";
+  const ins = instrutoresDe(s), ms = msgsSessao(s), temFoto = !!(s.foto && s.foto.data), incFoto = !(s.evid && s.evid.semFoto);
+  const nOps = [1, 2, 3, 4].map(n => [n, n === 1 ? "1 pessoa assina" : n + " pessoas assinam"]);
+  return `<div class="veu2" data-act="evidFechar"></div><div class="mdl2 evid" role="dialog" aria-modal="true" aria-labelledby="ev-t"><header class="mdh"><div><h2 id="ev-t">Imprimir evidência</h2><p class="aj">${esc(s.titulo)} · ${fData(s.encerradaEm || s.criadaEm)}</p></div><button class="btn sm ic" data-act="evidFechar" aria-label="Fechar">${ICON.fechar}</button></header>
+    <div class="mdb">
+      <section class="evs"><h3>Quem assina como instrutor</h3>
+        <div class="grid2">${dd("dd-evn", "Quantas pessoas", ins.length, nOps, "evidN", "")}<span></span></div>
+        <div class="evins">${ins.map((n, i) => `<label class="field"><span>Instrutor ${i + 1}</span><input type="text" data-evins="${i}" value="${esc(n)}" placeholder="Nome completo"></label>`).join("")}</div>
+      </section>
+      <section class="evs"><h3>Comentários da turma <span class="muted">· ${ms.filter(msgNoPdf).length} de ${ms.length} na impressão</span></h3>
+        ${ms.length ? `<p class="aj">Ocultar só tira da impressão. A mensagem continua guardada no sistema. Mensagens com palavrão já vêm ocultas.</p><div class="evms">${ms.map(m => { const pe = S.pessoas.find(x => x.id === m.pessoaId), inc = msgNoPdf(m), pal = temPalavrao(m.texto);
+          return `<div class="evm${inc ? "" : " fora"}"><div><b>${esc(pe ? nomeCompleto(pe) : "Pessoa")}</b> <span class="pill ${m.tipo === "reclamacao" ? "bad" : m.tipo === "elogio" ? "ok" : "mut"}">${TIPO_MSG[m.tipo] || m.tipo}</span>${pal ? ` <span class="pill warn">possível palavrão</span>` : ""}<p>${esc(m.texto)}</p></div><button class="btn sm" data-act="evidMsg" data-arg="${m.id}">${inc ? "Ocultar" : "Incluir"}</button></div>`; }).join("")}</div>` : `<p class="aj">Nenhum comentário nesta sessão.</p>`}
+      </section>
+      ${temFoto ? `<section class="evs"><label class="chk"><input type="checkbox" data-evfoto="1"${incFoto ? " checked" : ""}>Incluir a folha da foto da turma (fica em pé, ocupando a folha)</label></section>` : ""}
+      ${u.evidMsg ? `<p class="${u.evidErr ? "msg" : "okmsg"}">${esc(u.evidMsg)}</p>` : ""}
+    </div>
+    <footer class="mdf"><span class="esp"></span><button class="btn" data-act="evidFechar">Cancelar</button><button class="btn pri" data-act="evidGerar">${ICON.impr}Gerar PDF</button></footer></div>`;
+}
+const _vRel52 = vRel; vRel = function(){ return _vRel52() + vEvid(); };
+Object.assign(A, {
+  evidAbrir(id){ const s = sessById(id || UI().relId); if (!s) return; if (s.teste){ UI().dlMsg = "Sessão de TESTE: não gera o PDF oficial."; return; } UI().evid = s.id; UI().evidMsg = ""; UI().menu = null; },
+  evidFechar(){ UI().evid = null; UI().evidMsg = ""; },
+  evidN(n){ const s = sessById(UI().evid); if (!s) return; const ins = instrutoresDe(s).slice(0, +n); while (ins.length < +n) ins.push(""); s.evid = {...(s.evid || {}), assin: ins}; UI().menu = null; },
+  evidMsg(id){ const m = (S.mensagens || []).find(x => x.id === id); if (m) m.pdfOculta = msgNoPdf(m); },
+  evidGerar(){ const s = sessById(UI().evid); if (!s) return; s.evid = {...(s.evid || {}), assin: instrutoresDe(s)};
+    UI().evidMsg = "Gerando o PDF…"; UI().evidErr = false; save(); render();
+    pdfEvidencia(s).then(() => { UI().evidMsg = "PDF gerado."; UI().evidErr = false; save(); render(); }).catch(e => { UI().evidMsg = "Não deu para gerar o PDF: " + (e && e.message || e); UI().evidErr = true; save(); render(); });
+    return "norender"; }
+});
+A.pdf = function(){ return A.evidAbrir(UI().relId); };
+document.addEventListener("input", e => { const t = e.target; if (t && t.dataset && t.dataset.evins !== undefined){ const s = sessById(UI().evid); if (!s) return; const ins = instrutoresDe(s).slice(); ins[+t.dataset.evins] = t.value; s.evid = {...(s.evid || {}), assin: ins}; save(); } });
+document.addEventListener("change", e => { const t = e.target; if (t && t.dataset && t.dataset.evfoto){ const s = sessById(UI().evid); if (!s) return; s.evid = {...(s.evid || {}), semFoto: !t.checked}; save(); } });
+
+function carregarImg(src){ return new Promise((ok, erro) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => erro(new Error("imagem")); im.src = src; }); }
+async function fotoEmPe(src){ const im = await carregarImg(src); if (im.width <= im.height) return {src, w: im.width, h: im.height};
+  const c = document.createElement("canvas"); c.width = im.height; c.height = im.width; const x = c.getContext("2d"); x.translate(c.width / 2, c.height / 2); x.rotate(Math.PI / 2); x.drawImage(im, -im.width / 2, -im.height / 2);
+  return {src: c.toDataURL("image/jpeg", .9), w: c.width, h: c.height}; }
+async function pdfEvidencia(s){
+  if (!window.jspdf) throw new Error("o gerador de PDF não carregou");
+  const c = calc(s), N = numerosSessao(s, c), lp = linhasPresenca(s, c), M = c.meta, T = S.treinamentos.find(t => t.id === s.tId), gP = ganhoSessao(s);
+  const doc = new window.jspdf.jsPDF({unit: "mm", format: "a4"}), W = 210, H = 297, X = 12;
+  const roxo = [124, 58, 237], tinta = [26, 26, 38], cinza = [95, 95, 115], linha = [216, 216, 224], suave = [241, 235, 253], okc = [31, 107, 80], okf = [227, 242, 236], badc = [143, 53, 53], badf = [247, 230, 230];
+  const txt = (t, x, y, o = {}) => { doc.setFont("helvetica", o.b ? "bold" : "normal"); doc.setFontSize(o.s || 9); doc.setTextColor(...(o.c || tinta)); doc.text(safe(t), x, y, o.al ? {align: o.al} : undefined); };
+  const titulo = `${s.titulo} · ${vv(s.tVer || 0)}`, emp = String(EFC_CONFIG.empresa || "").trim();
+  let y = 0;
+  const cab = sub => { try { doc.addImage(EFC_MARCA, "JPEG", X, 10, 14, 14); } catch(e) {}
+    txt(sub.toUpperCase(), X + 18, 15, {s: 7, b: true, c: cinza}); txt(doc.splitTextToSize(safe(titulo), 120)[0], X + 18, 21.5, {s: 13, b: true});
+    if (s.integ){ txt("Código de conferência", W - X, 13.5, {s: 6.8, c: cinza, al: "right"}); doc.setFont("courier", "bold"); doc.setFontSize(9.5); doc.setTextColor(...tinta); doc.text(s.integ, W - X, 18, {align: "right"}); }
+    if (emp) txt(emp, W - X, 22.5, {s: 7, c: cinza, al: "right"});
+    doc.setDrawColor(...roxo); doc.setLineWidth(.6); doc.line(X, 26.5, W - X, 26.5); doc.setLineWidth(.2); y = 31; };
+  const nova = sub => { doc.addPage(); cab(sub); };
+  const cabe = h => y + h <= 280;
+  /* folha 1: dados e números */
+  cab("Registro de treinamento e avaliação de eficácia");
+  const dados = [["Data", fData(s.criadaEm)], ["Início · fim", `${fHora(s.iniciadaEm || s.criadaEm)} · ${s.encerradaEm ? fHora(s.encerradaEm) : "-"}`], ["Local", s.local || "-"], ["Instrutor", s.instrutor || "-"],
+    ["Modo", s.modo === "aovivo" ? "Ao vivo, com telão" : "No próprio ritmo"], ["Formato", s.equipe === "nao" ? "Individual" : "Equipes"], ["Meta de eficácia", M + "%"], ["Versão aplicada", vv(s.tVer || 0) + (T ? "" : "")]];
+  const cw = (W - 2 * X) / 4; doc.setDrawColor(...linha);
+  dados.forEach(([k, v], i) => { const cx = X + (i % 4) * cw, cy = y + Math.floor(i / 4) * 11; doc.rect(cx, cy, cw, 11); txt(k.toUpperCase(), cx + 2.5, cy + 4, {s: 6.3, b: true, c: cinza}); txt(doc.splitTextToSize(safe(v), cw - 5)[0], cx + 2.5, cy + 8.6, {s: 8.8, b: true}); });
+  y += 26;
+  const nums = [[String(N.presentes), "Presentes"], [`${N.eficazes} de ${N.presentes}`, "Atingiram a meta"], [N.media + "%", "Nota média"], [String(c.aval.length), "Perguntas de avaliação"]], nw = (W - 2 * X - 9) / 4;
+  nums.forEach(([v, r], i) => { const cx = X + i * (nw + 3); doc.setDrawColor(...linha); doc.roundedRect(cx, y, nw, 16, 1.6, 1.6); txt(v, cx + nw / 2, y + 8, {s: 14, b: true, al: "center", c: i === 2 ? (N.media >= M ? okc : badc) : tinta}); txt(r, cx + nw / 2, y + 13, {s: 7, c: cinza, al: "center"}); });
+  y += 22;
+  /* tabela de presença */
+  const cols = [["Nº", 10, "c"], ["Nome completo", 62, "l"], ["Setor", 28, "l"], ["Acertos", 17, "c"], ["Nota", 15, "c"], ["Situação", 20, "c"], ["Assinatura", W - 2 * X - 152, "l"]];
+  const cabT = () => { doc.setFillColor(...suave); doc.rect(X, y, W - 2 * X, 7, "F"); let x = X; cols.forEach(([t, w, al]) => { txt(t.toUpperCase(), al === "c" ? x + w / 2 : x + 2, y + 4.7, {s: 6.6, b: true, c: [59, 29, 128], al: al === "c" ? "center" : undefined}); x += w; }); y += 7; };
+  txt(`Presença e resultado · ${plural(lp.length, "pessoa", "pessoas")}`, X, y + 2, {s: 10, b: true}); y += 5; cabT();
+  const RH = 10, nAval = c.aval.length;
+  lp.forEach((l, i) => { if (!cabe(RH)){ nova("Registro de treinamento e avaliação de eficácia"); txt("Presença e resultado (continuação)", X, y + 2, {s: 10, b: true}); y += 5; cabT(); }
+    if (i % 2){ doc.setFillColor(250, 250, 252); doc.rect(X, y, W - 2 * X, RH, "F"); } doc.setDrawColor(...linha); doc.line(X, y + RH, W - X, y + RH);
+    let x = X; const ym = y + RH / 2 + 1.2, ok = l.nota >= M;
+    const vals = [String(i + 1), l.nome, l.setor || "-", `${l.ac}/${nAval}`, l.nota + "%"];
+    vals.forEach((v, k) => { const [, w, al] = cols[k]; txt(k === 1 ? doc.splitTextToSize(safe(v), w - 3)[0] : cut(safe(v), 18), al === "c" ? x + w / 2 : x + 2, ym, {s: k === 1 ? 8.6 : 8.2, b: k === 1 || k === 4, al: al === "c" ? "center" : undefined}); x += w; });
+    const sw = cols[5][1]; doc.setFillColor(...(ok ? okf : badf)); doc.roundedRect(x + 2.5, y + 3, sw - 5, 4.4, 1, 1, "F"); txt(ok ? "Eficaz" : "Reforço", x + sw / 2, y + 6.1, {s: 6.8, b: true, c: ok ? okc : badc, al: "center"}); x += sw;
+    if (l.sig){ try { doc.addImage(l.sig, "PNG", x + 2, y + 1, Math.min(cols[6][1] - 4, (RH - 2) * 3.3), RH - 2); } catch(e) {} } else txt("—", x + 2, ym, {c: cinza});
+    y += RH; });
+  y += 3; txt(`Nota = acertos nas perguntas de avaliação. Eficaz = nota igual ou acima da meta (${M}%).`, X, y + 2, {s: 7, c: cinza}); y += 8;
+  if (gP && gP.pares){ nova("Pré-teste e pós-teste · ganho de aprendizado"); y = pdfGanho(doc, txt, s, gP, X, W, y, cabe, nova); }
+  /* reforço */
+  const abaixo = c.rows.filter(r => r.nota < M && c.aval.length).sort((a, b) => a.nota - b.nota), dif = [...c.porItem].filter(x => x.pct < M && !x.it.ensaio).sort((a, b) => a.pct - b.pct);
+  const msN = msgsSessao(s).filter(msgNoPdf).length;
+  if (abaixo.length || dif.length || msN) nova("Resumo para revisão e comentários");
+  if (abaixo.length || dif.length){
+    txt("Quem precisa de revisão", X, y + 2, {s: 10, b: true}); y += 6;
+    abaixo.forEach(r => { if (!cabe(6)){ nova("Resumo para revisão"); } const err = c.aval.filter(it => !isCorrect(it, s.resp[r.p.id + "|" + it.id])).length;
+      txt("•  " + r.p.nome, X + 2, y + 2, {s: 8.6}); txt(`${r.nota}% · errou ${err} de ${c.aval.length}`, W - X, y + 2, {s: 8.2, c: badc, al: "right"}); y += 5.4; });
+    if (dif.length){ y += 3; if (!cabe(12)) nova("Resumo para revisão"); txt("Perguntas para reforçar", X, y + 2, {s: 10, b: true}); y += 6;
+      dif.slice(0, 6).forEach(x => { const ls = doc.splitTextToSize(safe(x.it.enunciado), 160); if (!cabe(ls.length * 4.2 + 2)) nova("Resumo para revisão");
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8.6); doc.setTextColor(...tinta); doc.text(ls, X + 2, y + 2); txt(x.pct + "% acertaram", W - X, y + 2, {s: 8.2, b: true, c: badc, al: "right"}); y += ls.length * 4.2 + 2; }); }
+    y += 4; }
+  /* comentários */
+  const ms = msgsSessao(s).filter(msgNoPdf);
+  if (ms.length){ if (!cabe(20)) nova("Comentários da turma"); txt("Sugestões, reclamações e comentários da turma", X, y + 2, {s: 10, b: true}); y += 6;
+    ms.forEach(m => { const pe = S.pessoas.find(x => x.id === m.pessoaId), ls = doc.splitTextToSize(safe(m.texto), 150); if (!cabe(ls.length * 4.2 + 7)) nova("Comentários da turma");
+      txt(`${TIPO_MSG[m.tipo] || m.tipo} · ${pe ? nomeCompleto(pe) : "Pessoa"}`, X + 2, y + 2, {s: 7.6, b: true, c: m.tipo === "reclamacao" ? badc : m.tipo === "elogio" ? okc : cinza});
+      doc.setFont("helvetica", "normal"); doc.setFontSize(8.6); doc.setTextColor(...tinta); doc.text(ls, X + 2, y + 6.4); y += ls.length * 4.2 + 6; });
+    y += 3; }
+  /* assinaturas dos instrutores */
+  const ins = instrutoresDe(s).filter((n, i, a) => n || a.length === 1);
+  const nl = Math.max(1, ins.length), porLinha = Math.min(2, nl), linhas = Math.ceil(nl / porLinha);
+  if (!cabe(linhas * 22 + 6)) nova("Registro de treinamento e avaliação de eficácia");
+  y = Math.max(y + 6, 280 - linhas * 22); const lw = (W - 2 * X - (porLinha - 1) * 14) / porLinha;
+  ins.forEach((n, i) => { const cx = X + (i % porLinha) * (lw + 14), cy = y + Math.floor(i / porLinha) * 22 + 12; doc.setDrawColor(...tinta); doc.setLineWidth(.3); doc.line(cx, cy, cx + lw, cy); doc.setLineWidth(.2);
+    txt(n || "Nome do instrutor", cx + lw / 2, cy + 4.2, {s: 8.4, al: "center", c: n ? tinta : cinza}); txt("Instrutor(a)", cx + lw / 2, cy + 8, {s: 7, c: cinza, al: "center"}); });
+  /* foto: folha sozinha, em pé, no tamanho máximo */
+  if (s.foto && s.foto.data && !(s.evid && s.evid.semFoto)){
+    nova("Registro fotográfico do treinamento");
+    const f = await fotoEmPe(s.foto.data), aw = W - 2 * X, ah = 280 - y - 8; let w = aw, h = w * f.h / f.w; if (h > ah){ h = ah; w = h * f.w / f.h; }
+    doc.addImage(f.src, "JPEG", X + (aw - w) / 2, y, w, h); txt(`Foto da turma · ${fData(s.foto.tiradaEm || s.encerradaEm)} ${fHora(s.foto.tiradaEm || s.encerradaEm)} · ${s.local || ""}`, W / 2, y + h + 5, {s: 7.4, c: cinza, al: "center"}); }
+  /* rodapé */
+  const pags = doc.getNumberOfPages();
+  for (let i = 1; i <= pags; i++){ doc.setPage(i); doc.setDrawColor(...linha); doc.line(X, 287, W - X, 287);
+    txt(`Gerado pelo ${EFC_CONFIG.produto} v${APP_VERSAO} em ${fData(now())} ${fHora(now())} · Sessão de ${fData(s.criadaEm)} · chave ${s.chave}`, X, 291.5, {s: 6.8, c: cinza}); txt(`Folha ${i} de ${pags}`, W - X, 291.5, {s: 6.8, c: cinza, al: "right"}); }
+  window.__ultimoPdf = {folhas: pags};
+  await salvarArquivo(nomeArq(s, "pdf"), doc.output("blob"));
+}
+
+/* =====================================================================
+   MENSAGENS: linhas compactas, ações só com ícone, filtro único, números
+   ===================================================================== */
+Object.assign(ICON, { resp: SVi('<path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v5"/>') });
+const TIPOS_MSG2 = [["", "Todos os tipos"], ["reclamacao", "Reclamação"], ["sugestao", "Sugestão"], ["elogio", "Elogio"], ["pergunta", "Pergunta"], ["comentario", "Comentário"]];
+const SIT_MSG = [["", "Novas e lidas"], ["nova", "Só as novas"], ["lida", "Só as lidas"]];
+function msgKpis(){ const ms = S.mensagens || [], n = t => ms.filter(m => m.tipo === t).length;
+  return [[String(ms.filter(m => !m.lida).length), "Novas", ms.some(m => !m.lida) ? "" : ""], [String(n("reclamacao")), "Reclamações", n("reclamacao") ? "bad" : ""], [String(n("sugestao")), "Sugestões"], [String(n("elogio")), "Elogios", n("elogio") ? "ok" : ""]]; }
+vMensagens = function(){
+  const u = UI(), f = u.mf || (u.mf = {tipo: "", sit: ""}), ab = u.msgAberta;
+  let ms = (S.mensagens || []).slice().sort((a, b) => (a.lida === b.lida ? 0 : a.lida ? 1 : -1) || b.em - a.em);
+  const total = ms.length; if (!total) return "";
+  ms = ms.filter(m => (!f.tipo || m.tipo === f.tipo) && (!f.sit || (f.sit === "nova" ? !m.lida : m.lida)));
+  const resumo = [f.tipo ? TIPOS_MSG2.find(x => x[0] === f.tipo)[1] : "", f.sit ? SIT_MSG.find(x => x[0] === f.sit)[1] : ""].filter(Boolean).join(" · ") || "Todas as mensagens";
+  const filtro = `<div class="filtro"><button data-act="mfToggle" aria-expanded="${!!u.mfAb}">${ICON.filtro || ICON.engr}<span>Filtro</span><span class="sum">${esc(resumo)}</span>${u.mfAb ? ICON.up : ICON.dn}</button>${u.mfAb ? `<div class="bd grid2">${dd("dd-mft", "Tipo", f.tipo, TIPOS_MSG2, "mfSet", "tipo|")}${dd("dd-mfs", "Situação", f.sit, SIT_MSG, "mfSet", "sit|")}</div>` : ""}</div>`;
+  const cls = t => t === "reclamacao" ? "bad" : t === "sugestao" ? "acc" : t === "elogio" ? "ok" : "mut";
+  const linhas = ms.slice(0, u.msgTodas ? 999 : 8).map(m => { const pe = S.pessoas.find(x => x.id === m.pessoaId), T = S.treinamentos.find(t => t.id === m.tId);
+    const resp = m.resposta ? `<div class="mg-r"><b>Sua resposta:</b> ${esc(m.resposta)}</div>` : ab === m.id ? `<div class="mg-f"><textarea id="resp-${m.id}" data-resptxt="${m.id}" rows="2" maxlength="600" placeholder="Sua resposta aparece no perfil da pessoa">${esc(u.respTxt || "")}</textarea><div class="row"><button class="btn sm pri" data-act="msgResponder" data-arg="${m.id}">Enviar resposta</button><button class="btn sm" data-act="msgAbrir" data-arg="">Cancelar</button></div></div>` : "";
+    return `<article class="mg${m.lida ? "" : " nova"}"><span class="mg-av">${pe ? avSvg(avDaPessoa(pe), "sm") : ""}</span>
+      <div class="mg-c"><div class="mg-h"><b>${esc(pe ? nomeCompleto(pe) : "Pessoa")}</b><span class="muted">${esc(pe ? pe.setor || "" : "")}</span><span class="pill ${cls(m.tipo)}">${TIPO_MSG[m.tipo] || m.tipo}</span>${m.lida ? "" : `<span class="pill warn">nova</span>`}</div>
+        <p class="mg-t">${esc(m.texto)}</p>
+        <div class="mg-m">${T ? `${esc(T.titulo)}${typeof m.tVer === "number" ? " · " + vv(m.tVer) : ""} · ` : ""}<span class="num">${fData(m.em)} ${fHora(m.em)}</span></div>${resp}</div>
+      <div class="mg-a">${m.resposta ? "" : `<button class="mg-b" data-act="msgAbrir" data-arg="${m.id}" title="Responder" aria-label="Responder">${ICON.resp}</button>`}${m.lida ? "" : `<button class="mg-b" data-act="msgLida" data-arg="${m.id}" title="Marcar como lida" aria-label="Marcar como lida">${ICON.ok}</button>`}<button class="mg-b del" data-act="msgDel" data-arg="${m.id}" title="Excluir" aria-label="Excluir mensagem">${ICON.lixo}</button></div></article>`; }).join("");
+  return `${filtro}<section class="panel mgl">${linhas || `<div class="bd"><p class="muted" style="margin:0">Nenhuma mensagem com este filtro.</p></div>`}${ms.length > 8 ? `<div class="bd"><button class="btn sm" data-act="msgTodas">${u.msgTodas ? "Mostrar só 8" : "Mostrar todas (" + ms.length + ")"}</button></div>` : ""}</section>`;
+};
+Object.assign(A, { mfToggle(){ UI().mfAb = !UI().mfAb; }, mfSet(a){ const [k, v] = a.split("|"); const f = UI().mf || (UI().mf = {tipo: "", sit: ""}); f[k] = v; UI().menu = null; } });
+const _padronizar52 = padronizar;
+padronizar = function(h){ if (h.includes('<div class="pghd"><h1>Mensagens</h1>')) return h.replace(/<div class="pghd"><h1>Mensagens<\/h1>(?:<span class="sub">[^<]*<\/span>)?<\/div>/, pgHead({titulo: "Mensagens", sub: "Comentários, perguntas, sugestões e reclamações da turma", kpis: msgKpis(), kmini: true})); return _padronizar52(h); };
+
+/* =====================================================================
+   ASSERTIVIDADE: gráfico que se explica sozinho (barras por sessão)
+   ===================================================================== */
+grafEvolucao = function(sess, f){
+  const xs = sess.slice(-16), n = xs.length, W = 760, H = 300, L = 66, R = 16, T = 26, B = 58, w = W - L - R, h = H - T - B;
+  const bw = Math.min(54, w / n * .62), X = i => L + (i + .5) * w / n, Y = v => T + h - v / 100 * h;
+  const metas = [...new Set(xs.map(x => x.meta))], meta = metas.length === 1 ? metas[0] : null;
+  const grid = [0, 25, 50, 75, 100].map(v => `<line class="ax" x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="yl" x="${L - 8}" y="${Y(v) + 4}" text-anchor="end">${v}%</text>`).join("");
+  const barras = xs.map((x, i) => { const ok = x.pct >= x.meta, x0 = X(i) - bw / 2;
+    return `<g class="br ${ok ? "ok" : "bad"}" data-act="verRel" data-arg="${x.s.id}"><title>${fData(x.em)} · ${esc(x.tit)} · ${x.pct}% de acerto (meta ${x.meta}%)</title>
+      <rect class="hit" x="${X(i) - w / n / 2}" y="${T}" width="${w / n}" height="${h + B}"/>
+      <rect class="b" x="${x0}" y="${Y(x.pct)}" width="${bw}" height="${Math.max(1, Y(0) - Y(x.pct))}" rx="5"/>
+      ${meta === null ? `<line class="mt1" x1="${x0 - 4}" x2="${x0 + bw + 4}" y1="${Y(x.meta)}" y2="${Y(x.meta)}"/>` : ""}
+      <text class="v" x="${X(i)}" y="${Y(x.pct) + (Y(0) - Y(x.pct) > 26 ? 18 : -7)}" text-anchor="middle"${Y(0) - Y(x.pct) > 26 ? ' style="fill:#fff"' : ""}>${x.pct}%</text>
+      <text class="xd" x="${X(i)}" y="${H - B + 18}" text-anchor="middle">${fData(x.em).slice(0, 5)}</text>
+      <text class="xt" x="${X(i)}" y="${H - B + 33}" text-anchor="middle">${esc(cut(x.tit.replace(/\s*\(exemplo\)/, ""), n > 8 ? 9 : 16))}</text></g>`; }).join("");
+  const mt = meta !== null ? `<line class="mt" x1="${L}" x2="${W - R}" y1="${Y(meta)}" y2="${Y(meta)}"/><text class="mtl" x="${W - R}" y="${Y(meta) - 6}" text-anchor="end">meta ${meta}%</text>` : "";
+  const nOk = xs.filter(x => x.pct >= x.meta).length;
+  return `<div class="gleg"><span><i class="ok"></i>Atingiu a meta</span><span><i class="bad"></i>Abaixo da meta</span><span><i class="mt"></i>Meta</span><span class="muted">${nOk} de ${n} ${n === 1 ? "sessão" : "sessões"} na meta${sess.length > n ? ` · últimas ${n}` : ""}</span></div>
+    <div class="grafx"><svg class="graf2" viewBox="0 0 ${W} ${H}" role="img" aria-label="Acerto de cada sessão, ${nOk} de ${n} na meta">${grid}<text class="yt" x="12" y="${T + h / 2}" transform="rotate(-90 12 ${T + h / 2})" text-anchor="middle">% de acerto</text>${barras}${mt}</svg></div>
+    <details style="margin-top:8px"><summary class="muted" style="cursor:pointer;font-size:13px">Ver em tabela</summary><table class="pres" style="margin-top:6px"><thead><tr><th>Data</th><th>Treinamento</th><th>Acerto</th><th>Meta</th></tr></thead><tbody>${sess.map(x => `<tr><td class="num">${fData(x.em)}</td><td>${esc(x.tit)}</td><td class="num"><b>${x.pct}%</b></td><td class="num">${x.meta}%</td></tr>`).join("")}</tbody></table></details>`;
+};
+A.setMetaEd = function(v){ UI().draft.meta = +v; UI().menu = null; };
+const _setUso52 = A.setUso; A.setUso = function(){ UI().menu = null; return _setUso52.apply(this, arguments); };
+/* Encerrar: números em caixas; Relatório depois de encerrar: aviso com a impressão */
+const _vEncerrar52 = vEncerrar;
+vEncerrar = function(){ const s = sessAtual(), h = _vEncerrar52(); if (!s) return h;
+  const lp = linhasPresenca(s, calc(s)), ass = lp.filter(l => l.sig).length;
+  const kp = `<div class="pg2-k sem n3"><div class="kx"><b class="num">${lp.length}</b><span>Presentes</span></div><div class="kx ok"><b class="num">${ass}</b><span>Assinaram</span></div><div class="kx${lp.length - ass ? " bad" : ""}"><b class="num">${lp.length - ass}</b><span>Faltam assinar</span></div></div>`;
+  return h.replace('Encerrar treinamento</h1></div>', 'Encerrar treinamento</h1></div>' + kp); };
+const _encerrar52 = A.encerrar; A.encerrar = function(m){ const s = sessAtual(); const r = _encerrar52.apply(this, arguments); if (s) UI().recemEnc = s.id; return r; };
+const _vRel52b = vRel;
+vRel = function(){ const u = UI(); let h = _vRel52b();
+  if (u.recemEnc && u.recemEnc === u.relId && (u.relAba || "sessao") === "sessao") h = h.replace('<div class="cx"><h2>O que fazer agora</h2>', `<div class="fimok"><div><b>Treinamento encerrado.</b><span>Aqui está o resumo da turma com as assinaturas. Toque em imprimir para gerar a evidência em PDF.</span></div><button class="btn pri" data-act="evidAbrir" data-arg="${u.relId}">${ICON.impr}Imprimir evidência</button></div><div class="cx"><h2>O que fazer agora</h2>`);
+  return h; };
+
+/* Configurações: escolhas em janela retrátil e liga/desliga como chave */
+segOnOff = function(act, v, rotOff, rotOn){ return `<button class="sw${v ? " on" : ""}" role="switch" aria-checked="${!!v}" data-act="${act}" data-arg="${v ? 0 : 1}"><i></i><span>${v ? rotOn : rotOff}</span></button>`; };
+const opsDeSelect = html => [...String(html).matchAll(/<option value="([^"]*)"(?: selected)?>([^<]*)<\/option>/g)].map(m => [m[1], m[2].replace(/&amp;/g, "&")]);
+const selDe = html => { const m = /<option value="([^"]*)" selected>/.exec(String(html)); return m ? m[1] : (opsDeSelect(html)[0] || [""])[0]; };
+const _vConfig52 = vConfig;
+vConfig = function(){
+  let h = _vConfig52();
+  h = h.replace(/<select id="cfg-tema" data-bindroot="temaCfg">([\s\S]*?)<\/select>/, (m, ops) => `<span class="ddw" id="cfg-tema" data-v="${esc(selDe(ops))}">${dd("dd-tema", "", selDe(ops), opsDeSelect(ops), "temaSet", "")}</span>`);
+  h = h.replace(/<select id="perfil" data-bindroot="perfil">([\s\S]*?)<\/select>/, (m, ops) => `<span class="ddw" id="perfil">${dd("dd-perfil", "", selDe(ops), opsDeSelect(ops), "perfilSet", "")}</span>`);
+  h = h.replace(/<select id="cfg-ir" data-cfgir="1">([\s\S]*?)<\/select>/, (m, ops) => `<span class="ddw" id="cfg-ir">${dd("dd-cfgir", "", selDe(ops), opsDeSelect(ops), "cfgIrSet", "")}</span>`);
+  return h;
+};
+Object.assign(A, {
+  temaSet(v){ UI().tema = v; UI().menu = null; },
+  perfilSet(v){ if (S.ui.nuvemConta) return; S.perfil = v; if (!pode()) UI().tela = "lista"; UI().menu = null; },
+  cfgIrSet(v){ UI().menu = null; A.cfgIr(v); }
+});
+const _avAba52 = A.avAba; A.avAba = function(k){ UI().menu = null; return _avAba52.apply(this, arguments); };
+/* Setores: Mês/Ano em janela retrátil */
+const _vSetores52 = vSetores;
+vSetores = function(){ const M = mesAtual(); return _vSetores52().replace(/<div class="seg" role="tablist" aria-label="Período">[\s\S]*?<\/div>/, `<span class="ddw sm">${dd("dd-dsmodo", "", M.ano ? "ano" : "mes", [["mes", "Por mês"], ["ano", "Por ano"]], "dsModo", "")}</span>`); };
+const _dsModo52 = A.dsModo; A.dsModo = function(){ UI().menu = null; return _dsModo52.apply(this, arguments); };
+/* ================= v2.5.0 · M01: telão em janela separada =================
+   O notebook fica no Controle; o telão abre noutra janela (2º monitor ou projetor).
+   As duas janelas conversam pelo BroadcastChannel "efcquiz-telao" (mesmo aparelho, sem internet).
+   A janela do telão só mostra: não grava, não fala com a nuvem e não move as fases.
+   Os botões do telão (Próxima, Encerrar tempo...) são executados pela janela do controle. */
+const TJ_QS = new URLSearchParams(location.search);
+const TELJ = {
+  modo: TJ_QS.has("telao"),             /* esta janela É o telão */
+  sidIni: TJ_QS.get("telao") || "",
+  canal: null, win: null, sid: "", vivo: 0, ultimo: 0, revEnv: -1, tEnv: 0, boot: false,
+  cheiaDispensada: false, aviso: "", estavaVivo: false, outraTela: false
+};
+try { TELJ.canal = new BroadcastChannel("efcquiz-telao"); } catch(e) { TELJ.canal = null; }
+function tjPost(m){ try { if (TELJ.canal) TELJ.canal.postMessage(m); } catch(e) {} }
+const tjVivo = () => !TELJ.modo && TELJ.vivo && (Date.now() - TELJ.vivo) < 3500;
+const tjEstreita = () => window.matchMedia && matchMedia("(max-width: 760px)").matches;
+const tjExtendida = () => !!(window.screen && window.screen.isExtended);
+function tjUrl(sid){ return location.href.split("#")[0].split("?")[0] + "?telao=" + encodeURIComponent(sid || ""); }
+
+ICON.ext = SV('<path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>');
+ICON.chev = SV('<path d="M6 9l6 6 6-6"/>', 2.2);
+ICON.frente = SV('<rect x="3" y="7" width="13" height="11" rx="2"/><path d="M8 7V5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-4"/>');
+
+/* ---------------- janela do CONTROLE (notebook) ---------------- */
+function tjSessaoParaEnviar(){
+  const s = sessById(TELJ.sid) || sessAtual(); if (!s) return null;
+  const c = Object.assign({}, s); delete c.assin; delete c.evid;
+  if (c.foto) c.foto = null;
+  return c;
+}
+function tjEnviar(forca){
+  if (TELJ.modo || !TELJ.canal || !S) return;
+  if (!forca && !tjVivo()) return;
+  if (!forca && S.rev === TELJ.revEnv && Date.now() - TELJ.tEnv < 1000) return;
+  const s = tjSessaoParaEnviar(); if (!s) { tjPost({t: "sem"}); return; }
+  const ids = new Set(s.part.map(p => p.pessoaId).filter(Boolean));
+  tjPost({t: "estado", s, cfg: S.config, tema: UI().tema, pessoas: S.pessoas.filter(pe => ids.has(pe.id)), rev: S.rev});
+  TELJ.revEnv = S.rev; TELJ.tEnv = Date.now();
+}
+function tjMoverParaOutraTela(w){
+  if (!w || !tjExtendida() || !("getScreenDetails" in window)) return;
+  window.getScreenDetails().then(d => {
+    const alvo = (d.screens || []).find(sc => sc !== d.currentScreen && !sc.isPrimary) || (d.screens || []).find(sc => sc !== d.currentScreen);
+    if (!alvo) return;
+    try { w.moveTo(alvo.availLeft, alvo.availTop); w.resizeTo(alvo.availWidth, alvo.availHeight); TELJ.outraTela = true; } catch(e) {}
+  }).catch(() => {});
+}
+Object.assign(A, {
+  telaoJanela(id){
+    const s = sessById(id) || sessAtual(); if (s) { UI().sessId = s.id; TELJ.sid = s.id; }
+    if (tjEstreita() || !TELJ.canal){ UI().view = "tel"; return; }   /* celular: telão na própria tela */
+    let w = null;
+    try { w = window.open(tjUrl(TELJ.sid), "efcquiz-telao", "popup,width=1280,height=720"); } catch(e) { w = null; }
+    if (!w){ TELJ.aviso = "O navegador bloqueou a janela do telão. Permita janelas pop-up para este site ou escolha \"Nesta tela\"."; return; }
+    TELJ.aviso = ""; TELJ.win = w; TELJ.vivo = Date.now();
+    if (UI().view === "tel"){ UI().view = "resp"; UI().tela = "controle"; }
+    try { w.focus(); } catch(e) {}
+    tjMoverParaOutraTela(w);
+  },
+  telaoFrente(){ if (TELJ.win && !TELJ.win.closed){ try { TELJ.win.focus(); } catch(e) {} } else tjPost({t: "frente"}); return "norender"; },
+  telaoFechar(){ tjPost({t: "fechar"}); if (TELJ.win && !TELJ.win.closed){ try { TELJ.win.close(); } catch(e) {} } TELJ.vivo = 0; TELJ.win = null; },
+  telaoAvisoOk(){ TELJ.aviso = ""; }
+});
+/* botão do cabeçalho do Controle: Abrir telão (outra janela) + ▾ com "Nesta tela" */
+function tjBotaoControle(s){
+  if (tjVivo()) return `<span class="pg2-tag st tjon">Telão na outra janela</span><button class="pg2-ib" data-act="telaoFrente" aria-label="Mostrar a janela do telão" title="Mostrar a janela do telão">${ICON.frente}</button><button class="pg2-ib" data-act="telaoFechar" aria-label="Fechar o telão" title="Fechar o telão">${ICON.x}</button>`;
+  const ab = UI().menu === "telOp", ext = tjExtendida();
+  return `<span class="mnu tjg"><button class="btn" data-act="telaoJanela" data-arg="${s.id}" title="${ext ? "Abre o telão no 2º monitor ou projetor" : "Abre o telão numa janela separada"}">${ICON.telao}<span class="tx">Abrir telão</span></button><button class="btn ic" data-act="menu" data-arg="telOp" aria-expanded="${ab}" aria-label="Onde abrir o telão" title="Onde abrir o telão">${ICON.chev}</button>${ab ? `<span class="pop" role="menu">
+    <button role="menuitem" data-act="telaoJanela" data-arg="${s.id}">${ICON.ext}<span><b>Em outra janela</b><small>${ext ? "Vai para o 2º monitor ou projetor" : "Arraste a janela para o projetor"}</small></span></button>
+    <button role="menuitem" data-act="view" data-arg="tel">${ICON.telao}<span><b>Nesta tela</b><small>O notebook vira o telão</small></span></button></span>` : ""}</span>`;
+}
+const _vControle53 = vControle;
+vControle = function(){
+  let h = _vControle53.apply(this, arguments); const s = sessAtual(); if (!s) return h;
+  h = h.replace(/<button class="btn[^"]*" data-act="view" data-arg="tel">[\s\S]*?<\/button>/, () => tjBotaoControle(s));
+  if (TELJ.aviso) h += `<div class="tjav" role="alert"><span>${esc(TELJ.aviso)}</span><button class="btn sm" data-act="telaoAvisoOk">Entendi</button></div>`;
+  return h;
+};
+
+/* ---------------- telão (nos dois casos) ---------------- */
+const _vTelao53 = vTelao;
+vTelao = function(){
+  let h = _vTelao53.apply(this, arguments);
+  if (TELJ.modo){
+    /* janela do telão: sem Voltar e sem "Controle no celular"; X fecha a janela */
+    h = h.replace(/<button class="btn sm vtl"[^>]*>[\s\S]*?<\/button>/, "");
+    h = h.replace(/<button class="btn" data-act="abrirControle"[^>]*>[^<]*<\/button>/, "");
+    h = h.replace(/(<span class="ferr"[^>]*>)/, `$1`).replace(/(<button class="ic-btn" data-act="telaCheia"[^>]*>[\s\S]*?<\/button>)/, `$1<button class="ic-btn" data-act="tjFechar" aria-label="Fechar o telão" title="Fechar o telão">${ICON.x}</button>`);
+    return h + tjOverlay();
+  }
+  if (!UI().telDesafio && !tjEstreita() && TELJ.canal)
+    h = h.replace(/(<button class="ic-btn" data-act="telaCheia"[^>]*>[\s\S]*?<\/button>)/, `$1<button class="ic-btn" data-act="telaoJanela" data-arg="${UI().sessId || ""}" aria-label="Levar o telão para outra janela" title="Levar para outra janela (2º monitor ou projetor)">${ICON.ext}</button>`);
+  return h;
+};
+function tjOverlay(){
+  if (!TELJ.modo) return "";
+  const semControle = TELJ.boot && TELJ.ultimo && (Date.now() - TELJ.ultimo) > 4000;
+  if (semControle) return `<div class="tj-ov" role="dialog" aria-modal="true" aria-label="Sem ligação com o controle"><div class="tj-cx"><span class="tj-ic">${ICON.telao}</span><h2>Esperando o controle</h2><p>Deixe o EFCquiz aberto no notebook, na tela de Controle da sessão. O telão volta sozinho.</p></div></div>`;
+  if (document.fullscreenElement || TELJ.cheiaDispensada) return "";
+  return `<div class="tj-ov" role="dialog" aria-modal="true" aria-label="Pôr o telão em tela cheia"><div class="tj-cx"><span class="tj-ic">${ICON.tela}</span><h2>Telão pronto</h2><p>Se esta janela não está no projetor, arraste-a para lá. Depois toque no botão.</p><button class="btn pri lg" data-act="tjCheia">${ICON.tela}Pôr em tela cheia</button><button class="btn sm tj-nao" data-act="tjAgoraNao">Agora não</button></div></div>`;
+}
+
+/* ---------------- janela do TELÃO ---------------- */
+if (TELJ.modo){
+  document.title = "EFCquiz · Telão";
+  document.documentElement.setAttribute("data-telao-janela", "1");
+  persistir = async function(){ gravaTimer = 0; };          /* nunca grava: o controle é o dono dos dados */
+  nvIniciar = function(){ return Promise.resolve(); };      /* nem fala com a nuvem */
+  nvSincronizar = function(){};
+  gate = function(){ return false; };
+  const LOCAL = new Set(["som", "projetor", "telaCheia", "menu", "tjCheia", "tjAgoraNao", "tjFechar", "zoomFechar", "confNao"]);
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-act]"); if (!b || b.disabled) return;
+    const act = b.dataset.act; if (LOCAL.has(act)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (act === "confSim"){ const c = UI().conf; UI().conf = null; if (c) tjPost({t: "act", act: c.act, arg: c.arg || "", ok: true}); save(); render(); return; }
+    tjPost({t: "act", act, arg: b.dataset.arg || ""});
+  }, true);
+  Object.assign(A, {
+    tjCheia(){ TELJ.cheiaDispensada = true; const r = document.documentElement; if (r.requestFullscreen && !document.fullscreenElement) r.requestFullscreen().catch(() => {}); try { tocarSom("nada"); } catch(e) {} },
+    tjAgoraNao(){ TELJ.cheiaDispensada = true; },
+    tjFechar(){ tjPost({t: "tchau"}); window.close(); return "norender"; }
+  });
+  if (TELJ.canal) TELJ.canal.onmessage = ev => {
+    const m = ev.data || {}; if (!S) return;
+    if (m.t === "estado" && m.s){
+      TELJ.ultimo = Date.now();
+      const i = S.sessoes.findIndex(x => x.id === m.s.id); if (i >= 0) S.sessoes[i] = m.s; else S.sessoes.push(m.s);
+      if (m.cfg) S.config = m.cfg;
+      if (m.tema !== undefined) UI().tema = m.tema;
+      (m.pessoas || []).forEach(pe => { const k = S.pessoas.findIndex(x => x.id === pe.id); if (k >= 0) S.pessoas[k] = pe; else S.pessoas.push(pe); });
+      UI().sessId = m.s.id; UI().view = "tel"; UI().telDesafio = false;
+      save();
+    } else if (m.t === "sem"){ TELJ.ultimo = Date.now(); }
+    else if (m.t === "conf" && m.conf){ UI().conf = m.conf; save(); }   /* confirmação aparece onde a pessoa clicou */
+    else if (m.t === "fechar"){ window.close(); }
+    else if (m.t === "frente"){ try { window.focus(); } catch(e) {} }
+    else if (m.t === "fechou"){ TELJ.ultimo = 1; save(); }
+  };
+  window.addEventListener("pagehide", () => tjPost({t: "tchau"}));
+  document.addEventListener("fullscreenchange", () => { save(); });
+  let tjBip = "", tjVivoT = 0, tjOvAnt = "";
+  tick = function(){
+    if (!S) return;
+    if (!TELJ.boot){
+      TELJ.boot = true; TELJ.ultimo = Date.now();
+      const u = UI(); u.view = "tel"; u.telDesafio = false; u.conf = null; u.menu = null; u.zoom = null; u.verAss = null;
+      if (TELJ.sidIni) u.sessId = TELJ.sidIni;
+      tjPost({t: "oi"}); save();
+    }
+    if (Date.now() - tjVivoT > 1000){ tjVivoT = Date.now(); tjPost({t: "vivo"}); }
+    /* bip dos últimos 5 segundos (o controle não toca som quando o telão está noutra janela) */
+    const s = sessAtual();
+    if (s && s.modo === "aovivo" && s.status === "andamento" && s.fase.etapa === "pergunta"){
+      const it = s.itens[s.fase.idx]; if (it){ const rest = Math.ceil((tmpS(s, it) - (now() - s.fase.inicio))/1000), k = s.id + it.id + rest;
+        if (rest <= 5 && rest >= 1 && tjBip !== k){ tjBip = k; tocarSom("bip"); } }
+    }
+    const ov = tjOverlay().slice(0, 60); if (ov !== tjOvAnt){ tjOvAnt = ov; save(); }
+    if (S.rev !== lastRev) render(); else tickTimers();
+  };
+} else {
+  /* janela do controle: responde ao telão e manda o estado */
+  if (TELJ.canal) TELJ.canal.onmessage = ev => {
+    const m = ev.data || {}; if (!S) return;
+    if (m.t === "oi" || m.t === "vivo"){ const era = tjVivo(); TELJ.vivo = Date.now(); if (m.t === "oi" || !era){ tjEnviar(true); if (!era){ save(); render(); } } }
+    else if (m.t === "tchau"){ TELJ.vivo = 0; TELJ.win = null; save(); render(); }
+    else if (m.t === "act" && A[m.act]){
+      UI().menu = null; const antes = UI().conf; const r = A[m.act](m.arg, !!m.ok, null);
+      if (UI().conf && UI().conf !== antes){ tjPost({t: "conf", conf: UI().conf}); UI().conf = antes; }
+      save(); if (r !== "norender") render(); tjEnviar(true); }
+  };
+  window.addEventListener("pagehide", () => tjPost({t: "fechou"}));
+  const _tick53 = tick;
+  tick = function(){
+    const r = _tick53();
+    try {
+      const v = !!tjVivo(); if (v !== TELJ.estavaVivo){ TELJ.estavaVivo = v; if (!v) TELJ.win = null; save(); }
+      tjEnviar(false);
+    } catch(e) {}
+    return r;
+  };
+}
+
+/* =====================================================================
+   v2.4.1 · iPhone e participante
+   - Entrar e cadastro com limite de tempo e aviso na tela ("Procurando…")
+   - busca interrompida não deixa o Entrar travado
+   - aviso de erro junto do botão e do campo que falta
+   - "Seu setor" em janela retrátil
+   - ícones do menu com traço arredondado
+   ===================================================================== */
+let NV_LIMITE = 12000;
+const NV_MSG_LENTO = "Não conectou com a nuvem. Confira a internet e toque de novo.";
+function nvCorrida(pr, ms){ return Promise.race([pr, new Promise((_, no) => setTimeout(() => { const e = new Error("tempo esgotado"); e.code = "timeout"; no(e); }, ms || NV_LIMITE))]); }
+const _nvBuscarChave241 = nvBuscarChave;
+nvBuscarChave = function(k){ return nvCorrida(_nvBuscarChave241(k)).catch(() => ({erro: navigator.onLine === false ? "Sem internet. Ligue os dados móveis ou o Wi-Fi e tente de novo." : NV_MSG_LENTO})); };
+const _nvEnviarPart241 = nvEnviarPart;
+nvEnviarPart = function(s, p){ return nvCorrida(_nvEnviarPart241(s, p)); };
+const _nvErroTexto241 = nvErroTexto;
+nvErroTexto = function(e){ return e && e.code === "timeout" ? NV_MSG_LENTO : _nvErroTexto241(e); };
+/* marca de "procurando"/"enviando" velha (aba fechada no meio) não trava mais o botão */
+const nvVelho = t => !(t && Date.now() - t < NV_LIMITE + 3000);
+const _joinChave241 = A.joinChave;
+A.joinChave = function(){ const j = UI().join || {}; if (j.procurando && nvVelho(j.procT)) j.procurando = false;
+  const antes = !!j.procurando, r = _joinChave241.apply(this, arguments); const j2 = UI().join || {}; if (!antes && j2.procurando) j2.procT = Date.now(); return r; };
+const _joinFim241 = A.joinFim;
+A.joinFim = function(){ const j = UI().join || {}; if (j.enviando && nvVelho(j.envT)) j.enviando = false;
+  const antes = !!j.enviando, r = _joinFim241.apply(this, arguments); const j2 = UI().join || {}; if (!antes && j2.enviando) j2.envT = Date.now(); return r; };
+A.joinSetorSel = function(v){ const j = UI().join; if (!j) return; j.setorSel = v; j.setor = v === "__novo" ? (j.setorNovo || "").trim().replace(/\s+/g, " ") : v; UI().menu = null; };
+const _vJoin241 = vJoin;
+vJoin = function(){
+  let h = _vJoin241(); const u = UI(), j = u.join || {};
+  if (j.procurando) h = h.replace('<button class="btn pri lg" data-act="joinChave">Continuar</button>', '<button class="btn pri lg ocupado" data-act="joinChave" aria-busy="true"><span class="gira" aria-hidden="true"></span>Procurando o treinamento…</button>');
+  /* setor: janela retrátil no lugar da lista do aparelho */
+  h = h.replace(/<label class="field"><span>Seu setor<\/span><select id="j-setor"[\s\S]*?<\/select><\/label>/, () => {
+    const s = S.sessoes.find(x => x.chave === j.chave && x.status !== "encerrada");
+    const ops = [["", "Escolha na lista…"], ...((s && s.setores) || S.config.setores).map(st => [st, st]), ["__novo", "Outro setor (digitar)…"]];
+    return dd("dd-jsetor", "Seu setor", j.setorSel || "", ops, "joinSetorSel", "");
+  });
+  /* aviso de erro junto do botão que a pessoa tocou, e o campo vazio marcado */
+  const err = u.erroJoin ? `<div class="msg">${esc(u.erroJoin)}</div>` : "";
+  if (err && h.startsWith(err)){
+    h = h.slice(err.length); const i = h.indexOf('<button class="btn pri lg');
+    const aviso = err.replace('class="msg"', 'class="msg" role="alert"');
+    h = i >= 0 ? h.slice(0, i) + aviso + h.slice(i) : aviso + h;
+    if (/nome|sobrenome/i.test(u.erroJoin)){
+      if (!(j.nome || "").trim()) h = h.replace('id="j-nome"', 'id="j-nome" class="falta" aria-invalid="true"');
+      if (!(j.sobrenome || "").trim()) h = h.replace('id="j-sob"', 'id="j-sob" class="falta" aria-invalid="true"');
+    }
+  }
+  return h;
+};
+/* Controle no PC: linha do tempo e próximo passo numa coluna, "Quem entrou" na outra */
+function arrumaControle241(){
+  const k = document.querySelector(".stack > .pg2-k.ctl"); if (!k) return;
+  const st = k.parentElement, so = st.querySelector(":scope > .solid"), pa = st.querySelector(":scope > .passo"), pn = st.querySelector(":scope > section.panel");
+  if (!so || !pa || !pn) return;
+  const esq = document.createElement("div"); esq.className = "ctl-esq"; so.before(esq); esq.append(so, pa); esq.after(pn); st.classList.add("ctl2");
+}
+const _render241 = render;
+render = function(){ const r = _render241.apply(this, arguments); try { arrumaControle241(); } catch(e) {} return r; };
+const _avancar241 = A.avancar;
+A.avancar = function(){ if (!sessAtual()) return "norender"; return _avancar241.apply(this, arguments); };
+/* menu: ícones com traço arredondado (antes eram de ponta quadrada) */
+const SVR = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+Object.assign(NAVI, {
+  trein: SVR('<path d="M9.5 6.5h10M9.5 12h10M9.5 17.5h10"/><circle cx="5" cy="6.5" r="1" fill="currentColor"/><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="5" cy="17.5" r="1" fill="currentColor"/>'),
+  ref: SVR('<path d="M19.5 11a7.5 7.5 0 0 0-13.4-4.1L4.5 8.5"/><path d="M4.5 4.5v4h4"/><path d="M4.5 13a7.5 7.5 0 0 0 13.4 4.1l1.6-1.6"/><path d="M19.5 19.5v-4h-4"/>'),
+  msg: SVR('<path d="M6 5h12a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 18 17h-7l-4.5 3.5V17H6a2.5 2.5 0 0 1-2.5-2.5v-7A2.5 2.5 0 0 1 6 5Z"/>'),
+  enc: SVR('<circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.3l2.4 2.4 4.6-5"/>'),
+  rel: SVR('<path d="M4 20h16"/><rect x="5.5" y="11" width="3" height="6" rx="1.2"/><rect x="10.5" y="6" width="3" height="11" rx="1.2"/><rect x="15.5" y="13" width="3" height="4" rx="1.2"/>'),
+  tel: SVR('<rect x="3" y="4.5" width="18" height="12" rx="2.5"/><path d="M8.5 20h7M12 16.5V20"/>'),
+  par: SVR('<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/>'),
+  conf: SVR('<path d="M12 3.5l7 2.6v5.4c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6.1Z"/><path d="M9 12l2.2 2.2L15.2 10"/>'),
+  cfg: SVR('<path d="M4 7h8.5M17.5 7H20M4 17h2.5M11.5 17H20"/><circle cx="15" cy="7" r="2.3"/><circle cx="9" cy="17" r="2.3"/>'),
+  mais: SVR('<circle cx="12" cy="5.5" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="18.5" r="1.3" fill="currentColor"/>')
+});
+
+/* ===== v2.4.2 · toque intencional =====
+   Quando uma pergunta nova aparece, o toque que ainda vinha do botão anterior ("Continuar", dedo apoiado, toque duplo)
+   caía numa alternativa e a resposta era enviada sem querer. Agora, nos primeiros TOQUE_MS depois que a pergunta
+   aparece, tocar numa alternativa (ou numa etapa de ordenar) não faz nada; as alternativas ficam mais claras e "acordam".
+   O tempo de resposta continua contando desde que a pergunta apareceu. */
+let TOQUE_MS = 400;
+let QV = {k: "", t: 0}, QV_TM = 0;
+const SEL_ALT = '.phone .opts1 [data-act="responder"],.phone .opts1 [data-act="preEscolher"],.phone .ord [data-act="ordTap"]';
+function qChave242(){
+  const a = document.querySelector(SEL_ALT); if (!a) return "";
+  const box = a.closest(".opts1,.ord"), q = document.querySelector(".phone .q");
+  return (S.eu ? S.eu.pid : "") + "§" + (q ? q.textContent : "") + "§" + (box ? box.textContent : "");
+}
+function toqueRestante242(){ return QV.k ? Math.max(0, TOQUE_MS - (performance.now() - QV.t)) : 0; }
+function marcaToque242(){
+  const k = qChave242();
+  if (!k){ QV = {k: "", t: 0}; return; }
+  if (k !== QV.k) QV = {k, t: performance.now()};
+  const rest = toqueRestante242(), box = document.querySelector(".phone .opts1,.phone .ord");
+  clearTimeout(QV_TM);
+  if (box && rest > 0){
+    box.classList.add("trava");
+    QV_TM = setTimeout(() => { document.querySelectorAll(".phone .opts1.trava,.phone .ord.trava").forEach(b => b.classList.remove("trava")); }, rest + 20);
+  }
+}
+const _render242 = render;
+render = function(){ const r = _render242.apply(this, arguments); try { marcaToque242(); } catch(e) {} return r; };
+document.addEventListener("click", e => {
+  const b = e.target && e.target.closest && e.target.closest(SEL_ALT);
+  if (b && toqueRestante242() > 0){ e.stopImmediatePropagation(); e.preventDefault(); }
+}, true);
+
+/* ================= v2.6.0 · M06: pré-teste e pós-teste com ganho =================
+   A sessão ganha um bloco "Pré-teste" logo depois da pergunta de teste: as perguntas de AVALIAÇÃO do treinamento, copiadas
+   (id "pre-…", it.pre = true). O pré não vale nota, não entra em nenhum número e o gabarito nunca é mostrado nem enviado
+   aos celulares. O pós-teste são as próprias perguntas do treinamento. Ganho = nota do pós − acerto do pré (pontos percentuais). */
+const _sessaoNova260 = sessaoNova;
+sessaoNova = function(T, o){
+  const s = _sessaoNova260(T, o);
+  if (o.prePos && !o.reforco){
+    const qs = s.itens.filter(it => isQ(it) && !it.ensaio && it.uso === "avaliacao");
+    if (qs.length){
+      const pre = qs.map(it => Object.assign(clone(it), {id: "pre-" + it.id, pre: true, preDe: it.id, uso: "avaliacao"}));
+      const ini = {id: "pre-ini", tipo: "explicacao", pre: true, enunciado: "Pré-teste", texto: "Responda o que souber. Não vale nota e o gabarito só aparece no fim do treinamento."};
+      const fim = {id: "pre-fim", tipo: "explicacao", pre: true, enunciado: "Agora, o treinamento", texto: "Depois da explicação, as perguntas voltam como pós-teste e valem nota."};
+      s.itens.splice(1, 0, ini, ...pre, fim); s.prePos = true;
+    }
+  }
+  return s;
+};
+const temAval260 = T => !!(T && T.itens.some(it => isQ(it) && it.uso === "avaliacao"));
+function blocoPrePos(o){
+  if (o.reforco) return "";
+  const T = S.treinamentos.find(t => t.id === o.tId); if (!temAval260(T)) return "";
+  return `<label class="chk"><input type="checkbox" id="n-prepos" data-nchk="prePos" ${o.prePos ? "checked" : ""}>Pré-teste e pós-teste (mede o ganho de aprendizado)</label>${o.prePos ? `<p class="aj" style="margin:0">As perguntas de avaliação são feitas antes e depois do treinamento. O pré não vale nota e não mostra o gabarito. O relatório mostra o ganho de cada pessoa e da turma.</p>` : ""}`;
+}
+
+/* ganho por pessoa e da turma (só quando o pré e o pós já foram liberados) */
+function ganhoDe(s, p, c){
+  if (!s.prePos) return null;
+  if (s.remota){ const r = p.res; return r && r.pre != null ? {pre: r.pre, pos: r.nota, ganho: r.ganho} : null; }
+  const lib = liberados(s), pres = s.itens.filter((it, i) => it.pre && isQ(it) && lib.has(i));
+  c = c || calc(s); const row = c.rows.find(x => x.p.id === p.id);
+  if (!pres.length || !c.aval.length || !row) return null;
+  if (!pres.some(it => s.resp[p.id + "|" + it.id])) return null;
+  const ac = pres.filter(it => isCorrect(it, s.resp[p.id + "|" + it.id])).length, pre = Math.round(ac / pres.length * 100);
+  return {pre, pos: row.nota, ganho: row.nota - pre};
+}
+function resGanho(s, p){ try { const g = ganhoDe(s, p); return g ? {pre: g.pre, ganho: g.ganho} : {}; } catch(e) { return {}; } }
+function ganhoSessao(s){
+  if (!s.prePos) return null;
+  const c = calc(s), linhas = c.rows.map(r => ({p: r.p, nome: s.equipe === "um" ? r.p.nome : r.p.nome, g: ganhoDe(s, r.p, c)}));
+  const pares = linhas.filter(l => l.g), med = k => pares.length ? Math.round(pares.reduce((a, l) => a + l.g[k], 0) / pares.length) : 0;
+  return {linhas, pares: pares.length, sem: linhas.length - pares.length, pre: med("pre"), pos: med("pos"), ganho: med("ganho"),
+          subiram: pares.filter(l => l.g.ganho > 0).length, iguais: pares.filter(l => l.g.ganho === 0).length, desceram: pares.filter(l => l.g.ganho < 0).length};
+}
+const fGanho = n => (n > 0 ? "+" : n < 0 ? "−" : "") + Math.abs(n) + " p.p.";
+
+/* celular do participante: pré sem gabarito */
+const _feedback260 = feedback;
+feedback = function(it, r, s, ritmo, p){
+  if (!it.pre) return _feedback260.apply(this, arguments);
+  return `<div class="res mut"><div class="faixa">${r ? ICON.ok : ICON.traco}<span><span class="v">${r ? "Resposta registrada" : "Sem resposta"}</span><span class="s2">Pré-teste: não vale nota.</span></span></div>
+    <div class="bl"><span class="lbl">Gabarito</span><span>Você vê as respostas certas no pós-teste, depois do treinamento.</span></div></div>
+    ${ritmo ? `<button class="btn pri lg" data-act="ritmoProx">Continuar</button>` : `<p class="muted" style="margin:0">Aguarde a próxima pergunta.</p>`}`;
+};
+/* telão: pré sem gabarito */
+const _telResultado260 = telResultado;
+telResultado = function(s, it){
+  if (!it.pre) return _telResultado260.apply(this, arguments);
+  const n = s.part.filter(p => s.resp[p.id + "|" + it.id]).length;
+  return `<div class="row">${rotUso(it)}<span class="muted num">${n} de ${s.part.length} responderam</span></div>
+    <p class="mid">${esc(it.enunciado)}</p>
+    <div class="solid" style="font-size:calc(18px*var(--esc));border-left:3px solid var(--accent)"><span class="lbl">Pré-teste</span><br>As respostas ficaram guardadas. O gabarito e o ganho da turma aparecem no fim do treinamento.</div>`;
+};
+function blocoGanhoTelao(s){
+  const g = ganhoSessao(s); if (!g || !g.pares) return "";
+  return `<div class="gnh"><span class="lbl">Pré-teste e pós-teste · ganho da turma</span>
+    <div class="gnh-r"><div><b class="num">${g.pre}%</b><span>Pré</span></div><i aria-hidden="true">→</i><div><b class="num">${g.pos}%</b><span>Pós</span></div><div class="gg"><b class="num">${fGanho(g.ganho)}</b><span>Ganho</span></div></div>
+    <p class="muted" style="margin:0">${g.subiram} de ${g.pares} ${g.pares === 1 ? "pessoa melhorou" : "pessoas melhoraram"}.</p></div>`;
+}
+const _telFim260 = telFim;
+telFim = function(s){ return _telFim260(s) + blocoGanhoTelao(s); };
+/* celular: o ganho da própria pessoa no resultado */
+const _meuResultado260 = meuResultado;
+meuResultado = function(s, p){
+  const h = _meuResultado260(s, p); if (!h || !s.prePos) return h;
+  const g = ganhoDe(s, p); if (!g) return h;
+  return h.replace(/(<div class="kv"[^>]*>[\s\S]*?<\/div>\s*<\/div>)/, `$1<div class="gnh sm"><span class="lbl">Seu ganho</span><div class="gnh-r"><div><b class="num">${g.pre}%</b><span>Pré</span></div><i aria-hidden="true">→</i><div><b class="num">${g.pos}%</b><span>Pós</span></div><div class="gg"><b class="num">${fGanho(g.ganho)}</b><span>Ganho</span></div></div></div>`);
+};
+/* relatório: painel do ganho */
+function painelGanho(s){
+  const g = ganhoSessao(s); if (!g) return "";
+  if (!g.pares) return `<section class="panel"><div class="bd"><p class="muted" style="margin:0"><b>Pré-teste e pós-teste.</b> O ganho aparece quando as perguntas do pós-teste forem liberadas e houver pessoas com os dois testes.</p></div></section>`;
+  const cor = n => n > 0 ? "var(--ok)" : n < 0 ? "var(--bad)" : "var(--muted)";
+  const linhas = [...g.linhas].sort((a, b) => (b.g ? b.g.ganho : -999) - (a.g ? a.g.ganho : -999));
+  return `<section class="panel gpn"><div class="hd"><h2>Pré-teste e pós-teste · ganho de aprendizado</h2></div><div class="bd">
+    <div class="gnh-r big"><div><b class="num">${g.pre}%</b><span>Pré · média</span></div><i aria-hidden="true">→</i><div><b class="num">${g.pos}%</b><span>Pós · média</span></div><div class="gg" style="--c:${cor(g.ganho)}"><b class="num">${fGanho(g.ganho)}</b><span>Ganho médio</span></div></div>
+    <p class="muted" style="margin:8px 0 12px;font-size:14px">${g.pares} ${g.pares === 1 ? "pessoa com" : "pessoas com"} os dois testes · ${g.subiram} melhoraram, ${g.iguais} ficaram iguais, ${g.desceram} pioraram${g.sem ? ` · ${g.sem} sem par (fora da média)` : ""}. Ganho = nota do pós − acerto do pré, em pontos percentuais.</p>
+    <div class="tblwrap"><table class="tb gt"><thead><tr><th class="nm">Pessoa</th><th>Pré</th><th>Pós</th><th>Ganho</th></tr></thead><tbody>${linhas.map(l => l.g
+      ? `<tr><td class="nm">${esc(l.nome)}</td><td class="num">${l.g.pre}%</td><td class="num">${l.g.pos}%</td><td class="num" style="color:${cor(l.g.ganho)};font-weight:800">${fGanho(l.g.ganho)}</td></tr>`
+      : `<tr><td class="nm">${esc(l.nome)}</td><td colspan="3" class="muted">sem par: faltou o pré ou o pós</td></tr>`).join("")}</tbody></table></div></div></section>`;
+}
+const _vRel260 = vRel;
+vRel = function(){
+  let h = _vRel260(); const s = sessById(UI().relId);
+  if (!s || !s.prePos || (UI().relAba || "sessao") !== "sessao" || !h.includes('<section class="panel')) return h;
+  const i = h.indexOf('<section class="panel'); return h.slice(0, i) + painelGanho(s) + h.slice(i);
+};
+/* PDF de evidência: folha do ganho */
+const fGP = n => (n > 0 ? "+" : n < 0 ? "-" : "") + Math.abs(n) + " p.p.";
+function pdfGanho(doc, txt, s, g, X, W, y, cabe, nova){
+  const roxo = [124, 58, 237], tinta = [26, 26, 38], cinza = [95, 95, 115], linha = [216, 216, 224], suave = [241, 235, 253], okc = [31, 107, 80], badc = [143, 53, 53];
+  txt("Pré-teste e pós-teste", X, y + 2, {s: 10, b: true}); y += 6;
+  const caixas = [[g.pre + "%", "Pré · média"], [g.pos + "%", "Pós · média"], [fGP(g.ganho), "Ganho médio"], [`${g.pares} de ${g.pares + g.sem}`, "Pessoas com os dois testes"]], nw = (W - 2 * X - 9) / 4;
+  caixas.forEach(([v, r], i) => { const cx = X + i * (nw + 3); doc.setDrawColor(...linha); doc.roundedRect(cx, y, nw, 16, 1.6, 1.6); txt(v, cx + nw / 2, y + 8, {s: 14, b: true, al: "center", c: i === 2 ? (g.ganho > 0 ? okc : g.ganho < 0 ? badc : tinta) : tinta}); txt(r, cx + nw / 2, y + 13, {s: 6.8, c: cinza, al: "center"}); });
+  y += 21;
+  txt(`${g.subiram} melhoraram · ${g.iguais} ficaram iguais · ${g.desceram} pioraram. Ganho = nota do pós menos o acerto do pré, em pontos percentuais. O pré não vale nota.`, X, y + 1, {s: 7, c: cinza}); y += 7;
+  const cols = [["Nº", 10, "c"], ["Nome completo", 100, "l"], ["Pré", 25, "c"], ["Pós", 25, "c"], ["Ganho", W - 2 * X - 160, "c"]];
+  const cabT = () => { doc.setFillColor(...suave); doc.rect(X, y, W - 2 * X, 7, "F"); let x = X; cols.forEach(([t, w, al]) => { txt(t.toUpperCase(), al === "c" ? x + w / 2 : x + 2, y + 4.7, {s: 6.6, b: true, c: [59, 29, 128], al: al === "c" ? "center" : undefined}); x += w; }); y += 7; };
+  cabT(); const RH = 7;
+  [...g.linhas].sort((a, b) => (b.g ? b.g.ganho : -999) - (a.g ? a.g.ganho : -999)).forEach((l, i) => {
+    if (!cabe(RH)){ nova("Pré-teste e pós-teste · continuação"); cabT(); }
+    if (i % 2){ doc.setFillColor(250, 250, 252); doc.rect(X, y, W - 2 * X, RH, "F"); } doc.setDrawColor(...linha); doc.line(X, y + RH, W - X, y + RH);
+    const ym = y + RH / 2 + 1.2; let x = X;
+    const vals = l.g ? [String(i + 1), l.nome, l.g.pre + "%", l.g.pos + "%", fGP(l.g.ganho)] : [String(i + 1), l.nome, "-", "-", "sem par"];
+    vals.forEach((v, k) => { const [, w, al] = cols[k]; txt(k === 1 ? doc.splitTextToSize(safe(v), w - 3)[0] : v, al === "c" ? x + w / 2 : x + 2, ym, {s: 8.4, b: k === 1 || k === 4, al: al === "c" ? "center" : undefined, c: k === 4 && l.g ? (l.g.ganho > 0 ? okc : l.g.ganho < 0 ? badc : tinta) : tinta}); x += w; });
+    y += RH; });
+  return y + 6;
+}
 </script>
 </body>
 </html>
