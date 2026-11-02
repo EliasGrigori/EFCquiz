@@ -1845,6 +1845,25 @@ table.hm td .av,table.hm td .av.xs,table.hm td .av.sm{width:30px;height:30px}
 .gpn .gt td,.gpn .gt th{text-align:center}.gpn .gt .nm{text-align:left}
 .tel .gnh{margin-top:18px}.tel .gnh-r b{font-size:calc(40px*var(--esc))}
 </style>
+<style id="v261">
+/* ===== v2.6.1 · cartão do participante cabe em 360 (passos 5 e 7) ===== */
+.phone{grid-template-columns:minmax(0,1fr)}
+.phone>*{min-width:0}
+.phone .pb>*{min-width:0;max-width:100%}
+.phone .ph .pnome{min-width:0}
+.phone .pf{flex-wrap:nowrap;gap:6px}
+.phone .pf>*{min-width:0}
+@media (max-width:400px){.phone .pf .cw{display:none}.phone .pf .btn{padding-inline:8px;font-size:14px;gap:4px}.phone .pf .mono{font-size:13px;flex:none}}
+@media (max-width:340px){.phone .pf .btn{padding-inline:5px;font-size:13px}.phone .pf .btn svg{width:14px;height:14px}}
+</style>
+<style id="v270">
+/* ===== v2.7.0 · refazer ===== */
+.rfz-qd{display:grid;gap:2px;justify-items:center;padding:14px 16px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:14px;background:var(--surface)}
+.rfz-qd b{font-size:26px;line-height:1.1;font-weight:800;text-align:center}
+.rfz-qd .lbl{font-size:13px}
+.rfz-av{margin-bottom:4px}
+.rfz-pn .gt td,.rfz-pn .gt th{text-align:center}.rfz-pn .gt .nm{text-align:left}
+</style>
 </head>
 <body>
 <div id="efc-fundo" aria-hidden="true"></div>
@@ -2267,7 +2286,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.6.0";
+const APP_VERSAO = "2.7.1";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Packing","Campo","Laboratório","Almoxarifado","Oficina","Segurança","RH","ADM","Outros"];
@@ -2994,7 +3013,7 @@ function vNova(){
   const segs = (k, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-act="setNova" data-arg="${k}|${v}" aria-pressed="${String(o[k])===String(v)}">${l}</button>`).join("")}</div>`;
   return `<div class="stack">
   <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">${o.reforco ? "Reforço" : "Aplicar"}: ${esc(T.titulo)}</h1></div>
-  ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram. Formato individual.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
+  ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> ${o.reforcoConteudo === "erradas" ? `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram.` : `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta. ${temExp271(S.treinamentos.find(t => t.id === o.tId)) ? "Elas revêem a explicação e refazem o teste." : "Elas refazem o teste."}`} Formato individual. A nota oficial continua a da 1ª tentativa. São até 3 tentativas: a 2ª pode ser no mesmo dia, a 3ª só em outro dia.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
   <section class="panel"><div class="bd stack">
     <div class="grid2">
       <label class="field"><span>Instrutor · aparece no Relatório e no PDF</span><input type="text" id="n-instr" data-nbind="instrutor" value="${esc(o.instrutor)}"></label>
@@ -3175,11 +3194,11 @@ function vPart(){
   if (!s || !p) return phone(`<b>Entrar no treinamento</b>`, vJoin(), lg ? `<span class="row" style="gap:6px">${avSvg(avDaPessoa(lg), "xs")}${esc(lg.nome)}</span>${fPerfil}` : "", "curto");
   if (S.eu.escolherAv && lg && p.pessoaId === lg.id){
     /* a escolha do boneco só aparece na espera: quando as perguntas começam, fica a sugestão e a pessoa troca depois no perfil */
-    if (s.status === "espera" || (s.modo === "ritmo" && S.eu.idx === 0 && !S.eu.qStart)) return phone(`<b>Presença registrada</b>`, vAvatar(lg, true), `<span class="muted mono">Chave ${s.chave}</span>`);
+    if (s.status === "espera" || (s.modo === "ritmo" && S.eu.idx === 0 && !S.eu.qStart)) return phone(`<b>Presença registrada</b>`, vAvatar(lg, true), `<span class="muted mono" aria-label="Chave ${s.chave}"><span class="cw">Chave </span>${s.chave}</span>`);
     if (!lg.av) lg.av = UI().avEd && UI().avEd.pid === lg.id ? UI().avEd.code : avSorteio(lg.id); S.eu.escolherAv = false; UI().avEd = null; save(); }
   const eqn = nomeEquipe(s, p);
   const head = `${s.equipe === "um" ? eqTag(s, p) : avMini(s, p, "xs")}<b class="pnome">${esc(s.equipe === "um" ? p.nome : ((pe => pe ? nomeCompleto(pe) : p.nome)(S.pessoas.find(x => x.id === p.pessoaId))))}</b>${eqn && s.equipe==="cada" ? `<span class="row" style="gap:6px">${eqTag(s, p)}${esc(eqn)}</span>` : ""}${fPerfil}`;
-  const foot = `<span class="muted mono">Chave ${s.chave}</span>${s.remota ? "" : `<button class="btn sm" data-act="proxPessoa">Próxima pessoa</button>`}`;
+  const foot = `<span class="muted mono" aria-label="Chave ${s.chave}"><span class="cw">Chave </span>${s.chave}</span>${s.remota ? "" : `<button class="btn sm" data-act="proxPessoa">Próxima pessoa</button>`}`;
   return phone(head, s.modo === "ritmo" ? vRitmo(s, p) : vAoVivo(s, p), foot);
 }
 function phone(h, b, f, cls = ""){ return `<div class="phone${cls ? " " + cls : ""}"><div class="ph">${h}</div><div class="pb">${b}</div><div class="pf">${f}</div></div>`; }
@@ -3230,6 +3249,7 @@ function vAoVivo(s, p){
   if (S.eu && S.eu.assinando) return blocoAssinatura(s, p) + `<button class="btn lg" data-act="voltarEncerrar">Voltar para o encerramento</button>`;
   if (s.status === "encerrada" || f.etapa === "fim") return meuResultado(s, p);
   if (s.status === "espera") return `<p class="q">Presença registrada.</p><p class="muted" style="font-size:17px">Aguarde o início. Olhe para o telão.</p>`;
+  if (f.etapa === "explicacao" && it && it.pre) return `<span class="lbl">Pré-teste</span><p class="q t1">${esc(it.enunciado)}</p><p class="muted" style="font-size:17px">${esc(it.texto)}</p><p class="muted">Acompanhe o telão. As perguntas do pré aparecem aqui logo em seguida.</p>`;
   if (f.etapa === "explicacao") return `<span class="lbl">Explicação</span><p class="q">Acompanhe a explicação no telão.</p><p class="muted">As perguntas aparecem aqui quando ela terminar.</p>`;
   const r = s.resp[p.id + "|" + it.id];
   if (f.etapa === "pergunta") return telaPergunta(s, p, it, f.inicio, r);
@@ -4069,6 +4089,7 @@ function registrarPWA(){
 async function iniciarApp(){
   app.innerHTML = `<div class="skel" aria-label="Carregando"><i></i><i></i><i></i><i></i></div>`;
   S = await load();
+  if (S && S.ui && S.ui.join){ S.ui.join.procurando = false; S.ui.join.enviando = false; }
   /* v2.3.0: ?demo=1 abre a demonstração (e libera o interruptor em Configurações); ?ativar=1 vem do menu do EFClaudian */
   const qs = new URLSearchParams(location.search), demoUrl = qs.get("demo") === "1";
   if (!S){ seed(demoUrl); if (demoUrl && !ativado()) S.ui.teste = true; }
@@ -4551,7 +4572,7 @@ async function nvPublicar(s){
   s.nuvem = {dono: nvUid(), estado: "enviando", em: now()}; save();
   const reforcoNomes = s.reforco ? s.reforco.pessoas.map(id => S.pessoas.find(pe => pe.id === id)).filter(Boolean).map(pe => sha256(s.id + "|" + norm(nomeCompleto(pe)))) : null;   /* só o resumo (hash): quem tem a chave não vê os nomes */
   const base = {v: 1, dono: nvUid(), donoNome: NV.conta.nome, chave: s.chave, titulo: s.titulo, tId: s.tId, modo: s.modo, equipe: s.equipe, maxEquipe: s.maxEquipe, meta: s.meta,
-    mostrarRanking: !!s.mostrarRanking, embaralhar: !!s.embaralhar, confirmar: !!s.confirmar, semBloqueio: !!s.semBloqueio, prazo: s.prazo || "", instrutor: s.instrutor || "", local: s.local || "",
+    mostrarRanking: !!s.mostrarRanking, embaralhar: !!s.embaralhar, confirmar: !!s.confirmar, semBloqueio: !!s.semBloqueio, refazer: !!s.refazer, prazo: s.prazo || "", instrutor: s.instrutor || "", local: s.local || "",
     ordem: s.itens.map(it => it.id), reforcoNomes, tVer: s.tVer || 0, tempoPct: s.tempoPct || 0, teste: !!s.teste, setores: (s.setores && s.setores.length ? s.setores : S.config.setores).slice(), criadaEm: s.criadaEm, escrito: now(), srv: nvTS(), ...nvDinamico(s)};
   try {
     await nvSessRef(s.id).set(base);
@@ -4683,7 +4704,7 @@ async function nvBuscarChave(k){
   const itens = (d.ordem || []).map(id => mapa[id]).filter(Boolean);
   const velho = S.sessoes.find(x => x.id === c.sid);
   const s = velho || {id: c.sid, tId: d.tId, titulo: d.titulo, meta: d.meta, assin: {}, chave: d.chave, criadaEm: d.criadaEm || now(), criadoPor: d.donoNome || "",
-    instrutor: d.instrutor, local: d.local, modo: d.modo, prazo: d.prazo, equipe: d.equipe, maxEquipe: d.maxEquipe, mostrarRanking: !!d.mostrarRanking, embaralhar: !!d.embaralhar, confirmar: !!d.confirmar,
+    instrutor: d.instrutor, local: d.local, modo: d.modo, prazo: d.prazo, refazer: d.refazer ? {tudo: true, ant: {}} : undefined, equipe: d.equipe, maxEquipe: d.maxEquipe, mostrarRanking: !!d.mostrarRanking, embaralhar: !!d.embaralhar, confirmar: !!d.confirmar,
     demo: false, tVer: +d.tVer || 0, tempoPct: +d.tempoPct || 0, teste: d.teste ? true : undefined, semBloqueio: !!d.semBloqueio, reforco: d.reforcoNomes ? {pessoas: [], nomes: d.reforcoNomes} : null, setores: Array.isArray(d.setores) ? d.setores : null, itens, part: [], equipes: [], resp: {}, foto: null, encerradaPor: ""};
   s.remota = {uid: nvTUid(), dono: d.dono, donoNome: d.donoNome || ""};
   nvAplicarDoc(s, d, sn);
@@ -5108,7 +5129,7 @@ reforcoPendente = semTeste(reforcoPendente);
 dadosAssert = semTeste(dadosAssert);
 dadosSetores = semTeste(dadosSetores);
 historico = semTeste(historico);
-const sessOficiais = tId => S.sessoes.filter(s => s.status === "encerrada" && !s.teste && (!tId || s.tId === tId));
+const sessOficiais = tId => S.sessoes.filter(s => s.status === "encerrada" && !s.teste && !s.refazer && (!tId || s.tId === tId));
 const sessTeste = () => S.sessoes.filter(s => s.teste).sort((a, b) => (b.encerradaEm || b.criadaEm) - (a.encerradaEm || a.criadaEm));
 function acertoDe(ss){ let soma = 0, n = 0; ss.forEach(s => { const c = calc(s); if (!c.aval.length) return; c.rows.forEach(r => { soma += r.nota; n++; }); }); return {med: n ? Math.round(soma / n) : null, n}; }
 const _vRel23 = vRel;
@@ -5423,7 +5444,7 @@ vNova = function(){
   const nuvem = pode() ? `<div class="field">${dd("dd-nuvem", "Onde a turma responde", String(o.nuvem ?? "0"), [["1", "Nos celulares da turma", rede ? "Cada um lê o QR ou digita a chave. Precisa de internet." : "Entre com a conta do EFClaudian em Configurações › Integração para usar.", !rede], ["0", "Só neste aparelho", "Tudo roda aqui, sem internet."]], "setNova", "nuvem|")}</div>` : "";
   return `<div class="stack nova2">${avisoDemo()}
   <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">${o.reforco ? "Reforço" : "Aplicar"}: ${esc(T.titulo)} <span class="vs">${vv(T.versao)}</span></h1></div>
-  ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram. Formato individual.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
+  ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> ${o.reforcoConteudo === "erradas" ? `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram.` : `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta. ${temExp271(S.treinamentos.find(t => t.id === o.tId)) ? "Elas revêem a explicação e refazem o teste." : "Elas refazem o teste."}`} Formato individual. A nota oficial continua a da 1ª tentativa. São até 3 tentativas: a 2ª pode ser no mesmo dia, a 3ª só em outro dia.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
   <section class="panel"><div class="bd stack">
     <div class="grid2">
       <label class="field"><span>Instrutor · aparece no Relatório e no PDF</span><input type="text" id="n-instr" data-nbind="instrutor" value="${esc(o.instrutor)}"></label>
@@ -5439,6 +5460,7 @@ vNova = function(){
     ${+o.meta !== mT ? `<p class="note" style="margin:0">Meta ajustada só nesta sessão. O registro guarda a mudança: de ${mT}% para ${o.meta}%, por ${PERFIS[S.perfil]}.</p>` : ""}
     ${o.modo === "ritmo" ? `<label class="field" style="max-width:260px"><span>Prazo para responder</span><input type="date" id="n-prazo" data-nbind="prazo" value="${esc(o.prazo)}"></label>` : ""}
     ${o.equipe !== "nao" && !o.reforco ? `<label class="field" style="max-width:260px"><span>Máximo de pessoas por equipe</span><input type="number" min="2" max="12" id="n-max" data-nbind="maxEquipe" value="${o.maxEquipe}"></label>` : ""}
+    ${blocoRefazer270(o)}
     ${blocoSetores(o)}
     <div class="grid2">${dd("dd-tpct", "Tempo extra para quem tiver dificuldade", o.tempoPct || 0, TPCT, "novaTpct", "")}<p class="aj" style="align-self:end;margin:0">Soma uma porcentagem ao tempo de cada pergunta. Dá para mudar durante a sessão.</p></div>
     <div class="chks"><label class="chk"><input type="checkbox" id="n-teste" data-nchk="teste" ${o.teste || S.config.demoModo === "real" ? "checked" : ""}>Sessão de teste (não entra no relatório, no reforço nem no PDF)</label><label class="chk"><input type="checkbox" id="n-rank" data-nchk="mostrarRanking" ${o.mostrarRanking ? "checked" : ""}>Mostrar ranking no telão e no celular</label>
@@ -6156,7 +6178,7 @@ Object.assign(A, {
 function tjBotaoControle(s){
   if (tjVivo()) return `<span class="pg2-tag st tjon">Telão na outra janela</span><button class="pg2-ib" data-act="telaoFrente" aria-label="Mostrar a janela do telão" title="Mostrar a janela do telão">${ICON.frente}</button><button class="pg2-ib" data-act="telaoFechar" aria-label="Fechar o telão" title="Fechar o telão">${ICON.x}</button>`;
   const ab = UI().menu === "telOp", ext = tjExtendida();
-  return `<span class="mnu tjg"><button class="btn" data-act="telaoJanela" data-arg="${s.id}" title="${ext ? "Abre o telão no 2º monitor ou projetor" : "Abre o telão numa janela separada"}">${ICON.telao}<span class="tx">Abrir telão</span></button><button class="btn ic" data-act="menu" data-arg="telOp" aria-expanded="${ab}" aria-label="Onde abrir o telão" title="Onde abrir o telão">${ICON.chev}</button>${ab ? `<span class="pop" role="menu">
+  return `<span class="mnu tjg"><button class="btn" data-act="telaoJanela" data-arg="${s.id}" title="${tjEstreita() ? "Abre o telão nesta tela" : ext ? "Abre o telão no 2º monitor ou projetor" : "Abre o telão numa janela separada"}" aria-label="${tjEstreita() ? "Abrir o telão nesta tela" : "Abrir o telão"}">${ICON.telao}<span class="tx">Abrir telão</span></button><button class="btn ic" data-act="menu" data-arg="telOp" aria-expanded="${ab}" aria-label="Onde abrir o telão" title="Onde abrir o telão">${ICON.chev}</button>${ab ? `<span class="pop" role="menu">
     <button role="menuitem" data-act="telaoJanela" data-arg="${s.id}">${ICON.ext}<span><b>Em outra janela</b><small>${ext ? "Vai para o 2º monitor ou projetor" : "Arraste a janela para o projetor"}</small></span></button>
     <button role="menuitem" data-act="view" data-arg="tel">${ICON.telao}<span><b>Nesta tela</b><small>O notebook vira o telão</small></span></button></span>` : ""}</span>`;
 }
@@ -6412,6 +6434,7 @@ function ganhoDe(s, p, c){
   c = c || calc(s); const row = c.rows.find(x => x.p.id === p.id);
   if (!pres.length || !c.aval.length || !row) return null;
   if (!pres.some(it => s.resp[p.id + "|" + it.id])) return null;
+  if (!s.itens.some((it, i) => lib.has(i) && !it.pre && scored(it) && s.resp[p.id + "|" + it.id])) return null;   /* v2.6.1: sem pós respondido = sem par */
   const ac = pres.filter(it => isCorrect(it, s.resp[p.id + "|" + it.id])).length, pre = Math.round(ac / pres.length * 100);
   return {pre, pos: row.nota, ganho: row.nota - pre};
 }
@@ -6496,6 +6519,138 @@ function pdfGanho(doc, txt, s, g, X, W, y, cabe, nova){
     vals.forEach((v, k) => { const [, w, al] = cols[k]; txt(k === 1 ? doc.splitTextToSize(safe(v), w - 3)[0] : v, al === "c" ? x + w / 2 : x + 2, ym, {s: 8.4, b: k === 1 || k === 4, al: al === "c" ? "center" : undefined, c: k === 4 && l.g ? (l.g.ganho > 0 ? okc : l.g.ganho < 0 ? badc : tinta) : tinta}); x += w; });
     y += RH; });
   return y + 6;
+}
+
+/* ================= v2.7.0 · M15: refazer (rever a explicação e refazer o teste) =================
+   Quem ficou abaixo da meta entra numa sessão de reforço do tipo "refazer": passa de novo pela explicação e responde as perguntas
+   de avaliação, no próprio ritmo, quando o responsável liberar. A nota oficial continua a da
+   1ª tentativa: a sessão "refazer" (s.refazer) fica fora do acerto médio, da assertividade, dos setores e do histórico. */
+/* o reforço abre já no próprio ritmo e com "rever a explicação e refazer o teste" */
+const _reforcoAbrir270 = A.reforcoAbrir;
+A.reforcoAbrir = function(){ const r = _reforcoAbrir270.apply(this, arguments); const o = UI().nova; if (o && o.reforco){ o.reforcoConteudo = "tudo"; o.modo = "ritmo"; } return r; };
+const _sessaoNova270 = sessaoNova;
+sessaoNova = function(T, o){
+  const s = _sessaoNova270.apply(this, arguments);
+  if (!o || !o.reforco) return s;
+  if (o.reforcoConteudo === "tudo"){
+    s.itens = [ENSAIO(), ...clone(T.itens.filter(it => !isQ(it) || it.uso === "avaliacao"))];
+    s.titulo = "Refazer · " + T.titulo;
+    s.refazer = {tudo: true, ant: {}};
+    const g = reforcoPendente().find(x => x.T.id === T.id);
+    (g ? g.pessoas : []).forEach(x => { if (o.reforco.pessoas.includes(x.pid)) s.refazer.ant[x.pid] = {nota: x.n1 != null ? x.n1 : x.nota, n2: x.n2 != null ? x.n2 : null, meta: x.meta, em: x.em}; });
+  }
+  return s;
+};
+/* fora do acerto médio, da assertividade, dos setores e do histórico (a reforcoPendente continua vendo a sessão) */
+function semRefazer270(fn){ return function(...a){ const todas = S.sessoes; S.sessoes = todas.filter(s => !s.refazer); try { return fn.apply(this, a); } finally { S.sessoes = todas; } }; }
+dadosAssert = semRefazer270(dadosAssert);
+dadosSetores = semRefazer270(dadosSetores);
+historico = semRefazer270(historico);
+
+const _vRel270 = vRel;
+vRel = function(){
+  let h = _vRel270(); const s = sessById(UI().relId);
+  if (!s || !s.refazer || (UI().relAba || "sessao") !== "sessao" || !h.includes('<section class="panel')) return h;
+  const i = h.indexOf('<section class="panel'); return h.slice(0, i) + painelRefazer(s) + h.slice(i);
+};
+
+/* ================= v2.7.1 · refazer em até 3 tentativas, sem dia e hora de início =================
+   Quem ficou abaixo da meta refaz (2ª tentativa, que pode ser no mesmo dia da 1ª). Quem ainda ficar abaixo tem a 3ª, só em outro dia.
+   Depois da 3ª a pessoa não entra mais no refazer. A nota oficial é sempre a da 1ª. O responsável libera quando quiser ("Liberar
+   respostas") e o único limite de tempo é o prazo para responder. */
+function temExp271(T){ return !!T && T.itens.some(it => !isQ(it)); }
+const diaSeguinte271 = ms => { const d = new Date(ms); d.setHours(24, 0, 0, 0); return d.getTime(); };
+const fmtDia271 = ms => { const d = new Date(ms), p = n => String(n).padStart(2, "0"); return `${p(d.getDate())}/${p(d.getMonth() + 1)}`; };
+/* por pessoa: a 1ª tentativa (a última sessão que não é refazer) e as tentativas de refazer que ela de fato respondeu depois */
+function tentativas271(tId){
+  const m = new Map();
+  S.sessoes.filter(s => !s.teste && s.status === "encerrada" && s.tId === tId && s.equipe !== "um").sort((a, b) => a.encerradaEm - b.encerradaEm).forEach(s => {
+    const c = calc(s); if (!c.aval.length) return;
+    c.rows.forEach(r => { const pid = r.p.pessoaId; if (!pid) return;
+      if (!s.refazer){ m.set(pid, {n1: {nota: r.nota, meta: c.meta, em: s.encerradaEm}, r: []}); return; }
+      const e = m.get(pid); if (!e) return;
+      const ts = s.itens.filter(it => scored(it)).map(it => s.resp[r.p.id + "|" + it.id]).filter(Boolean).map(x => x.t || 0);
+      if (ts.length) e.r.push({nota: r.nota, meta: c.meta, em: Math.max(...ts)}); });
+  });
+  return m;
+}
+const _reforcoPendente271 = reforcoPendente;
+reforcoPendente = function(){
+  const gs = _reforcoPendente271.apply(this, arguments), out = [];
+  gs.forEach(g => {
+    const tm = tentativas271(g.T.id), ps = [];
+    g.pessoas.forEach(x => {
+      const e = tm.get(x.pid); if (!e){ ps.push(x); return; }
+      const ult = e.r.length ? e.r[e.r.length - 1] : e.n1;
+      if (ult.nota >= ult.meta || e.r.length >= 2) return;                         // já passou, ou já usou as 3 tentativas
+      const rodada = e.r.length + 2, lib = rodada === 3 ? diaSeguinte271(e.r[0].em) : 0;
+      ps.push({...x, nota: ult.nota, meta: ult.meta, em: ult.em, rodada, n1: e.n1.nota, n2: e.r.length ? e.r[0].nota : null, liberaEm: lib, bloqueada: lib > now()});
+    });
+    if (ps.length) out.push({...g, pessoas: ps});
+  });
+  return out;
+};
+/* abre o Aplicar só com quem já pode (a 3ª tentativa só em outro dia) */
+const _reforcoAbrir271 = A.reforcoAbrir;
+A.reforcoAbrir = function(tId){
+  const g = reforcoPendente().find(x => x.T.id === tId); if (!g) return;
+  const livres = g.pessoas.filter(x => !x.bloqueada);
+  if (!livres.length){
+    pedir("A 3ª tentativa é em outro dia", `Quem ainda ficou abaixo na 2ª tentativa só pode fazer a 3ª a partir de ${fmtDia271(Math.min(...g.pessoas.map(x => x.liberaEm)))}. Volte nesse dia.`, "confNao", "", "Entendi");
+    return;
+  }
+  const r = _reforcoAbrir271.apply(this, arguments); const o = UI().nova;
+  if (o && o.reforco) o.reforco.pessoas = livres.map(x => x.pid);
+  return r;
+};
+function blocoRefazer270(o){
+  if (!o.reforco) return "";
+  const T = S.treinamentos.find(t => t.id === o.tId), comExp = temExp271(T);
+  const c = o.reforcoConteudo === "erradas" ? "erradas" : "tudo";
+  const g = reforcoPendente().find(x => x.T.id === o.tId), sel = g ? g.pessoas.filter(x => o.reforco.pessoas.includes(x.pid)) : [];
+  const n2 = sel.filter(x => x.rodada === 2).length, n3 = sel.filter(x => x.rodada === 3).length, espera = g ? g.pessoas.filter(x => x.bloqueada) : [];
+  const quem = [n2 && `${n2} na 2ª tentativa`, n3 && `${n3} na 3ª tentativa`].filter(Boolean).join(" e ");
+  const opcoes = comExp ? [["tudo", "Rever a explicação e refazer o teste", "Passam de novo pela explicação e respondem as perguntas de avaliação."], ["erradas", "Só as perguntas que erraram", "Respondem só o que erraram, sem a explicação."]]
+                        : [["tudo", "Refazer o teste", "Respondem de novo as perguntas de avaliação."], ["erradas", "Só as perguntas que erraram", "Respondem só o que erraram."]];
+  return `<div class="ddg">${dd("dd-rconteudo", "O que as pessoas refazem", c, opcoes, "setNova", "reforcoConteudo|")}</div>
+  <p class="aj" style="margin:0">${quem ? quem + ". " : ""}A 2ª tentativa pode ser hoje; a 3ª só em outro dia.${espera.length ? ` ${espera.length === 1 ? "1 pessoa faz" : espera.length + " pessoas fazem"} a 3ª só a partir de ${fmtDia271(Math.min(...espera.map(x => x.liberaEm)))}.` : ""}</p>
+  <p class="aj" style="margin:0">${o.modo === "ritmo" ? "Você libera quando quiser, em “Liberar respostas”. O limite de tempo é o prazo para responder, acima." : "Para dar um prazo para responder, escolha o modo “No próprio ritmo”."}</p>`;
+}
+/* celular: antes de o responsável liberar */
+const _vRitmo271 = vRitmo;
+vRitmo = function(s, p){
+  if (s.refazer && s.status === "espera"){
+    const pz = s.prazo ? s.prazo.split("-").reverse().join("/") : "";
+    return `<p class="q">Inscrição registrada.</p>${pz ? `<div class="rfz-qd"><span class="lbl">Prazo para responder</span><b class="num">${pz.slice(0, 5)}</b></div>` : ""}<p class="muted">Aguarde o responsável liberar. ${temExp271({itens: s.itens}) ? "Você vai rever a explicação e refazer o teste." : "Você vai refazer o teste."}</p>`;
+  }
+  return _vRitmo271.apply(this, arguments);
+};
+/* Controle: o refazer está em espera até o responsável liberar */
+const _vControle271 = vControle;
+vControle = function(){
+  const h = _vControle271.apply(this, arguments), s = sessAtual();
+  if (!s || !s.refazer || s.status !== "espera") return h;
+  const ant = Object.values((s.refazer && s.refazer.ant) || {}), t3 = ant.some(a => a.n2 != null), t2 = ant.some(a => a.n2 == null);
+  const rod = t2 && t3 ? "2ª e 3ª tentativas" : t3 ? "3ª tentativa" : "2ª tentativa";
+  const pz = s.prazo ? ` O prazo para responder é ${s.prazo.split("-").reverse().join("/")}.` : "";
+  const aviso = `<div class="note rfz-av"><b>Refazer · ${rod}.</b> Está em espera. Toque em Liberar respostas quando quiser abrir no celular de cada pessoa.${pz}</div>`;
+  const alvo = '<div class="solid"><div class="lt"';
+  return h.includes(alvo) ? h.replace(alvo, aviso + alvo) : h.includes('<div class="stack">') ? h.replace('<div class="stack">', '<div class="stack">' + aviso) : aviso + h;
+};
+/* Relatório do refazer: 1ª, 2ª e (se houver) 3ª tentativa */
+function painelRefazer(s){
+  if (!s.refazer) return "";
+  const c = calc(s), ids = (s.reforco && s.reforco.pessoas) || [];
+  const linhas = ids.map(pid => { const pe = S.pessoas.find(x => x.id === pid); if (!pe) return null;
+    const ant = (s.refazer.ant || {})[pid] || {}, row = c.rows.find(r => r.p.pessoaId === pid), terc = ant.n2 != null;
+    const refez = !!row && s.itens.some(it => scored(it) && s.resp[row.p.id + "|" + it.id]);
+    return {nome: nomeCompleto(pe), a1: ant.nota == null ? null : ant.nota, a2: terc ? ant.n2 : (refez ? row.nota : null), a3: terc && refez ? row.nota : null, terc, refez, passou: refez && row.nota >= c.meta}; }).filter(Boolean);
+  const nRef = linhas.filter(l => l.refez).length, nPas = linhas.filter(l => l.passou).length, tem3 = linhas.some(l => l.terc);
+  const pc = v => v == null ? "–" : v + "%";
+  return `<section class="panel gpn rfz-pn"><div class="hd"><h2>Refazer · ${tem3 ? "1ª, 2ª e 3ª tentativa" : "1ª e 2ª tentativa"}</h2></div><div class="bd">
+    <div class="gnh-r big"><div><b class="num">${nRef} de ${linhas.length}</b><span>Refizeram</span></div><div class="gg" style="--c:${nPas ? "var(--ok)" : "var(--muted)"}"><b class="num">${nPas}</b><span>Passaram da meta de ${c.meta}%</span></div></div>
+    <p class="muted" style="margin:8px 0 12px;font-size:14px">A nota oficial de cada pessoa continua a da 1ª tentativa. Esta sessão não entra no acerto médio do treinamento.${tem3 ? " Quem ainda ficar abaixo na 3ª tentativa não entra mais no refazer." : ""}</p>
+    <div class="tblwrap"><table class="tb gt"><thead><tr><th class="nm">Pessoa</th><th>1ª tentativa</th><th>2ª tentativa</th>${tem3 ? "<th>3ª tentativa</th>" : ""}<th>Resultado</th></tr></thead><tbody>${linhas.map(l => `<tr><td class="nm">${esc(l.nome)}</td><td class="num">${pc(l.a1)}</td><td class="num">${pc(l.a2)}</td>${tem3 ? `<td class="num">${pc(l.a3)}</td>` : ""}<td style="font-weight:800;color:${l.passou ? "var(--ok)" : l.refez ? "var(--bad)" : "var(--muted)"}">${l.passou ? "Passou" : l.refez ? "Ainda abaixo" : "Não refez"}</td></tr>`).join("")}</tbody></table></div></div></section>`;
 }
 </script>
 </body>
