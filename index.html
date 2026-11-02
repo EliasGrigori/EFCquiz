@@ -1864,6 +1864,38 @@ table.hm td .av,table.hm td .av.xs,table.hm td .av.sm{width:30px;height:30px}
 .rfz-av{margin-bottom:4px}
 .rfz-pn .gt td,.rfz-pn .gt th{text-align:center}.rfz-pn .gt .nm{text-align:left}
 </style>
+<style id="v272">
+/* ===== v2.7.2 · tentativa na lista de reforço; faixa roxa e ondas até as bordas ===== */
+.rfz-tg{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+.rfz-tg.b{color:var(--accent)}
+/* as ondas e o brilho cobrem a largura toda da área ao lado do menu (antes paravam em 1180 px e sobrava faixa lisa) */
+.pg2::after{left:calc(50% - 50vw);right:calc(50% - 50vw)}
+@media (min-width:901px){:root[data-shell="1"] .pg2::after{left:calc(50% - (100vw - var(--sw)) / 2);right:calc(50% - (100vw - var(--sw)) / 2)}}
+</style>
+<style id="v273">
+/* ===== v2.7.3 · telão: número de pessoas e porcentagem separados (antes "3" e "33%" liam-se "333%") ===== */
+.bars .score small{margin-left:10px;padding-left:10px;border-left:2px solid var(--line,#c9ced8)}
+.bars .score small::before{content:none}
+</style>
+<style id="v275">
+/* ===== v2.7.5 · pontos como nota principal; a % fica pequena ao lado ===== */
+.hist .nt .muted{margin:0 8px;font-size:13px}
+</style>
+<style id="v276">
+/* ===== v2.7.6 · nome à esquerda no Relatório; lista da meta rola; logotipo ===== */
+main table.pres th:nth-child(2),main table.pres td:nth-child(2){text-align:left}
+main .tblwrap table.pres th:nth-child(2),main .tblwrap table.pres td:nth-child(2){text-align:left}
+.dd .ddp{max-height:min(360px,55vh);overflow:auto}
+.lg276{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:48px}
+.lg276 img{max-height:48px;max-width:160px;object-fit:contain;border:1px solid var(--line);border-radius:6px;padding:4px;background:#fff}
+.lg276 .btn.ic{width:36px;height:36px;padding:0;display:inline-grid;place-items:center}.lg276 .btn.ic svg{width:18px;height:18px}
+</style>
+<style id="v277">
+/* ===== v2.7.7 · periodicidade ===== */
+.per277-l{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.per277-l .field.dd{flex:1 1 200px;min-width:0;margin:0}.per277-l .per277-n{width:96px;flex:0 0 96px}.per277-l .field.dd:last-child{flex:0 1 140px}
+.per277-t{display:flex;align-items:center;gap:6px;font-size:13px;margin-top:2px;line-height:1.3}.per277-t svg{width:14px;height:14px;flex:0 0 auto}
+.per277-t.ok{color:var(--ok)}.per277-t.bad{color:var(--bad)}.per277-t.warn{color:var(--warn,#8a5a00)}.per277-t.mut{color:var(--muted)}
+</style>
 </head>
 <body>
 <div id="efc-fundo" aria-hidden="true"></div>
@@ -2286,10 +2318,11 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.7.1";
+const APP_VERSAO = "2.7.7";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
-const SETORES_PADRAO = ["Packing","Campo","Laboratório","Almoxarifado","Oficina","Segurança","RH","ADM","Outros"];
+const SETORES_PADRAO = ["Equipe 1","Equipe 2","Equipe 3","Outros"];
+const SETORES_DEMO274 = ["Packing","Campo","Laboratório","Almoxarifado","Oficina","Segurança","RH","ADM","Outros"];
 /* integrações com o EFClaudian: preparadas e desligadas (I01, I03, I04, I05) */
 EFC_CONFIG.integracoes = Object.assign({contaEFClaudian: false, reforcoNC: false, temasEFClaudian: true, firebase: false}, EFC_CONFIG.integracoes || {});
 const PERFIS = {primario:"Primário", estrela:"Líder estrela", colaborador:"Colaborador"};
@@ -2785,7 +2818,7 @@ function vResp(){
   const cab = (t, sub) => `<div class="pghd"><h1>${t}</h1>${sub ? `<span class="sub">${sub}</span>` : ""}</div>`;
   let corpo = "";
   if (aba === "trein"){
-    const vazio = `<div class="vazio-t"><b>Comece pelo primeiro treinamento</b><p class="muted" style="margin:0">Toque em <b>+ Novo treinamento</b>, escreva as perguntas e marque a resposta certa. Para ir mais rápido, abra <b>Modelos prontos</b> ou use <b>Mais › Gerar prompt para IA</b> para converter um POP ou slide.</p></div>`;
+    const vazio = `<div class="vazio-t"><b>Comece pelo primeiro treinamento</b><p class="muted" style="margin:0">Toque em <b>+ Novo treinamento</b>, escreva as perguntas e marque a resposta certa. Para ir mais rápido, abra <b>Modelos prontos</b> ou use <b>Mais › Gerar prompt para IA</b> para converter o seu material (procedimento, apostila ou slides).</p></div>`;
     corpo = `${cab("Treinamentos", "Modelos salvos só neste aparelho")}
     ${pode() ? `<div class="tools"><button class="btn pri so-pc" data-act="novoT">${ICON.mais}Novo treinamento</button><button class="btn" data-act="modelos" aria-pressed="${!!u.modelos}">Modelos prontos</button>
       <span class="fim">${menuTxt("maisT", "Mais", [["irPrompt", "", "Gerar prompt para IA", ICON.ia], ["impClique", "", "Importar .json", ICON.subir]])}</span><input class="sr" type="file" id="imp-json" accept=".json,.txt,application/json" data-import-json="1" tabindex="-1" aria-label="Importar arquivo .json"></div>` : `<div class="note">O perfil Colaborador não cria nem aplica treinamentos. Só os perfis Primário e Líder estrela podem.</div>`}
@@ -2809,7 +2842,7 @@ function vConfig(){
   const abas = [["geral","Geral"],["pessoas","Setores e pessoas"],["armaz","Armazenamento"],["integ","Integração"]];
   let corpo = "";
   if (aba === "geral") corpo = `<div class="grid2">
-      <label class="field"><span>Nome da empresa (aparece no topo e no PDF; vazio = não mostra)</span><input type="text" id="cfg-emp" data-cfgemp="1" value="${esc(EFC_CONFIG.empresa || "")}"></label>
+      <label class="field"><span>Nome da organização, escola ou empresa (aparece no topo e no PDF; vazio = não mostra)</span><input type="text" id="cfg-emp" data-cfgemp="1" value="${esc(EFC_CONFIG.empresa || "")}"></label>
       <label class="field"><span>Tema · o padrão é seguir o EFClaudian neste aparelho</span><select id="cfg-tema" data-bindroot="temaCfg" style="max-width:320px">${opcoesTema()}</select></label>
       ${S.ui.nuvemConta ? "" : `<label class="field"><span>Perfil neste aparelho · com a conta do EFClaudian o perfil vem da conta</span><select id="perfil" data-bindroot="perfil" style="max-width:320px">${Object.entries(PERFIS).map(([k,v]) => `<option value="${k}"${S.perfil===k?" selected":""}>${v}</option>`).join("")}</select></label>`}
     </div>
@@ -2879,7 +2912,7 @@ function vConferir(){
 /* S08: gerar prompt para qualquer IA converter um POP ou slide no formato do EFCquiz */
 function textoPrompt(o){
   const n = +o.n, g = Math.min(+o.g, n), a = n - g;
-  return `Você vai transformar o material anexo (POP, procedimento ou slides) em um treinamento do EFCquiz.
+  return `Você vai transformar o material anexo (procedimento, apostila, texto ou slides) em um treinamento do EFCquiz.
 Responda SOMENTE com um JSON válido, sem nenhum texto antes ou depois, neste formato:
 
 {"formato":"efcquiz/treinamento","titulo":"...","meta":${o.meta},"itens":[
@@ -2892,7 +2925,7 @@ Responda SOMENTE com um JSON válido, sem nenhum texto antes ou depois, neste fo
 Regras:
 1. Faça ${n} perguntas no total: ${a} de avaliação ("uso":"avaliacao") e ${g} de gincana ("uso":"gincana"). As de gincana vêm no fim.
 2. Use só o que está no material. Não invente norma, número, prazo ou produto que não esteja nele.
-3. Linguagem simples, para colaboradores de campo e de packing house, muitos com pouca leitura: frases curtas, palavras do dia a dia, sem pegadinha e sem dupla negação.
+3. Linguagem simples, para quem vai responder, muitos com pouca leitura: frases curtas, palavras do dia a dia, sem pegadinha e sem dupla negação.
 4. Múltipla escolha ("multipla"): 4 alternativas curtas e uma só certa. "correta" é a posição da certa, contando a partir de 0 (0 = A, 1 = B, 2 = C, 3 = D). Varie a posição da certa entre as perguntas.
 5. Verdadeiro ou falso ("vf"): "correta" 0 = Verdadeiro, 1 = Falso. Não precisa de "alternativas".
 6. Ordenar etapas ("ordenar"): de 3 a 6 etapas, escritas já na ordem CERTA. O app embaralha para o participante.
@@ -2911,7 +2944,7 @@ function vPrompt(){
   return `<div class="stack">
     <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">Gerar prompt para IA</h1></div>
     <div class="passos"><div><span class="n">1</span><span><b>Copie o prompt.</b> Escolha antes quantas perguntas e o tempo padrão.</span></div>
-      <div><span class="n">2</span><span><b>Cole em qualquer IA</b> junto com o POP ou o slide. Salve a resposta como arquivo .json.</span></div>
+      <div><span class="n">2</span><span><b>Cole em qualquer IA</b> junto com o seu material. Salve a resposta como arquivo .json.</span></div>
       <div><span class="n">3</span><span><b>Importe o .json</b> aqui. O treinamento abre no editor para você revisar.</span></div></div>
     <section class="panel"><div class="bd stack prompt">
       <div class="grid3">
@@ -2920,7 +2953,7 @@ function vPrompt(){
         <label class="field"><span>Delas, de gincana</span>${sel("g", [0,1,2,3,4,5], "")}</label>
         <label class="field"><span>Meta de aprovação</span>${sel("meta", METAS, "%")}</label>
       </div>
-      <label class="field"><span>Título (opcional)</span><input type="text" id="pr-tit" data-prbind="titulo" value="${esc(o.titulo)}" placeholder="Ex.: Higiene no packing house"></label>
+      <label class="field"><span>Título (opcional)</span><input type="text" id="pr-tit" data-prbind="titulo" value="${esc(o.titulo)}" placeholder="Ex.: Higiene das mãos"></label>
       <label class="field"><span>Prompt</span><textarea id="pr-txt" readonly>${esc(textoPrompt(o))}</textarea></label>
       ${u.msgPrompt ? `<div class="okmsg">${esc(u.msgPrompt)}</div>` : ""}
       <div class="row"><button class="btn pri lg" data-act="copiarPrompt">${ICON.copiar}Copiar prompt</button><button class="btn" data-act="baixarPrompt">${ICON.baixar}Baixar .txt</button><label class="btn">${ICON.subir}Importar .json<input class="sr" type="file" accept=".json,.txt,application/json" data-import-json="1"></label></div>
@@ -2945,8 +2978,10 @@ function vEditor(){
     <button class="btn pri" data-act="salvarT">Salvar</button></div>
   ${UI().erro ? `<div class="msg">${esc(UI().erro)}</div>` : ""}${UI().msgEd ? `<div class="okmsg">${esc(UI().msgEd)}</div>` : ""}
   <section class="panel"><div class="bd grid2">
-    <label class="field"><span>Título</span><input type="text" id="t-titulo" data-bind="titulo" value="${esc(d.titulo)}" placeholder="Ex.: Higiene no packing house"></label>
-    <label class="field"><span>Meta de aprovação (nota mínima para "Eficaz")</span>${dd("dd-tmeta", "", +(d.meta || 70), METAS.map(m => [m, m + "%"]), "setMetaEd", "")}</label>
+    <label class="field"><span>Título</span><input type="text" id="t-titulo" data-bind="titulo" value="${esc(d.titulo)}" placeholder="Ex.: Higiene das mãos"></label>
+    <label class="field"><span>Meta de aprovação (mínimo para "Eficaz")</span>${dd("dd-tmeta", "", valMeta275(+(d.meta || 70), nAval275(d.itens), d.metaTipo || "pts"), opsMeta275(nAval275(d.itens), d.metaTipo || "pts", +(d.meta || 70)), "setMetaEd", "")}</label>
+    <label class="field"><span>Meta em</span>${dd("dd-tmetatipo", "", d.metaTipo || "pts", [["pts", "Pontos"], ["pct", "Porcentagem"]], "setMetaTipoEd", "")}</label>
+    ${perEd277(d)}
     <label class="field"><span>Descrição (opcional)</span><input type="text" id="t-desc" data-bind="descricao" value="${esc(d.descricao)}"></label>
   </div></section>
   <div class="note">Toda sessão começa sozinha com uma pergunta de teste que não vale nota. Use "Explicação" para marcar os momentos em que você apresenta no telão.</div>
@@ -3174,11 +3209,11 @@ function telResultado(s, it){
 function telFim(s){
   const c = calc(s);
   if (!s.mostrarRanking) return `<p class="big">Perguntas concluídas.</p><p class="mid muted">Participação registrada. Obrigado.</p><p class="muted">Encerre na tela do professor (responsável) para tirar a foto e gerar o registro.</p>`;
-  const lista = (s.equipe !== "nao" ? c.equipes.map(e => ({nome: e.nome, v: e.nota + "%", nota: e.nota, m: marcaEq(e.cor, e.simb, true)})) : c.rows.map(r => ({nome: r.p.nome, v: r.ac + " acerto(s) · " + r.nota + "%", nota: r.nota, m: avMini(s, r.p, "pod")}))).slice(0, 3);
+  const lista = (s.equipe !== "nao" ? c.equipes.map(e => ({nome: e.nome, v: e.nota + "%", nota: e.nota, m: marcaEq(e.cor, e.simb, true)})) : c.rows.map(r => ({nome: r.p.nome, v: pontosTxt275(r.ac, c.aval.length) + " · " + r.nota + "%", nota: r.nota, m: avMini(s, r.p, "pod")}))).slice(0, 3);
   const alt = n => 0;
   const pod = [lista[1], lista[0], lista[2]].map((x, i) => x ? `<div class="h${[2,1,3][i]}" ><span class="pos">${[2,1,3][i]}º</span>${x.m}<b>${esc(x.nome)}</b><span class="score">${x.v}</span></div>` : `<div style="background:transparent;border:0"></div>`).join("");
   const g = c.ginc.length ? c.gin[0] : null;
-  return `<p class="big">Resultado</p><span class="lbl">${s.equipe !== "nao" ? "Equipes · média da nota" : "Avaliação · acertos, rapidez desempata"}</span>
+  return `<p class="big">Resultado</p><span class="lbl">${s.equipe !== "nao" ? "Equipes · média da nota" : "Avaliação · pontos, rapidez desempata"}</span>
   <div class="podwrap"><div class="podium prop">${pod}</div></div>
   ${g && g.pg > 0 ? `<div class="gincl"><span class="lbl">Gincana</span>${eqTag(s, g.p)}<b style="flex:1">${esc(g.p.nome)}</b><span class="score num">${g.pg} pts</span></div>` : ""}
   <p class="muted">Encerre na tela do professor (responsável) para tirar a foto e gerar o registro.</p>`;
@@ -3369,7 +3404,7 @@ function vRel(){
     <div><b class="num">${N.acerto}%</b><span>Acerto geral</span></div>
     <div><b class="num">${N.tempo}</b><span>Tempo médio por pergunta</span></div></div>`;
   const agir = `<div class="cx"><h2>O que fazer agora</h2>
-    ${nAbaixo ? `<p><span class="ruim">${ICON_TRI}<span class="num">${nAbaixo}</span> ${nAbaixo === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ${erraram.map(r => `${esc(r.p.nome)} <span class="num">${r.nota}%</span>`).join(", ")}${nAbaixo > erraram.length ? "…" : ""}</p>` : (!c.aval.length ? (s.itens.some(it => isQ(it) && it.uso === "avaliacao") ? (N.presentes ? `<p><span class="ruim">${ICON_TRI}<span class="num">${N.presentes}</span> ${N.presentes === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ninguém respondeu às perguntas de avaliação.</p>` : `<p class="muted">Ninguém respondeu às perguntas de avaliação.</p>`) : `<p class="muted">Esta sessão não tem perguntas de avaliação, por isso não há meta a conferir.</p>`) : N.presentes && N.eficazes >= N.presentes ? `<p>Todos atingiram a meta de <span class="num">${M}%</span>.</p>` : `<p><span class="num">${N.eficazes} de ${N.presentes}</span> atingiram a meta de <span class="num">${M}%</span>.</p>`)}
+    ${nAbaixo ? `<p><span class="ruim">${ICON_TRI}<span class="num">${nAbaixo}</span> ${nAbaixo === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ${erraram.map(r => `${esc(r.p.nome)} <span class="num">${r.ac} de ${c.aval.length} (${r.nota}%)</span>`).join(", ")}${nAbaixo > erraram.length ? "…" : ""}</p>` : (!c.aval.length ? (s.itens.some(it => isQ(it) && it.uso === "avaliacao") ? (N.presentes ? `<p><span class="ruim">${ICON_TRI}<span class="num">${N.presentes}</span> ${N.presentes === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ninguém respondeu às perguntas de avaliação.</p>` : `<p class="muted">Ninguém respondeu às perguntas de avaliação.</p>`) : `<p class="muted">Esta sessão não tem perguntas de avaliação, por isso não há meta a conferir.</p>`) : N.presentes && N.eficazes >= N.presentes ? `<p>Todos atingiram a meta de <span class="num">${M}%</span>.</p>` : `<p><span class="num">${N.eficazes} de ${N.presentes}</span> atingiram a meta de <span class="num">${M}%</span>.</p>`)}
     ${dificeis.length ? `<p>Pergunta mais difícil: “${esc(cut(dificeis[0].it.enunciado, 90))}” (<span class="num">${dificeis[0].pct}%</span>)</p>` : ""}
     ${faltou.length ? `<p class="muted">${s.modo === "ritmo" ? plural(faltou.length, "pessoa não concluiu", "pessoas não concluíram") : plural(faltou.length, "pessoa deixou perguntas sem resposta", "pessoas deixaram perguntas sem resposta")}. Veja no Mapa da turma.</p>` : ""}
     ${podeRea ? (reforcoT ? `<button class="btn pri" data-act="reforcoAbrir" data-arg="${s.tId}">${ICON.play}Reaplicar para quem ficou abaixo</button>` : `<button class="btn pri" data-act="novaSessao" data-arg="${s.tId}">${ICON.play}Aplicar de novo</button>`) : ""}</div>`;
@@ -3402,11 +3437,11 @@ function vRel(){
   ${agir}
   <section class="panel">${hdr("Presença e resultado", `<span class="muted so-d" style="font-size:13px">Toque no título da coluna para ordenar</span>`)}
     <div class="tblwrap so-d"><table class="pres">
-    <thead><tr>${th("pos","Pos.")}${th("nome","Nome")}${temEq ? th("equipe","Equipe") : ""}${temSetor ? th("setor","Setor") : ""}${th("ac","Certas")}${th("nota","Nota")}${th("nota","Situação")}${temG ? th("pg","Gincana") : ""}<th>Assinou</th></tr></thead>
-    <tbody>${linhas.map(l => `<tr><td class="num">${l.pos}º${dsp(l)}</td><td>${esc(l.nome)}${l.bot && S.config.demo ? ` <span class="pill mut">simulado</span>` : ""}</td>${temEq ? `<td><span class="row" style="gap:6px">${l.eq ? marcaEq(l.eq.cor, l.eq.simb) : ""}${esc(l.equipe)}</span></td>` : ""}${temSetor ? `<td>${esc(l.setor || "—")}</td>` : ""}<td class="num">${l.ac}</td><td class="num"><b>${l.nota}%</b></td><td>${sit(l)}</td>${temG ? `<td class="num">${l.pg}</td>` : ""}<td>${ass(l)}</td></tr>`).join("") || `<tr><td colspan="9" class="muted">Sem participantes.</td></tr>`}</tbody></table></div>
-    <div class="cartoes">${linhas.map(l => `<div><span class="pos num">${l.pos}º${dsp(l)}</span><span class="nm">${esc(l.nome)}</span><b class="num">${l.nota}%</b>
-      <span class="sub">${temEq && l.eq ? `<span class="row" style="gap:5px">${marcaEq(l.eq.cor, l.eq.simb)}${esc(l.equipe)}</span>` : ""}${l.setor ? `<span>${esc(l.setor)}</span>` : ""}<span class="num">${l.ac} certa(s)</span>${sit(l)}${temG ? `<span class="num">${l.pg} pts</span>` : ""}<span class="row" style="gap:5px">Assinou ${ass(l)}</span></span></div>`).join("")}</div>
-    <div class="bd muted" style="font-size:13px;border-top:1px solid var(--line)">Meta desta sessão: ${M}%. Nota = acertos nas perguntas de avaliação. Pergunta de teste e gincana não entram na nota.${temEmp ? " * Entre os 3 primeiros: empatou em acertos e foi desempatado pelo menor tempo total de resposta." : ""}</div></section>
+    <thead><tr>${th("pos","Pos.")}${th("nome","Nome")}${temEq ? th("equipe","Equipe") : ""}${temSetor ? th("setor","Setor") : ""}${th("ac","Pontos")}${th("nota","%")}${th("nota","Situação")}${temG ? th("pg","Gincana") : ""}<th>Assinou</th></tr></thead>
+    <tbody>${linhas.map(l => `<tr><td class="num">${l.pos}º${dsp(l)}</td><td>${esc(l.nome)}${l.bot && S.config.demo ? ` <span class="pill mut">simulado</span>` : ""}</td>${temEq ? `<td><span class="row" style="gap:6px">${l.eq ? marcaEq(l.eq.cor, l.eq.simb) : ""}${esc(l.equipe)}</span></td>` : ""}${temSetor ? `<td>${esc(l.setor || "—")}</td>` : ""}<td class="num"><b>${l.ac}</b> de ${c.aval.length}</td><td class="num">${l.nota}%</td><td>${sit(l)}</td>${temG ? `<td class="num">${l.pg}</td>` : ""}<td>${ass(l)}</td></tr>`).join("") || `<tr><td colspan="9" class="muted">Sem participantes.</td></tr>`}</tbody></table></div>
+    <div class="cartoes">${linhas.map(l => `<div><span class="pos num">${l.pos}º${dsp(l)}</span><span class="nm">${esc(l.nome)}</span><b class="num">${l.ac} de ${c.aval.length}</b>
+      <span class="sub">${temEq && l.eq ? `<span class="row" style="gap:5px">${marcaEq(l.eq.cor, l.eq.simb)}${esc(l.equipe)}</span>` : ""}${l.setor ? `<span>${esc(l.setor)}</span>` : ""}<span class="num">${l.nota}%</span>${sit(l)}${temG ? `<span class="num">${l.pg} pts</span>` : ""}<span class="row" style="gap:5px">Assinou ${ass(l)}</span></span></div>`).join("")}</div>
+    <div class="bd muted" style="font-size:13px;border-top:1px solid var(--line)">Meta desta sessão: ${metaTxt275(M, c.aval.length, s.metaTipo)}. Cada acerto vale 1 ponto, só nas perguntas de avaliação; a % é pontos ÷ total. Pergunta de teste e gincana não entram na nota.${temEmp ? " * Entre os 3 primeiros: empatou em acertos e foi desempatado pelo menor tempo total de resposta." : ""}</div></section>
   ${c.equipes.length ? `<section class="panel">${hdr("Equipes")}<div class="tblwrap"><table class="pres"><thead><tr><th>Pos.</th><th>Equipe</th><th>Pessoas</th><th>Nota média</th>${temG?`<th>Gincana (média)</th>`:""}</tr></thead><tbody>
     ${c.equipes.map((e, i) => `<tr><td class="num">${i+1}º</td><td><span class="row" style="gap:6px">${marcaEq(e.cor, e.simb)}${esc(e.nome)}</span></td><td class="num">${e.n}</td><td class="num"><b>${e.nota}%</b></td>${temG?`<td class="num">${e.pg}</td>`:""}</tr>`).join("")}</tbody></table></div></section>` : ""}
   <section class="panel">${hdr("Foto da turma")}<div class="bd stack">
@@ -3578,7 +3613,7 @@ function pdfBase(){
   o.precisa = h => { if (o.y + h > 278) { o.novaPag(); return true; } return false; };
   o.faixa = (t, h = 7) => { doc.setFillColor(...K.faixa); doc.setDrawColor(...K.borda); doc.setLineWidth(.25); doc.rect(o.M, o.y, o.W - 2*o.M, h, "FD"); o.txt(t, o.M + 3, o.y + h/2 + 1.5, {b: true, s: h > 8 ? 12.5 : 9.5}); o.y += h; };
   o.cabecalho = titulo => { const emp = String(EFC_CONFIG.empresa || "").trim();
-    o.txt(emp || " ", o.M, o.y + 3, {b: true, s: 10, c: K.cinza}); o.txt(EFC_CONFIG.produto + " v" + APP_VERSAO, o.W - o.M, o.y + 3, {s: 8, c: K.cinza, al: "right"}); o.y += 5;
+    o.txt(emp || " ", o.M, o.y + 3, {b: true, s: 10, c: K.cinza}); o.y += 5;
     o.faixa(titulo, 11); };
   /* faixa de números grandes, números à direita */
   o.numeros = itens => { const nw = (o.W - 2*o.M) / itens.length; doc.setDrawColor(...K.borda); doc.setLineWidth(.25);
@@ -3782,7 +3817,7 @@ const A = {
   irConferir(){ UI().tela = "conferir"; UI().conf2 = {codigo: ""}; UI().msgResp = ""; UI().erroImp = ""; },
   conferir(){ const c = UI().conf2 || (UI().conf2 = {codigo: ""}); c.feito = true; },
   irPrompt(){ UI().tela = "prompt"; UI().msgPrompt = ""; UI().erroImp = ""; },
-  copiarPrompt(){ const t = textoPrompt(UI().prompt); const ok = () => { UI().msgPrompt = "Prompt copiado. Cole na IA junto com o POP ou o slide."; save(); render(); };
+  copiarPrompt(){ const t = textoPrompt(UI().prompt); const ok = () => { UI().msgPrompt = "Prompt copiado. Cole na IA junto com o seu material."; save(); render(); };
     const reserva = () => { const ta = document.getElementById("pr-txt"); if (ta){ ta.removeAttribute("readonly"); ta.focus(); ta.select(); try { const r = document.execCommand("copy"); ta.setAttribute("readonly", ""); if (r) return ok(); } catch(e) {} ta.setAttribute("readonly", ""); }
       UI().msgPrompt = "Não deu para copiar sozinho neste aparelho. O texto já está selecionado: use Copiar do teclado ou toque em Baixar .txt."; save(); render(); const t2 = document.getElementById("pr-txt"); if (t2){ t2.focus(); t2.select(); } };
     try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, reserva); else reserva(); } catch(e) { reserva(); } return "norender"; },
@@ -3860,7 +3895,7 @@ const A = {
     if (ruim >= 0) return UI().erro = `Preencha o item ${ruim+1}: ${isQ(d.itens[ruim]) ? "a pergunta e todas as alternativas (texto ou foto)" : "o tema da explicação"}.`, undefined;
     delete d._novo; d.atualizado = Date.now(); const i = S.treinamentos.findIndex(t => t.id === d.id); if (i >= 0) S.treinamentos[i] = d; else S.treinamentos.push(d);
     UI().tela = "lista"; UI().erro = ""; },
-  novaSessao(tId){ const T = S.treinamentos.find(t => t.id === tId); UI().view = "resp"; UI().nova = {tId, instrutor: "", local: "", meta: (T && T.meta) || 70, modo: "aovivo", prazo: "", equipe: "nao", maxEquipe: 4, mostrarRanking: true, embaralhar: false, confirmar: false}; UI().tela = "nova"; },
+  novaSessao(tId){ const T = S.treinamentos.find(t => t.id === tId); UI().view = "resp"; UI().nova = {tId, instrutor: "", local: "", meta: (T && T.meta) || 70, metaTipo: (T && T.metaTipo) || "pts", modo: "aovivo", prazo: "", equipe: "nao", maxEquipe: 4, mostrarRanking: true, embaralhar: false, confirmar: false}; UI().tela = "nova"; },
   setNova(a){ const [k, v] = a.split("|"); UI().nova[k] = k === "semBloqueio" ? v === "1" : v; },
   abrirSessao(){ const o = UI().nova, T = S.treinamentos.find(t => t.id === o.tId); const s = sessaoNova(T, o); S.sessoes.push(s); UI().sessId = s.id; UI().tela = "controle"; },
   abrirControle(id){ UI().sessId = id; UI().view = "resp"; UI().tela = "controle"; },
@@ -4050,7 +4085,7 @@ function seedSessao(T, o, diasAtras, bonus, nBots, chave){
 }
 function seed(demo){
   S = {v: 3, rev: 0, offset: 0, perfil: "primario", treinamentos: demo ? [exemplo(), exemplo2()] : [], sessoes: [], pessoas: [], mensagens: [], eu: null, ui: {view: "resp", tela: "lista", abaResp: "trein", som: false, v23: 1},
-    config: {empresa: "", setores: SETORES_PADRAO.slice(), demo: !!demo, comemoracao: false}};
+    config: {empresa: "", setores: (demo ? SETORES_DEMO274 : SETORES_PADRAO).slice(), demo: !!demo, comemoracao: false}};
   if (!demo) return;
   const [T1, T2] = S.treinamentos, base = {modo: "aovivo", maxEquipe: 4, mostrarRanking: true};
   seedSessao(T1, {...base, instrutor: "Ana Lima", local: "Refeitório", equipe: "nao"}, 80, -.14, 11);
@@ -4244,7 +4279,7 @@ function vPerfil(){
     <div class="ptopo">${avSvg(avDaPessoa(pe), "md")}<div style="min-width:0"><b class="pn">${esc(nomeCompleto(pe))}</b><span class="muted">${esc(pe.setor || "")}</span><button class="btn sm" data-act="avAbrir">${ICON.pen}Editar boneco</button></div></div>
     <section class="pbl"><span class="lbl">Selos · <span class="num">${conq} de ${SELOS.length}</span></span><div class="selos">${selos.map(seloHtml).join("")}</div></section>
     <section class="pbl"><span class="lbl">Meus treinamentos · <span class="num">${h.length}</span></span>
-      ${h.length ? `<div class="hist">${h.slice(0, u.histTodos ? 999 : 4).map(x => `<div><span class="t"><b>${esc(x.s.titulo)}</b><span class="muted num">${fData(x.s.encerradaEm)}</span></span><span class="nt"><b class="num">${x.nota}%</b><span class="sit ${x.ok ? "ok" : "bad"}">${x.ok ? "Eficaz" : "Reforço"}</span></span>
+      ${h.length ? `<div class="hist">${h.slice(0, u.histTodos ? 999 : 4).map(x => `<div><span class="t"><b>${esc(x.s.titulo)}</b><span class="muted num">${fData(x.s.encerradaEm)}</span></span><span class="nt"><b class="num">${x.r.ac} de ${x.aval}</b><span class="muted num">${x.nota}%</span><span class="sit ${x.ok ? "ok" : "bad"}">${x.ok ? "Eficaz" : "Reforço"}</span></span>
         ${x.erros.length ? `<button class="btn sm" data-act="revAbrir" data-arg="${x.s.id}">Rever o que errei (${x.erros.length})</button>` : ""}</div>`).join("")}</div>${h.length > 4 ? `<button class="btn sm" style="justify-self:start" data-act="histTodos">${u.histTodos ? "Mostrar só os 4 últimos" : "Mostrar todos (" + h.length + ")"}</button>` : ""}` : `<p class="muted" style="margin:0">Os treinamentos aparecem aqui depois que o responsável encerra a sessão.</p>`}</section>
     <section class="pbl"><span class="lbl">Fale com o responsável</span>
       ${u.msgFale ? `<div class="okmsg">${esc(u.msgFale)}</div>` : ""}${u.erroFale ? `<div class="msg">${esc(u.erroFale)}</div>` : ""}
@@ -4306,7 +4341,7 @@ function vReforco(){
   return `<section class="panel">${hdr("Reforço pendente", `<span class="muted" style="font-size:13px">Quem ficou abaixo da meta na última vez, com as perguntas que errou</span>`)}<div class="tlist">${gs.map(g => `<div>
     <div class="t"><b>${esc(g.T.titulo)}</b><span class="muted"><span class="num">${g.pessoas.length}</span> pessoa(s) abaixo da meta · <span class="num">${g.itens.length}</span> pergunta(s) para reforçar</span></div>
     <div class="acs"><button class="btn pri" data-act="reforcoAbrir" data-arg="${g.T.id}">${ICON.play}Abrir reforço</button></div>
-    <div class="ult">${g.pessoas.slice(0, 8).map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return pe ? `<span class="row" style="gap:5px">${avSvg(avDaPessoa(pe), "xs")}${esc(nomeCompleto(pe))} <b class="num">${x.nota}%</b></span>` : ""; }).join("")}${g.pessoas.length > 8 ? `<span class="muted">e mais ${g.pessoas.length - 8}</span>` : ""}</div></div>`).join("")}</div></section>`;
+    <div class="ult">${g.pessoas.slice(0, 8).map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return pe ? `<span class="row" style="gap:5px">${avSvg(avDaPessoa(pe), "xs")}${esc(nomeCompleto(pe))} <b class="num" title="${tituloNota272(x)}">${x.nota}%</b>${tagRod272(x)}</span>` : ""; }).join("")}${g.pessoas.length > 8 ? `<span class="muted">e mais ${g.pessoas.length - 8}</span>` : ""}</div></div>`).join("")}</div></section>`;
 }
 
 /* ---------- X05: desafio entre setores, placar do mês sem nomes ---------- */
@@ -4344,35 +4379,35 @@ function telSetores(){
 
 /* ---------- X06: modelos prontos (revisar com o POP antes de aplicar) ---------- */
 const MODELOS = [
-  {id: "m-epi", titulo: "Uso de EPI no trabalho de campo", meta: 80, descricao: "Modelo pronto. Revise com o POP da fazenda antes de aplicar.", itens: [
-    {tipo:"explicacao", enunciado:"Para que serve o EPI e quando usar", texto:""},
-    {tipo:"multipla", enunciado:"Quando o EPI deve ser usado?", alternativas:["Só quando o encarregado está olhando","Durante toda a atividade que exige o EPI","Só nos dias de muito calor","Só no começo do turno"], correta:1, tempo:20, uso:"avaliacao", porque:"O EPI protege durante toda a atividade. Tirar no meio do serviço deixa a pessoa exposta."},
-    {tipo:"vf", enunciado:"Pode emprestar o seu EPI de uso individual a um colega.", alternativas:["Verdadeiro","Falso"], correta:1, tempo:20, uso:"avaliacao", porque:"O EPI é de uso pessoal. O colega deve pedir o dele ao responsável."},
-    {tipo:"multipla", enunciado:"O EPI rasgou durante o trabalho. O que fazer?", alternativas:["Continuar e trocar no fim do mês","Avisar o responsável e trocar antes de continuar","Remendar com fita","Trabalhar sem ele"], correta:1, tempo:30, uso:"avaliacao", porque:"EPI danificado não protege. Avise e troque antes de voltar à atividade."},
-    {tipo:"vf", enunciado:"Todo EPI precisa ter o Certificado de Aprovação (CA) válido.", alternativas:["Verdadeiro","Falso"], correta:0, tempo:20, uso:"avaliacao", porque:"A NR 6 exige o CA. Sem ele não há garantia de que o equipamento protege."},
-    {tipo:"ordenar", enunciado:"Coloque na ordem o cuidado com o EPI depois do uso.", alternativas:["Limpar conforme a orientação","Conferir se há rasgo ou defeito","Guardar em local limpo e seco"], tempo:45, uso:"avaliacao", porque:"Limpar, conferir e guardar: assim ele está pronto e seguro para o próximo uso."},
-    {tipo:"multipla", enunciado:"O que protege do sol forte no campo?", alternativas:["Chapéu de aba larga e roupa de manga longa","Protetor auricular","Touca descartável","Luva de látex"], correta:0, tempo:20, uso:"gincana", porque:"Chapéu de aba larga e manga longa protegem a pele do sol."}]},
-  {id: "m-hig", titulo: "Higiene pessoal no packing house", meta: 80, descricao: "Modelo pronto. Revise com o POP da fazenda antes de aplicar.", itens: [
-    {tipo:"explicacao", enunciado:"Higiene pessoal protege o fruto e quem consome", texto:""},
-    {tipo:"multipla", enunciado:"Você acordou com febre ou diarreia. O que fazer antes do turno?", alternativas:["Trabalhar normalmente","Avisar o responsável antes de entrar na área","Tomar um remédio e entrar","Só usar máscara"], correta:1, tempo:30, uso:"avaliacao", porque:"Doença pode passar para o alimento. O responsável decide a sua atividade antes de você entrar."},
-    {tipo:"vf", enunciado:"Corte na mão deve ficar coberto com curativo e luva.", alternativas:["Verdadeiro","Falso"], correta:0, tempo:20, uso:"avaliacao", porque:"Curativo e luva impedem contato do ferimento com o produto."},
-    {tipo:"multipla", enunciado:"Onde se pode comer e beber durante o turno?", alternativas:["Na linha de seleção","Só na área definida para isso","Dentro da câmara fria","No carregamento"], correta:1, tempo:20, uso:"avaliacao", porque:"Comida e bebida só na área definida, longe do produto."},
-    {tipo:"vf", enunciado:"Unha comprida ou com esmalte é permitida na área de manuseio.", alternativas:["Verdadeiro","Falso"], correta:1, tempo:20, uso:"avaliacao", porque:"Unha comprida acumula sujeira e o esmalte pode soltar no produto."},
+  {id: "m-epi", titulo: "Equipamentos de proteção no trabalho", meta: 80, descricao: "Modelo pronto. Revise com o seu material antes de aplicar.", itens: [
+    {tipo:"explicacao", enunciado:"Para que serve o equipamento de proteção e quando usar", texto:""},
+    {tipo:"multipla", enunciado:"Quando o equipamento de proteção deve ser usado?", alternativas:["Só quando o responsável está olhando","Durante toda a atividade que exige o equipamento","Só nos dias de muito calor","Só no começo do turno"], correta:1, tempo:20, uso:"avaliacao", porque:"A proteção vale durante toda a atividade. Tirar no meio do serviço deixa a pessoa exposta."},
+    {tipo:"vf", enunciado:"Pode emprestar o seu equipamento de proteção de uso individual a um colega.", alternativas:["Verdadeiro","Falso"], correta:1, tempo:20, uso:"avaliacao", porque:"O equipamento é de uso pessoal. O colega deve pedir o dele ao responsável."},
+    {tipo:"multipla", enunciado:"O equipamento rasgou ou quebrou durante o trabalho. O que fazer?", alternativas:["Continuar e trocar no fim do mês","Avisar o responsável e trocar antes de continuar","Remendar com fita","Trabalhar sem ele"], correta:1, tempo:30, uso:"avaliacao", porque:"Equipamento danificado não protege. Avise e troque antes de voltar à atividade."},
+    {tipo:"vf", enunciado:"O equipamento de proteção precisa ser do tamanho certo para quem usa.", alternativas:["Verdadeiro","Falso"], correta:0, tempo:20, uso:"avaliacao", porque:"Equipamento folgado ou apertado atrapalha e protege mal."},
+    {tipo:"ordenar", enunciado:"Coloque na ordem o cuidado com o equipamento depois do uso.", alternativas:["Limpar conforme a orientação","Conferir se há rasgo ou defeito","Guardar em local limpo e seco"], tempo:45, uso:"avaliacao", porque:"Limpar, conferir e guardar: assim ele está pronto e seguro para o próximo uso."},
+    {tipo:"multipla", enunciado:"Onde guardar o equipamento de proteção?", alternativas:["Em local limpo, seco e conhecido por todos","No chão, perto do trabalho","Dentro do carro","Onde der"], correta:0, tempo:20, uso:"gincana", porque:"Guardado no lugar certo, o equipamento dura mais e é fácil de achar."}]},
+  {id: "m-hig", titulo: "Higiene das mãos e pessoal", meta: 80, descricao: "Modelo pronto. Revise com o seu material antes de aplicar.", itens: [
+    {tipo:"explicacao", enunciado:"Higiene pessoal protege quem trabalha e quem é atendido", texto:""},
+    {tipo:"multipla", enunciado:"Você acordou com febre ou diarreia. O que fazer antes de começar o dia?", alternativas:["Trabalhar normalmente","Avisar o responsável antes de entrar na área","Tomar um remédio e entrar","Só usar máscara"], correta:1, tempo:30, uso:"avaliacao", porque:"Doença passa de pessoa para pessoa e para os alimentos. O responsável decide a sua atividade antes de você entrar."},
+    {tipo:"vf", enunciado:"Corte na mão deve ficar coberto com curativo e luva.", alternativas:["Verdadeiro","Falso"], correta:0, tempo:20, uso:"avaliacao", porque:"Curativo e luva impedem contato do ferimento com o que a pessoa toca."},
+    {tipo:"multipla", enunciado:"Onde se pode comer e beber durante o turno?", alternativas:["No meio da atividade","Só na área definida para isso","Dentro da área de trabalho","Em qualquer lugar"], correta:1, tempo:20, uso:"avaliacao", porque:"Comida e bebida só na área definida, longe do trabalho e do material."},
+    {tipo:"vf", enunciado:"Unha comprida ou com esmalte é permitida na área de manuseio.", alternativas:["Verdadeiro","Falso"], correta:1, tempo:20, uso:"avaliacao", porque:"Unha comprida acumula sujeira e o esmalte pode soltar."},
     {tipo:"ordenar", enunciado:"Coloque na ordem a entrada na área de manuseio.", alternativas:["Prender o cabelo e colocar a touca","Lavar as mãos","Calçar as luvas, se a atividade pedir"], tempo:45, uso:"avaliacao", porque:"Touca primeiro, depois mãos lavadas e por último as luvas: assim as mãos limpas não tocam o cabelo."},
-    {tipo:"vf", enunciado:"Brinco, anel e pulseira devem ser retirados antes de entrar.", alternativas:["Verdadeiro","Falso"], correta:0, tempo:15, uso:"gincana", porque:"Adornos acumulam sujeira e podem cair no produto."}]},
-  {id: "m-amo", titulo: "Coleta e envio de amostras ao laboratório", meta: 75, descricao: "Modelo pronto. Revise com o POP da fazenda antes de aplicar.", itens: [
-    {tipo:"explicacao", enunciado:"Amostra bem coletada é resultado confiável", texto:""},
-    {tipo:"multipla", enunciado:"O que confere primeiro, antes de sair para coletar?", alternativas:["A programação de coleta: talhão e tipo de amostra","A previsão do tempo da semana","O preço da análise","Nada, é só coletar"], correta:0, tempo:30, uso:"avaliacao", porque:"A programação diz onde e o que coletar. Coletar no lugar errado invalida o resultado."},
-    {tipo:"multipla", enunciado:"O que não pode faltar na identificação da amostra?", alternativas:["Só o nome de quem coletou","Talhão, data e tipo de amostra","Nada, o laboratório identifica","Só a data"], correta:1, tempo:30, uso:"avaliacao", porque:"Sem talhão, data e tipo, o laudo não tem como ser ligado à área certa."},
-    {tipo:"vf", enunciado:"Pode usar saco de adubo reaproveitado para levar a amostra.", alternativas:["Verdadeiro","Falso"], correta:1, tempo:20, uso:"avaliacao", porque:"Resto de adubo contamina a amostra. Use embalagem limpa e própria."},
-    {tipo:"vf", enunciado:"A amostra pode ficar no sol, dentro do carro, até o fim do dia.", alternativas:["Verdadeiro","Falso"], correta:1, tempo:20, uso:"avaliacao", porque:"O calor altera a amostra. Guarde em local fresco e envie o quanto antes."},
-    {tipo:"ordenar", enunciado:"Coloque as etapas na ordem certa.", alternativas:["Conferir a programação","Coletar no ponto certo","Identificar a embalagem","Registrar a coleta e enviar"], tempo:60, uso:"avaliacao", porque:"Conferir, coletar, identificar e registrar: cada etapa depende da anterior."},
-    {tipo:"multipla", enunciado:"Qual ferramenta é a mais usada para coletar solo?", alternativas:["Trado","Pá de lixo","Facão","A mão"], correta:0, tempo:20, uso:"gincana", porque:"O trado tira a amostra na profundidade certa e sempre do mesmo jeito."}]}];
+    {tipo:"vf", enunciado:"Brinco, anel e pulseira devem ser retirados antes de entrar.", alternativas:["Verdadeiro","Falso"], correta:0, tempo:15, uso:"gincana", porque:"Adornos acumulam sujeira e podem cair."}]},
+  {id: "m-inc", titulo: "Como comunicar um problema ou acidente", meta: 75, descricao: "Modelo pronto. Revise com o seu material antes de aplicar.", itens: [
+    {tipo:"explicacao", enunciado:"Avisar logo evita que o problema cresça", texto:""},
+    {tipo:"multipla", enunciado:"Quando avisar o responsável sobre um problema ou acidente?", alternativas:["Só no fim da semana","O quanto antes","Só se alguém perguntar","Nunca, se for pequeno"], correta:1, tempo:30, uso:"avaliacao", porque:"Quanto antes o responsável souber, mais cedo ele resolve e evita que se repita."},
+    {tipo:"multipla", enunciado:"O que não pode faltar no aviso?", alternativas:["Só o nome de quem viu","O que aconteceu, onde e quando","Nada, o responsável descobre","Só o horário"], correta:1, tempo:30, uso:"avaliacao", porque:"Sem saber o que, onde e quando, fica difícil achar a causa e resolver."},
+    {tipo:"vf", enunciado:"Quase acidente, que não machucou ninguém, também deve ser avisado.", alternativas:["Verdadeiro","Falso"], correta:0, tempo:20, uso:"avaliacao", porque:"O quase acidente mostra o risco antes que alguém se machuque."},
+    {tipo:"vf", enunciado:"Pode mexer no local do acidente antes de o responsável chegar, para arrumar tudo.", alternativas:["Verdadeiro","Falso"], correta:1, tempo:20, uso:"avaliacao", porque:"Mexer apaga as pistas do que aconteceu. Só mexa se for preciso para socorrer alguém ou evitar outro risco."},
+    {tipo:"ordenar", enunciado:"Coloque as etapas na ordem certa.", alternativas:["Garantir a segurança de todos","Avisar o responsável","Registrar o que aconteceu","Acompanhar a solução"], tempo:60, uso:"avaliacao", porque:"Primeiro a segurança, depois o aviso, o registro e o acompanhamento: cada etapa depende da anterior."},
+    {tipo:"multipla", enunciado:"Quem deve avisar um problema?", alternativas:["Só o chefe","Qualquer pessoa que perceber","Só quem se machucou","Só quem está de plantão"], correta:1, tempo:20, uso:"gincana", porque:"Quem percebe primeiro tem o dever de avisar. Todos ajudam a evitar o problema."}]}];
 function vModelos(){
   if (!UI().modelos || !pode()) return "";
   return `<section class="banco">${hdr("Modelos prontos", `<button class="btn sm" data-act="modelosFechar">Fechar</button>`)}
     <div class="lista">${MODELOS.map(m => { const nq = m.itens.filter(isQ).length; return `<div class="mdl"><span><b>${esc(m.titulo)}</b><br><span class="muted" style="font-size:13px"><span class="num">${nq}</span> perguntas · meta <span class="num">${m.meta}%</span> · ${esc(m.descricao)}</span></span><button class="btn sm pri" data-act="modeloUsar" data-arg="${m.id}">Usar este modelo</button></div>`; }).join("")}</div>
-    <div class="bd muted" style="font-size:13px;border-top:1px solid var(--line)">O modelo vira uma cópia sua e abre no editor. Para converter os seus POPs e slides, use "Gerar prompt para IA".</div></section>`;
+    <div class="bd muted" style="font-size:13px;border-top:1px solid var(--line)">O modelo vira uma cópia sua e abre no editor. Para converter o seu material (procedimentos, apostilas, slides), use "Gerar prompt para IA".</div></section>`;
 }
 
 /* ---------- X03: voz gravada na pergunta (opcional) ---------- */
@@ -4431,7 +4466,7 @@ Object.assign(A, {
   modelos(){ UI().modelos = !UI().modelos; },
   modelosFechar(){ UI().modelos = false; },
   modeloUsar(id){ const m = MODELOS.find(x => x.id === id); if (!m) return; const T = {id: uid(), titulo: m.titulo, meta: m.meta, descricao: m.descricao, criadoPor: PERFIS[S.perfil], atualizado: Date.now(), modelo: m.id, itens: m.itens.map(it => ({id: uid(), foto: null, ...clone(it)}))};
-    S.treinamentos.push(T); UI().modelos = false; UI().draft = clone(T); UI().tela = "editor"; UI().erro = ""; UI().msgEd = "Modelo copiado para os seus treinamentos. Revise com o POP antes de aplicar."; },
+    S.treinamentos.push(T); UI().modelos = false; UI().draft = clone(T); UI().tela = "editor"; UI().erro = ""; UI().msgEd = "Modelo copiado para os seus treinamentos. Revise com o seu material antes de aplicar."; },
   vozGravar(i){ gravarVoz(+i); return "norender"; },
   vozApagar(i){ const it = UI().draft.itens[+i]; delete it.voz; delete it.vozSeg; },
   vozOuvirEd(i){ const it = UI().draft.itens[+i]; if (it && it.voz) tocarVoz(it.voz); return "norender"; },
@@ -5291,15 +5326,15 @@ function vReforco2(q){
   const u = UI(), g = gs.find(x => x.T.id === u.refSel) || gs[0], primeiro = g === gs[0];
   const ult = sessOficiais(g.T.id).sort((a, b) => b.encerradaEm - a.encerradaEm)[0], cU = ult ? calc(ult) : null;
   const dias = Math.max(0, Math.floor((now() - g.desde) / DAY));
-  const nomes = [...g.pessoas].sort((a, b) => a.nota - b.nota).slice(0, 6).map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return pe ? `<span>${avSvg(avDaPessoa(pe), "xs")}${esc(nomeCompleto(pe))} <b class="num">${x.nota}%</b></span>` : ""; }).join("") + (g.pessoas.length > 6 ? `<span class="aj">e mais ${g.pessoas.length - 6}</span>` : "");
+  const nomes = [...g.pessoas].sort((a, b) => a.nota - b.nota).slice(0, 6).map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return pe ? `<span>${avSvg(avDaPessoa(pe), "xs")}${esc(nomeCompleto(pe))} <b class="num" title="${tituloNota272(x)}">${x.nota}%</b>${tagRod272(x)}</span>` : ""; }).join("") + (g.pessoas.length > 6 ? `<span class="aj">e mais ${g.pessoas.length - 6}</span>` : "");
   return `<div class="duas"><div class="tl rl">${gs.map(x => `<button class="r2${x === g ? " at" : ""}" data-act="refSel" data-arg="${x.T.id}"${x === g ? ` aria-current="true"` : ""}>
       <span class="ind" aria-hidden="true"></span><span class="nm"><b>${esc(x.T.titulo)}</b><span class="det">${plu(x.pessoas.length, "pessoa", "pessoas")} · desde ${fCurta(x.desde)}</span></span><span class="pill warn">Pendente</span></button>`).join("")}</div>
     <aside class="pn">${primeiro ? `<span class="pnm">Mostrando o reforço mais antigo</span>` : ""}<h2>${esc(g.T.titulo)}</h2>
       ${ult ? `<p class="det">Última aplicação em ${fData(ult.encerradaEm)} · meta ${cU.meta}% · nota média ${numerosSessao(ult, cU).media}%</p>` : ""}
-      <dl class="dl2"><dt>Pessoas</dt><dd class="num">${g.pessoas.length}</dd><dt>Perguntas para reforçar</dt><dd class="num">${g.itens.length}</dd><dt>Aberto há</dt><dd class="num">${plu(dias, "dia", "dias")}</dd></dl>
+      <dl class="dl2"><dt>Pessoas</dt><dd class="num">${g.pessoas.length}</dd>${g.pessoas.some(x => x.rodada === 3) ? `<dt>Na 3ª tentativa</dt><dd class="num">${g.pessoas.filter(x => x.rodada === 3).length}</dd>` : ""}<dt>Perguntas para reforçar</dt><dd class="num">${g.itens.length}</dd><dt>Aberto há</dt><dd class="num">${plu(dias, "dia", "dias")}</dd></dl>
       <div class="nms">${nomes}</div>
       <div class="pna"><button class="btn pri" data-act="reforcoAbrir" data-arg="${g.T.id}">${ICON.play}Abrir reforço</button>${ult ? `<button class="btn" data-act="verRel" data-arg="${ult.id}">Ver relatório</button>` : ""}</div>
-      <p class="aj">Só entram as pessoas abaixo da meta e só as perguntas que elas erraram.</p></aside></div>`;
+      <p class="aj">Só entram as pessoas abaixo da meta. A 2ª tentativa pode ser no mesmo dia; a 3ª só em outro dia.</p></aside></div>`;
 }
 
 /* ---------------- painel de versões e observações (pela direita, de cima a baixo) ---------------- */
@@ -5397,7 +5432,7 @@ function vIA(){
   const passos = `<ol class="pss">${[["Pedido", 1], ["Resposta", 2], ["Escolher", 3]].map(([l, n]) => `<li class="${passo === n ? "at" : passo > n ? "ok" : ""}"><span>${passo > n ? ICON.ok : n}</span>${l}</li>`).join("")}</ol>`;
   let corpo = "", pe = "";
   if (!I.itens){
-    corpo = `<div class="grid3 iag"><label class="field"><span>Assunto</span><input type="text" id="ia-ass" data-iabind="assunto" value="${esc(I.assunto || "")}" placeholder="Ex.: Higiene no packing house"></label>
+    corpo = `<div class="grid3 iag"><label class="field"><span>Assunto</span><input type="text" id="ia-ass" data-iabind="assunto" value="${esc(I.assunto || "")}" placeholder="Ex.: Higiene das mãos"></label>
         ${dd("dd-pub", "Público", I.publico || "adulto", [["adulto", "Adulto", "Linguagem simples e direta"], ["infantil", "Infantil", "Frases curtas, palavras de criança"]], "iaPub", "")}
         ${dd("dd-tam", "Tamanho", +I.tam, [[5, "5 perguntas"], [10, "10 perguntas"], [15, "15 perguntas"], [20, "20 perguntas"], [30, "30 perguntas"]], "iaTam", "")}</div>
       <label class="field"><span>O pedido pronto · cole numa IA junto com o seu material</span><textarea id="ia-txt" class="prm" readonly rows="7">${esc(textoPromptIA(I))}</textarea></label>
@@ -5451,13 +5486,13 @@ vNova = function(){
       <label class="field"><span>Local</span><input type="text" id="n-local" data-nbind="local" value="${esc(o.local)}" placeholder="Ex.: Refeitório"></label>
     </div>
     <div class="ddg">
-      ${dd("dd-meta", "Meta de aprovação", +o.meta, METAS.map(m => [m, m + "%" + (m === mT ? " · do treinamento" : "")]), "setNova", "meta|")}
+      ${dd("dd-meta", "Meta de aprovação", valMeta275(+o.meta, nAval275(T.itens), o.metaTipo || "pts"), opsMeta275(nAval275(T.itens), o.metaTipo || "pts", +o.meta), "setNova", "meta|")}${dd("dd-metatipo", "Meta em", o.metaTipo || "pts", [["pts", "Pontos"], ["pct", "Porcentagem"]], "setNova", "metaTipo|")}
       ${nuvem}
       ${dd("dd-modo", "Modo", o.modo, [["aovivo", "Ao vivo, com telão", "Todos respondem juntos, pergunta por pergunta."], ["ritmo", "No próprio ritmo", "Cada um responde quando puder, até o prazo."]], "setNova", "modo|")}
       ${o.reforco ? "" : dd("dd-eq", "Formato", o.equipe, [["nao", "Individual", "Cada pessoa responde por si e tem a própria nota."], ["um", "Equipe · 1 celular por equipe", "Uma pessoa responde pelo grupo. Todos assinam no final."], ["cada", "Equipe · cada um no seu celular", "Cada um escolhe ou cria a equipe. A nota da equipe é a média."]], "setNova", "equipe|")}
       ${dd("dd-tempo", "Quando o tempo da pergunta acabar", String(+!!+o.semBloqueio), [["0", "Fecha a pergunta"], ["1", "Ainda aceita resposta", "Vale para a nota, sem pontos de rapidez na gincana. Bom para quem lê devagar."]], "setNova", "semBloqueio|")}
     </div>
-    ${+o.meta !== mT ? `<p class="note" style="margin:0">Meta ajustada só nesta sessão. O registro guarda a mudança: de ${mT}% para ${o.meta}%, por ${PERFIS[S.perfil]}.</p>` : ""}
+    ${+o.meta !== mT ? `<p class="note" style="margin:0">Meta ajustada só nesta sessão. O registro guarda a mudança: de ${metaTxt275(mT, nAval275(T.itens), o.metaTipo || "pts")} para ${metaTxt275(+o.meta, nAval275(T.itens), o.metaTipo || "pts")}, por ${PERFIS[S.perfil]}.</p>` : ""}
     ${o.modo === "ritmo" ? `<label class="field" style="max-width:260px"><span>Prazo para responder</span><input type="date" id="n-prazo" data-nbind="prazo" value="${esc(o.prazo)}"></label>` : ""}
     ${o.equipe !== "nao" && !o.reforco ? `<label class="field" style="max-width:260px"><span>Máximo de pessoas por equipe</span><input type="number" min="2" max="12" id="n-max" data-nbind="maxEquipe" value="${o.maxEquipe}"></label>` : ""}
     ${blocoRefazer270(o)}
@@ -5484,8 +5519,8 @@ vConfig = function(){
   if (!a && !u._armazPedido){ u._armazPedido = true; atualizarArmaz(); }
   const m = C.demoModo;
   const corpo = [
-    sec("ident", "Identificação", `<div class="grid2"><label class="field"><span>Nome da empresa · aparece no topo e no PDF; vazio não mostra</span><input type="text" id="cfg-emp" data-cfgemp="1" value="${esc(EFC_CONFIG.empresa || "")}"></label>
-      ${S.ui.nuvemConta ? `<div class="field"><span>Perfil neste aparelho</span><b>${esc(PERFIS[S.perfil])} · vem da conta do EFClaudian</b></div>` : `<label class="field"><span>Perfil neste aparelho · com a conta do EFClaudian o perfil vem da conta</span><select id="perfil" data-bindroot="perfil">${Object.entries(PERFIS).map(([k, v]) => `<option value="${k}"${S.perfil === k ? " selected" : ""}>${v}</option>`).join("")}</select></label>`}</div>`),
+    sec("ident", "Identificação", `<div class="grid2"><label class="field"><span>Nome da organização, escola ou empresa · aparece no topo e no PDF; vazio não mostra</span><input type="text" id="cfg-emp" data-cfgemp="1" value="${esc(EFC_CONFIG.empresa || "")}"></label>
+      ${logoCfg276()}${S.ui.nuvemConta ? `<div class="field"><span>Perfil neste aparelho</span><b>${esc(PERFIS[S.perfil])} · vem da conta do EFClaudian</b></div>` : `<label class="field"><span>Perfil neste aparelho · com a conta do EFClaudian o perfil vem da conta</span><select id="perfil" data-bindroot="perfil">${Object.entries(PERFIS).map(([k, v]) => `<option value="${k}"${S.perfil === k ? " selected" : ""}>${v}</option>`).join("")}</select></label>`}</div>`),
     sec("apar", "Aparência", `<label class="field" style="max-width:420px"><span>Tema · o padrão é seguir o EFClaudian neste aparelho</span><select id="cfg-tema" data-bindroot="temaCfg">${opcoesTema()}</select></label>`),
     sec("telao", "No telão", `<div class="tgls"><div class="tgl"><span>Sons dos últimos segundos e da revelação</span>${segOnOff("somCfg", u.som === true, "Desligados", "Ligados")}</div>
       <div class="tgl"><span>Comemoração no pódio · confete só dentro do pódio, 2 segundos</span>${segOnOff("comemoracao", C.comemoracao, "Desligada", "Ligada")}</div></div>`),
@@ -5953,8 +5988,9 @@ async function pdfEvidencia(s){
   const txt = (t, x, y, o = {}) => { doc.setFont("helvetica", o.b ? "bold" : "normal"); doc.setFontSize(o.s || 9); doc.setTextColor(...(o.c || tinta)); doc.text(safe(t), x, y, o.al ? {align: o.al} : undefined); };
   const titulo = `${s.titulo} · ${vv(s.tVer || 0)}`, emp = String(EFC_CONFIG.empresa || "").trim();
   let y = 0;
-  const cab = sub => { try { doc.addImage(EFC_MARCA, "JPEG", X, 10, 14, 14); } catch(e) {}
-    txt(sub.toUpperCase(), X + 18, 15, {s: 7, b: true, c: cinza}); txt(doc.splitTextToSize(safe(titulo), 120)[0], X + 18, 21.5, {s: 13, b: true});
+  const cab = sub => { const lg = S.config && S.config.logo; let ox = X;
+    if (lg && lg.src){ try { let hh = 14, ww = hh * lg.w / lg.h; if (ww > 40){ ww = 40; hh = ww * lg.h / lg.w; } doc.addImage(lg.src, lg.tipo || "PNG", X, 10 + (14 - hh) / 2, ww, hh); ox = X + ww + 4; } catch(e) { ox = X; } }
+    txt(sub.toUpperCase(), ox, 15, {s: 7, b: true, c: cinza}); txt(doc.splitTextToSize(safe(titulo), Math.min(120, 140 - (ox - X)))[0], ox, 21.5, {s: 13, b: true});
     if (s.integ){ txt("Código de conferência", W - X, 13.5, {s: 6.8, c: cinza, al: "right"}); doc.setFont("courier", "bold"); doc.setFontSize(9.5); doc.setTextColor(...tinta); doc.text(s.integ, W - X, 18, {align: "right"}); }
     if (emp) txt(emp, W - X, 22.5, {s: 7, c: cinza, al: "right"});
     doc.setDrawColor(...roxo); doc.setLineWidth(.6); doc.line(X, 26.5, W - X, 26.5); doc.setLineWidth(.2); y = 31; };
@@ -5963,7 +5999,7 @@ async function pdfEvidencia(s){
   /* folha 1: dados e números */
   cab("Registro de treinamento e avaliação de eficácia");
   const dados = [["Data", fData(s.criadaEm)], ["Início · fim", `${fHora(s.iniciadaEm || s.criadaEm)} · ${s.encerradaEm ? fHora(s.encerradaEm) : "-"}`], ["Local", s.local || "-"], ["Instrutor", s.instrutor || "-"],
-    ["Modo", s.modo === "aovivo" ? "Ao vivo, com telão" : "No próprio ritmo"], ["Formato", s.equipe === "nao" ? "Individual" : "Equipes"], ["Meta de eficácia", M + "%"], ["Versão aplicada", vv(s.tVer || 0) + (T ? "" : "")]];
+    ["Modo", s.modo === "aovivo" ? "Ao vivo, com telão" : "No próprio ritmo"], ["Formato", s.equipe === "nao" ? "Individual" : "Equipes"], ["Meta de eficácia", metaTxt275(M, c.aval.length, s.metaTipo)], ["Versão aplicada", vv(s.tVer || 0) + (T ? "" : "")]];
   const cw = (W - 2 * X) / 4; doc.setDrawColor(...linha);
   dados.forEach(([k, v], i) => { const cx = X + (i % 4) * cw, cy = y + Math.floor(i / 4) * 11; doc.rect(cx, cy, cw, 11); txt(k.toUpperCase(), cx + 2.5, cy + 4, {s: 6.3, b: true, c: cinza}); txt(doc.splitTextToSize(safe(v), cw - 5)[0], cx + 2.5, cy + 8.6, {s: 8.8, b: true}); });
   y += 26;
@@ -5971,7 +6007,7 @@ async function pdfEvidencia(s){
   nums.forEach(([v, r], i) => { const cx = X + i * (nw + 3); doc.setDrawColor(...linha); doc.roundedRect(cx, y, nw, 16, 1.6, 1.6); txt(v, cx + nw / 2, y + 8, {s: 14, b: true, al: "center", c: i === 2 ? (N.media >= M ? okc : badc) : tinta}); txt(r, cx + nw / 2, y + 13, {s: 7, c: cinza, al: "center"}); });
   y += 22;
   /* tabela de presença */
-  const cols = [["Nº", 10, "c"], ["Nome completo", 62, "l"], ["Setor", 28, "l"], ["Acertos", 17, "c"], ["Nota", 15, "c"], ["Situação", 20, "c"], ["Assinatura", W - 2 * X - 152, "l"]];
+  const cols = [["Nº", 10, "c"], ["Nome completo", 62, "l"], ["Setor", 28, "l"], ["Pontos", 17, "c"], ["%", 15, "c"], ["Situação", 20, "c"], ["Assinatura", W - 2 * X - 152, "l"]];
   const cabT = () => { doc.setFillColor(...suave); doc.rect(X, y, W - 2 * X, 7, "F"); let x = X; cols.forEach(([t, w, al]) => { txt(t.toUpperCase(), al === "c" ? x + w / 2 : x + 2, y + 4.7, {s: 6.6, b: true, c: [59, 29, 128], al: al === "c" ? "center" : undefined}); x += w; }); y += 7; };
   txt(`Presença e resultado · ${plural(lp.length, "pessoa", "pessoas")}`, X, y + 2, {s: 10, b: true}); y += 5; cabT();
   const RH = 10, nAval = c.aval.length;
@@ -5983,7 +6019,7 @@ async function pdfEvidencia(s){
     const sw = cols[5][1]; doc.setFillColor(...(ok ? okf : badf)); doc.roundedRect(x + 2.5, y + 3, sw - 5, 4.4, 1, 1, "F"); txt(ok ? "Eficaz" : "Reforço", x + sw / 2, y + 6.1, {s: 6.8, b: true, c: ok ? okc : badc, al: "center"}); x += sw;
     if (l.sig){ try { doc.addImage(l.sig, "PNG", x + 2, y + 1, Math.min(cols[6][1] - 4, (RH - 2) * 3.3), RH - 2); } catch(e) {} } else txt("—", x + 2, ym, {c: cinza});
     y += RH; });
-  y += 3; txt(`Nota = acertos nas perguntas de avaliação. Eficaz = nota igual ou acima da meta (${M}%).`, X, y + 2, {s: 7, c: cinza}); y += 8;
+  y += 3; txt(`Pontos = acertos nas perguntas de avaliação (1 ponto por acerto); % = pontos ÷ total. Eficaz = meta atingida (${metaTxt275(M, c.aval.length, s.metaTipo)}).`, X, y + 2, {s: 7, c: cinza}); y += 8;
   if (gP && gP.pares){ nova("Pré-teste e pós-teste · ganho de aprendizado"); y = pdfGanho(doc, txt, s, gP, X, W, y, cabe, nova); }
   /* reforço */
   const abaixo = c.rows.filter(r => r.nota < M && c.aval.length).sort((a, b) => a.nota - b.nota), dif = [...c.porItem].filter(x => x.pct < M && !x.it.ensaio).sort((a, b) => a.pct - b.pct);
@@ -5992,7 +6028,7 @@ async function pdfEvidencia(s){
   if (abaixo.length || dif.length){
     txt("Quem precisa de revisão", X, y + 2, {s: 10, b: true}); y += 6;
     abaixo.forEach(r => { if (!cabe(6)){ nova("Resumo para revisão"); } const err = c.aval.filter(it => !isCorrect(it, s.resp[r.p.id + "|" + it.id])).length;
-      txt("•  " + r.p.nome, X + 2, y + 2, {s: 8.6}); txt(`${r.nota}% · errou ${err} de ${c.aval.length}`, W - X, y + 2, {s: 8.2, c: badc, al: "right"}); y += 5.4; });
+      txt("•  " + r.p.nome, X + 2, y + 2, {s: 8.6}); txt(`${pontosTxt275(r.ac, c.aval.length)} · ${r.nota}% · errou ${err}`, W - X, y + 2, {s: 8.2, c: badc, al: "right"}); y += 5.4; });
     if (dif.length){ y += 3; if (!cabe(12)) nova("Resumo para revisão"); txt("Perguntas para reforçar", X, y + 2, {s: 10, b: true}); y += 6;
       dif.slice(0, 6).forEach(x => { const ls = doc.splitTextToSize(safe(x.it.enunciado), 160); if (!cabe(ls.length * 4.2 + 2)) nova("Resumo para revisão");
         doc.setFont("helvetica", "normal"); doc.setFontSize(8.6); doc.setTextColor(...tinta); doc.text(ls, X + 2, y + 2); txt(x.pct + "% acertaram", W - X, y + 2, {s: 8.2, b: true, c: badc, al: "right"}); y += ls.length * 4.2 + 2; }); }
@@ -6045,7 +6081,7 @@ vMensagens = function(){
     return `<article class="mg${m.lida ? "" : " nova"}"><span class="mg-av">${pe ? avSvg(avDaPessoa(pe), "sm") : ""}</span>
       <div class="mg-c"><div class="mg-h"><b>${esc(pe ? nomeCompleto(pe) : "Pessoa")}</b><span class="muted">${esc(pe ? pe.setor || "" : "")}</span><span class="pill ${cls(m.tipo)}">${TIPO_MSG[m.tipo] || m.tipo}</span>${m.lida ? "" : `<span class="pill warn">nova</span>`}</div>
         <p class="mg-t">${esc(m.texto)}</p>
-        <div class="mg-m">${T ? `${esc(T.titulo)}${typeof m.tVer === "number" ? " · " + vv(m.tVer) : ""} · ` : ""}<span class="num">${fData(m.em)} ${fHora(m.em)}</span></div>${resp}</div>
+        <div class="mg-m">${T ? `${esc(T.titulo)} · ${vv(typeof m.tVer === "number" ? m.tVer : verEm(T, m.em))} · ` : ""}<span class="num">${fData(m.em)} ${fHora(m.em)}</span></div>${resp}</div>
       <div class="mg-a">${m.resposta ? "" : `<button class="mg-b" data-act="msgAbrir" data-arg="${m.id}" title="Responder" aria-label="Responder">${ICON.resp}</button>`}${m.lida ? "" : `<button class="mg-b" data-act="msgLida" data-arg="${m.id}" title="Marcar como lida" aria-label="Marcar como lida">${ICON.ok}</button>`}<button class="mg-b del" data-act="msgDel" data-arg="${m.id}" title="Excluir" aria-label="Excluir mensagem">${ICON.lixo}</button></div></article>`; }).join("");
   return `${filtro}<section class="panel mgl">${linhas || `<div class="bd"><p class="muted" style="margin:0">Nenhuma mensagem com este filtro.</p></div>`}${ms.length > 8 ? `<div class="bd"><button class="btn sm" data-act="msgTodas">${u.msgTodas ? "Mostrar só 8" : "Mostrar todas (" + ms.length + ")"}</button></div>` : ""}</section>`;
 };
@@ -6380,7 +6416,7 @@ const SEL_ALT = '.phone .opts1 [data-act="responder"],.phone .opts1 [data-act="p
 function qChave242(){
   const a = document.querySelector(SEL_ALT); if (!a) return "";
   const box = a.closest(".opts1,.ord"), q = document.querySelector(".phone .q");
-  return (S.eu ? S.eu.pid : "") + "§" + (q ? q.textContent : "") + "§" + (box ? box.textContent : "");
+  return (S.eu ? S.eu.pid : "") + "§" + (q ? q.textContent : "") + "§" + (box && box.classList.contains("ord") ? "ordenar" + box.querySelectorAll('[data-act="ordTap"]').length : box ? box.textContent : "");
 }
 function toqueRestante242(){ return QV.k ? Math.max(0, TOQUE_MS - (performance.now() - QV.t)) : 0; }
 function marcaToque242(){
@@ -6613,7 +6649,7 @@ function blocoRefazer270(o){
   const opcoes = comExp ? [["tudo", "Rever a explicação e refazer o teste", "Passam de novo pela explicação e respondem as perguntas de avaliação."], ["erradas", "Só as perguntas que erraram", "Respondem só o que erraram, sem a explicação."]]
                         : [["tudo", "Refazer o teste", "Respondem de novo as perguntas de avaliação."], ["erradas", "Só as perguntas que erraram", "Respondem só o que erraram."]];
   return `<div class="ddg">${dd("dd-rconteudo", "O que as pessoas refazem", c, opcoes, "setNova", "reforcoConteudo|")}</div>
-  <p class="aj" style="margin:0">${quem ? quem + ". " : ""}A 2ª tentativa pode ser hoje; a 3ª só em outro dia.${espera.length ? ` ${espera.length === 1 ? "1 pessoa faz" : espera.length + " pessoas fazem"} a 3ª só a partir de ${fmtDia271(Math.min(...espera.map(x => x.liberaEm)))}.` : ""}</p>
+  <p class="aj" style="margin:0">${quem ? quem + ". " : ""}A 2ª tentativa pode ser hoje; a 3ª só em outro dia. Entram só as pessoas que ainda estão abaixo da meta e já podem fazer; quem já passou ou espera o dia da 3ª fica de fora.${espera.length ? ` ${espera.length === 1 ? "1 pessoa faz" : espera.length + " pessoas fazem"} a 3ª só a partir de ${fmtDia271(Math.min(...espera.map(x => x.liberaEm)))}.` : ""}</p>
   <p class="aj" style="margin:0">${o.modo === "ritmo" ? "Você libera quando quiser, em “Liberar respostas”. O limite de tempo é o prazo para responder, acima." : "Para dar um prazo para responder, escolha o modo “No próprio ritmo”."}</p>`;
 }
 /* celular: antes de o responsável liberar */
@@ -6652,6 +6688,146 @@ function painelRefazer(s){
     <p class="muted" style="margin:8px 0 12px;font-size:14px">A nota oficial de cada pessoa continua a da 1ª tentativa. Esta sessão não entra no acerto médio do treinamento.${tem3 ? " Quem ainda ficar abaixo na 3ª tentativa não entra mais no refazer." : ""}</p>
     <div class="tblwrap"><table class="tb gt"><thead><tr><th class="nm">Pessoa</th><th>1ª tentativa</th><th>2ª tentativa</th>${tem3 ? "<th>3ª tentativa</th>" : ""}<th>Resultado</th></tr></thead><tbody>${linhas.map(l => `<tr><td class="nm">${esc(l.nome)}</td><td class="num">${pc(l.a1)}</td><td class="num">${pc(l.a2)}</td>${tem3 ? `<td class="num">${pc(l.a3)}</td>` : ""}<td style="font-weight:800;color:${l.passou ? "var(--ok)" : l.refez ? "var(--bad)" : "var(--muted)"}">${l.passou ? "Passou" : l.refez ? "Ainda abaixo" : "Não refez"}</td></tr>`).join("")}</tbody></table></div></div></section>`;
 }
+
+/* ================= v2.7.2 · correções do relatório do Grok sobre a v2.7.1 ================= */
+function tagRod272(x){
+  if (!x || !x.rodada) return "";
+  if (x.rodada === 3) return ` <span class="rfz-tg b">3ª tentativa${x.bloqueada ? " · libera " + fmtDia271(x.liberaEm) : ""}</span>`;
+  return ` <span class="rfz-tg">2ª tentativa</span>`;
+}
+function tituloNota272(x){ return x && x.rodada === 3 ? "Última nota: a da 2ª tentativa" : x && x.rodada === 2 ? "Última nota: a da 1ª tentativa" : "Última nota"; }
+
+/* ================= v2.7.3 · correções do passo 20 do Grok ================= */
+/* 4.0-22: "Rever o que errei" também abre com a sessão ainda aberta (no próprio ritmo ou ao vivo). O histórico só lista sessões
+   encerradas, então a revisão montava a tela vazia. Aqui, se a sessão não está no histórico, a revisão monta a linha dela direto. */
+function linhaRev273(pe, sid){
+  const s = sessById(sid); if (!s || s.equipe === "um") return null;
+  const p = s.part.find(x => x.pessoaId === pe.id); if (!p) return null;
+  const erros = s.itens.filter(it => scored(it) && it.uso === "avaliacao" && !isCorrect(it, s.resp[p.id + "|" + it.id]));
+  return {s, p, erros};
+}
+const _vRevisao273 = vRevisao;
+vRevisao = function(pe, sid){
+  const h0 = historico;
+  historico = function(pid){ const r = h0.apply(this, arguments); if (r.some(y => y.s.id === sid)) return r; const x = pid === pe.id ? linhaRev273(pe, sid) : null; return x ? r.concat([x]) : r; };
+  try { return _vRevisao273.call(this, pe, sid); } finally { historico = h0; }
+};
+
+/* ================= v2.7.5 · pontuação em pontos (1 ponto por acerto) =================
+   A nota principal passa a ser "N de M pontos" e a porcentagem fica ao lado, como segunda métrica. Por dentro a meta continua guardada em %
+   (s.meta), então tudo o que compara nota com meta segue igual. A meta pode ser escolhida em pontos ou em % (metaTipo, só muda como aparece). */
+function nAval275(itens){ return (itens || []).filter(it => scored(it) && it.uso === "avaliacao").length; }
+function pontosTxt275(ac, n){ return `${ac} de ${n} ${n === 1 ? "ponto" : "pontos"}`; }
+function ptsDe275(m, n){ for (let k = 1; k <= n; k++) if (Math.round(k / n * 100) >= m) return k; return n; }
+function metaTxt275(m, n, tipo){ if (!n) return m + "%"; const k = ptsDe275(m, n); return tipo === "pct" ? `${m}% (${pontosTxt275(k, n)})` : `${pontosTxt275(k, n)} (${m}%)`; }
+function valMeta275(atual, n, tipo){ return tipo !== "pct" && n ? Math.round(ptsDe275(atual, n) / n * 100) : atual; }
+function opsMeta275(n, tipo, atual){
+  if (!n) return METAS.map(m => [m, m + "%"]);
+  if (tipo === "pct"){ const ops = METAS.map(m => [m, `${m}% · ${pontosTxt275(ptsDe275(m, n), n)}`]); if (atual && !ops.some(o => +o[0] === +atual)){ ops.push([atual, `${atual}% · ${pontosTxt275(ptsDe275(atual, n), n)}`]); ops.sort((a, b) => a[0] - b[0]); } return ops; }
+  const vistos = new Set(), ops = []; for (let k = Math.max(1, Math.ceil(n * .3)); k <= n; k++){ const v = Math.round(k / n * 100); if (vistos.has(v)) continue; vistos.add(v); ops.push([v, `${pontosTxt275(k, n)} · ${v}%`]); }
+  return ops;
+}
+A.setMetaTipoEd = function(v){ UI().draft.metaTipo = v === "pct" ? "pct" : "pts"; UI().menu = null; };
+const _sessaoNova275 = sessaoNova;
+sessaoNova = function(T, o){ const s = _sessaoNova275(T, o); s.metaTipo = (o && o.metaTipo) || T.metaTipo || "pts"; return s; };
+const _meuResultado275 = meuResultado;
+meuResultado = function(s, p){
+  const h0 = _meuResultado275(s, p); if (!h0) return h0;
+  const c = calc(s), r = c.rows.find(x => x.p.id === p.id); if (!r) return h0;
+  const velho = `<span class="lbl">Nota</span><b class="score" style="font-size:24px">${r.nota}%</b>`;
+  return h0.replace(velho, `<span class="lbl">Pontos</span><b class="score" style="font-size:24px">${r.ac} de ${c.aval.length}</b><span class="muted num" style="font-size:13px">${r.nota}%</span>`);
+};
+
+/* ===== v2.7.6 · logotipo da instituição no PDF ===== */
+function logoCfg276(){
+  const lg = S.config && S.config.logo;
+  return `<div class="field logo276"><span>Logotipo da organização · aparece no canto do PDF; sem logotipo, o PDF não mostra imagem</span>
+    <div class="lg276">${lg && lg.src ? `<img src="${lg.src}" alt="Logotipo da organização"><button class="btn ic" data-act="logoTirar" aria-label="Remover logotipo" title="Remover logotipo">${ICON.lixo}</button>` : `<span class="muted">Nenhum logotipo enviado</span>`}
+      <label class="btn sm" for="cfg-logo">${lg && lg.src ? "Trocar imagem" : "Enviar imagem"}</label><input type="file" id="cfg-logo" data-cfglogo="1" accept="image/png,image/jpeg" hidden></div></div>`;
+}
+A.logoTirar = function(){ if (S.config) delete S.config.logo; };
+document.addEventListener("change", e => {
+  const t = e.target; if (!t || !t.dataset || t.dataset.cfglogo === undefined) return;
+  const f = t.files && t.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => { const im = new Image(); im.onload = () => {
+    const M = 400, k = Math.min(1, M / Math.max(im.width, im.height)), w = Math.max(1, Math.round(im.width * k)), hh = Math.max(1, Math.round(im.height * k));
+    const c = document.createElement("canvas"); c.width = w; c.height = hh; const x = c.getContext("2d"); x.drawImage(im, 0, 0, w, hh);
+    S.config = S.config || {}; S.config.logo = {src: c.toDataURL("image/png"), w, h: hh, tipo: "PNG"}; save(); render(); };
+    im.onerror = () => { try { toast("Não consegui abrir essa imagem. Use PNG ou JPEG."); } catch(_) {} };
+    im.src = String(rd.result); };
+  rd.readAsDataURL(f); t.value = "";
+});
+
+/* ===== v2.7.7 · periodicidade opcional ===== */
+const PER277 = [["", "Sem periodicidade"], ["1m", "A cada 1 mês"], ["3m", "A cada 3 meses"], ["6m", "A cada 6 meses"], ["12m", "A cada 12 meses"], ["24m", "A cada 24 meses"], ["outro", "Outro prazo"]];
+function perSel277(p){
+  if (!p || !(+p.n > 0)) return "";
+  if (p.outro) return "outro";
+  const k = (+p.n) + (p.un === "d" ? "d" : "m"); return PER277.some(o => o[0] === k) ? k : "outro";
+}
+function perTxt277(p){
+  if (!p || !(+p.n > 0)) return "";
+  const n = Math.round(+p.n), un = p.un === "d" ? (n === 1 ? "dia" : "dias") : (n === 1 ? "mês" : "meses");
+  return `a cada ${n} ${un}`;
+}
+function perEd277(d){
+  const sel = perSel277(d.per), ou = sel === "outro";
+  return `<div class="field per277"><span>Periodicidade · opcional; para quem quer controlar quando cada pessoa deve refazer</span>
+    <div class="per277-l">${dd("dd-per", "", sel, PER277, "setPer277", "")}${ou ? `<input type="number" min="1" max="999" inputmode="numeric" id="t-pern" class="per277-n" data-bind="per.n" value="${esc(String((d.per && d.per.n) || ""))}" aria-label="Quantidade de meses ou dias">${dd("dd-perun", "", (d.per && d.per.un) === "d" ? "d" : "m", [["m", "meses"], ["d", "dias"]], "setPerUn277", "")}` : ""}</div></div>`;
+}
+A.setPer277 = function(v){
+  const d = UI().draft; UI().menu = null;
+  if (!v) { d.per = null; return; }
+  if (v === "outro") { const a = d.per && +d.per.n > 0 ? d.per : {n: 2, un: "m"}; d.per = {n: +a.n, un: a.un === "d" ? "d" : "m", outro: true}; return; }
+  d.per = {n: parseInt(v, 10), un: v.endsWith("d") ? "d" : "m"};
+};
+A.setPerUn277 = function(v){ const d = UI().draft; UI().menu = null; if (d.per) d.per = Object.assign({}, d.per, {un: v === "d" ? "d" : "m", outro: true}); };
+/* o que ficou guardado: números de verdade, nada vazio */
+const _salvarT277 = A.salvarT;
+A.salvarT = function(){
+  const d = UI().draft;
+  if (d && d.per){ const n = Math.round(+d.per.n); if (!(n > 0)) d.per = null; else d.per = {n: Math.min(n, 999), un: d.per.un === "d" ? "d" : "m", outro: !!d.per.outro}; }
+  const antes = (S.treinamentos.find(t => t.id === (d && d.id)) || {}).per, mudouPer = JSON.stringify(antes || null) !== JSON.stringify((d && d.per) || null);
+  const r = _salvarT277();
+  if (mudouPer && UI().msgResp) UI().msgResp += " A periodicidade foi guardada.";
+  return r;
+};
+/* vencimento por pessoa: última vez que a pessoa fez (sessão encerrada oficial deste treinamento) + o intervalo */
+function somaPer277(t, p){
+  const d = new Date(t), n = Math.round(+p.n);
+  if (p.un === "d") d.setDate(d.getDate() + n);
+  else { const dia = d.getDate(); d.setDate(1); d.setMonth(d.getMonth() + n); d.setDate(Math.min(dia, new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate())); }
+  return d.getTime();
+}
+function diasPer277(p){ return p.un === "d" ? Math.round(+p.n) : Math.round(+p.n * 30.44); }
+function vencimentos277(T, agora){
+  const p = T && T.per; if (!p || !(+p.n > 0)) return null;
+  agora = agora || now();
+  const ult = new Map();
+  S.sessoes.filter(s => s.tId === T.id && s.status === "encerrada" && !s.teste && !s.refazer && s.equipe !== "um").forEach(s => {
+    const t = s.encerradaEm || s.criadaEm || 0;
+    s.part.forEach(x => { const k = x.pessoaId || x.id; if (!ult.has(k) || ult.get(k) < t) ult.set(k, t); }); });
+  const janela = Math.min(30, Math.max(3, Math.round(diasPer277(p) * .25))) * 86400000;
+  let vencidos = 0, breve = 0, prox = null; const total = ult.size;
+  ult.forEach(t => { const v = somaPer277(t, p);
+    if (v < agora) vencidos++; else { if (v - agora <= janela) breve++; if (prox === null || v < prox) prox = v; } });
+  return {total, vencidos, breve, prox, janela: Math.round(janela / 86400000)};
+}
+function perLinha277(T){
+  const p = T.per; if (!p || !(+p.n > 0)) return "";
+  const v = vencimentos277(T), base = `Repete ${perTxt277(p)}`;
+  if (!v || !v.total) return `<span class="per277-t mut">${base} · ainda sem aplicação</span>`;
+  if (v.vencidos) return `<span class="per277-t bad">${ICON_TRI}${base} · ${plural(v.vencidos, "pessoa vencida", "pessoas vencidas")} de ${v.total}${v.breve ? ` · ${v.breve} vence${v.breve === 1 ? "" : "m"} em até ${v.janela} dias` : ""}</span>`;
+  if (v.breve) return `<span class="per277-t warn">${base} · ${plural(v.breve, "pessoa vence", "pessoas vencem")} em até ${v.janela} dias · próximo ${fData(v.prox)}</span>`;
+  return `<span class="per277-t ok">${ICON.ok}${base} · todos em dia · próximo vencimento ${fData(v.prox)}</span>`;
+}
+function comPer277(h0, T){
+  const extra = perLinha277(T); if (!extra) return h0;
+  const i = h0.indexOf("</span>", h0.indexOf("atualizado")); return i < 0 ? h0 : h0.slice(0, i + 7) + extra + h0.slice(i + 7);
+}
+const _linhaT2277 = linhaT2; linhaT2 = function(x){ return comPer277(_linhaT2277(x), x.T); };
+const _cartaoT277 = cartaoT; cartaoT = function(x){ return comPer277(_cartaoT277(x), x.T); };
 </script>
 </body>
 </html>
