@@ -1896,6 +1896,56 @@ main .tblwrap table.pres th:nth-child(2),main .tblwrap table.pres td:nth-child(2
 .per277-t{display:flex;align-items:center;gap:6px;font-size:13px;margin-top:2px;line-height:1.3}.per277-t svg{width:14px;height:14px;flex:0 0 auto}
 .per277-t.ok{color:var(--ok)}.per277-t.bad{color:var(--bad)}.per277-t.warn{color:var(--warn,#8a5a00)}.per277-t.mut{color:var(--muted)}
 </style>
+<style id="v278">
+/* ===== v2.7.8 · lista de presença e carga horária ===== */
+.carga278 .per277-l{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.carga278 .field.dd,.evs .per277-l .field.dd{flex:1 1 200px;min-width:0;margin:0}.evs .per277-l{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.evs .per277-l .per277-n,.carga278 .per277-n{width:96px;flex:0 0 96px}.evs .per277-l .field.dd:last-child,.carga278 .per277-l .field.dd:last-child{flex:0 1 140px}
+</style>
+<style id="v279">
+/* ===== v2.7.9 · vencidos ===== */
+.vnl{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.vnl li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:8px 10px;border-bottom:1px solid var(--line);align-items:center;font-size:13.5px}
+.vnl li:last-child{border-bottom:0}
+.vn-n{display:grid;min-width:0}.vn-n b{overflow-wrap:anywhere}.vn-n small,.vn-d small{color:var(--muted);font-size:12px}
+.vn-d{display:grid;justify-items:end;text-align:right;font-weight:600}
+.vn-venc .vn-d,.nt.vn-venc b{color:var(--bad)}.vn-breve .vn-d,.nt.vn-breve b{color:var(--warn,#8a5a00)}.nt.vn-ok b{color:var(--ok)}
+.vn-r{margin:6px 0 0;font-size:13.5px;line-height:1.4}.vn-r.bad{color:var(--bad)}.vn-r.warn{color:var(--warn,#8a5a00)}.vn-r.ok{color:var(--ok)}
+.venc279r .vn-t{display:flex;gap:6px 12px;flex-wrap:wrap;align-items:baseline}.venc279r .vn-t b{font-size:15px}
+.venc279r .bd{padding:12px 16px}
+</style>
+<style id="v280">
+/* ===== v2.8.0 · reavaliação ===== */
+.reav280 .ult small{font-size:12px}
+.reav280-n{min-width:0;width:11ch;max-width:100%}
+.reav280r .tb td{white-space:nowrap}
+.reav280r .sm,.reav280r .rs{display:none}
+@media (max-width:600px){.reav280r .tb th,.reav280r .tb td{padding:8px 5px;font-size:13px}.reav280r .tb th{white-space:normal;font-size:11px}.reav280r .tb td.nm{white-space:normal}.reav280r .res{display:none}.reav280r .sm{display:inline}.reav280r .lg{display:none}.reav280r .rs{display:block;font-weight:800;font-size:12px}}
+</style>
+<style id="v281">
+/* ===== v2.8.1 · material ===== */
+.mat281{list-style:none;margin:8px 0 0;padding:0;display:grid;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.mat281>li{display:grid;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}.mat281>li:last-child{border-bottom:0}
+.mat281 .mt{display:flex;gap:10px;align-items:flex-start;min-width:0}.mat281 .mn{display:grid;min-width:0}.mat281 .mn b{overflow-wrap:anywhere}
+.mat281 .ma{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.mat281 .mtp{font:700 11px/1 inherit;letter-spacing:.04em;text-transform:uppercase;padding:5px 7px;border-radius:6px;background:var(--line);color:var(--ink,inherit);flex:none}
+.mat281 .mfx{color:var(--bad)}
+.mat input[type=file]{display:none}
+.mv281{position:fixed;inset:0;z-index:80;background:var(--bg,#fff);display:grid;grid-template-rows:auto 1fr}
+.mv281 .mv-h{display:flex;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line);flex-wrap:wrap}.mv281 .mv-h b{overflow-wrap:anywhere;min-width:0}.mv281 .esp{flex:1}
+.mv281 .mv-f{width:100%;height:100%;border:0;background:#fff}
+.mv-sem{display:grid;gap:10px;align-content:start;justify-items:start;padding:24px 16px;max-width:520px}.mv-sem p{margin:0;color:var(--muted)}
+.dwtabs button{white-space:nowrap}
+</style>
+<style id="v282">
+/* ===== v2.8.2 · capítulos do material ===== */
+.mat-slot{min-height:46vh;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:var(--bg,#fff)}
+.mat-over{position:fixed;z-index:30;border-radius:12px;overflow:hidden;background:#fff}.mat-over[hidden]{display:none}
+.mat-over-f{width:100%;height:100%;border:0;background:#fff}
+.mat-falta{text-align:center;padding:16px}
+.cap282 .per277-l{align-items:flex-end}
+.cap282c{flex:1 1 100%;margin:0 0 4px;order:-1}
+</style>
 </head>
 <body>
 <div id="efc-fundo" aria-hidden="true"></div>
@@ -2318,7 +2368,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.7.7";
+const APP_VERSAO = "2.8.2";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Equipe 1","Equipe 2","Equipe 3","Outros"];
@@ -2982,6 +3032,7 @@ function vEditor(){
     <label class="field"><span>Meta de aprovação (mínimo para "Eficaz")</span>${dd("dd-tmeta", "", valMeta275(+(d.meta || 70), nAval275(d.itens), d.metaTipo || "pts"), opsMeta275(nAval275(d.itens), d.metaTipo || "pts", +(d.meta || 70)), "setMetaEd", "")}</label>
     <label class="field"><span>Meta em</span>${dd("dd-tmetatipo", "", d.metaTipo || "pts", [["pts", "Pontos"], ["pct", "Porcentagem"]], "setMetaTipoEd", "")}</label>
     ${perEd277(d)}
+    ${reavEd280(d)}
     <label class="field"><span>Descrição (opcional)</span><input type="text" id="t-desc" data-bind="descricao" value="${esc(d.descricao)}"></label>
   </div></section>
   <div class="note">Toda sessão começa sozinha com uma pergunta de teste que não vale nota. Use "Explicação" para marcar os momentos em que você apresenta no telão.</div>
@@ -3047,7 +3098,7 @@ function vNova(){
   const o = UI().nova, T = S.treinamentos.find(t => t.id === o.tId);
   const segs = (k, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-act="setNova" data-arg="${k}|${v}" aria-pressed="${String(o[k])===String(v)}">${l}</button>`).join("")}</div>`;
   return `<div class="stack">
-  <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">${o.reforco ? "Reforço" : "Aplicar"}: ${esc(T.titulo)}</h1></div>
+  <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">${o.reav ? "Reavaliação" : o.reforco ? "Reforço" : "Aplicar"}: ${esc(T.titulo)}</h1></div>
   ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> ${o.reforcoConteudo === "erradas" ? `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram.` : `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta. ${temExp271(S.treinamentos.find(t => t.id === o.tId)) ? "Elas revêem a explicação e refazem o teste." : "Elas refazem o teste."}`} Formato individual. A nota oficial continua a da 1ª tentativa. São até 3 tentativas: a 2ª pode ser no mesmo dia, a 3ª só em outro dia.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
   <section class="panel"><div class="bd stack">
     <div class="grid2">
@@ -3421,7 +3472,7 @@ function vRel(){
   const kpisRel = aba === "sessao" ? [[`${N.media}%`, `Nota média · meta ${M}%`, dif >= 0 ? "ok" : "bad", `<span class="barra" style="color:${dif >= 0 ? "var(--ok)" : "var(--bad)"}"><i style="width:${Math.min(100, N.media)}%"></i><u style="left:${M}%"></u></span>`], [`${N.eficazes} de ${N.presentes}`, "Atingiram a meta"], [`${N.acerto}%`, "Acerto geral"], [N.tempo, "Tempo médio por pergunta"]] : null;
   const expItens = [["exportarS", s.id, "Sessão (.json)", "baixar"], ["csv", "", "Planilha (CSV)", "baixar"], ...(S.config.demo ? [["simDias", "", "Demonstração: avançar " + FOTO_DIAS + " dias", "cam"]] : [])];
   cab = pgHead({crumb: "Relatório", titulo: esc(s.titulo), tags: [[vv(s.tVer || 0), "v"], ...(REL_TESTE ? [["TESTE", "warn"]] : [])], info: infoRel, status: [s.status === "encerrada" ? "Encerrada" : rotFase(s), ""],
-    icones: [["relExp", "", "exp", "Exportar", expItens], ["evidAbrir", s.id, "impr", "Imprimir evidência"]],
+    icones: [["relExp", "", "exp", "Exportar", expItens], ["listaAbrir", s.id, "lista", "Lista de presença"], ["evidAbrir", s.id, "impr", "Imprimir evidência"]],
     tools: `<div class="ses">${dd("relses", "Sessão", s.id, opSes, "relSel")}</div>${abas}`, kpis: kpisRel, nota: relNotaTeste()});
   return `<div class="stack">
   ${cab}
@@ -5035,7 +5086,7 @@ function shellRender(){
   if (gate() && /^https?:$/.test(location.protocol) && NV.estado === "off" && !NV.p){ nvIniciar().catch(() => {}); }   /* já logado no EFClaudian neste navegador = entra sozinho */
   if (!comShell()){ side.innerHTML = mtop.innerHTML = mbar.innerHTML = ""; mais.hidden = true; db.hidden = true; return; }
   const u = UI(), sec = secaoAtual(), ed = pode();
-  const nRef = ed ? reforcoPendente().length : 0, nMsg = ed ? (S.mensagens || []).filter(m => !m.lida).length : 0;
+  const nRef = ed ? reforcoPendente().length + reavPendentes280().length : 0, nMsg = ed ? (S.mensagens || []).filter(m => !m.lida).length : 0;
   const nv = (k, rot, n, cls) => `<button class="nv${cls ? " " + cls : ""}" data-act="nav" data-arg="${k}"${sec === k ? ` aria-current="page"` : ""}>${NAVI[k]}<span>${rot}</span>${n ? `<span class="n" aria-label="${n} pendentes">${n}</span>` : ""}</button>`;
   const conta = nvResp()
     ? `<b>${esc(NV.conta.nome)}</b><span>${esc(PERFIS[S.perfil])} · conta do EFClaudian</span>`
@@ -5245,7 +5296,7 @@ function cabLista(titulo, sub, kpis){
   return `<header class="phd"><div class="pht"><h1>${titulo}</h1><p>${sub}</p></div>${kpis && kpis.length ? `<div class="kps">${kpis.map(([v, r]) => `<div><b class="num">${v}</b><span>${r}</span></div>`).join("")}</div>` : ""}</header>`;
 }
 function abasLista(aba){
-  const nT = S.treinamentos.length, nRef = pode() ? reforcoPendente().length : 0, nTes = principal() ? sessTeste().length : 0;
+  const nT = S.treinamentos.length, nRef = pode() ? reforcoPendente().length + reavPendentes280().length : 0, nTes = principal() ? sessTeste().length : 0;
   const ls = [["trein", "Avaliações", nT], ...(pode() ? [["ref", "Reforço", nRef]] : []), ["enc", "Encerradas", 0], ...(principal() && (nTes || S.config.demoModo === "real") ? [["teste", "Testes", nTes]] : [])];
   const u = UI(), ab = u.menu === "novoT";
   const novo = pode() ? `<div class="mnu novo"><button class="btn pri" data-act="menu" data-arg="novoT" aria-expanded="${ab}" aria-haspopup="menu">${ICON.mais}Novo treinamento${ICON.baixo}</button>${ab ? `<div class="pop novo-pop" role="menu">
@@ -5478,7 +5529,7 @@ vNova = function(){
   const mT = T.meta || 70, rede = nvResp();
   const nuvem = pode() ? `<div class="field">${dd("dd-nuvem", "Onde a turma responde", String(o.nuvem ?? "0"), [["1", "Nos celulares da turma", rede ? "Cada um lê o QR ou digita a chave. Precisa de internet." : "Entre com a conta do EFClaudian em Configurações › Integração para usar.", !rede], ["0", "Só neste aparelho", "Tudo roda aqui, sem internet."]], "setNova", "nuvem|")}</div>` : "";
   return `<div class="stack nova2">${avisoDemo()}
-  <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">${o.reforco ? "Reforço" : "Aplicar"}: ${esc(T.titulo)} <span class="vs">${vv(T.versao)}</span></h1></div>
+  <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">${o.reav ? "Reavaliação" : o.reforco ? "Reforço" : "Aplicar"}: ${esc(T.titulo)} <span class="vs">${vv(T.versao)}</span></h1></div>
   ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> ${o.reforcoConteudo === "erradas" ? `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram.` : `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta. ${temExp271(S.treinamentos.find(t => t.id === o.tId)) ? "Elas revêem a explicação e refazem o teste." : "Elas refazem o teste."}`} Formato individual. A nota oficial continua a da 1ª tentativa. São até 3 tentativas: a 2ª pode ser no mesmo dia, a 3ª só em outro dia.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
   <section class="panel"><div class="bd stack">
     <div class="grid2">
@@ -5497,6 +5548,7 @@ vNova = function(){
     ${o.equipe !== "nao" && !o.reforco ? `<label class="field" style="max-width:260px"><span>Máximo de pessoas por equipe</span><input type="number" min="2" max="12" id="n-max" data-nbind="maxEquipe" value="${o.maxEquipe}"></label>` : ""}
     ${blocoRefazer270(o)}
     ${blocoSetores(o)}
+    ${cargaAplicar278(o)}
     <div class="grid2">${dd("dd-tpct", "Tempo extra para quem tiver dificuldade", o.tempoPct || 0, TPCT, "novaTpct", "")}<p class="aj" style="align-self:end;margin:0">Soma uma porcentagem ao tempo de cada pergunta. Dá para mudar durante a sessão.</p></div>
     <div class="chks"><label class="chk"><input type="checkbox" id="n-teste" data-nchk="teste" ${o.teste || S.config.demoModo === "real" ? "checked" : ""}>Sessão de teste (não entra no relatório, no reforço nem no PDF)</label><label class="chk"><input type="checkbox" id="n-rank" data-nchk="mostrarRanking" ${o.mostrarRanking ? "checked" : ""}>Mostrar ranking no telão e no celular</label>
     ${blocoPrePos(o)}<label class="chk"><input type="checkbox" id="n-emb" data-nchk="embaralhar" ${o.embaralhar ? "checked" : ""}>Embaralhar a ordem das alternativas no celular</label>
@@ -5999,7 +6051,7 @@ async function pdfEvidencia(s){
   /* folha 1: dados e números */
   cab("Registro de treinamento e avaliação de eficácia");
   const dados = [["Data", fData(s.criadaEm)], ["Início · fim", `${fHora(s.iniciadaEm || s.criadaEm)} · ${s.encerradaEm ? fHora(s.encerradaEm) : "-"}`], ["Local", s.local || "-"], ["Instrutor", s.instrutor || "-"],
-    ["Modo", s.modo === "aovivo" ? "Ao vivo, com telão" : "No próprio ritmo"], ["Formato", s.equipe === "nao" ? "Individual" : "Equipes"], ["Meta de eficácia", metaTxt275(M, c.aval.length, s.metaTipo)], ["Versão aplicada", vv(s.tVer || 0) + (T ? "" : "")]];
+    ["Modo", s.modo === "aovivo" ? "Ao vivo, com telão" : "No próprio ritmo"], ["Formato", s.equipe === "nao" ? "Individual" : "Equipes"], ["Meta de eficácia", metaTxt275(M, c.aval.length, s.metaTipo)], [s.carga > 0 ? "Versão · carga horária" : "Versão aplicada", vv(s.tVer || 0) + (s.carga > 0 ? " · " + cargaTxt278(s.carga) : "")]];
   const cw = (W - 2 * X) / 4; doc.setDrawColor(...linha);
   dados.forEach(([k, v], i) => { const cx = X + (i % 4) * cw, cy = y + Math.floor(i / 4) * 11; doc.rect(cx, cy, cw, 11); txt(k.toUpperCase(), cx + 2.5, cy + 4, {s: 6.3, b: true, c: cinza}); txt(doc.splitTextToSize(safe(v), cw - 5)[0], cx + 2.5, cy + 8.6, {s: 8.8, b: true}); });
   y += 26;
@@ -6020,6 +6072,7 @@ async function pdfEvidencia(s){
     if (l.sig){ try { doc.addImage(l.sig, "PNG", x + 2, y + 1, Math.min(cols[6][1] - 4, (RH - 2) * 3.3), RH - 2); } catch(e) {} } else txt("—", x + 2, ym, {c: cinza});
     y += RH; });
   y += 3; txt(`Pontos = acertos nas perguntas de avaliação (1 ponto por acerto); % = pontos ÷ total. Eficaz = meta atingida (${metaTxt275(M, c.aval.length, s.metaTipo)}).`, X, y + 2, {s: 7, c: cinza}); y += 8;
+  y = blocoRefazer279(doc, txt, s, c, X, W, y, cabe, nova);
   if (gP && gP.pares){ nova("Pré-teste e pós-teste · ganho de aprendizado"); y = pdfGanho(doc, txt, s, gP, X, W, y, cabe, nova); }
   /* reforço */
   const abaixo = c.rows.filter(r => r.nota < M && c.aval.length).sort((a, b) => a.nota - b.nota), dif = [...c.porItem].filter(x => x.pct < M && !x.it.ensaio).sort((a, b) => a.pct - b.pct);
@@ -6828,6 +6881,616 @@ function comPer277(h0, T){
 }
 const _linhaT2277 = linhaT2; linhaT2 = function(x){ return comPer277(_linhaT2277(x), x.T); };
 const _cartaoT277 = cartaoT; cartaoT = function(x){ return comPer277(_cartaoT277(x), x.T); };
+
+/* ===== v2.7.8 · M12: lista de presença com carga horária ===== */
+Object.assign(ICON, { lista: SVi('<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/>') });
+const CARGAS278 = [["", "Não informar"], ["30", "30 minutos"], ["60", "1 hora"], ["90", "1 h 30 min"], ["120", "2 horas"], ["180", "3 horas"], ["240", "4 horas"], ["480", "8 horas"], ["outro", "Outra carga"]];
+function cargaTxt278(m){
+  m = Math.round(+m); if (!(m > 0)) return "";
+  if (m < 60) return m + " minutos";
+  const hh = Math.floor(m / 60), mm = m % 60;
+  return mm ? `${hh} h ${mm} min` : (hh === 1 ? "1 hora" : hh + " horas");
+}
+const cargaPreset278 = m => CARGAS278.some(o => o[0] !== "" && o[0] !== "outro" && +o[0] === +m);
+/* o = {carga, cargaN, cargaUn} do Aplicar */
+function cargaMin278(o){
+  if (!o || o.carga === undefined || o.carga === "") return null;
+  if (o.carga === "outro"){ const n = +String(o.cargaN || "").replace(",", "."), m = Math.round(n * (o.cargaUn === "min" ? 1 : 60)); return m > 0 ? Math.min(m, 1440) : null; }
+  const m = Math.round(+o.carga); return m > 0 ? m : null;
+}
+function cargaAplicar278(o){
+  const sel = o.carga === undefined ? "" : o.carga, ou = sel === "outro";
+  return `<div class="grid2 carga278"><div class="field"><span>Carga horária · opcional; aparece na lista de presença</span>
+    <div class="per277-l">${dd("dd-carga", "", sel, CARGAS278, "novaCarga278", "")}${ou ? `<input type="number" min="0.5" max="24" step="0.5" inputmode="decimal" id="n-cargan" class="per277-n" data-nbind="cargaN" value="${esc(String(o.cargaN || ""))}" aria-label="Quantidade">${dd("dd-cargaun", "", o.cargaUn === "min" ? "min" : "h", [["h", "horas"], ["min", "minutos"]], "novaCargaUn278", "")}` : ""}</div></div>
+    <p class="aj" style="align-self:end;margin:0">Para treinamento presencial. Dá para informar ou mudar depois, ao imprimir a lista de presença no Relatório.</p></div>`;
+}
+A.novaCarga278 = function(v){ const o = UI().nova; UI().menu = null; o.carga = v; if (v === "outro"){ if (!o.cargaN) o.cargaN = "2"; if (!o.cargaUn) o.cargaUn = "h"; } };
+A.novaCargaUn278 = function(v){ const o = UI().nova; UI().menu = null; o.cargaUn = v === "min" ? "min" : "h"; };
+const _sessaoNova278 = sessaoNova;
+sessaoNova = function(T, o){ const s = _sessaoNova278(T, o); s.carga = cargaMin278(o); return s; };
+
+/* ---- janela da lista de presença ---- */
+const LINHAS278 = [[0, "Nenhuma"], [5, "5 linhas"], [10, "10 linhas"], [15, "15 linhas"], [20, "20 linhas"]];
+const cfgLista278 = s => (s.lista = Object.assign({linhas: 5, semAss: false, outro: false}, s.lista || {}));
+function vLista278(){
+  const u = UI(); if (!u.lista278) return ""; const s = sessById(u.lista278); if (!s) return "";
+  const L = cfgLista278(s), ins = instrutoresDe(s), pre = cargaPreset278(s.carga), ou = L.outro || (s.carga && !pre);
+  const sel = ou ? "outro" : (s.carga ? String(s.carga) : ""), un = L.un || ((s.carga && s.carga % 60) ? "min" : "h"), nVal = s.carga ? (un === "min" ? s.carga : +(s.carga / 60).toFixed(2)) : "";
+  const nOps = [1, 2, 3, 4].map(n => [n, n === 1 ? "1 pessoa assina" : n + " pessoas assinam"]);
+  const nPart = s.part ? s.part.length : 0;
+  return `<div class="veu2" data-act="listaFechar"></div><div class="mdl2 evid" role="dialog" aria-modal="true" aria-labelledby="ls-t"><header class="mdh"><div><h2 id="ls-t">Lista de presença</h2><p class="aj">${esc(s.titulo)} · ${fData(s.encerradaEm || s.criadaEm)}</p></div><button class="btn sm ic" data-act="listaFechar" aria-label="Fechar">${ICON.fechar}</button></header>
+    <div class="mdb">
+      <section class="evs"><h3>Carga horária</h3>
+        <div class="per277-l">${dd("dd-lcarga", "", sel, CARGAS278, "listaCarga", "")}${ou ? `<input type="number" min="0.5" max="24" step="0.5" inputmode="decimal" id="l-cargan" class="per277-n" data-lcn="1" value="${esc(String(nVal))}" aria-label="Quantidade">${dd("dd-lcargaun", "", un, [["h", "horas"], ["min", "minutos"]], "listaCargaUn", "")}` : ""}</div>
+        <p class="aj">${s.carga ? `Aparece na folha: ${esc(cargaTxt278(s.carga))}.` : "Sem carga horária, o campo sai em branco para preencher à mão."}</p>
+      </section>
+      <section class="evs"><h3>Quem assina como instrutor</h3>
+        <div class="grid2">${dd("dd-lsn", "Quantas pessoas", ins.length, nOps, "listaN", "")}<span></span></div>
+        <div class="evins">${ins.map((n, i) => `<label class="field"><span>Instrutor ${i + 1}</span><input type="text" data-lins="${i}" value="${esc(n)}" placeholder="Nome completo"></label>`).join("")}</div>
+      </section>
+      <section class="evs"><h3>Folha</h3>
+        <div class="grid2">${dd("dd-llin", "Linhas em branco no fim (para quem assina no papel)", L.linhas, LINHAS278, "listaLinhas", "")}<span></span></div>
+        <label class="chk"><input type="checkbox" data-lass="1"${L.semAss ? "" : " checked"}>Mostrar a assinatura de quem assinou no celular</label>
+        <p class="aj">${nPart ? `${plural(nPart, "participante", "participantes")} em ordem alfabética.` : "Ainda não há participantes: a folha sai só com as linhas em branco (pelo menos 15)."}</p>
+      </section>
+      ${u.listaMsg ? `<p class="${u.listaErr ? "msg" : "okmsg"}">${esc(u.listaMsg)}</p>` : ""}
+    </div>
+    <footer class="mdf"><span class="esp"></span><button class="btn" data-act="listaFechar">Cancelar</button><button class="btn pri" data-act="listaGerar">${ICON.impr}Gerar PDF</button></footer></div>`;
+}
+const _vRel278 = vRel; vRel = function(){ return _vRel278() + vLista278(); };
+Object.assign(A, {
+  listaAbrir(id){ const s = sessById(id || UI().relId); if (!s) return; if (s.teste){ UI().dlMsg = "Sessão de TESTE: não gera a lista de presença oficial."; return; } cfgLista278(s); UI().lista278 = s.id; UI().listaMsg = ""; UI().menu = null; },
+  listaFechar(){ UI().lista278 = null; UI().listaMsg = ""; },
+  listaCarga(v){ const s = sessById(UI().lista278); if (!s) return; UI().menu = null; const L = cfgLista278(s);
+    if (v === "outro"){ L.outro = true; if (!s.carga) s.carga = 120; L.un = (s.carga % 60) ? "min" : "h"; } else { L.outro = false; s.carga = v ? +v : null; } },
+  listaCargaUn(v){ const s = sessById(UI().lista278); if (!s) return; UI().menu = null; const L = cfgLista278(s), antes = L.un || "h"; L.un = v === "min" ? "min" : "h";
+    if (s.carga && antes !== L.un){ /* mantém o mesmo número digitado, troca a unidade */ const n = antes === "min" ? s.carga : s.carga / 60; s.carga = Math.round(n * (L.un === "min" ? 1 : 60)); } },
+  listaN(n){ const s = sessById(UI().lista278); if (!s) return; const ins = instrutoresDe(s).slice(0, +n); while (ins.length < +n) ins.push(""); s.evid = Object.assign({}, s.evid || {}, {assin: ins}); UI().menu = null; },
+  listaLinhas(v){ const s = sessById(UI().lista278); if (!s) return; cfgLista278(s).linhas = +v; UI().menu = null; },
+  listaGerar(){ const s = sessById(UI().lista278); if (!s) return; s.evid = Object.assign({}, s.evid || {}, {assin: instrutoresDe(s)});
+    UI().listaMsg = "Gerando o PDF…"; UI().listaErr = false; save(); render();
+    pdfLista278(s).then(() => { UI().listaMsg = "PDF gerado."; UI().listaErr = false; save(); render(); }).catch(e => { UI().listaMsg = "Não deu para gerar o PDF: " + (e && e.message || e); UI().listaErr = true; save(); render(); });
+    return "norender"; }
+});
+document.addEventListener("input", e => { const t = e.target; if (!t || !t.dataset) return; const s = sessById(UI().lista278); if (!s) return;
+  if (t.dataset.lins !== undefined){ const ins = instrutoresDe(s).slice(); ins[+t.dataset.lins] = t.value; s.evid = Object.assign({}, s.evid || {}, {assin: ins}); save(); }
+  else if (t.dataset.lcn !== undefined){ const L = cfgLista278(s), n = +String(t.value).replace(",", "."), un = L.un || "h", m = Math.round(n * (un === "min" ? 1 : 60)); s.carga = m > 0 ? Math.min(m, 1440) : null; L.outro = true; save(); } });
+document.addEventListener("change", e => { const t = e.target; if (t && t.dataset && t.dataset.lass){ const s = sessById(UI().lista278); if (!s) return; cfgLista278(s).semAss = !t.checked; save(); } });
+
+/* ---- PDF da lista de presença ---- */
+async function pdfLista278(s){
+  if (!window.jspdf) throw new Error("o gerador de PDF não carregou");
+  const L = cfgLista278(s), c = calc(s), lp = linhasPresenca(s, c).slice().sort((a, b) => String(a.nome).localeCompare(String(b.nome), "pt"));
+  const doc = new window.jspdf.jsPDF({unit: "mm", format: "a4"}), W = 210, X = 12;
+  const roxo = [124, 58, 237], tinta = [26, 26, 38], cinza = [95, 95, 115], linha = [216, 216, 224], suave = [241, 235, 253];
+  const txt = (t, x, y, o = {}) => { doc.setFont("helvetica", o.b ? "bold" : "normal"); doc.setFontSize(o.s || 9); doc.setTextColor(...(o.c || tinta)); doc.text(safe(t), x, y, o.al ? {align: o.al} : undefined); };
+  const titulo = `${s.titulo} · ${vv(s.tVer || 0)}`, emp = String(EFC_CONFIG.empresa || "").trim();
+  let y = 0;
+  const cab = () => { const lg = S.config && S.config.logo; let ox = X;
+    if (lg && lg.src){ try { let hh = 14, ww = hh * lg.w / lg.h; if (ww > 40){ ww = 40; hh = ww * lg.h / lg.w; } doc.addImage(lg.src, lg.tipo || "PNG", X, 10 + (14 - hh) / 2, ww, hh); ox = X + ww + 4; } catch(e) { ox = X; } }
+    txt("LISTA DE PRESENÇA", ox, 15, {s: 7, b: true, c: cinza}); txt(doc.splitTextToSize(safe(titulo), Math.min(130, 190 - (ox - X)))[0], ox, 21.5, {s: 13, b: true});
+    if (emp) txt(emp, W - X, 15, {s: 7.5, c: cinza, al: "right"});
+    doc.setDrawColor(...roxo); doc.setLineWidth(.6); doc.line(X, 26.5, W - X, 26.5); doc.setLineWidth(.2); y = 31; };
+  const nova = () => { doc.addPage(); cab(); };
+  const cabe = h => y + h <= 280;
+  cab();
+  const ins = instrutoresDe(s).filter((n, i, a) => n || a.length === 1), fim = s.encerradaEm;
+  const dados = [["Data", fData(s.criadaEm)], ["Início · fim", s.iniciadaEm || fim ? `${fHora(s.iniciadaEm || s.criadaEm)} · ${fim ? fHora(fim) : "-"}` : "-"], ["Carga horária", s.carga ? cargaTxt278(s.carga) : " "],
+    ["Local", s.local || "-"], ["Instrutor", ins.filter(Boolean).join(", ") || "-"], ["Participantes", String(lp.length)]];
+  const cw = (W - 2 * X) / 3; doc.setDrawColor(...linha);
+  dados.forEach(([k, v], i) => { const cx = X + (i % 3) * cw, cy = y + Math.floor(i / 3) * 11; doc.rect(cx, cy, cw, 11); txt(k.toUpperCase(), cx + 2.5, cy + 4, {s: 6.3, b: true, c: cinza}); txt(doc.splitTextToSize(safe(v), cw - 5)[0], cx + 2.5, cy + 8.6, {s: 8.8, b: true}); });
+  y += 26;
+  txt("Declaro que participei do treinamento acima, pelo tempo indicado.", X, y, {s: 8, c: cinza}); y += 5;
+  const cols = [["Nº", 11, "c"], ["Nome completo", 76, "l"], ["Setor", 32, "l"], ["Assinatura", W - 2 * X - 119, "l"]];
+  const cabT = () => { doc.setFillColor(...suave); doc.rect(X, y, W - 2 * X, 7, "F"); let x = X; cols.forEach(([t, w, al]) => { txt(t.toUpperCase(), al === "c" ? x + w / 2 : x + 2, y + 4.7, {s: 6.6, b: true, c: [59, 29, 128], al: al === "c" ? "center" : undefined}); x += w; }); y += 7; };
+  cabT();
+  const RH = 10, extra = lp.length ? L.linhas : Math.max(15, L.linhas), total = lp.length + extra;
+  for (let i = 0; i < total; i++){
+    if (!cabe(RH)){ nova(); cabT(); }
+    doc.setDrawColor(...linha); doc.line(X, y + RH, W - X, y + RH);
+    let x = X; const ym = y + RH / 2 + 1.2, l = lp[i];
+    txt(String(i + 1), x + cols[0][1] / 2, ym, {s: 8.2, al: "center", c: l ? tinta : cinza}); x += cols[0][1];
+    if (l){ txt(doc.splitTextToSize(safe(l.nome), cols[1][1] - 3)[0], x + 2, ym, {s: 8.8, b: true}); x += cols[1][1]; txt(cut(safe(l.setor || "-"), 22), x + 2, ym, {s: 8.2}); x += cols[2][1];
+      if (l.sig && !L.semAss){ try { doc.addImage(l.sig, "PNG", x + 2, y + 1, Math.min(cols[3][1] - 4, (RH - 2) * 3.3), RH - 2); } catch(e) {} } }
+    y += RH;
+  }
+  y += 6;
+  /* assinatura de quem o ministrador escolheu */
+  const nl = Math.max(1, ins.length), porLinha = Math.min(2, nl), linhas = Math.ceil(nl / porLinha);
+  if (!cabe(linhas * 22 + 4)){ nova(); }
+  y = Math.max(y + 4, 278 - linhas * 22); const lw = (W - 2 * X - (porLinha - 1) * 14) / porLinha;
+  ins.forEach((n, i) => { const cx = X + (i % porLinha) * (lw + 14), cy = y + Math.floor(i / porLinha) * 22 + 12; doc.setDrawColor(...tinta); doc.setLineWidth(.3); doc.line(cx, cy, cx + lw, cy); doc.setLineWidth(.2);
+    txt(n || "Nome do instrutor", cx + lw / 2, cy + 4.2, {s: 8.4, al: "center", c: n ? tinta : cinza}); txt("Instrutor(a)", cx + lw / 2, cy + 8, {s: 7, c: cinza, al: "center"}); });
+  const pags = doc.getNumberOfPages();
+  for (let i = 1; i <= pags; i++){ doc.setPage(i); doc.setDrawColor(...linha); doc.line(X, 287, W - X, 287);
+    txt(`Gerado pelo ${EFC_CONFIG.produto} v${APP_VERSAO} em ${fData(now())} ${fHora(now())} · Sessão de ${fData(s.criadaEm)} · chave ${s.chave}`, X, 291.5, {s: 6.8, c: cinza}); txt(`Folha ${i} de ${pags}`, W - X, 291.5, {s: 6.8, c: cinza, al: "right"}); }
+  window.__ultimaLista = {folhas: pags, linhas: total};
+  await salvarArquivo(nomeArq(s, "pdf").replace(/^registro-/, "lista-presenca-"), doc.output("blob"));
+}
+
+/* ===== v2.7.9 · M09 (complemento do registro) e vencidos ===== */
+/* quem refez depois desta sessão: pessoaId -> tentativas respondidas (até 2, as de refazer) */
+function refazer279(s){
+  const m = new Map(); if (!s || s.refazer) return m;
+  S.sessoes.filter(x => x.tId === s.tId && x.refazer && x.status === "encerrada" && !x.teste && (x.encerradaEm || 0) > (s.encerradaEm || 0)).sort((a, b) => a.encerradaEm - b.encerradaEm).forEach(x => {
+    const c2 = calc(x); if (!c2.aval.length) return;
+    c2.rows.forEach(r => { const pid = r.p.pessoaId; if (!pid) return;
+      if (!x.itens.filter(it => scored(it)).map(it => x.resp[r.p.id + "|" + it.id]).filter(Boolean).length) return;
+      const a = m.get(pid) || []; if (a.length < 2) a.push({ac: r.ac, n: c2.aval.length, nota: r.nota, ok: r.nota >= c2.meta, em: x.encerradaEm}); m.set(pid, a); });
+  });
+  return m;
+}
+function blocoRefazer279(doc, txt, s, c, X, W, y, cabe, nova){
+  if (s.refazer || !c.aval.length) return y;
+  const tm = refazer279(s), M = c.meta;
+  const abaixo = c.rows.filter(r => r.nota < M).sort((a, b) => a.nota - b.nota);
+  if (!abaixo.length || !abaixo.some(r => tm.has(r.p.pessoaId))) return y;
+  const roxo = [124, 58, 237], tinta = [26, 26, 38], cinza = [95, 95, 115], linha = [216, 216, 224], suave = [241, 235, 253], okc = [31, 107, 80], okf = [227, 242, 236], badc = [143, 53, 53], badf = [247, 230, 230];
+  const cols = [["Nome completo", 62, "l"], ["1ª tentativa", 31, "c"], ["2ª tentativa", 31, "c"], ["3ª tentativa", 31, "c"], ["Situação", W - 2 * X - 155, "c"]], RH = 8;
+  const ptxt = (ac, n, nota) => `${ac}/${n} · ${nota}%`;
+  const cabT = () => { doc.setFillColor(...suave); doc.rect(X, y, W - 2 * X, 7, "F"); let x = X; cols.forEach(([t, w, al]) => { txt(t.toUpperCase(), al === "c" ? x + w / 2 : x + 2, y + 4.7, {s: 6.6, b: true, c: [59, 29, 128], al: al === "c" ? "center" : undefined}); x += w; }); y += 7; };
+  const cabeL = hh => y + hh <= 280, pagina = sub => { nova(sub); y = 31; };
+  if (!cabeL(34)) pagina("Refazer · quem ficou abaixo da meta");
+  txt("Refazer · quem ficou abaixo da meta", X, y + 2, {s: 10, b: true}); y += 5; cabT();
+  abaixo.forEach((r, i) => {
+    if (!cabeL(RH + (i === abaixo.length - 1 ? 10 : 0))){ pagina("Refazer · quem ficou abaixo da meta"); txt("Refazer (continuação)", X, y + 2, {s: 10, b: true}); y += 5; cabT(); }
+    if (i % 2){ doc.setFillColor(250, 250, 252); doc.rect(X, y, W - 2 * X, RH, "F"); } doc.setDrawColor(...linha); doc.line(X, y + RH, W - X, y + RH);
+    const ts = tm.get(r.p.pessoaId) || [], ym = y + RH / 2 + 1.2;
+    const cel = [ptxt(r.ac, c.aval.length, r.nota), ts[0] ? ptxt(ts[0].ac, ts[0].n, ts[0].nota) : "-", ts[1] ? ptxt(ts[1].ac, ts[1].n, ts[1].nota) : "-"];
+    const pass = ts.findIndex(t => t.ok), sit = pass >= 0 ? `Passou na ${pass + 2}ª` : (ts.length ? "Abaixo da meta" : "Não refez");
+    const cor = pass >= 0 ? okc : (ts.length ? badc : cinza), fundo = pass >= 0 ? okf : (ts.length ? badf : null);
+    let x = X; txt(doc.splitTextToSize(safe(r.p.nome), cols[0][1] - 3)[0], x + 2, ym, {s: 8.6, b: true}); x += cols[0][1];
+    cel.forEach((v, k) => { const w = cols[k + 1][1]; txt(v, x + w / 2, ym, {s: 8.2, c: v === "-" ? cinza : tinta, al: "center"}); x += w; });
+    const sw = cols[4][1]; if (fundo){ doc.setFillColor(...fundo); doc.roundedRect(x + 2.5, y + 2, sw - 5, 4.4, 1, 1, "F"); } txt(sit, x + sw / 2, y + 5.1, {s: 6.8, b: true, c: cor, al: "center"});
+    y += RH; });
+  y += 3; if (!cabeL(8)) pagina("Refazer · quem ficou abaixo da meta");
+  txt("A nota oficial é a da 1ª tentativa; o refazer não muda a nota da turma.", X, y + 2, {s: 7, c: cinza}); y += 8;
+  return y;
+}
+
+/* vencimento por pessoa, com nome e data (mesma conta de vencimentos277: última vez de cada pessoa + intervalo) */
+function vencDet279(T, agora){
+  const p = T && T.per; if (!p || !(+p.n > 0)) return null;
+  agora = agora || now();
+  const ult = new Map(), ref = new Map();
+  S.sessoes.filter(s => s.tId === T.id && s.status === "encerrada" && !s.teste && !s.refazer && s.equipe !== "um").forEach(s => {
+    const t = s.encerradaEm || s.criadaEm || 0;
+    s.part.forEach(x => { const k = x.pessoaId || x.id; if (!ult.has(k) || ult.get(k) < t){ ult.set(k, t); ref.set(k, x); } }); });
+  const janela = Math.min(30, Math.max(3, Math.round(diasPer277(p) * .25))) * 86400000, lista = [];
+  ult.forEach((t, k) => { const v = somaPer277(t, p), pe = S.pessoas.find(z => z.id === k), x = ref.get(k);
+    lista.push({k, nome: pe ? nomeCompleto(pe) : (x && x.nome) || "Pessoa", setor: pe ? pe.setor || "" : (x && x.setor) || "", ult: t, venc: v,
+      estado: v < agora ? "venc" : (v - agora <= janela ? "breve" : "ok"), dias: v < agora ? Math.floor((agora - v) / 86400000) : Math.ceil((v - agora) / 86400000)}); });
+  return {lista, janela: Math.round(janela / 86400000), agora};
+}
+function vencTxt279(e){
+  const d = e.dias, pl = n => n === 1 ? "1 dia" : n + " dias";
+  if (e.estado === "venc") return d < 1 ? "Venceu hoje" : `Vencido há ${pl(d)}`;
+  if (e.estado === "breve") return d < 1 ? "Vence hoje" : `Vence em ${pl(d)}`;
+  return `Vence em ${fData(e.venc)}`;
+}
+const ordVenc279 = (a, b) => (a.estado === b.estado ? a.venc - b.venc : (a.estado === "venc" ? -1 : 1));
+const vencItem279 = e => `<li class="vn-${e.estado}"><span class="vn-n"><b>${esc(e.nome)}</b>${e.setor ? `<small>${esc(e.setor)}</small>` : ""}</span><span class="vn-d">${vencTxt279(e)}<small>${fData(e.venc)}</small></span></li>`;
+function secVenc279(T, P){
+  const d = vencDet279(T); if (!d) return "";
+  const per = perTxt277(T.per), em = d.lista.filter(e => e.estado !== "ok").sort(ordVenc279), ok = d.lista.filter(e => e.estado === "ok").sort((a, b) => a.venc - b.venc);
+  if (!d.lista.length) return `<section class="dwbl venc279"><header><h3>Vencimentos</h3><span class="aj">Repete ${per}</span></header><p class="muted">Ainda sem aplicação: os prazos começam depois da primeira sessão encerrada.</p></section>`;
+  const nV = em.filter(e => e.estado === "venc").length, nB = em.length - nV, lim = P && P.vencTodos ? 999 : 8;
+  const resumo = !em.length ? `Todos em dia · próximo vencimento ${fData(ok[0].venc)}` : [nV ? plural(nV, "vencida", "vencidas") : "", nB ? `${nB} ${nB === 1 ? "vence" : "vencem"} em até ${d.janela} dias` : "", ok.length ? `${ok.length} em dia` : ""].filter(Boolean).join(" · ");
+  return `<section class="dwbl venc279"><header><h3>Vencimentos</h3><span class="aj">Repete ${per}</span></header>
+    <p class="vn-r ${nV ? "bad" : nB ? "warn" : "ok"}">${resumo}</p>
+    ${em.length ? `<ul class="vnl">${em.slice(0, lim).map(vencItem279).join("")}</ul>${em.length > 8 ? `<button class="btn sm" style="justify-self:start" data-act="vencTodos279">${P && P.vencTodos ? "Mostrar só as 8 primeiras" : `Ver todas (${em.length})`}</button>` : ""}` : ""}
+    <span class="aj">Conta da última vez de cada pessoa (sessão oficial encerrada; teste e refazer não contam).</span></section>`;
+}
+A.vencTodos279 = function(){ const P = UI().painel; if (P) P.vencTodos = !P.vencTodos; };
+const _vPainel279 = vPainel;
+vPainel = function(){
+  const h0 = _vPainel279(), P = UI().painel; if (!P || (P.aba && P.aba !== "geral")) return h0;
+  const T = S.treinamentos.find(t => t.id === P.tId); if (!T || !T.per) return h0;
+  const ancora = '<section class="dwbl"><header><h3>Acerto por versão</h3>', i = h0.indexOf(ancora);
+  return i < 0 ? h0 : h0.slice(0, i) + secVenc279(T, P) + h0.slice(i);
+};
+/* Relatório: aviso do vencimento da turma, antes do primeiro painel (só na aba Resumo) */
+function painelVenc279(s){
+  const T = S.treinamentos.find(t => t.id === s.tId), d = vencDet279(T); if (!d) return "";
+  const per = perTxt277(T.per), base = s.encerradaEm || s.criadaEm, vTurma = somaPer277(base, T.per);
+  const chaves = new Set(s.part.map(x => x.pessoaId || x.id)), minha = d.lista.filter(e => chaves.has(e.k)), em = minha.filter(e => e.estado !== "ok").sort(ordVenc279);
+  const nV = em.filter(e => e.estado === "venc").length, nB = em.length - nV;
+  const nomes = em.slice(0, 6).map(e => `${esc(e.nome)} (${vencTxt279(e).toLowerCase()})`).join(", ") + (em.length > 6 ? ` e mais ${em.length - 6}` : "");
+  const cls = nV ? "bad" : nB ? "warn" : "ok";
+  const sit = !em.length ? "Hoje, todos desta turma estão em dia." : `${[nV ? plural(nV, "pessoa vencida", "pessoas vencidas") : "", nB ? `${nB} ${nB === 1 ? "vence" : "vencem"} em até ${d.janela} dias` : ""].filter(Boolean).join(" · ")}: ${nomes}.`;
+  return `<section class="panel venc279r"><div class="bd"><div class="vn-t"><b>Vencimento</b><span class="muted">Repete ${per} · desta sessão vence em ${fData(vTurma)}</span></div><p class="vn-r ${cls}">${sit}</p></div></section>`;
+}
+const _vRel279 = vRel;
+vRel = function(){
+  let h0 = _vRel279(); const s = sessById(UI().relId);
+  if (!s || s.refazer || s.teste || s.status !== "encerrada" || (UI().relAba || "sessao") !== "sessao" || !h0.includes('<section class="panel')) return h0;
+  const p = painelVenc279(s); if (!p) return h0;
+  const i = h0.indexOf('<section class="panel'); return h0.slice(0, i) + p + h0.slice(i);
+};
+/* perfil do participante: os próprios vencimentos */
+function vencPerfil279(pe){
+  const out = [];
+  S.treinamentos.forEach(T => { if (!T.per || !(+T.per.n > 0)) return;
+    const d = vencDet279(T), e = d && d.lista.find(x => x.k === pe.id); if (e) out.push({T, e}); });
+  if (!out.length) return "";
+  out.sort((a, b) => a.e.venc - b.e.venc);
+  return `<section class="pbl venc279p"><span class="lbl">Meus vencimentos · <span class="num">${out.length}</span></span><div class="hist">${out.map(({T, e}) => `<div><span class="t"><b>${esc(T.titulo)}</b><span class="muted">Última vez ${fData(e.ult)} · repete ${perTxt277(T.per)}</span></span><span class="nt vn-${e.estado}"><b class="num">${vencTxt279(e)}</b></span></div>`).join("")}</div></section>`;
+}
+const _vPerfil279 = vPerfil;
+vPerfil = function(){
+  const h0 = _vPerfil279(), pe = logado(), u = UI(); if (!pe || (u.avEd && u.avEd.aberto) || u.revisao) return h0;
+  const ancora = '<section class="pbl"><span class="lbl">Fale com o responsável</span>', i = h0.indexOf(ancora); if (i < 0) return h0;
+  return h0.slice(0, i) + vencPerfil279(pe) + h0.slice(i);
+};
+
+/* ===== v2.8.0 · M07 · eficácia em 30, 60 e 90 dias ===== */
+const REAV280 = [["", "Sem reavaliação"], ["30,60,90", "Em 30, 60 e 90 dias"], ["30,90", "Em 30 e 90 dias"], ["90", "Só em 90 dias"], ["outro", "Outros prazos"]];
+const NPERG280 = 5;
+function reavTxt280(r){
+  const m = r && Array.isArray(r.m) ? r.m : []; if (!m.length) return "";
+  return m.length === 1 ? `${m[0]} dias` : m.slice(0, -1).join(", ") + " e " + m[m.length - 1] + " dias";
+}
+function reavSel280(r){
+  if (!r || !Array.isArray(r.m) || !r.m.length) return "";
+  if (r.outro) return "outro";
+  const k = r.m.join(","); return REAV280.some(o => o[0] === k) ? k : "outro";
+}
+function reavLer280(txt){
+  const v = String(txt || "").split(/[^0-9]+/).map(x => parseInt(x, 10)).filter(n => n >= 1 && n <= 999);
+  return [...new Set(v)].sort((a, b) => a - b).slice(0, 4);
+}
+function reavEd280(d){
+  const sel = reavSel280(d.reav), ou = sel === "outro";
+  return `<div class="field reav280"><span>Reavaliação · opcional; mede o quanto a pessoa guardou depois de um tempo</span>
+    <div class="per277-l">${dd("dd-reav", "", sel, REAV280, "setReav280", "")}${ou ? `<input type="text" id="t-reavtxt" class="reav280-n" inputmode="numeric" maxlength="30" data-bind="reav.txt" value="${esc((d.reav && d.reav.txt) || "")}" placeholder="Ex.: 45, 120" aria-label="Prazos em dias, separados por vírgula">` : ""}</div>
+    ${ou ? `<span class="aj">Até 4 prazos, em dias, separados por vírgula.</span>` : ""}</div>`;
+}
+A.setReav280 = function(v){
+  const d = UI().draft; UI().menu = null;
+  if (!v){ d.reav = null; return; }
+  if (v === "outro"){ const a = d.reav && d.reav.m && d.reav.m.length ? d.reav.m : [45]; d.reav = {m: a.slice(), outro: true, txt: a.join(", ")}; return; }
+  d.reav = {m: v.split(",").map(Number)};
+};
+const _salvarT280 = A.salvarT;
+A.salvarT = function(){
+  const d = UI().draft;
+  if (d && d.reav){
+    const m = d.reav.outro ? reavLer280(d.reav.txt) : (d.reav.m || []).map(Math.round).filter(n => n >= 1 && n <= 999);
+    d.reav = m.length ? {m, outro: !!d.reav.outro, txt: m.join(", ")} : null;
+  }
+  const antes = (S.treinamentos.find(t => t.id === (d && d.id)) || {}).reav, mudou = JSON.stringify(antes || null) !== JSON.stringify((d && d.reav) || null);
+  const r = _salvarT280();
+  if (mudou && UI().msgResp) UI().msgResp += " A reavaliação foi guardada.";
+  return r;
+};
+/* ---------- quem deve reavaliar ---------- */
+const mais280 = (t, n) => { const d = new Date(t); d.setDate(d.getDate() + n); return d.getTime(); };
+const respondeu280 = (s, pid) => { const p = s.part.find(x => x.pessoaId === pid); return !!p && s.itens.some(it => scored(it) && s.resp[p.id + "|" + it.id]); };
+function semReav280(fn){ return function(...a){ const todas = S.sessoes; S.sessoes = todas.filter(s => !(s.refazer && s.refazer.reav)); try { return fn.apply(this, a); } finally { S.sessoes = todas; } }; }
+/* o refazer não enxerga a reavaliação */
+reforcoPendente = semReav280(reforcoPendente);
+tentativas271 = semReav280(tentativas271);
+refazer279 = semReav280(refazer279);
+/* grupos: um por treinamento e prazo; cada pessoa entra só no prazo mais recente que já passou */
+function reavPendentes280(agora){
+  agora = agora || now(); const grupos = [];
+  S.treinamentos.forEach(T => {
+    const marcos = T.reav && Array.isArray(T.reav.m) ? T.reav.m.slice().sort((a, b) => a - b) : []; if (!marcos.length) return;
+    const base = new Map();
+    S.sessoes.filter(s => s.tId === T.id && s.status === "encerrada" && !s.teste && !s.refazer && s.equipe !== "um").forEach(s => {
+      const t = s.encerradaEm || s.criadaEm || 0;
+      s.part.forEach(x => { const k = x.pessoaId; if (k && (!base.has(k) || base.get(k).t < t)) base.set(k, {t, s}); }); });
+    const feitas = S.sessoes.filter(s => s.tId === T.id && s.refazer && s.refazer.reav && s.status === "encerrada" && !s.teste);
+    const abertas = S.sessoes.filter(s => s.tId === T.id && s.refazer && s.refazer.reav && s.status !== "encerrada" && !s.teste);
+    const porM = new Map(), calcs = new Map();
+    base.forEach((b, pid) => {
+      const pe = S.pessoas.find(z => z.id === pid); if (!pe) return;
+      let atual = -1; marcos.forEach((m, i) => { if (mais280(b.t, m) <= agora) atual = i; });
+      if (atual < 0) return;
+      const m = marcos[atual];
+      if (feitas.some(s => s.refazer.reav === m && (s.encerradaEm || 0) > b.t && respondeu280(s, pid))) return;
+      let c = calcs.get(b.s.id); if (!c){ c = calc(b.s); calcs.set(b.s.id, c); }
+      const row = c.rows.find(r => r.p.pessoaId === pid);
+      const due = mais280(b.t, m), dias = Math.floor((agora - due) / 86400000);
+      const g = porM.get(m) || porM.set(m, {T, marco: m, pessoas: [], itens: [], aberta: null}).get(m);
+      g.pessoas.push({pid, nome: nomeCompleto(pe), nota: row ? row.nota : null, meta: c.meta, em: b.t, due, dias});
+    });
+    porM.forEach((g, m) => {
+      const ab = abertas.find(s => s.refazer.reav === m); g.aberta = ab ? ab.id : null;
+      g.pessoas.sort((a, b) => a.due - b.due);
+      g.itens = dificeis280(T);
+      if (g.itens.length) grupos.push(g);
+    });
+  });
+  return grupos;
+}
+/* as perguntas de avaliação em que mais gente errou (as 5 mais difíceis) */
+function dificeis280(T){
+  const ss = sessOficiais(T.id), qs = T.itens.filter(it => isQ(it) && it.uso === "avaliacao" && scored(it));
+  const taxa = it => { let n = 0, ok = 0; ss.forEach(s => s.part.forEach(p => { const r = s.resp[p.id + "|" + it.id]; if (r){ n++; if (isCorrect(it, r)) ok++; } })); return n ? ok / n : 1; };
+  return qs.map(it => ({it, t: taxa(it)})).sort((a, b) => a.t - b.t).slice(0, NPERG280).map(x => x.it);
+}
+const diasTxt280 = d => d < 1 ? "vence hoje" : d === 1 ? "venceu há 1 dia" : `venceu há ${d} dias`;
+function notaReav280(o){
+  const nomes = o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ");
+  return `Reavaliação de <span class="num">${o.reav}</span> dias para <span class="num">${o.reforco.pessoas.length}</span> pessoa(s), com <span class="num">${o.reforco.itens.length}</span> pergunta(s) de avaliação, as que mais gente errou. Formato individual, sem explicação. Não troca a nota oficial nem renova o vencimento. Depois de abrir, envie por link, QR code ou WhatsApp.<br>${nomes}`;
+}
+const _vNova280 = vNova;
+vNova = function(){
+  const h0 = _vNova280.apply(this, arguments), o = UI().nova;
+  if (!o || !o.reav) return h0;
+  return h0.replace(/<div class="note"><b>Sessão de reforço\.<\/b>[\s\S]*?<\/div>/, `<div class="note"><b>Sessão de reavaliação.</b> ${notaReav280(o)}</div>`);
+};
+const _blocoRefazer280 = blocoRefazer270;
+blocoRefazer270 = function(o){
+  if (!o.reav) return _blocoRefazer280(o);
+  return `<p class="aj" style="margin:0">${o.modo === "ritmo" ? "Você libera quando quiser, em “Liberar respostas”. O limite de tempo é o prazo para responder, acima." : "Para dar um prazo para responder, escolha o modo “No próprio ritmo”."}</p>`;
+};
+A.reavAbrir = function(arg){
+  const [tId, mm] = String(arg).split("|"), m = +mm, g = reavPendentes280().find(x => x.T.id === tId && x.marco === m); if (!g) return;
+  if (g.aberta){ A.abrirControle(g.aberta); return; }
+  A.novaSessao(tId); const o = UI().nova;
+  o.reforco = {pessoas: g.pessoas.map(x => x.pid), itens: g.itens.map(it => it.id)}; o.equipe = "nao"; o.modo = "ritmo"; o.reforcoConteudo = "reav"; o.reav = m;
+};
+const _sessaoNova280 = sessaoNova;
+sessaoNova = function(T, o){
+  const s = _sessaoNova280.apply(this, arguments);
+  if (!o || !o.reav || !o.reforco) return s;
+  s.titulo = `Reavaliação · ${T.titulo} · ${o.reav} dias`;
+  s.refazer = {tudo: true, ant: {}, reav: +o.reav};
+  const g = reavPendentes280().find(x => x.T.id === T.id && x.marco === +o.reav);
+  (g ? g.pessoas : []).forEach(x => { if (o.reforco.pessoas.includes(x.pid)) s.refazer.ant[x.pid] = {nota: x.nota, meta: x.meta, em: x.em}; });
+  return s;
+};
+/* Reforço: seção Reavaliações */
+function secReav280(q){
+  const gs = reavPendentes280().filter(g => !q || norm(g.T.titulo + " " + g.pessoas.map(x => x.nome).join(" ")).includes(q)).sort((a, b) => a.pessoas[0].due - b.pessoas[0].due);
+  if (!gs.length) return "";
+  return `<section class="panel reav280">${hdr("Reavaliações", `<span class="muted" style="font-size:13px">Quem já passou do prazo de 30, 60 ou 90 dias e ainda não refez a prova curta</span>`)}<div class="tlist">${gs.map(g => `<div>
+    <div class="t"><b>${esc(g.T.titulo)}</b><span class="muted">Reavaliação de <span class="num">${g.marco}</span> dias · <span class="num">${g.pessoas.length}</span> ${g.pessoas.length === 1 ? "pessoa" : "pessoas"} · <span class="num">${g.itens.length}</span> ${g.itens.length === 1 ? "pergunta" : "perguntas"}</span></div>
+    <div class="acs"><button class="btn pri" data-act="reavAbrir" data-arg="${g.T.id}|${g.marco}">${ICON.play}${g.aberta ? "Abrir a sessão em andamento" : "Abrir reavaliação"}</button></div>
+    <div class="ult">${g.pessoas.slice(0, 8).map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return `<span class="row" style="gap:5px">${pe ? avSvg(avDaPessoa(pe), "xs") : ""}${esc(x.nome)} <small class="muted">${diasTxt280(x.dias)}</small></span>`; }).join("")}${g.pessoas.length > 8 ? `<span class="muted">e mais ${g.pessoas.length - 8}</span>` : ""}</div></div>`).join("")}</div></section>`;
+}
+const _vReforco2_280 = vReforco2;
+vReforco2 = function(q){
+  const r = _vReforco2_280.apply(this, arguments), sec = pode() ? secReav280(q) : "";
+  if (!sec) return r;
+  return r.replace(/<p class="muted vz">Nenhum reforço pendente[^<]*<\/p>/, "") + sec;
+};
+/* linha no cartão do treinamento */
+function reavLinha280(T){
+  if (!T.reav || !(T.reav.m || []).length) return "";
+  const n = reavPendentes280().filter(g => g.T.id === T.id).reduce((a, g) => a + g.pessoas.length, 0);
+  return `<span class="per277-t ${n ? "warn" : "mut"}">Reavaliação em ${reavTxt280(T.reav)}${n ? ` · ${plural(n, "pessoa pendente", "pessoas pendentes")}` : " · nenhuma pendente"}</span>`;
+}
+function comReav280(h0, T){
+  const extra = reavLinha280(T); if (!extra) return h0;
+  const i = h0.indexOf("</span>", h0.indexOf("atualizado")); return i < 0 ? h0 : h0.slice(0, i + 7) + extra + h0.slice(i + 7);
+}
+const _linhaT2280 = linhaT2; linhaT2 = function(x){ return comReav280(_linhaT2280(x), x.T); };
+const _cartaoT280 = cartaoT; cartaoT = function(x){ return comReav280(_cartaoT280(x), x.T); };
+/* o celular e o Controle falam em reavaliação, não em refazer */
+const _vRitmo280 = vRitmo;
+vRitmo = function(s, p){
+  const r = _vRitmo280.apply(this, arguments);
+  return s && s.refazer && s.refazer.reav ? r.replace(/Você vai (rever a explicação e )?refazer o teste\./, "Você vai responder a reavaliação, uma prova curta.") : r;
+};
+const _vControle280 = vControle;
+vControle = function(){
+  const h0 = _vControle280.apply(this, arguments), s = sessAtual();
+  return s && s.refazer && s.refazer.reav ? h0.replace(/<b>Refazer · [^<]*<\/b>/, `<b>Reavaliação de ${s.refazer.reav} dias.</b>`) : h0;
+};
+/* Relatório: nota do treinamento x nota da reavaliação */
+const _painelRefazer280 = painelRefazer;
+painelRefazer = function(s){
+  if (!s.refazer || !s.refazer.reav) return _painelRefazer280(s);
+  const c = calc(s), ids = (s.reforco && s.reforco.pessoas) || [];
+  const linhas = ids.map(pid => { const pe = S.pessoas.find(x => x.id === pid); if (!pe) return null;
+    const ant = (s.refazer.ant || {})[pid] || {}, row = c.rows.find(r => r.p.pessoaId === pid), fez = !!row && respondeu280(s, pid);
+    const nota = fez ? row.nota : null, dif = fez && ant.nota != null ? nota - ant.nota : null;
+    return {nome: nomeCompleto(pe), a: ant.nota == null ? null : ant.nota, nota, dif, fez, ok: fez && nota >= c.meta}; }).filter(Boolean);
+  const f = linhas.filter(l => l.fez), med = k => f.length ? Math.round(f.reduce((a, l) => a + (l[k] || 0), 0) / f.length) : null;
+  const ma = f.filter(l => l.a != null).length ? Math.round(f.filter(l => l.a != null).reduce((a, l) => a + l.a, 0) / f.filter(l => l.a != null).length) : null, mn = med("nota");
+  const pc = v => v == null ? "–" : v + "%", dd2 = v => v == null ? "–" : (v > 0 ? "+" : "") + v + " p.p.";
+  const sit = l => !l.fez ? ["Não respondeu", "var(--muted)"] : l.ok ? [l.dif != null && l.dif < 0 ? "Guardou, com queda" : "Guardou", "var(--ok)"] : ["Abaixo da meta", "var(--bad)"];
+  return `<section class="panel gpn rfz-pn reav280r"><div class="hd"><h2>Reavaliação de ${s.refazer.reav} dias</h2></div><div class="bd">
+    <div class="gnh-r big"><div><b class="num">${f.length} de ${linhas.length}</b><span>Responderam</span></div><div class="gg" style="--c:${mn != null && ma != null && mn >= ma ? "var(--ok)" : "var(--muted)"}"><b class="num">${mn == null ? "–" : mn + "%"}</b><span>Média hoje${ma != null ? `, contra ${ma}% no treinamento` : ""}</span></div></div>
+    <p class="muted" style="margin:8px 0 12px;font-size:14px">Mede o quanto cada pessoa guardou. Compara com a nota do treinamento (a mais recente). Esta sessão não entra no acerto médio nem renova o vencimento. Meta de ${c.meta}%.</p>
+    <div class="tblwrap"><table class="tb gt"><thead><tr><th class="nm">Pessoa</th><th><span class="lg">No treinamento</span><span class="sm">Treino</span></th><th><span class="lg">Na reavaliação</span><span class="sm">Reaval.</span></th><th><span class="lg">Diferença</span><span class="sm">Dif.</span></th><th class="res">Resultado</th></tr></thead><tbody>${linhas.map(l => { const t = sit(l); return `<tr><td class="nm">${esc(l.nome)}<small class="rs" style="color:${t[1]}">${t[0]}</small></td><td class="num">${pc(l.a)}</td><td class="num">${pc(l.nota)}</td><td class="num">${dd2(l.dif)}</td><td class="res" style="font-weight:800;color:${t[1]}">${t[0]}</td></tr>`; }).join("")}</tbody></table></div></div></section>`;
+};
+
+/* ===== v2.8.1 · M02 parte 1 · aba Material (arquivos neste aparelho) ===== */
+const MAT_MAX = 50 * 1024 * 1024;
+const MATTIPOS = {pdf: "PDF", html: "HTML", pptx: "PowerPoint"};
+function matTipo281(nome){ const m = /\.([a-z0-9]+)$/i.exec(String(nome || "")); const e = m ? m[1].toLowerCase() : ""; return e === "pdf" ? "pdf" : (e === "html" || e === "htm") ? "html" : e === "pptx" ? "pptx" : ""; }
+function matTam281(b){ return b >= 1048576 ? (b / 1048576).toFixed(1).replace(".", ",") + " MB" : Math.max(1, Math.round(b / 1024)) + " KB"; }
+const MATDB = {db: null,
+  abrir(){ return new Promise(ok => { if (MATDB.db) return ok(true); try { const r = indexedDB.open("efcquiz-material", 1); r.onupgradeneeded = () => r.result.createObjectStore("f"); r.onsuccess = () => { MATDB.db = r.result; ok(true); }; r.onerror = () => ok(false); r.onblocked = () => ok(false); } catch(e){ ok(false); } }); },
+  async pôr(id, blob){ if (!await MATDB.abrir()) throw new Error("sem armazenamento"); return new Promise((ok, no) => { const t = MATDB.db.transaction("f", "readwrite"); t.objectStore("f").put(blob, id); t.oncomplete = () => ok(true); t.onerror = () => no(t.error); t.onabort = () => no(t.error); }); },
+  async ler(id){ if (!await MATDB.abrir()) return null; return new Promise(ok => { try { const q = MATDB.db.transaction("f").objectStore("f").get(id); q.onsuccess = () => ok(q.result || null); q.onerror = () => ok(null); } catch(e){ ok(null); } }); },
+  async tirar(id){ if (!await MATDB.abrir()) return; return new Promise(ok => { try { const t = MATDB.db.transaction("f", "readwrite"); t.objectStore("f").delete(id); t.oncomplete = () => ok(); t.onerror = () => ok(); } catch(e){ ok(); } }); }
+};
+const MATOK = {};   /* id -> true/false: o arquivo está neste aparelho? */
+const matT281 = () => { const P = UI().painel; return P ? S.treinamentos.find(t => t.id === P.tId) : null; };
+function matLista281(T){
+  const L = T.material || [];
+  if (!L.length) return `<p class="muted">Nenhum material ainda. Anexe o PDF, o HTML ou o PowerPoint que você usa neste treinamento.</p>`;
+  return `<ul class="mat281">${L.map(m => {
+    const tem = MATOK[m.id]; if (tem === undefined){ MATOK[m.id] = null; MATDB.ler(m.id).then(b => { MATOK[m.id] = !!b; render(); }); }
+    const abre = (m.tipo === "pdf" || m.tipo === "html") && tem;
+    return `<li><div class="mt"><span class="mtp ${m.tipo}">${MATTIPOS[m.tipo] || m.tipo}</span><div class="mn"><b>${esc(m.nome)}</b><span class="aj">${matTam281(m.tam)} · ${fData(m.em)}${m.por ? " · " + esc(m.por) : ""}</span>${tem === false ? `<span class="aj mfx">O arquivo não está neste aparelho. Anexe de novo para usar aqui.</span>` : ""}</div></div>
+      <div class="ma">${abre ? `<button class="btn sm pri" data-act="matAbrir281" data-arg="${m.id}">${ICON.play}Abrir</button>` : ""}${tem ? `<button class="btn sm" data-act="matBaixar281" data-arg="${m.id}">${ICON.baixar}Baixar</button>` : ""}
+      ${pode() ? `<label class="btn sm">Trocar<input type="file" hidden accept=".pdf,.html,.htm,.pptx" data-mattroca="${m.id}"></label><button class="btn sm ic" data-act="matTirar281" data-arg="${m.id}" aria-label="Remover material" title="Remover material">${ICON.lixo}</button>` : ""}</div>
+      ${m.tipo === "pptx" ? `<span class="aj">PowerPoint só para baixar. Guarde também uma cópia em PDF para abrir dentro do app.</span>` : ""}</li>`; }).join("")}</ul>`;
+}
+function matCorpo281(T){
+  const log = (T.matLog || []).slice().sort((a, b) => b.em - a.em).slice(0, 8), P = UI().painel || {};
+  return `<section class="dwbl mat"><header><h3>Material do treinamento</h3>${pode() ? `<label class="btn sm pri">${ICON.mais}Adicionar<input type="file" hidden accept=".pdf,.html,.htm,.pptx" data-matnovo="1"></label>` : ""}</header>
+    ${P.matErro ? `<div class="msg">${esc(P.matErro)}</div>` : ""}${matLista281(T)}
+    <span class="aj">PDF e HTML abrem dentro do app. PowerPoint só baixa. Até 50 MB por arquivo. Os arquivos ficam neste aparelho; no EFClaudian vai só a ficha (nome, tamanho e data).</span></section>
+    <section class="dwbl"><header><h3>Trocas de material</h3></header>${log.length ? `<ul class="mud">${log.map(x => `<li>${fData(x.em)} · ${esc(x.acao)} <b>${esc(x.nome)}</b>${x.por ? " · " + esc(x.por) : ""}</li>`).join("")}</ul>` : `<p class="muted">Nenhuma troca registrada.</p>`}
+    <span class="aj">Trocar o material só registra a troca com a data. Não cria versão nova do treinamento.</span></section>`;
+}
+async function matSalvar281(T, f, trocaId){
+  const P = UI().painel; if (!P) return; P.matErro = "";
+  const tipo = matTipo281(f.name);
+  if (!tipo) P.matErro = "Só PDF, HTML ou PowerPoint (.pptx).";
+  else if (f.size > MAT_MAX) P.matErro = `O arquivo tem ${matTam281(f.size)}. O limite é 50 MB.`;
+  else if (f.size === 0) P.matErro = "O arquivo está vazio.";
+  if (P.matErro){ save(); render(); return; }
+  const id = trocaId || ("m" + uid());
+  try { await MATDB.pôr(id, f); } catch(e){ P.matErro = "Não consegui guardar o arquivo neste aparelho."; save(); render(); return; }
+  T.material = T.material || []; const ant = trocaId ? T.material.find(x => x.id === trocaId) : null;
+  const ficha = {id, nome: f.name, tipo, tam: f.size, em: now(), por: PERFIS[S.perfil]};
+  if (ant) Object.assign(ant, ficha); else T.material.push(ficha);
+  T.matLog = (T.matLog || []).concat([{em: now(), acao: ant ? "trocou" : "incluiu", nome: f.name, por: PERFIS[S.perfil]}]);
+  MATOK[id] = true; save(); render();
+}
+document.addEventListener("change", e => { const t = e.target; if (!t || !t.dataset || !S) return;
+  const T = matT281(); if (!T || !pode() || !t.files || !t.files[0]) return;
+  if (t.dataset.matnovo){ const f = t.files[0]; t.value = ""; matSalvar281(T, f, null); }
+  else if (t.dataset.mattroca){ const f = t.files[0], id = t.dataset.mattroca; t.value = ""; matSalvar281(T, f, id); } });
+A.matTirar281 = function(id, ok){ const T = matT281(); if (!T) return; const m = (T.material || []).find(x => x.id === id); if (!m) return;
+  if (!ok) return pedir("Remover material?", `"${m.nome}" sai deste treinamento e é apagado deste aparelho. A remoção fica registrada.`, "matTirar281", id, "Remover", true);
+  T.material = T.material.filter(x => x.id !== id); T.matLog = (T.matLog || []).concat([{em: now(), acao: "removeu", nome: m.nome, por: PERFIS[S.perfil]}]); delete MATOK[id]; MATDB.tirar(id); };
+let MATURL = null;
+A.matAbrir281 = function(id){ const T = matT281(); if (!T) return; const m = (T.material || []).find(x => x.id === id); if (!m) return;
+  MATDB.ler(id).then(async b => { if (!b){ MATOK[id] = false; render(); return; }
+    if (MATURL){ URL.revokeObjectURL(MATURL.url); MATURL = null; }
+    let url = "", txt = "";
+    if (m.tipo === "pdf") url = URL.createObjectURL(new Blob([b], {type: "application/pdf"}));
+    else txt = await b.text();
+    MATURL = {id, url}; UI().matVer = {id, nome: m.nome, tipo: m.tipo, url, txt}; render(); }); };
+A.matFechar281 = function(){ UI().matVer = null; if (MATURL){ URL.revokeObjectURL(MATURL.url); MATURL = null; } };
+A.matBaixar281 = function(id){ const T = matT281(); if (!T) return; const m = (T.material || []).find(x => x.id === id); if (!m) return;
+  MATDB.ler(id).then(b => { if (!b) return; const u = URL.createObjectURL(b), a = document.createElement("a"); a.href = u; a.download = m.nome; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); }); };
+function matVisor281(){
+  const v = UI().matVer; if (!v) return "";
+  const semLeitor = v.tipo === "pdf" && navigator.pdfViewerEnabled === false;
+  const corpo = semLeitor ? `<div class="mv-sem"><b>Este aparelho não mostra PDF dentro do app.</b><p>Use "Abrir em outra aba" para ler no leitor do aparelho, ou baixe o arquivo.</p><div class="row"><a class="btn pri" href="${v.url}" target="_blank" rel="noopener">Abrir em outra aba</a><button class="btn" data-act="matBaixar281" data-arg="${v.id}">${ICON.baixar}Baixar</button></div></div>` : v.tipo === "pdf" ? `<iframe class="mv-f" title="${esc(v.nome)}" src="${v.url}"></iframe>` : `<iframe class="mv-f" title="${esc(v.nome)}" sandbox="allow-scripts" srcdoc="${esc(v.txt)}"></iframe>`;
+  return `<div class="mv281" role="dialog" aria-modal="true" aria-label="${esc(v.nome)}"><div class="mv-h"><b>${esc(v.nome)}</b><span class="esp"></span>${v.tipo === "pdf" ? `<a class="btn sm" href="${v.url}" target="_blank" rel="noopener">Abrir em outra aba</a>` : ""}<button class="btn sm" data-act="matBaixar281" data-arg="${v.id}">${ICON.baixar}Baixar</button><button class="btn sm ic" data-act="matFechar281" aria-label="Fechar" title="Fechar">${ICON.fechar}</button></div>${corpo}</div>`;
+}
+const _vPainel281 = vPainel;
+vPainel = function(){
+  let h0 = _vPainel281.apply(this, arguments), P = UI().painel; if (!P) return h0;
+  const T = S.treinamentos.find(t => t.id === P.tId); if (!T) return h0;
+  const ab = P.aba || "geral", n = (T.material || []).length;
+  const aba = `<button role="tab" data-act="painelAba" data-arg="material" aria-selected="${ab === "material"}">Material${n ? `<em>${n}</em>` : ""}</button>`;
+  const k = h0.indexOf("</nav>", h0.indexOf('class="dwtabs"')); if (k > 0) h0 = h0.slice(0, k) + aba + h0.slice(k);
+  if (ab === "material"){ const i = h0.indexOf('<div class="dwb">'), j = h0.indexOf('<footer class="dwf">'); if (i > 0 && j > i) h0 = h0.slice(0, i) + `<div class="dwb">${matCorpo281(T)}</div>\n    ` + h0.slice(j); }
+  return h0 + matVisor281();
+};
+const _painelFechar281 = A.painelFechar; A.painelFechar = function(){ A.matFechar281(); return _painelFechar281 && _painelFechar281.apply(this, arguments); };
+
+/* ===== v2.8.2 · M02 parte 2 · capítulos do material ===== */
+/* capítulo = item "explicação" com it.mat = {id, nome, tipo, de, ate}; o título do capítulo é o tema da explicação */
+const matCap282 = it => it && !isQ(it) && it.mat && it.mat.id ? it.mat : null;
+function capTxt282(m){
+  if (!m) return "";
+  if (m.tipo === "pdf"){ const de = +m.de > 0 ? Math.round(+m.de) : 1, ate = +m.ate > 0 ? Math.round(+m.ate) : 0;
+    return !ate ? (de > 1 ? `a partir da página ${de}` : "arquivo inteiro") : de === ate ? `página ${de}` : `páginas ${de} a ${ate}`; }
+  return "arquivo inteiro";
+}
+const _vItemEd282 = vItemEd;
+vItemEd = function(it, i, n){
+  const r = _vItemEd282.apply(this, arguments); if (isQ(it)) return r;
+  const d = UI().draft, lista = (d.material || []).filter(m => m.tipo === "pdf" || m.tipo === "html"), m = it.mat || null, p = "itens." + i + ".";
+  let extra;
+  if (!lista.length) extra = `<div class="note cap282" style="grid-column:1/-1">Para ligar esta explicação a um trecho de PDF ou HTML, anexe o arquivo na aba Material do treinamento (três pontinhos).</div>`;
+  else extra = `<div class="field cap282" style="grid-column:1/-1"><span>Material deste capítulo · opcional; aparece no telão no lugar da explicação</span><div class="per277-l">${dd("dd-mat-" + i, "", m ? m.id : "", [["", "Sem material"], ...lista.map(x => [x.id, x.nome, x.tipo === "pdf" ? "PDF" : "HTML"])], "setMat282", i + "|")}
+    ${m && m.tipo === "pdf" ? `<label class="field" style="max-width:110px"><span>Da página</span><input type="number" min="1" max="9999" inputmode="numeric" id="mde-${it.id}" data-bind="${p}mat.de" value="${esc(String(m.de || 1))}"></label><label class="field" style="max-width:110px"><span>Até a página</span><input type="number" min="1" max="9999" inputmode="numeric" id="mate-${it.id}" data-bind="${p}mat.ate" value="${esc(String(m.ate || ""))}" placeholder="fim"></label>` : ""}</div>
+    ${m ? `<span class="aj">${esc(m.nome)} · ${capTxt282(m)}. As perguntas que você colocar logo abaixo são as deste capítulo.</span>` : ""}</div>`;
+  const k = r.lastIndexOf("</div></div>"); return k < 0 ? r : r.slice(0, k) + extra + r.slice(k);
+};
+A.setMat282 = function(arg){
+  const [i, id] = String(arg).split("|"), d = UI().draft, it = d.itens[+i]; UI().menu = null; if (!it) return;
+  if (!id){ delete it.mat; return; }
+  const f = (d.material || []).find(x => x.id === id); if (!f) return;
+  it.mat = {id: f.id, nome: f.nome, tipo: f.tipo, de: 1, ate: ""};
+};
+/* guarda números de verdade na faixa de páginas */
+const _salvarT282 = A.salvarT;
+A.salvarT = function(){
+  const d = UI().draft;
+  if (d) d.itens.forEach(it => { if (!it.mat) return; if (!isQ(it) === false){ delete it.mat; return; }
+    let de = Math.round(+it.mat.de), ate = Math.round(+it.mat.ate);
+    de = de > 0 ? Math.min(de, 9999) : 1; ate = ate > 0 ? Math.min(ate, 9999) : 0; if (ate && ate < de) ate = de;
+    it.mat = {id: it.mat.id, nome: it.mat.nome, tipo: it.mat.tipo, de, ate: ate || ""}; });
+  return _salvarT282.apply(this, arguments);
+};
+/* Aplicar: quando perguntar */
+function temCap282(T){ return !!T && T.itens.some(matCap282); }
+function ordenaCap282(s){
+  /* todas as perguntas valendo nota depois de todas as explicações; mantém o ensaio no começo */
+  const ens = s.itens.filter(it => it.ensaio), exp = s.itens.filter(it => !it.ensaio && !isQ(it)), qs = s.itens.filter(it => !it.ensaio && isQ(it));
+  s.itens = [...ens, ...exp, ...qs];
+}
+const _sessaoNova282 = sessaoNova;
+sessaoNova = function(T, o){
+  const s = _sessaoNova282.apply(this, arguments);
+  if (o && o.avalCap === "fim" && temCap282(T) && !s.prePos && !s.refazer){ ordenaCap282(s); s.perguntasNoFim = true; }
+  return s;
+};
+const _vNova282 = vNova;
+vNova = function(){
+  const h0 = _vNova282.apply(this, arguments), o = UI().nova, T = o && S.treinamentos.find(t => t.id === o.tId);
+  if (!T || o.reforco || !temCap282(T)) return h0;
+  const campo = `<div class="field cap282n">${dd("dd-avalcap", "Quando fazer as perguntas", o.avalCap === "fim" ? "fim" : "cada", [["cada", "Depois de cada capítulo", "Segue a ordem do treinamento: o capítulo, as perguntas dele, o próximo capítulo"], ["fim", "Todas no fim", "Passa por todos os capítulos e só então vêm as perguntas"]], "setNova", "avalCap|")}<span class="aj">O material aparece no telão. No próprio ritmo o celular mostra só o título do capítulo.${o.prePos ? " Com pré-teste ligado vale a ordem do treinamento." : ""}</span></div>`;
+  const i = h0.indexOf("Setores que participam"); if (i < 0) return h0;
+  const j = h0.lastIndexOf("<", i), antes = h0.lastIndexOf("<", j - 1);
+  return h0.slice(0, antes) + campo + h0.slice(antes);
+};
+/* telão: o material do capítulo, num painel que não recarrega a cada atualização da tela */
+const MATTEL = {chave: "", url: "", falta: false, sem: false, el: null, carregando: false};
+function matTelPrepara282(m){
+  const chave = m.id + "|" + (m.tipo === "pdf" ? (m.de || 1) : "");
+  if (MATTEL.chave === chave || MATTEL.carregando) return;
+  MATTEL.carregando = true; MATTEL.falta = false;
+  MATDB.ler(m.id).then(async b => {
+    if (MATTEL.url){ URL.revokeObjectURL(MATTEL.url); MATTEL.url = ""; }
+    if (!b){ MATTEL.falta = true; MATTEL.chave = chave; MATTEL.carregando = false; matTelLimpa282(); render(); return; }
+    let el = document.createElement("iframe"); el.className = "mat-over-f"; el.title = m.nome;
+    MATTEL.sem = false;
+    if (m.tipo === "pdf" && navigator.pdfViewerEnabled === false){ MATTEL.url = URL.createObjectURL(new Blob([b], {type: "application/pdf"})); MATTEL.sem = true; matTelLimpa282(); MATTEL.chave = chave; MATTEL.carregando = false; render(); return; }
+    if (m.tipo === "pdf"){ MATTEL.url = URL.createObjectURL(new Blob([b], {type: "application/pdf"})); el.src = MATTEL.url + "#page=" + (m.de || 1) + "&view=FitH"; }
+    else { el.setAttribute("sandbox", "allow-scripts"); el.srcdoc = await b.text(); }
+    matTelLimpa282(); MATTEL.el = el; MATTEL.chave = chave; MATTEL.carregando = false; render(); });
+}
+function matTelLimpa282(){ const o = document.getElementById("matover282"); if (o) o.remove(); MATTEL.el = null; }
+function matTelSync282(){
+  const slot = document.getElementById("matslot282"); let o = document.getElementById("matover282");
+  if (!slot || !MATTEL.el){ if (o) o.hidden = true; return; }
+  if (!o){ o = document.createElement("div"); o.id = "matover282"; o.className = "mat-over"; document.body.appendChild(o); }
+  if (MATTEL.el.parentNode !== o) o.replaceChildren(MATTEL.el);
+  const r = slot.getBoundingClientRect(); o.hidden = false;
+  Object.assign(o.style, {left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px"});
+}
+const _vTelao282 = vTelao;
+vTelao = function(){
+  let h0 = _vTelao282.apply(this, arguments);
+  let s = null; try { s = sessAtual(); } catch(e) {}
+  const it = s && s.status !== "encerrada" && s.modo !== "ritmo" && s.status !== "espera" && s.fase && s.fase.etapa === "explicacao" ? s.itens[s.fase.idx] : null, m = matCap282(it);
+  if (!m){ if (MATTEL.chave){ matTelLimpa282(); MATTEL.chave = ""; } return h0; }
+  matTelPrepara282(m);
+  const corpo = MATTEL.sem ? `<div class="mat-falta"><p class="big">Este aparelho não mostra PDF dentro da página.</p><p class="muted">${esc(m.nome)}, ${capTxt282(m)}.</p><p><a class="btn" href="${MATTEL.url}#page=${m.de || 1}" target="_blank" rel="noopener">Abrir o PDF em outra aba</a></p></div>` : MATTEL.falta ? `<div class="mat-falta"><p class="big">O material não está neste aparelho.</p><p class="muted">${esc(m.nome)}. Anexe de novo na aba Material do treinamento neste aparelho.</p></div>` : !MATTEL.el ? `<p class="muted">Carregando o material…</p>` : "";
+  const bloco = `<span class="lbl">Capítulo · ${esc(m.nome)} · ${capTxt282(m)}</span><p class="mid q2">${esc(it.enunciado || "Capítulo")}</p><div id="matslot282" class="mat-slot">${corpo}</div><p class="muted" style="margin:6px 0 0">Quando terminar, toque em "Concluir explicação". As perguntas abrem no celular da turma.</p>`;
+  const a = h0.indexOf('<span class="lbl">Momento de explicação</span>'); if (a < 0) return h0;
+  const b = h0.indexOf("</p>", h0.indexOf("As perguntas abrem no celular da turma", a)); if (b < 0) return h0;
+  return h0.slice(0, a) + bloco + h0.slice(b + 4);
+};
+const _render282 = render;
+render = function(){ const r = _render282.apply(this, arguments); try { matTelSync282(); } catch(e) {} return r; };
+window.addEventListener("resize", () => { try { matTelSync282(); } catch(e) {} });
+/* Controle do responsável: avisa que o capítulo está no telão */
+const _vControle282 = vControle;
+vControle = function(){
+  const h0 = _vControle282.apply(this, arguments), s = sessAtual();
+  if (!s || s.status === "encerrada" || !s.fase || s.fase.etapa !== "explicacao") return h0;
+  const m = matCap282(s.itens[s.fase.idx]); if (!m) return h0;
+  const nota = `<div class="note cap282c"><b>Capítulo no telão.</b> ${esc(m.nome)} · ${capTxt282(m)}. Abra o telão para apresentar; depois toque em Concluir explicação.</div>`;
+  const k = h0.indexOf('<button class="btn pri lg" data-act="avancar"'); if (k < 0) return h0;
+  return h0.slice(0, k) + nota + h0.slice(k);
+};
 </script>
 </body>
 </html>
