@@ -1949,7 +1949,7 @@ main .tblwrap table.pres th:nth-child(2),main .tblwrap table.pres td:nth-child(2
 <style id="v284">
 /* ===== v2.8.4 · folha do refazer ===== */
 .pna{flex-wrap:wrap}.pna .btn[data-act="refFolha284"]{flex:1 1 100%;order:3}
-</style>
+<style id="v287">.side .pe .cav.cf{background:none;overflow:hidden;padding:0}.side .pe .cav img{width:100%;height:100%;object-fit:cover;display:block}</style>
 </head>
 <body>
 <div id="efc-fundo" aria-hidden="true"></div>
@@ -2372,7 +2372,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.8.6";
+const APP_VERSAO = "2.8.7";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Equipe 1","Equipe 2","Equipe 3","Outros"];
@@ -5959,7 +5959,7 @@ shellRender = function(){
   const pe = side.querySelector(".pe"); if (!pe) return;
   const logado = nvResp(), nome = logado ? String(NV.conta.nome) : "Sem login";
   const ini = logado ? nome.split(/\s+/).filter(Boolean).map(x => x[0]).filter((x, i, a) => i === 0 || i === a.length - 1).join("").toUpperCase() : "";
-  pe.innerHTML = `<span class="cav">${ini ? esc(ini) : (ICON.pessoa || "")}</span><b>${esc(nome)}</b><span>${esc(PERFIS[S.perfil])}${logado ? " · conta do EFClaudian" : ""}</span>${logado ? `<span>${esc(EFC_CONFIG.produto)} v${APP_VERSAO}</span>` : `<button class="lk" data-act="nvAbrirInteg">Entrar com a conta do EFClaudian</button>`}`;
+  pe.innerHTML = `<span class="cav${logado && NV.conta.foto ? " cf" : ""}">${logado && NV.conta.foto ? `<img src="${NV.conta.foto}" alt="">` : (ini ? esc(ini) : (ICON.pessoa || ""))}</span><b>${esc(nome)}</b><span>${esc(PERFIS[S.perfil])}${logado ? " · conta do EFClaudian" : ""}</span>${logado ? `<span>${esc(EFC_CONFIG.produto)} v${APP_VERSAO}</span>` : `<button class="lk" data-act="nvAbrirInteg">Entrar com a conta do EFClaudian</button>`}`;
   if (!logado) pe.insertAdjacentHTML("afterend", `<span class="side-v">${esc(EFC_CONFIG.produto)} v${APP_VERSAO}</span>`);
 };
 
@@ -7027,7 +7027,7 @@ function refazer279(s){
 function blocoRefazer279(doc, txt, s, c, X, W, y, cabe, nova){
   if (s.refazer || !c.aval.length) return y;
   const tm = refazer279(s), M = c.meta;
-  const abaixo = c.rows.filter(r => r.nota < M).sort((a, b) => a.nota - b.nota);
+  const uo = ultOficial287(s.tId), abaixo = c.rows.filter(r => r.nota < M && (!r.p.pessoaId || uo.get(r.p.pessoaId) === s.id)).sort((a, b) => a.nota - b.nota);
   if (!abaixo.length || !abaixo.some(r => tm.has(r.p.pessoaId))) return y;
   const roxo = [124, 58, 237], tinta = [26, 26, 38], cinza = [95, 95, 115], linha = [216, 216, 224], suave = [241, 235, 253], okc = [31, 107, 80], okf = [227, 242, 236], badc = [143, 53, 53], badf = [247, 230, 230];
   const cols = [["Nome completo", 62, "l"], ["1ª tentativa", 31, "c"], ["2ª tentativa", 31, "c"], ["3ª tentativa", 31, "c"], ["Situação", W - 2 * X - 155, "c"]], RH = 8;
@@ -7616,6 +7616,33 @@ refazer279 = function(s){
       const a = m.get(pid) || []; if (a.length < 2) a.push({ac: r.ac, n: c2.aval.length, nota: r.nota, ok: r.nota >= c2.meta, em: x.encerradaEm}); m.set(pid, a); });
   });
   return m;
+};
+
+/* ===== v2.8.7 · registro do refazer por última sessão; foto e nome da conta do EFClaudian ===== */
+/* pessoa -> id da última sessão oficial em que ela participou (a sessão de onde sai o refazer dela) */
+function ultOficial287(tId){
+  const m = new Map();
+  sessOficiais(tId).filter(x => x.equipe !== "um").sort((a, b) => a.encerradaEm - b.encerradaEm).forEach(x => calc(x).rows.forEach(r => { if (r.p.pessoaId) m.set(r.p.pessoaId, x.id); }));
+  return m;
+}
+/* a foto fica em sv2_avatar/{uid}.img (imagem em base64, gravada pelo EFClaudian); sem foto, ficam as iniciais */
+async function nvFoto287(){
+  if (!nvResp()) return;
+  const uid = NV.user.uid;
+  try {
+    const d = await NV.fdb.collection("sv2_avatar").doc(uid).get(), x = d.exists ? d.data() : null;
+    const img = x && typeof x.img === "string" && x.img.length <= 200000 && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(x.img) ? x.img : "";
+    if (NV.conta && NV.user && NV.user.uid === uid && (NV.conta.foto || "") !== img){ NV.conta.foto = img; render(); }
+  } catch(e) { /* sem permissão ou sem rede: ficam as iniciais */ }
+}
+const _nvAuth287 = nvAuthMudou;
+nvAuthMudou = async function(u){ await _nvAuth287.apply(this, arguments); nvFoto287(); };
+/* ao aplicar, o instrutor já vem com o nome da conta (dá para trocar) */
+const _novaSess287 = A.novaSessao;
+A.novaSessao = function(){
+  const r = _novaSess287.apply(this, arguments), o = UI().nova;
+  if (o && !o.instrutor && nvResp()) o.instrutor = String(NV.conta.nome || "");
+  return r;
 };
 </script>
 </body>
