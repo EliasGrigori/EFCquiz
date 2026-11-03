@@ -2372,7 +2372,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.8.4";
+const APP_VERSAO = "2.8.6";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Equipe 1","Equipe 2","Equipe 3","Outros"];
@@ -2952,7 +2952,7 @@ function vConferir(){
   if (c.feito){ const cod = c.codigo.toUpperCase().replace(/[^0-9A-F]/g, "").replace(/(.{4})(?=.)/g, "$1-");
     const s = S.sessoes.find(x => x.integ === cod);
     if (!s) res = `<div class="veredito bad"><b class="v">Não encontrado</b><span>Nenhum registro deste aparelho tem o código <b class="mono">${esc(cod)}</b>.</span><span class="muted">Confira se digitou igual ao rodapé do PDF. Se o registro foi feito em outro aparelho, importe o .json da sessão e confira de novo.</span></div>`;
-    else if (codigoIntegridade(s) === s.integ) res = `<div class="veredito ok"><b class="v">Confere</b><span><b>${esc(s.titulo)}</b> · <span class="num">${fData(s.encerradaEm)} ${fHora(s.encerradaEm)}</span> · <span class="num">${linhasPresenca(s, calc(s)).length}</span> pessoa(s).</span><span>Nenhum dado foi alterado desde o encerramento.</span><button class="btn sm" style="justify-self:start" data-act="verRel" data-arg="${s.id}">Abrir o relatório</button></div>`;
+    else if (codigoIntegridade(s) === s.integ) res = `<div class="veredito ok"><b class="v">Confere</b><span><b>${esc(s.titulo)}</b> · <span class="num">${fData(s.encerradaEm)} ${fHora(s.encerradaEm)}</span> · <span class="num">${linhasPresenca(s, calc(s)).length}</span> ${linhasPresenca(s, calc(s)).length === 1 ? "pessoa" : "pessoas"}.</span><span>Nenhum dado foi alterado desde o encerramento.</span><button class="btn sm" style="justify-self:start" data-act="verRel" data-arg="${s.id}">Abrir o relatório</button></div>`;
     else res = `<div class="veredito bad"><b class="v">Não confere</b><span><b>${esc(s.titulo)}</b> · <span class="num">${fData(s.encerradaEm)}</span></span><span>Os dados desta sessão foram alterados depois do encerramento. O PDF com este código não corresponde ao registro atual.</span></div>`; }
   return `<div class="stack" style="max-width:640px;margin-inline:auto">
     <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:24px">Conferir registro</h1></div>
@@ -3103,7 +3103,7 @@ function vNova(){
   const segs = (k, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-act="setNova" data-arg="${k}|${v}" aria-pressed="${String(o[k])===String(v)}">${l}</button>`).join("")}</div>`;
   return `<div class="stack">
   <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">${o.reav ? "Reavaliação" : o.reforco ? "Reforço" : "Aplicar"}: ${esc(T.titulo)}</h1></div>
-  ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> ${o.reforcoConteudo === "erradas" ? `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram.` : `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta. ${temExp271(S.treinamentos.find(t => t.id === o.tId)) ? "Elas revêem a explicação e refazem o teste." : "Elas refazem o teste."}`} Formato individual. A nota oficial continua a da 1ª tentativa. São até 3 tentativas: a 2ª pode ser no mesmo dia, a 3ª só em outro dia.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
+  ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> ${o.reforcoConteudo === "erradas" ? `Só ${o.reforco.pessoas.length === 1 ? "entra a" : "entram as"} <span class="num">${o.reforco.pessoas.length}</span> ${o.reforco.pessoas.length === 1 ? "pessoa que ficou" : "pessoas que ficaram"} abaixo da meta, e só com ${o.reforco.itens.length === 1 ? "a" : "as"} <span class="num">${o.reforco.itens.length}</span> ${o.reforco.itens.length === 1 ? "pergunta que ela errou" : "perguntas que elas erraram"}.` : `Só ${o.reforco.pessoas.length === 1 ? "entra a" : "entram as"} <span class="num">${o.reforco.pessoas.length}</span> ${o.reforco.pessoas.length === 1 ? "pessoa que ficou" : "pessoas que ficaram"} abaixo da meta. ${temExp271(S.treinamentos.find(t => t.id === o.tId)) ? "Elas revêem a explicação e refazem o teste." : "Elas refazem o teste."}`} Formato individual. A nota oficial continua a da 1ª tentativa. São até 3 tentativas: a 2ª pode ser no mesmo dia, a 3ª só em outro dia.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
   <section class="panel"><div class="bd stack">
     <div class="grid2">
       <label class="field"><span>Instrutor · aparece no Relatório e no PDF</span><input type="text" id="n-instr" data-nbind="instrutor" value="${esc(o.instrutor)}"></label>
@@ -3433,7 +3433,7 @@ function vRel(){
   if (!lista.length) return `<div class="stack">${pgHead({crumb: "Relatório", titulo: "Relatório", sub: "Nenhuma sessão ainda", tools: abas})}${relNotaTeste()}<section class="panel"><div class="bd"><p class="muted" style="margin:0">Aplique um treinamento para ver o relatório aqui.</p></div></section></div>`;
   let s = sessById(u.relId); if (!s){ s = lista.find(x => x.status === "encerrada") || lista[0]; u.relId = s.id; }
   const c = calc(s), ag = now();
-  const sel = `<select id="rel-sel" data-relsel="1" style="width:auto;max-width:100%" aria-label="Sessão">${S.treinamentos.map(T => { const ss = lista.filter(x => x.tId === T.id); return ss.length ? `<optgroup label="${esc(T.titulo)}">${ss.map(x => `<option value="${x.id}"${x.id===s.id?" selected":""}>${fData(x.encerradaEm||x.criadaEm)} ${fHora(x.encerradaEm||x.criadaEm)} · ${x.status==="encerrada"?"encerrada":"aberta"} · ${x.part.length} pessoa(s)</option>`).join("")}</optgroup>` : ""; }).join("")}${lista.filter(x => !S.treinamentos.some(T => T.id === x.tId)).map(x => `<option value="${x.id}"${x.id===s.id?" selected":""}>${esc(x.titulo)} · ${fData(x.encerradaEm||x.criadaEm)}</option>`).join("")}</select>`;
+  const sel = `<select id="rel-sel" data-relsel="1" style="width:auto;max-width:100%" aria-label="Sessão">${S.treinamentos.map(T => { const ss = lista.filter(x => x.tId === T.id); return ss.length ? `<optgroup label="${esc(T.titulo)}">${ss.map(x => `<option value="${x.id}"${x.id===s.id?" selected":""}>${fData(x.encerradaEm||x.criadaEm)} ${fHora(x.encerradaEm||x.criadaEm)} · ${x.status==="encerrada"?"encerrada":"aberta"} · ${x.part.length} ${x.part.length === 1 ? "pessoa" : "pessoas"}</option>`).join("")}</optgroup>` : ""; }).join("")}${lista.filter(x => !S.treinamentos.some(T => T.id === x.tId)).map(x => `<option value="${x.id}"${x.id===s.id?" selected":""}>${esc(x.titulo)} · ${fData(x.encerradaEm||x.criadaEm)}</option>`).join("")}</select>`;
   const M = c.meta;
   const dificeis = [...c.porItem].sort((a, b) => a.pct - b.pct).filter(x => x.pct < M).slice(0, 3);
   const erraram = [...c.rows].filter(r => r.nota < M && c.aval.length).sort((a, b) => a.nota - b.nota).slice(0, 3);
@@ -3459,7 +3459,7 @@ function vRel(){
     <div><b class="num">${N.acerto}%</b><span>Acerto geral</span></div>
     <div><b class="num">${N.tempo}</b><span>Tempo médio por pergunta</span></div></div>`;
   const agir = `<div class="cx"><h2>O que fazer agora</h2>
-    ${nAbaixo ? `<p><span class="ruim">${ICON_TRI}<span class="num">${nAbaixo}</span> ${nAbaixo === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ${erraram.map(r => `${esc(r.p.nome)} <span class="num">${r.ac} de ${c.aval.length} (${r.nota}%)</span>`).join(", ")}${nAbaixo > erraram.length ? "…" : ""}</p>` : (!c.aval.length ? (s.itens.some(it => isQ(it) && it.uso === "avaliacao") ? (N.presentes ? `<p><span class="ruim">${ICON_TRI}<span class="num">${N.presentes}</span> ${N.presentes === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ninguém respondeu às perguntas de avaliação.</p>` : `<p class="muted">Ninguém respondeu às perguntas de avaliação.</p>`) : `<p class="muted">Esta sessão não tem perguntas de avaliação, por isso não há meta a conferir.</p>`) : N.presentes && N.eficazes >= N.presentes ? `<p>Todos atingiram a meta de <span class="num">${M}%</span>.</p>` : `<p><span class="num">${N.eficazes} de ${N.presentes}</span> atingiram a meta de <span class="num">${M}%</span>.</p>`)}
+    ${nAbaixo ? `<p><span class="ruim">${ICON_TRI}<span class="num">${nAbaixo}</span> ${s.refazer ? (nAbaixo === 1 ? "pessoa continua abaixo da meta" : "pessoas continuam abaixo da meta") : (nAbaixo === 1 ? "pessoa precisa de reforço" : "pessoas precisam de reforço")}</span>: ${erraram.map(r => `${esc(r.p.nome)} <span class="num">${r.ac} de ${c.aval.length} (${r.nota}%)</span>`).join(", ")}${nAbaixo > erraram.length ? "…" : ""}</p>` : (!c.aval.length ? (s.itens.some(it => isQ(it) && it.uso === "avaliacao") ? (N.presentes ? `<p><span class="ruim">${ICON_TRI}<span class="num">${N.presentes}</span> ${N.presentes === 1 ? "pessoa precisa" : "pessoas precisam"} de reforço</span>: ninguém respondeu às perguntas de avaliação.</p>` : `<p class="muted">Ninguém respondeu às perguntas de avaliação.</p>`) : `<p class="muted">Esta sessão não tem perguntas de avaliação, por isso não há meta a conferir.</p>`) : N.presentes && N.eficazes >= N.presentes ? `<p>Todos atingiram a meta de <span class="num">${M}%</span>.</p>` : `<p><span class="num">${N.eficazes} de ${N.presentes}</span> atingiram a meta de <span class="num">${M}%</span>.</p>`)}
     ${dificeis.length ? `<p>Pergunta mais difícil: “${esc(cut(dificeis[0].it.enunciado, 90))}” (<span class="num">${dificeis[0].pct}%</span>)</p>` : ""}
     ${faltou.length ? `<p class="muted">${s.modo === "ritmo" ? plural(faltou.length, "pessoa não concluiu", "pessoas não concluíram") : plural(faltou.length, "pessoa deixou perguntas sem resposta", "pessoas deixaram perguntas sem resposta")}. Veja no Mapa da turma.</p>` : ""}
     ${podeRea ? (reforcoT ? `<button class="btn pri" data-act="reforcoAbrir" data-arg="${s.tId}">${ICON.play}Reaplicar para quem ficou abaixo</button>` : `<button class="btn pri" data-act="novaSessao" data-arg="${s.tId}">${ICON.play}Aplicar de novo</button>`) : ""}</div>`;
@@ -3820,7 +3820,7 @@ async function importarJSON(file){
     if (o && o.formato === "efcquiz/treinamento" && Array.isArray(o.itens)){
       const T = treinamentoDaIA(o); S.treinamentos.push(T);
       u.draft = clone(T); u.tela = "editor"; u.view = "resp"; u.erro = ""; u.erroImp = ""; u.msgResp = "";
-      u.msgEd = `Importado do arquivo da IA: ${T.itens.filter(isQ).length} pergunta(s) e ${T.itens.filter(it => !isQ(it)).length} explicação(ões). Revise cada pergunta, a resposta certa e o tempo. Depois toque em Salvar.`;
+      u.msgEd = `Importado do arquivo da IA: ${T.itens.filter(isQ).length} ${T.itens.filter(isQ).length === 1 ? "pergunta" : "perguntas"} e ${T.itens.filter(it => !isQ(it)).length} ${T.itens.filter(it => !isQ(it)).length === 1 ? "explicação" : "explicações"}. Revise cada pergunta, a resposta certa e o tempo. Depois toque em Salvar.`;
     } else if (o && /^(efcquiz|treinamento-quiz)\/modelo$/.test(o.formato || "") && o.modelo && Array.isArray(o.modelo.itens)){
       const T = clone(o.modelo); if (S.treinamentos.some(t => t.id === T.id)) T.id = uid(); T.atualizado = Date.now();
       S.treinamentos.push(T); u.msgResp = `Modelo importado: ${T.titulo} (${T.itens.reduce((a, it) => a + (it.foto ? 1 : 0) + (it.altFotos || []).filter(Boolean).length, 0)} foto(s)).`;
@@ -3936,7 +3936,7 @@ const A = {
   bancoFechar(){ UI().banco = null; },
   bancoCopiar(){ const b = UI().banco, d = UI().draft; let n = 0;
     b.sel.forEach(k => { const [tid, iid] = k.split("|"); const T = S.treinamentos.find(t => t.id === tid); const it = T && T.itens.find(x => x.id === iid); if (it){ const c = clone(it); c.id = uid(); d.itens.push(c); n++; } });
-    UI().banco = null; UI().erro = ""; UI().msgEd = n + " pergunta(s) copiada(s) para o fim da lista."; },
+    UI().banco = null; UI().erro = ""; UI().msgEd = n + (n === 1 ? " pergunta copiada" : " perguntas copiadas") + " para o fim da lista."; },
   irQuestao(id){ UI().alvo = id; setTimeout(() => { const el = document.getElementById("pq-" + id); if (el) el.scrollIntoView({block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"}); }, 30); },
   cfg(){ UI().cfg = !UI().cfg; },
   tema(t){ UI().tema = t; },
@@ -4394,7 +4394,7 @@ function reforcoPendente(){
 function vReforco(){
   if (!pode()) return ""; const gs = reforcoPendente(); if (!gs.length) return "";
   return `<section class="panel">${hdr("Reforço pendente", `<span class="muted" style="font-size:13px">Quem ficou abaixo da meta na última vez, com as perguntas que errou</span>`)}<div class="tlist">${gs.map(g => `<div>
-    <div class="t"><b>${esc(g.T.titulo)}</b><span class="muted"><span class="num">${g.pessoas.length}</span> pessoa(s) abaixo da meta · <span class="num">${g.itens.length}</span> pergunta(s) para reforçar</span></div>
+    <div class="t"><b>${esc(g.T.titulo)}</b><span class="muted"><span class="num">${g.pessoas.length}</span> ${g.pessoas.length === 1 ? "pessoa abaixo" : "pessoas abaixo"} da meta · <span class="num">${g.itens.length}</span> ${g.itens.length === 1 ? "pergunta" : "perguntas"} para reforçar</span></div>
     <div class="acs"><button class="btn pri" data-act="reforcoAbrir" data-arg="${g.T.id}">${ICON.play}Abrir reforço</button></div>
     <div class="ult">${g.pessoas.slice(0, 8).map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return pe ? `<span class="row" style="gap:5px">${avSvg(avDaPessoa(pe), "xs")}${esc(nomeCompleto(pe))} <b class="num" title="${tituloNota272(x)}">${x.nota}%</b>${tagRod272(x)}</span>` : ""; }).join("")}${g.pessoas.length > 8 ? `<span class="muted">e mais ${g.pessoas.length - 8}</span>` : ""}</div></div>`).join("")}</div></section>`;
 }
@@ -5286,7 +5286,7 @@ A.bancoCopiar = function(){
   const b = UI().banco, d = UI().draft; let n = 0;
   b.sel = b.sel.filter(k => { if (!k.startsWith("banco|")) return true; const id = k.slice(6), x = (S.banco || []).find(y => y.id === id);
     if (x){ const c = clone(x.item); c.id = uid(); d.itens.push(c); S.banco = S.banco.filter(y => y.id !== id); n++; } return false; });
-  const r = _bancoCopiar23(); if (n){ const m = /^(\d+)/.exec(UI().msgEd || ""); const tot = (m ? +m[1] : 0) + n; UI().msgEd = tot + " pergunta(s) copiada(s) para o fim da lista."; } return r;
+  const r = _bancoCopiar23(); if (n){ const m = /^(\d+)/.exec(UI().msgEd || ""); const tot = (m ? +m[1] : 0) + n; UI().msgEd = tot + (tot === 1 ? " pergunta copiada" : " perguntas copiadas") + " para o fim da lista."; } return r;
 };
 
 /* ---------------- lista: cabeçalho com resumo, abas e ferramentas ---------------- */
@@ -5534,7 +5534,7 @@ vNova = function(){
   const nuvem = pode() ? `<div class="field">${dd("dd-nuvem", "Onde a turma responde", String(o.nuvem ?? "0"), [["1", "Nos celulares da turma", rede ? "Cada um lê o QR ou digita a chave. Precisa de internet." : "Entre com a conta do EFClaudian em Configurações › Integração para usar.", !rede], ["0", "Só neste aparelho", "Tudo roda aqui, sem internet."]], "setNova", "nuvem|")}</div>` : "";
   return `<div class="stack nova2">${avisoDemo()}
   <div class="row"><button class="btn sm" data-act="voltar">Voltar</button><h1 style="font-size:22px;margin-right:auto">${o.reav ? "Reavaliação" : o.reforco ? "Reforço" : "Aplicar"}: ${esc(T.titulo)} <span class="vs">${vv(T.versao)}</span></h1></div>
-  ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> ${o.reforcoConteudo === "erradas" ? `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta, e só com as <span class="num">${o.reforco.itens.length}</span> perguntas que elas erraram.` : `Só entram as <span class="num">${o.reforco.pessoas.length}</span> pessoas que ficaram abaixo da meta. ${temExp271(S.treinamentos.find(t => t.id === o.tId)) ? "Elas revêem a explicação e refazem o teste." : "Elas refazem o teste."}`} Formato individual. A nota oficial continua a da 1ª tentativa. São até 3 tentativas: a 2ª pode ser no mesmo dia, a 3ª só em outro dia.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
+  ${o.reforco ? `<div class="note"><b>Sessão de reforço.</b> ${o.reforcoConteudo === "erradas" ? `Só ${o.reforco.pessoas.length === 1 ? "entra a" : "entram as"} <span class="num">${o.reforco.pessoas.length}</span> ${o.reforco.pessoas.length === 1 ? "pessoa que ficou" : "pessoas que ficaram"} abaixo da meta, e só com ${o.reforco.itens.length === 1 ? "a" : "as"} <span class="num">${o.reforco.itens.length}</span> ${o.reforco.itens.length === 1 ? "pergunta que ela errou" : "perguntas que elas erraram"}.` : `Só ${o.reforco.pessoas.length === 1 ? "entra a" : "entram as"} <span class="num">${o.reforco.pessoas.length}</span> ${o.reforco.pessoas.length === 1 ? "pessoa que ficou" : "pessoas que ficaram"} abaixo da meta. ${temExp271(S.treinamentos.find(t => t.id === o.tId)) ? "Elas revêem a explicação e refazem o teste." : "Elas refazem o teste."}`} Formato individual. A nota oficial continua a da 1ª tentativa. São até 3 tentativas: a 2ª pode ser no mesmo dia, a 3ª só em outro dia.<br>${o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ")}</div>` : ""}
   <section class="panel"><div class="bd stack">
     <div class="grid2">
       <label class="field"><span>Instrutor · aparece no Relatório e no PDF</span><input type="text" id="n-instr" data-nbind="instrutor" value="${esc(o.instrutor)}"></label>
@@ -6075,7 +6075,7 @@ async function pdfEvidencia(s){
     const sw = cols[5][1]; doc.setFillColor(...(ok ? okf : badf)); doc.roundedRect(x + 2.5, y + 3, sw - 5, 4.4, 1, 1, "F"); txt(ok ? "Eficaz" : "Reforço", x + sw / 2, y + 6.1, {s: 6.8, b: true, c: ok ? okc : badc, al: "center"}); x += sw;
     if (l.sig){ try { doc.addImage(l.sig, "PNG", x + 2, y + 1, Math.min(cols[6][1] - 4, (RH - 2) * 3.3), RH - 2); } catch(e) {} } else txt("—", x + 2, ym, {c: cinza});
     y += RH; });
-  y += 3; txt(`Pontos = acertos nas perguntas de avaliação (1 ponto por acerto); % = pontos ÷ total. Eficaz = meta atingida (${metaTxt275(M, c.aval.length, s.metaTipo)}).`, X, y + 2, {s: 7, c: cinza}); y += 8;
+  y += 3; txt(`Pontos = acertos nas perguntas de avaliação (1 ponto por acerto); % = pontos ÷ total. Eficaz = meta atingida: ${metaTxt275(M, c.aval.length, s.metaTipo)}.`, X, y + 2, {s: 7, c: cinza}); y += 8;
   y = blocoRefazer279(doc, txt, s, c, X, W, y, cabe, nova);
   if (gP && gP.pares){ nova("Pré-teste e pós-teste · ganho de aprendizado"); y = pdfGanho(doc, txt, s, gP, X, W, y, cabe, nova); }
   /* reforço */
@@ -6776,7 +6776,7 @@ vRevisao = function(pe, sid){
 function nAval275(itens){ return (itens || []).filter(it => scored(it) && it.uso === "avaliacao").length; }
 function pontosTxt275(ac, n){ return `${ac} de ${n} ${n === 1 ? "ponto" : "pontos"}`; }
 function ptsDe275(m, n){ for (let k = 1; k <= n; k++) if (Math.round(k / n * 100) >= m) return k; return n; }
-function metaTxt275(m, n, tipo){ if (!n) return m + "%"; const k = ptsDe275(m, n); return tipo === "pct" ? `${m}% (${pontosTxt275(k, n)})` : `${pontosTxt275(k, n)} (${m}%)`; }
+function metaTxt275(m, n, tipo){ if (!n) return m + "%"; const k = ptsDe275(m, n); return tipo === "pct" ? `${m}% (${pontosTxt275(k, n)})` : `${pontosTxt275(k, n)} (${Math.round(k / n * 100) === +m ? m + "%" : "meta de " + m + "%"})`; }
 function valMeta275(atual, n, tipo){ return tipo !== "pct" && n ? Math.round(ptsDe275(atual, n) / n * 100) : atual; }
 function opsMeta275(n, tipo, atual){
   if (!n) return METAS.map(m => [m, m + "%"]);
@@ -7217,7 +7217,7 @@ function dificeis280(T){
 const diasTxt280 = d => d < 1 ? "vence hoje" : d === 1 ? "venceu há 1 dia" : `venceu há ${d} dias`;
 function notaReav280(o){
   const nomes = o.reforco.pessoas.map(id => { const pe = S.pessoas.find(x => x.id === id); return pe ? esc(nomeCompleto(pe)) : ""; }).filter(Boolean).join(", ");
-  return `Reavaliação de <span class="num">${o.reav}</span> dias para <span class="num">${o.reforco.pessoas.length}</span> pessoa(s), com <span class="num">${o.reforco.itens.length}</span> pergunta(s) de avaliação, as que mais gente errou. Formato individual, sem explicação. Não troca a nota oficial nem renova o vencimento. Depois de abrir, envie por link, QR code ou WhatsApp.<br>${nomes}`;
+  return `Reavaliação de <span class="num">${o.reav}</span> dias para <span class="num">${o.reforco.pessoas.length}</span> ${o.reforco.pessoas.length === 1 ? "pessoa" : "pessoas"}, com <span class="num">${o.reforco.itens.length}</span> ${o.reforco.itens.length === 1 ? "pergunta" : "perguntas"} de avaliação, as que mais gente errou. Formato individual, sem explicação. Não troca a nota oficial nem renova o vencimento. Depois de abrir, envie por link, QR code ou WhatsApp.<br>${nomes}`;
 }
 const _vNova280 = vNova;
 vNova = function(){
@@ -7537,7 +7537,7 @@ async function pdfFolhaRefazer284(g){
   const txt = (t, x, y, o = {}) => { doc.setFont("helvetica", o.b ? "bold" : "normal"); doc.setFontSize(o.s || 9); doc.setTextColor(...(o.c || tinta)); doc.text(safe(t), x, y, o.al ? {align: o.al} : undefined); };
   const ult = sessOficiais(T.id).sort((a, b) => b.encerradaEm - a.encerradaEm)[0], emp = String(EFC_CONFIG.empresa || "").trim();
   const titulo = `${T.titulo}${ult ? " · " + vv(ult.tVer || 0) : ""}`, ins = ult ? instrutoresDe(ult).filter(Boolean) : [];
-  const pessoas = g.pessoas.map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return pe ? {nome: nomeCompleto(pe), setor: pe.setor || "", nota: x.nota, meta: x.meta, rod: x.rodada || 1} : null; }).filter(Boolean)
+  const pessoas = g.pessoas.map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return pe ? {nome: nomeCompleto(pe), setor: pe.setor || "", nota: x.nota, meta: x.meta, rod: x.rodada || 1, ult: ult285(T.id, x.pid)} : null; }).filter(Boolean)
     .sort((a, b) => a.nome.localeCompare(b.nome, "pt"));
   const meta = pessoas.length ? pessoas[0].meta : (ult ? calc(ult).meta : 0);
   let y = 0;
@@ -7565,7 +7565,7 @@ async function pdfFolhaRefazer284(g){
     txt(String(i + 1), x + cols[0][1] / 2, ym, {s: 8.2, al: "center"}); x += cols[0][1];
     { let fs = 8.6; doc.setFont("helvetica", "bold"); doc.setFontSize(fs); while (fs > 5.8 && doc.getTextWidth(safe(p.nome)) > cols[1][1] - 3){ fs -= .3; doc.setFontSize(fs); } txt(safe(p.nome), x + 1.8, ym, {s: fs, b: true}); } x += cols[1][1];
     txt(cut(safe(p.setor || "-"), 16), x + 1.8, ym, {s: 8}); x += cols[2][1];
-    txt(p.nota + "%", x + cols[3][1] / 2, ym, {s: 8.4, b: true, al: "center"}); x += cols[3][1];
+    txt(p.ult ? `${p.ult.ac}/${p.ult.n} · ${p.nota}%` : p.nota + "%", x + cols[3][1] / 2, ym, {s: p.ult ? 7.2 : 8.4, b: true, al: "center"}); x += cols[3][1];
     txt(p.rod === 3 ? "3ª" : p.rod === 2 ? "2ª" : "1ª", x + cols[4][1] / 2, ym, {s: 8.2, al: "center"});
     { const x0 = X + 9 + 56 + 24 + 17 + 17, ly = y + RH - 2.2; doc.line(x0 + 1.5, ly, x0 + 22.5, ly); doc.line(x0 + 24 + 2, ly, x0 + 24 + 14, ly); doc.line(x0 + 40 + 1.5, ly, W - X - 2, ly); }
     y += RH;
@@ -7593,6 +7593,30 @@ async function pdfFolhaRefazer284(g){
   const nm = T.titulo.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "").toLowerCase().slice(0, 40), d = new Date();
   await salvarArquivo(`folha-refazer-${nm}-${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}.pdf`, doc.output("blob"));
 }
+
+/* ===== v2.8.5 · correções do relatório do agente ===== */
+/* a última sessão (a mesma que a aba Reforço usa) em que a pessoa respondeu: acertos, total e nota */
+function ult285(tId, pid){
+  let r = null;
+  S.sessoes.filter(s => s.status === "encerrada" && s.tId === tId && !s.teste && s.equipe !== "um" && !(s.refazer && s.refazer.reav)).sort((a, b) => a.encerradaEm - b.encerradaEm).forEach(s => {
+    const c = calc(s); if (!c.aval.length) return; const row = c.rows.find(x => x.p.pessoaId === pid); if (row) r = {ac: row.ac, n: c.aval.length, nota: row.nota}; });
+  return r;
+}
+/* o refazer pertence à sessão de onde saiu: a última sessão oficial da pessoa antes dele (a reavaliação nunca entra) */
+refazer279 = function(s){
+  const m = new Map(); if (!s || s.refazer) return m;
+  const ofi = sessOficiais(s.tId).filter(x => x.equipe !== "um").sort((a, b) => a.encerradaEm - b.encerradaEm), pids = new Map();
+  ofi.forEach(x => pids.set(x.id, new Set(calc(x).rows.map(r => r.p.pessoaId).filter(Boolean))));
+  S.sessoes.filter(x => x.tId === s.tId && x.refazer && !x.refazer.reav && x.status === "encerrada" && !x.teste && (x.encerradaEm || 0) > (s.encerradaEm || 0)).sort((a, b) => a.encerradaEm - b.encerradaEm).forEach(x => {
+    const c2 = calc(x); if (!c2.aval.length) return;
+    c2.rows.forEach(r => { const pid = r.p.pessoaId; if (!pid) return;
+      if (!x.itens.filter(it => scored(it)).map(it => x.resp[r.p.id + "|" + it.id]).filter(Boolean).length) return;
+      let origem = null; ofi.forEach(o => { if ((o.encerradaEm || 0) < (x.encerradaEm || 0) && pids.get(o.id).has(pid)) origem = o; });
+      if (!origem || origem.id !== s.id) return;
+      const a = m.get(pid) || []; if (a.length < 2) a.push({ac: r.ac, n: c2.aval.length, nota: r.nota, ok: r.nota >= c2.meta, em: x.encerradaEm}); m.set(pid, a); });
+  });
+  return m;
+};
 </script>
 </body>
 </html>
