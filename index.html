@@ -1946,6 +1946,10 @@ main .tblwrap table.pres th:nth-child(2),main .tblwrap table.pres td:nth-child(2
 .cap282 .per277-l{align-items:flex-end}
 .cap282c{flex:1 1 100%;margin:0 0 4px;order:-1}
 </style>
+<style id="v284">
+/* ===== v2.8.4 · folha do refazer ===== */
+.pna{flex-wrap:wrap}.pna .btn[data-act="refFolha284"]{flex:1 1 100%;order:3}
+</style>
 </head>
 <body>
 <div id="efc-fundo" aria-hidden="true"></div>
@@ -2368,7 +2372,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.8.2";
+const APP_VERSAO = "2.8.4";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Equipe 1","Equipe 2","Equipe 3","Outros"];
@@ -7491,6 +7495,104 @@ vControle = function(){
   const k = h0.indexOf('<button class="btn pri lg" data-act="avancar"'); if (k < 0) return h0;
   return h0.slice(0, k) + nota + h0.slice(k);
 };
+
+/* ===== v2.8.3 · "Abrir telão" do menu lateral abre a janela do telão ===== */
+const _nav283 = A.nav;
+A.nav = function(k){
+  if (k === "tel" && !tjEstreita() && TELJ.canal){
+    const u = UI(), s = sessAtual() || S.sessoes.filter(x => x.status !== "encerrada").pop();
+    if (s && s.status !== "encerrada"){
+      u.maisAberto = false; u.menu = null;
+      A.telaoJanela(s.id);
+      if (TELJ.aviso){ TELJ.aviso = ""; A.view("tel"); }   /* pop-up bloqueado: cai na tela cheia, como antes */
+      return;
+    }
+  }
+  return _nav283.apply(this, arguments);
+};
+
+/* ===== v2.8.4 · folha em PDF do refazer ===== */
+const _vReforco2_284 = vReforco2;
+vReforco2 = function(q){
+  let h0 = _vReforco2_284.apply(this, arguments);
+  const marca = 'data-act="reforcoAbrir" data-arg="', a = h0.indexOf(marca); if (a < 0) return h0;
+  const tId = h0.slice(a + marca.length, h0.indexOf('"', a + marca.length)), b = h0.indexOf("</button>", a); if (b < 0) return h0;
+  h0 = h0.slice(0, b + 9) + `<button class="btn" data-act="refFolha284" data-arg="${tId}">${ICON.impr}Folha do refazer (PDF)</button>` + h0.slice(b + 9);
+  const u = UI(), m = u.refMsg284 && u.refMsg284.tId === tId ? u.refMsg284 : null, c = h0.indexOf('<p class="aj">Só entram');
+  return m && c > 0 ? h0.slice(0, c) + `<p class="${m.erro ? "msg" : "okmsg"}">${esc(m.txt)}</p>` + h0.slice(c) : h0;
+};
+Object.assign(A, {
+  refFolha284(tId){
+    const g = reforcoPendente().find(x => x.T.id === tId); if (!g) return;
+    UI().refMsg284 = {tId, txt: "Gerando o PDF…", erro: false}; save(); render();
+    pdfFolhaRefazer284(g).then(() => { UI().refMsg284 = {tId, txt: "PDF gerado.", erro: false}; save(); render(); })
+      .catch(e => { UI().refMsg284 = {tId, txt: "Não deu para gerar o PDF: " + (e && e.message || e), erro: true}; save(); render(); });
+    return "norender";
+  }
+});
+async function pdfFolhaRefazer284(g){
+  if (!window.jspdf) throw new Error("o gerador de PDF não carregou");
+  const T = g.T, doc = new window.jspdf.jsPDF({unit: "mm", format: "a4"}), W = 210, X = 12;
+  const roxo = [124, 58, 237], tinta = [26, 26, 38], cinza = [95, 95, 115], linha = [216, 216, 224], suave = [241, 235, 253];
+  const txt = (t, x, y, o = {}) => { doc.setFont("helvetica", o.b ? "bold" : "normal"); doc.setFontSize(o.s || 9); doc.setTextColor(...(o.c || tinta)); doc.text(safe(t), x, y, o.al ? {align: o.al} : undefined); };
+  const ult = sessOficiais(T.id).sort((a, b) => b.encerradaEm - a.encerradaEm)[0], emp = String(EFC_CONFIG.empresa || "").trim();
+  const titulo = `${T.titulo}${ult ? " · " + vv(ult.tVer || 0) : ""}`, ins = ult ? instrutoresDe(ult).filter(Boolean) : [];
+  const pessoas = g.pessoas.map(x => { const pe = S.pessoas.find(y => y.id === x.pid); return pe ? {nome: nomeCompleto(pe), setor: pe.setor || "", nota: x.nota, meta: x.meta, rod: x.rodada || 1} : null; }).filter(Boolean)
+    .sort((a, b) => a.nome.localeCompare(b.nome, "pt"));
+  const meta = pessoas.length ? pessoas[0].meta : (ult ? calc(ult).meta : 0);
+  let y = 0;
+  const cab = () => { const lg = S.config && S.config.logo; let ox = X;
+    if (lg && lg.src){ try { let hh = 14, ww = hh * lg.w / lg.h; if (ww > 40){ ww = 40; hh = ww * lg.h / lg.w; } doc.addImage(lg.src, lg.tipo || "PNG", X, 10 + (14 - hh) / 2, ww, hh); ox = X + ww + 4; } catch(e) { ox = X; } }
+    txt("FOLHA DO REFAZER", ox, 15, {s: 7, b: true, c: cinza}); txt(doc.splitTextToSize(safe(titulo), Math.min(130, 190 - (ox - X)))[0], ox, 21.5, {s: 13, b: true});
+    if (emp) txt(emp, W - X, 15, {s: 7.5, c: cinza, al: "right"});
+    doc.setDrawColor(...roxo); doc.setLineWidth(.6); doc.line(X, 26.5, W - X, 26.5); doc.setLineWidth(.2); y = 31; };
+  const nova = () => { doc.addPage(); cab(); }, cabe = h => y + h <= 280;
+  cab();
+  const dados = [["Treinamento", T.titulo], ["Meta", meta + "%"], ["Última aplicação", ult ? fData(ult.encerradaEm) : "-"],
+    ["Pessoas a refazer", String(pessoas.length)], ["Perguntas a reforçar", String(g.itens.length)], ["Instrutor", ins.join(", ") || "-"]];
+  const cw = (W - 2 * X) / 3; doc.setDrawColor(...linha);
+  dados.forEach(([k, v], i) => { const cx = X + (i % 3) * cw, cy = y + Math.floor(i / 3) * 11; doc.rect(cx, cy, cw, 11); txt(k.toUpperCase(), cx + 2.5, cy + 4, {s: 6.3, b: true, c: cinza}); txt(doc.splitTextToSize(safe(v), cw - 5)[0], cx + 2.5, cy + 8.6, {s: 8.8, b: true}); });
+  y += 26;
+  txt("Quem ficou abaixo da meta refaz as perguntas que errou. Anote a data e a nova nota. A 2ª tentativa pode ser no mesmo dia; a 3ª, só em outro dia.", X, y, {s: 7.6, c: cinza}); y += 5;
+  const cols = [["Nº", 9, "c"], ["Nome completo", 56, "l"], ["Setor", 24, "l"], ["Última nota", 17, "c"], ["Tentativa", 17, "c"], ["Data do refazer", 24, "l"], ["Nova nota", 16, "c"], ["Assinatura", W - 2 * X - 163, "l"]];
+  const cabT = () => { doc.setFillColor(...suave); doc.rect(X, y, W - 2 * X, 7, "F"); let x = X; cols.forEach(([t, w, al]) => { txt(t.toUpperCase(), al === "c" ? x + w / 2 : x + 1.8, y + 4.7, {s: 5.6, b: true, c: [59, 29, 128], al: al === "c" ? "center" : undefined}); x += w; }); y += 7; };
+  cabT();
+  const RH = 9.5;
+  pessoas.forEach((p, i) => {
+    if (!cabe(RH)){ nova(); cabT(); }
+    doc.setDrawColor(...linha); doc.line(X, y + RH, W - X, y + RH);
+    let x = X; const ym = y + RH / 2 + 1.2;
+    txt(String(i + 1), x + cols[0][1] / 2, ym, {s: 8.2, al: "center"}); x += cols[0][1];
+    { let fs = 8.6; doc.setFont("helvetica", "bold"); doc.setFontSize(fs); while (fs > 5.8 && doc.getTextWidth(safe(p.nome)) > cols[1][1] - 3){ fs -= .3; doc.setFontSize(fs); } txt(safe(p.nome), x + 1.8, ym, {s: fs, b: true}); } x += cols[1][1];
+    txt(cut(safe(p.setor || "-"), 16), x + 1.8, ym, {s: 8}); x += cols[2][1];
+    txt(p.nota + "%", x + cols[3][1] / 2, ym, {s: 8.4, b: true, al: "center"}); x += cols[3][1];
+    txt(p.rod === 3 ? "3ª" : p.rod === 2 ? "2ª" : "1ª", x + cols[4][1] / 2, ym, {s: 8.2, al: "center"});
+    { const x0 = X + 9 + 56 + 24 + 17 + 17, ly = y + RH - 2.2; doc.line(x0 + 1.5, ly, x0 + 22.5, ly); doc.line(x0 + 24 + 2, ly, x0 + 24 + 14, ly); doc.line(x0 + 40 + 1.5, ly, W - X - 2, ly); }
+    y += RH;
+  });
+  if (!pessoas.length){ txt("Nenhuma pessoa abaixo da meta neste treinamento.", X, y + 8, {s: 9, c: cinza}); y += 14; }
+  y += 6;
+  /* perguntas a reforçar */
+  const itens = g.itens.map(it => String(it.enunciado || it.texto || "Pergunta")).filter(Boolean);
+  if (itens.length){
+    if (!cabe(14)){ nova(); }
+    txt("PERGUNTAS A REFORÇAR", X, y + 3, {s: 7, b: true, c: cinza}); y += 6;
+    itens.forEach((t, i) => { const ls = doc.splitTextToSize(safe(`${i + 1}. ${t}`), W - 2 * X - 4).slice(0, 2); const hh = ls.length * 4 + 1.5; if (!cabe(hh)){ nova(); }
+      ls.forEach((l, k) => txt(l, X + 2, y + 3 + k * 4, {s: 8})); y += hh; });
+  }
+  y += 6;
+  const nl = Math.max(1, ins.length), porLinha = Math.min(2, nl), linhas = Math.ceil(nl / porLinha);
+  if (!cabe(linhas * 22 + 4)){ nova(); }
+  y = Math.max(y + 4, 278 - linhas * 22); const lw = (W - 2 * X - (porLinha - 1) * 14) / porLinha;
+  (ins.length ? ins : [""]).forEach((n, i) => { const cx = X + (i % porLinha) * (lw + 14), cy = y + Math.floor(i / porLinha) * 22 + 12; doc.setDrawColor(...tinta); doc.setLineWidth(.3); doc.line(cx, cy, cx + lw, cy); doc.setLineWidth(.2);
+    txt(n || "Nome do instrutor", cx + lw / 2, cy + 4.2, {s: 8.4, al: "center", c: n ? tinta : cinza}); txt("Instrutor(a)", cx + lw / 2, cy + 8, {s: 7, c: cinza, al: "center"}); });
+  const pags = doc.getNumberOfPages();
+  for (let i = 1; i <= pags; i++){ doc.setPage(i); doc.setDrawColor(...linha); doc.line(X, 287, W - X, 287);
+    txt(`Gerado pelo ${EFC_CONFIG.produto} v${APP_VERSAO} em ${fData(now())} ${fHora(now())}`, X, 291.5, {s: 6.8, c: cinza}); txt(`Folha ${i} de ${pags}`, W - X, 291.5, {s: 6.8, c: cinza, al: "right"}); }
+  window.__ultimaFolhaRefazer = {folhas: pags, pessoas: pessoas.length, perguntas: itens.length};
+  const nm = T.titulo.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "").toLowerCase().slice(0, 40), d = new Date();
+  await salvarArquivo(`folha-refazer-${nm}-${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}.pdf`, doc.output("blob"));
+}
 </script>
 </body>
 </html>
