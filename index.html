@@ -1950,6 +1950,17 @@ main .tblwrap table.pres th:nth-child(2),main .tblwrap table.pres td:nth-child(2
 /* ===== v2.8.4 · folha do refazer ===== */
 .pna{flex-wrap:wrap}.pna .btn[data-act="refFolha284"]{flex:1 1 100%;order:3}
 <style id="v287">.side .pe .cav.cf{background:none;overflow:hidden;padding:0}.side .pe .cav img{width:100%;height:100%;object-fit:cover;display:block}</style>
+<style id="v288">
+#undo288{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:80;display:flex;align-items:center;gap:14px;max-width:min(92vw,460px);padding:12px 14px 14px;border-radius:12px;background:#1d1d29;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.35);font:600 14px/1.3 var(--f-body,system-ui,sans-serif);overflow:hidden;animation:u288in .16s ease-out}
+#undo288 span{flex:1;min-width:0}
+#undo288 button{all:unset;cursor:pointer;font:800 13px/1 var(--f-body,system-ui,sans-serif);letter-spacing:.04em;text-transform:uppercase;color:#c4b5fd;padding:9px 10px;border-radius:8px}
+#undo288 button:hover{background:rgba(255,255,255,.1)}#undo288 button:focus-visible{outline:2px solid #c4b5fd;outline-offset:1px}
+#undo288 i{position:absolute;left:0;bottom:0;height:3px;width:100%;background:#a78bfa;transform-origin:left;animation:u288bar 3s linear forwards}
+#undo288:hover i,#undo288:focus-within i{animation-play-state:paused}
+@keyframes u288bar{to{transform:scaleX(0)}}@keyframes u288in{from{opacity:0;transform:translate(-50%,8px)}}
+@media (max-width:860px){#undo288{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){#undo288{animation:none}}
+</style>
 </head>
 <body>
 <div id="efc-fundo" aria-hidden="true"></div>
@@ -2372,7 +2383,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
 /* ============ base ============ */
 const EFC_CONFIG = Object.assign({empresa: "", produto: "EFCquiz", sistema: "EFClaudian"}, window.EFC_CONFIG || {});
 window.EFC_CONFIG = EFC_CONFIG;
-const APP_VERSAO = "2.8.7";
+const APP_VERSAO = "2.8.8";
 const DAY = 86400000, FOTO_DIAS = 3, LS = "efcquiz-v1";
 const METAS = [50,60,70,75,80,90,100];
 const SETORES_PADRAO = ["Equipe 1","Equipe 2","Equipe 3","Outros"];
@@ -7644,6 +7655,54 @@ A.novaSessao = function(){
   if (o && !o.instrutor && nvResp()) o.instrutor = String(NV.conta.nome || "");
   return r;
 };
+
+/* ===== v2.8.8 · Desfazer por 3 segundos depois de excluir modelo, sessão, setor ou mensagem ===== */
+const UNDO_MS288 = 3000;
+const UNDO288 = {fim: null, rest: 0, t: null};
+function undoFechar288(){ clearTimeout(UNDO288.t); UNDO288.t = null; const e = document.getElementById("undo288"); if (e) e.remove(); }
+function undoMostrar288(msg, desfaz){
+  undoFechar288();
+  const e = document.createElement("div"); e.id = "undo288"; e.setAttribute("role", "status");
+  e.innerHTML = `<span></span><button type="button">Desfazer</button><i></i>`;
+  e.querySelector("span").textContent = msg;
+  const arma = ms => { clearTimeout(UNDO288.t); UNDO288.fim = Date.now() + ms; UNDO288.t = setTimeout(undoFechar288, ms); };
+  e.querySelector("button").addEventListener("click", () => { let feito = false; try { desfaz(); feito = true; } catch(x) {} undoFechar288(); if (feito){ save(); render(); } });
+  e.addEventListener("pointerenter", () => { UNDO288.rest = Math.max(600, UNDO288.fim - Date.now()); clearTimeout(UNDO288.t); });
+  e.addEventListener("pointerleave", () => arma(UNDO288.rest || UNDO_MS288));
+  e.addEventListener("focusin", () => { UNDO288.rest = Math.max(600, UNDO288.fim - Date.now()); clearTimeout(UNDO288.t); });
+  e.addEventListener("focusout", () => arma(UNDO288.rest || UNDO_MS288));
+  document.body.appendChild(e); arma(UNDO_MS288);
+}
+/* envolve a exclusão confirmada: guarda o item e a posição e, se o item sumiu, oferece desfazer */
+function envolverDel288(nome, pega, some, volta, msg){
+  const orig = A[nome];
+  A[nome] = function(arg, ok){
+    if (!ok) return orig.apply(this, arguments);
+    const it = pega(arg); const r = orig.apply(this, arguments);
+    if (it && some(it, arg)) undoMostrar288(msg, () => volta(it, arg));
+    return r;
+  };
+}
+envolverDel288("delT",
+  id => { const T = S.treinamentos.find(t => t.id === id); return T ? {T, i: S.treinamentos.indexOf(T)} : null; },
+  (o, id) => !S.treinamentos.some(t => t.id === id),
+  o => { if (!S.treinamentos.some(t => t.id === o.T.id)) S.treinamentos.splice(Math.min(o.i, S.treinamentos.length), 0, o.T); UI().msgResp = "Modelo restaurado."; },
+  "Modelo excluído.");
+envolverDel288("delSessao",
+  id => { const s = sessById(id); return s ? {s, i: S.sessoes.indexOf(s)} : null; },
+  (o, id) => !S.sessoes.some(x => x.id === id),
+  o => { if (!S.sessoes.some(x => x.id === o.s.id)) S.sessoes.splice(Math.min(o.i, S.sessoes.length), 0, o.s); UI().msgResp = "Sessão restaurada."; },
+  "Sessão excluída.");
+envolverDel288("delSetor",
+  k => { const st = S.config.setores[+k]; return st === undefined ? null : {st, i: +k, n: S.config.setores.length}; },
+  o => S.config.setores.length < o.n,
+  o => { if (!S.config.setores.includes(o.st)) S.config.setores.splice(Math.min(o.i, S.config.setores.length), 0, o.st); },
+  "Setor excluído.");
+envolverDel288("msgDel",
+  id => { const l = S.mensagens || [], m = l.find(x => x.id === id); return m ? {m, i: l.indexOf(m)} : null; },
+  (o, id) => !(S.mensagens || []).some(x => x.id === id),
+  o => { S.mensagens = S.mensagens || []; if (!S.mensagens.some(x => x.id === o.m.id)) S.mensagens.splice(Math.min(o.i, S.mensagens.length), 0, o.m); nvMsgUpd(o.m.id, {oculta: false}); },
+  "Mensagem excluída.");
 </script>
 </body>
 </html>
